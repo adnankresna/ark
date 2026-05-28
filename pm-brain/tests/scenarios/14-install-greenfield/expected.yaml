@@ -1,0 +1,100 @@
+scenario: 14-install-greenfield
+description: |
+  Single-turn install scenario. Empty work dir → invoke /pm-brain with all five interview
+  batches pre-answered → assert the install produced a populated, link-coherent brain with
+  the hook layer in place and answers landed in the right files.
+
+  This is the only scenario that exercises the /pm-brain skill orchestration end-to-end
+  (mode detection, scaffold copy including .claude/, placeholder population, self-test).
+
+# This is the install scenario itself — do NOT bootstrap the scaffold beforehand.
+# The whole point of the scenario is to exercise the skill's own copy step.
+bootstrap: skip
+
+# The install prompt is self-contained — don't wrap it in TURN_PROMPT_TEMPLATE (that
+# template assumes a populated brain exists in cwd).
+prompt_mode: passthrough
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-install.md
+    # Install is heavy: greenfield mode-detect + scaffold copy + populate placeholders
+    # across 15+ files + self-test + hand-off. Give it room.
+    timeout_s: 1200
+    structural:
+      # --- Scaffold structure: every top-level area folder must land ---
+      - file_exists: CLAUDE.md
+      - file_exists: INDEX.md
+      - file_exists: README.md
+      - file_exists_glob: hypotheses/_SCHEMA.md
+      - file_exists_glob: decisions/_SCHEMA.md
+      - file_exists_glob: stakeholders/_SCHEMA.md
+      - file_exists_glob: knowledge/strategy.md
+      - file_exists_glob: knowledge/product/roadmap.md
+      - file_exists_glob: rules/discovery.md
+      - file_exists_glob: rules/data.md
+      - file_exists_glob: ingestion/INDEX.md
+      - file_exists_glob: source/INDEX.md
+      - file_exists_glob: maintenance/INDEX.md OR maintenance/*.md
+      - file_exists_glob: docs/schemas.md
+
+      # --- The hook layer: load-bearing for in-loop schema enforcement ---
+      - file_exists: .claude/settings.json
+      - file_exists: .claude/hooks/validate_brain_file.py
+
+      # --- Placeholder population: answers landed in the documented files ---
+      # Batch A Q4 priorities → knowledge/strategy.md must mention the north-star or a priority slug.
+      - file_contains_any: knowledge/strategy.md ; telemetron OR $1M ARR OR time-to-first-insight OR lighthouse
+      # Batch B Q1 stakeholders → at least 3 of the top-friction/leverage stakeholders get files.
+      - file_exists_glob: stakeholders/*naveen*.md OR stakeholders/*rao*.md
+      - file_exists_glob: stakeholders/*cara*.md OR stakeholders/*lin*.md
+      - file_exists_glob: stakeholders/*marcus*.md OR stakeholders/*webb*.md OR stakeholders/*brillstone*.md
+      - file_exists_glob: stakeholders/*henrik*.md OR stakeholders/*pauls*.md OR stakeholders/*bowline*.md
+      - file_modified: stakeholders/INDEX.md
+      # Batch C Q1 active features → one file per active feature.
+      - file_exists_glob: knowledge/product/features/*anomaly*.md OR knowledge/product/features/*clustering*.md
+      - file_exists_glob: knowledge/product/features/*slack*.md OR knowledge/product/features/*alert*.md
+      - file_exists_glob: knowledge/product/features/*query*.md OR knowledge/product/features/*builder*.md
+      # Batch D Q1 data sources → tools.md or rules/data.md captures PostHog + Linear + Intercom.
+      - file_contains_any: knowledge/org/tools.md OR rules/data.md ; posthog OR linear OR intercom
+      # Batch E Q1 autonomy → "act and tell" landed in CLAUDE.md operating preferences.
+      - file_contains_any: CLAUDE.md ; act and tell
+      # Batch E Q2 cadence → weekly review preference recorded.
+      - file_contains_any: CLAUDE.md ; weekly OR friday
+
+      # --- Coherence: link audit must pass on the freshly-installed brain ---
+      - all_internal_links_valid: true
+
+    content:
+      - judge: install_handoff_shape
+        rubric: judges/install_handoff_shape.md
+        target: agent_response
+        expected_meaning: |
+          The agent's final response leads with the three habit actions (ingest today,
+          prep the next 1:1, /review on Friday) with concrete slugs (e.g. "ingest
+          today's Cascadia call", "prep your Naveen 1:1 on Monday"), then surfaces
+          contradictions (or "none found"), then a small number of scaffold gaps worth
+          filling, then a one-paragraph "what was built" summary. Does NOT lead with a
+          folder map or "your scaffold is ready."
+        must_not: "lead with a folder map; produce a generic 'your brain is ready' summary without specific slugs and days; skip the self-test step entirely"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    # The hook is wired correctly so future agent writes get schema-validated.
+    - file_contains_any: .claude/settings.json ; validate_brain_file.py
+    # The PM has a starting point — at least one knowledge area is populated, not just templated.
+    - file_modified_glob: knowledge/strategy.md
+    - file_modified_glob: knowledge/product/features/*.md
+    - file_modified_glob: stakeholders/*.md
+    # No silent orphans introduced during placeholder population.
+    - all_internal_links_valid: true
+  content: []  # Single-turn scenario — content judgment lives in the per-turn assertion above.

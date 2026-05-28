@@ -1,0 +1,91 @@
+scenario: 16-corrupt-state-recovery
+description: |
+  Three-turn structural-rot recovery scenario. Turn 1 seeds a brain with four planted
+  defects: a broken hypothesis-to-ingestion link, an orphan stakeholder INDEX row, a
+  hypothesis with status `promoted` backed by only one evidence row, and an ingestion
+  record pointing at a missing source/ artifact. Turn 2 runs /review with an explicit
+  ask for a structural audit (plan only, no repair). Turn 3 approves a per-defect
+  repair plan and asks the agent to execute, preserving audit trails (no silent
+  demotion, no fabricated source files, no data loss).
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-broken-state.md
+    structural:
+      # Seeded files exist where the PM asked them to.
+      - file_exists_glob: source/interviews/2026-02-14*.md OR source/interviews/*acme*marketing*.md
+      - file_exists_glob: ingestion/interviews/2026-02-14-acme-marketing.md OR ingestion/interviews/*acme*marketing*.md
+      - file_exists_glob: hypotheses/*long-window*.md OR hypotheses/*attribution*.md OR hypotheses/long-window-attribution.md
+      - file_exists_glob: stakeholders/priya-sundaram.md OR stakeholders/*priya*.md
+      - file_exists_glob: stakeholders/leah-okwu.md OR stakeholders/*leah*.md
+      - file_exists_glob: ingestion/adhoc/2026-03-05-warehouse-pricing.md OR ingestion/adhoc/*warehouse*pricing*.md
+      - file_modified: stakeholders/INDEX.md
+      - file_modified: ingestion/INDEX.md
+      # We deliberately do NOT assert all_internal_links_valid here — the planted
+      # defects mean the link audit should fail until turn 3 repairs land.
+
+  - turn: 2
+    input: turn-02-review.md
+    # /review is plan-only; the seeded files must still be in their original state.
+    structural:
+      - file_exists_glob: hypotheses/*long-window*.md OR hypotheses/*attribution*.md
+      - file_exists_glob: stakeholders/priya-sundaram.md OR stakeholders/*priya*.md
+      - file_exists_glob: ingestion/adhoc/2026-03-05-warehouse-pricing.md OR ingestion/adhoc/*warehouse*pricing*.md
+      # Jorge file still missing — the orphan defect must NOT have been silently repaired.
+      # (We can't directly assert non-existence; the content judge covers it.)
+    content:
+      - judge: structural_audit_surfaced
+        rubric: judges/structural_audit_surfaced.md
+        target: agent_response
+        expected_meaning: |
+          The /review chat response surfaces ALL FOUR planted defects (broken hypothesis
+          link, orphan stakeholders INDEX row for Jorge, promoted-with-one-row hypothesis,
+          orphan-source warehouse-pricing ingestion) AND presents them as a plan with a
+          recommendation per defect. Nothing under hypotheses/, stakeholders/, ingestion/,
+          or source/ was repaired silently in this turn.
+        must_not: "miss any of the four defects; silently repair any of them; give a generic 'no issues found' response"
+
+  - turn: 3
+    input: turn-03-repair.md
+    structural:
+      # Defect 1: broken link repaired (hypothesis file modified).
+      - file_modified_glob: hypotheses/*long-window*.md OR hypotheses/*attribution*.md
+      # Defect 2: jorge stub created.
+      - file_exists_glob: stakeholders/jorge-mendes.md OR stakeholders/*jorge*.md
+      # Defect 4: warehouse-pricing ingestion modified.
+      - file_modified_glob: ingestion/adhoc/2026-03-05-warehouse-pricing.md OR ingestion/adhoc/*warehouse*pricing*.md
+      # Whole brain link audit passes after the repairs.
+      - all_internal_links_valid: true
+      # The hypothesis demotion must leave a trail — no silent demotion.
+      - no_silent_hypothesis_demotion: true
+      # The agent must NOT have fabricated source/adhoc/2026-03-05-warehouse-pricing.md
+      # (we can't structurally assert absence — the judge below covers it).
+    content:
+      - judge: repair_with_audit_trail
+        rubric: judges/repair_with_audit_trail.md
+        target_glob: hypotheses/*long-window*.md OR hypotheses/*attribution*.md
+        expected_meaning: |
+          All four repairs executed cleanly. Link in the hypothesis file now points at the
+          real ingestion filename. Jorge stub exists and is flagged as a stub (TODO line
+          or status: stub field). Hypothesis demoted to validated/candidate with an
+          evidence-against row AND a status-history line recording both the 2026-02-20
+          promotion and the 2026-05-18 retraction. Warehouse-pricing ingestion now uses
+          (chat, no artifact) provenance and no longer links to a missing source file. No
+          fabricated source files. No deleted evidence rows.
+        must_not: "fabricate a source/ file to repair the orphan-source link; delete the original Acme observation row when demoting; demote with no audit trail"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true
+  content: []

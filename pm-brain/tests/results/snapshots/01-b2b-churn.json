@@ -1,0 +1,468 @@
+{
+  "scenario": "01-b2b-churn",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-1wp73jbq",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T18:46:49.112384+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-interview-acme-ops.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 239.87,
+      "returncode": 0,
+      "cost_usd": 0.36822575,
+      "agent_response": "Done. Here's what was created/updated:\n\n**Created (4 files):**\n- `source/interviews/2026-04-22-acme-ops-jamie-chen.md` \u2014 verbatim audit anchor\n- `ingestion/interviews/2026-04-22-acme-ops-jamie-chen.md` \u2014 synthesis, routing, open questions\n- `stakeholders/jamie-chen.md` \u2014 Jamie Chen profile with 4-week re-engagement open ask flagged\n- `hypotheses/notification-frequency.md` \u2014 two active hypotheses (H-V1 value risk, H-B1 viability risk), both confidence: low, both citing source file with correct provenance links\n\n**Updated (2 files):**\n- `stakeholders/INDEX.md` \u2014 Jamie Chen roster row added\n- `hypotheses/INDEX.md` \u2014 notification-frequency entry added under Active\n\n**What remains open (PM judgment required):**\n- `knowledge/users/insights.md` \u2014 NOT updated. N=1 interview doesn't meet the promotion bar. Promote the notification-batching theme once 2+ more mid-market ops interviews corroborate.\n- Re-engagement: calendar a touchpoint with Jamie Chen ~2026-05-20 (4 weeks from interview) regardless of product news \u2014 the PM note flags silence as the churn accelerant.\n- Next step on hypothesis: pull product analytics for notification open/action rates by account size and channel-count before the next customer call.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*acme*.md OR source/interviews/*chen*.md OR source/interviews/*jamie*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-04-22-acme-ops-jamie-chen.md', 'source/interviews/2026-04-22-acme-ops-jamie-chen.md', 'source/interviews/2026-04-22-acme-ops-jamie-chen.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*acme*.md OR ingestion/interviews/*chen*.md OR ingestion/interviews/*jamie*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-04-22-acme-ops-jamie-chen.md', 'ingestion/interviews/2026-04-22-acme-ops-jamie-chen.md', 'ingestion/interviews/2026-04-22-acme-ops-jamie-chen.md']"
+        },
+        {
+          "name": "file_modified_glob:stakeholders/*acme*.md OR stakeholders/*chen*.md OR stakeholders/*jamie*.md OR stakeholders/*ops*.md",
+          "passed": true,
+          "detail": "changed: ['stakeholders/jamie-chen.md', 'stakeholders/jamie-chen.md']"
+        },
+        {
+          "name": "hypothesis_count_at_least:1",
+          "passed": true,
+          "detail": "found 1 non-stub hypothesis files (total .md = 1)"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:hypothesis_proposed_not_promoted",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (1 match)"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-meeting-eng-sync.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 352.52,
+      "returncode": 0,
+      "cost_usd": 0.5504382999999999,
+      "agent_response": "Done. Here's what was created/updated:\n\n**Created (3 files):**\n- `source/meetings/2026-04-24-eng-sync-alert-cadence.md` \u2014 verbatim audit anchor\n- `ingestion/meetings/2026-04-24-eng-sync-alert-cadence.md` \u2014 synthesis with decision log, action items, hypothesis routing\n- `stakeholders/diana-park.md` \u2014 new stakeholder file; influence: high, friction: low; open ask to qualify real-time demand before next sync\n\n**Updated (3 files):**\n- `hypotheses/notification-frequency.md` \u2014 added full Feasibility risk section with H-F1 (calm-mode: high confidence, trivial, ~1\u20132 sprints) and H-F2 (real-time: high confidence technically, 6 weeks/2 engineers, on-call posture change); added Diana's demand pushback as an open question caveat on H-V1\n- `hypotheses/INDEX.md` \u2014 entry updated to surface the new feasibility hypotheses and the eng tech doc deadline\n- `stakeholders/INDEX.md` \u2014 Diana Park added to roster\n\n**PM's key call materialized in the file writes:** the calm-mode / real-time trade-off is explicitly asymmetric in H-F1 vs H-F2. Real-time is not blocked on feasibility \u2014 it's blocked on demand validation (one unqualified support request is not a signal). The eng tech doc (due 2026-05-01) and 2 more interviews are the gates before any scoping decision.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/meetings/*eng-sync*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-04-24-eng-sync-alert-cadence.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/meetings/*eng-sync*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/meetings/2026-04-24-eng-sync-alert-cadence.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:feasibility_risk_updated",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (1 match)"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-analytics-churn-snapshot.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 261.88,
+      "returncode": 0,
+      "cost_usd": 0.54406235,
+      "agent_response": "The source/INDEX.md is descriptive, no roster update needed. All writes are complete.\n\n---\n\n**Done. Here's what changed:**\n\n1. **`source/adhoc/2026-04-26-mid-market-churn-snapshot.md`** \u2014 verbatim audit anchor, never to be edited.\n\n2. **`ingestion/adhoc/2026-04-26-mid-market-churn-snapshot.md`** \u2014 synthesis: observations, interpretations, what this does/doesn't establish, open next steps.\n\n3. **`knowledge/product/metrics.md`** \u2014 mid-market churn rates recorded under Retention (Q1 6.1%, Q2 trailing 10.3%); Recent movements section added with full watch-item caveat and links to hypothesis + source.\n\n4. **`hypotheses/notification-frequency.md` H-V1** \u2014 two new evidence rows added (exit-survey top reason N=5/18 + cohort engagement decay N=12), both tagged to the source file with inline N/correlation caveats. Confidence left at **low** \u2014 not bumped. Five new Open questions bullets added: the non-independence of interview + exit-survey, cohort confounders, multiple competing churn causes, and the key unresolved question (did churned accounts receive more notifications, or just disengage from similar volume?).\n\n5. **`knowledge/users/insights.md`** \u2014 notification overload promoted to Active themes at **watch level** (2+ consistent signals across 2 signal types: qualitative + analytics). Full caveats inline: interview + exit-survey are same population/not independent, cohort confounded, no causation established. Confidence-raise conditions stated explicitly.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*churn*.md OR ingestion/market/*churn*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-04-26-mid-market-churn-snapshot.md']"
+        },
+        {
+          "name": "file_modified:knowledge/product/metrics.md",
+          "passed": true,
+          "detail": "modified: knowledge/product/metrics.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:market_signal_added",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-interview-stripe-compliance.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 238.39,
+      "returncode": 0,
+      "cost_usd": 0.5435101499999999,
+      "agent_response": "**Done. Routing summary:**\n\n- **Created** `source/interviews/2026-04-29-stripe-compliance-marcus-adelana.md` \u2014 verbatim audit anchor\n- **Created** `ingestion/interviews/2026-04-29-stripe-compliance-marcus-adelana.md` \u2014 synthesis with observations, interpretations, open questions\n- **Created** `stakeholders/marcus-adelana.md` \u2014 low-friction, medium-influence; renewal next quarter flagged for 6-week CS nudge\n- **Updated** `hypotheses/notification-frequency.md` \u2014 H-V1: second independent evidence row added (Stripe/Marcus); open questions updated from N=1\u2192N=2, promotion threshold noted as 1 more account needed; H-B1: open questions updated to note Marcus did not volunteer WTP \u2014 don't extrapolate Acme's pricing signal\n- **Updated** `knowledge/users/insights.md` \u2014 second evidence row added to the \"notification volume as behavioral churn driver \u2014 WATCH\" theme; caveats updated to reflect N=2 and revised promotion condition\n- **Updated** `stakeholders/INDEX.md` and `hypotheses/INDEX.md` \u2014 Marcus added to roster; hypothesis description updated to N=2 with WTP caveat\n\n**What remains open:**\n- Need 1 more independent mid-market ops interview to hit the 3-account H-V1 promotion threshold\n- WTP signal is still N=1 (Acme only) \u2014 H-B1 cannot be confirmed until 2\u20133 more accounts are asked explicitly about pricing\n- Delta-digest feature ask (Marcus's \"what changed this week\" request) is N=1 \u2014 track whether it surfaces from additional accounts before scoping\n- PM to confirm Stripe renewal date with CS; flag at 6-week mark",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*stripe*.md OR source/interviews/*compliance*.md OR source/interviews/2026-*compliance*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-04-29-stripe-compliance-marcus-adelana.md', 'source/interviews/2026-04-29-stripe-compliance-marcus-adelana.md', 'source/interviews/2026-04-29-stripe-compliance-marcus-adelana.md']"
+        },
+        {
+          "name": "hypothesis_evidence_count_increased_for:H-V1",
+          "passed": true,
+          "detail": "file changed=True, evidence links now=10 (hypotheses/notification-frequency.md)"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:insight_still_not_promoted",
+          "passed": true,
+          "detail": "verdict=PASS | target=file:knowledge/users/insights.md"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "input": "turn-05-slack-pricing-thread.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 129.49,
+      "returncode": 0,
+      "cost_usd": 0.2576895,
+      "agent_response": "Done. Here's what was written:\n\n- **Created** `source/adhoc/2026-05-01-pricing-slack-thread.md` \u2014 verbatim audit anchor, never to be edited.\n- **Created** `ingestion/adhoc/2026-05-01-pricing-slack-thread.md` \u2014 synthesis noting: (a) two commercial framings (calm-mode/compliance vs. real-time/ops), (b) no hypothesis evidence updates (all signals are internal relay), (c) Priya's Acme reference is not new evidence, (d) Sam Okafor interview still pending primary source, (e) Riku's tier-sprawl constraint flagged for the eventual decision record.\n- **Created** `stakeholders/riku.md` \u2014 Riku (Marketing) with the tier-sprawl concern and open ask to include in the pricing-decision review loop.\n- **Updated** `stakeholders/INDEX.md` \u2014 Riku added to roster.\n\n**Nothing open requiring PM judgment.** The Sam Okafor (Brex) interview is the next primary source needed \u2014 route to H-V1 and H-B1 when that transcript lands.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*pricing*.md OR ingestion/meetings/*pricing*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-05-01-pricing-slack-thread.md']"
+        },
+        {
+          "name": "hypothesis_evidence_count_unchanged_for:H-V1",
+          "passed": true,
+          "detail": "file hypotheses/notification-frequency.md mtime before=1779044691.3586154 after=1779044691.3586154"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:low_signal_rejected",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "input": "turn-06-interview-contradicting.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 598.46,
+      "returncode": 0,
+      "cost_usd": 0.707503,
+      "agent_response": "All writes complete. Here's the routing summary:\n\n---\n\n**Files created (3):**\n- `source/interviews/2026-05-06-brex-ops-sam-okafor.md` \u2014 verbatim audit anchor\n- `ingestion/interviews/2026-05-06-brex-ops-sam-okafor.md` \u2014 synthesis with hypothesis routing table and open follow-ups\n- `stakeholders/sam-okafor.md` \u2014 new stakeholder; open ask: PM owes a roadmap follow-up\n\n**Files updated (4):**\n- `hypotheses/notification-frequency.md` \u2014 **H-V1 re-scoped** to compliance ops only (not demoted); **H-V2 added** (operational-risk ops, real-time prerequisite, N=1); **H-B2 added** (real-time tier WTP, cadence-sensitive not price-sensitive, N=1); **H-F2 open questions updated** (real-time demand now at 1/3 accounts toward decision trigger, no longer \"unqualified\")\n- `knowledge/users/insights.md` \u2014 compliance ops theme scoped correctly; **persona-split contradiction added** between compliance ops (weekly) and operational-risk ops (real-time) with both sides tagged and preserved\n- `stakeholders/INDEX.md` \u2014 Sam Okafor added to roster\n- `hypotheses/INDEX.md` \u2014 updated to reflect H-V2, H-B2, and the sub-persona split\n\n**What remains open for PM judgment:**\n- Ask CS for a segmentation pass: how many mid-market accounts are operational-risk (fraud, AML, T&S) vs. compliance ops? The persona split is a hypothesis, not a confirmed pattern \u2014 sub-segment size will determine whether real-time is worth the 6-week / on-call investment.\n- Whether to pursue 2 more operational-risk ops interviews now or after the CS segmentation pass shapes the sample.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*brex*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-05-06-brex-ops-sam-okafor.md']"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/INDEX.md', 'hypotheses/notification-frequency.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:contradiction_surfaced",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (1 match)"
+        }
+      ]
+    },
+    {
+      "turn": 7,
+      "input": "turn-07-decision-trigger.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 201.0,
+      "returncode": 0,
+      "cost_usd": 0.30858655,
+      "agent_response": "All context loaded. Delivering the Type B synthesis now.\n\n---\n\n## Alert-cadence synthesis \u2014 2026-05-07\n\n**Hypothesis:** `hypotheses/notification-frequency.md` \u2014 five active hypotheses (H-V1, H-V2, H-F1, H-F2, H-B1, H-B2)  \n**Artifacts referenced:** six ingested artifacts across three interviews, one eng sync, one analytics snapshot, one internal thread.\n\n---\n\n### 1. Strongest evidence FOR deferring real-time and shipping calm mode as the default\n\n**The behavioral adaptation evidence is the strongest signal in the case.**\n\nBoth compliance-ops accounts show the same costly behavioral change \u2014 not a stated preference, an action already taken. Jamie Chen (`source/interviews/2026-04-22-acme-ops-jamie-chen.md`) reports her team has stopped acting on daily notifications and batched all compliance work to Friday afternoons. Marcus Adelana (`source/interviews/2026-04-29-stripe-compliance-marcus-adelana.md`) has *already muted in-app alerts and filters daily emails to a folder checked only on Friday mornings*. These users didn't wait for calm mode \u2014 they built it themselves against the product's defaults. That's stronger than stated preference: it's evidence of a workflow misalignment the product is currently forcing users to fix manually.\n\nThe two accounts are independent. Acme is ~80 employees, SOC2 Type II, ops team; Stripe's subteam is ~4-person compliance, SOC2/SOX. Different companies, different team sizes, same behavioral pattern. Marcus explicitly stated: \"Nothing in our compliance workflow needs response in less than a day. If your tool sent me real-time alerts, I genuinely would mute them.\" \u2014 which he has already done.\n\nThe feasibility signal from the eng sync (`source/meetings/2026-04-24-eng-sync-alert-cadence.md`) makes calm-mode the path of least resistance technically. Diana Park: \"Almost trivial. 1\u20132 sprints including UX, no new infra, no SLO change.\" The cost asymmetry with real-time is stark: calm-mode is reversible, cheap, and carries no permanent operational burden. Shipping it first doesn't close the door on real-time.\n\nThe churn analytics (`source/adhoc/2026-04-26-mid-market-churn-snapshot.md`) add a directional watch signal. Mid-market churn jumped 4.2pp QoQ (6.1% \u2192 10.3%), concentrated in mid-market only; \"notification overload\" is the top free-text exit-survey reason at 28% (N=5 of 18 respondents). This is **correlational only** \u2014 small N, likely draws from the same population as the Acme interview, and the mechanism (too many notifications vs. disengagement from normal volume) is unconfirmed. It does not independently validate H-V1. But it is consistent with the direction, and the mid-market concentration is notable.\n\n---\n\n### 2. Strongest evidence AGAINST\n\n**The Brex interview is not a footnote. It is a structural finding about the scope of the case.**\n\nSam Okafor (`source/interviews/2026-05-06-brex-ops-sam-okafor.md`) did not say he prefers faster alerts. He said: *\"Our window from 'something looks wrong' to 'we need to act' is measured in minutes, not days. If your tool catches an anomaly in our flagged-transaction review pipeline, I need to know within ten minutes. Otherwise I'd rather not have the alert at all.\"*\n\nThat is a hard threshold, not a preference gradient. Weekly-batch default doesn't inconvenience Sam \u2014 it makes the product non-functional for his use case. He also said that if real-time is not on the roadmap, he would \"seriously look at building something internal or moving to a tool that does it natively.\" That is a stated defection signal from a 7-month mid-market customer.\n\n**What makes this structurally significant is not just \"one customer wants real-time.\" It is that the entire case up to this point had been built on the implicit assumption that \"mid-market ops lead\" is one persona.** Sam's interview reveals that assumption is wrong. His team runs 24/7 fraud detection \u2014 a completely different job. He bought the product for its evidence-collection layer to feed an internal SOC, not for compliance audit support. The product is solving a different problem for him than it is for Acme and Stripe.\n\nH-V1 has been re-scoped to compliance ops only as a result of this finding. That is not a minor annotation. The claim \"mid-market ops personas batch weekly\" was always too broad \u2014 it was two different personas in one slot.\n\nThe H-V2 counter-hypothesis is low confidence (N=1), but Sam's stated churn risk is real and the Brex use case is not exotic \u2014 fraud, AML, and trust-and-safety teams at mid-market companies are plausibly numerous. The compliance-ops positioning of the product may be actively hiding that segment from the CS team's visibility. Sam himself said so.\n\nSecondary against: the #pricing Slack thread (`source/adhoc/2026-05-01-pricing-slack-thread.md`) surfaces Riku's (Marketing) institutional concern about tier sprawl \u2014 a prior failure with SKU proliferation. This doesn't argue against calm-mode; it argues for caution about building both calm-mode and a real-time tier simultaneously as two new pricing levers.\n\n---\n\n### 3. What's still ambiguous\n\nFour concrete gaps \u2014 these are decision-blockers, not context color:\n\n**a) The third compliance-ops interview hasn't happened.**  \nH-V1 stands at N=2 (Acme/Jamie, Stripe/Marcus). Pattern is consistent, but the 3-account promotion threshold has not been reached. The Notion interview (per the artifact context) is upcoming. Until it lands, the core factual premise of the calm-mode case \u2014 \"compliance ops universally batches weekly\" \u2014 is not promoted. It is a 2-account pattern. If Notion turns out to be an operational-risk ops account or has different cadence needs, that changes the ratio.\n\n**b) No segmentation pass on what fraction of mid-market accounts are compliance ops vs. operational-risk ops.**  \nSam's speculation (\"I'd bet there are more of us than you think \u2014 anyone running fraud, risk, AML, trust-and-safety in a mid-market company has a similar tempo\") is *his inference*, not evidence. CS has not run this pull. Without it, the weighting of the two sub-personas is unknown. A design choice that serves 80% of accounts well and alienates 20% is a different call than a 50/50 split. The action required is a CS account segmentation pass; no one has done it yet.\n\n**c) No causal test of the churn-cause hypothesis.**  \nThe planned pull of actual notification volumes for the 6 churned vs. 6 renewed cohort accounts has not been completed. The 10.3% churn rate and \"notification overload\" exit-survey result are consistent with H-V1 but cannot establish causation. Specifically: did churned accounts receive *more* notifications than renewed accounts, or did they simply disengage from a similar volume? The mechanism matters for whether calm-mode would actually arrest churn or just improve a UX that was already failing.\n\n**d) WTP for calm-mode is not validated beyond one account.**  \nJamie Chen (Acme, H-B1) volunteered WTP unprompted \u2014 she'd argue internally for a \"calm mode\" pricing tier. Marcus Adelana (Stripe) showed the same behavioral problem and confirmed renewal, but said nothing about pricing or tiering. Two accounts confirm the use-case; one confirms WTP. Whether calm-mode is a pricing lever or a free configuration feature is open. Shipping it as a tier without more WTP signal is premature on the business-case side.\n\n**e) The real-time eng tech doc (due 2026-05-01) has not been referenced.**  \nDiana Park committed to a 2-page tech doc to sharpen the 6-week / 2-engineer estimate (H-F2). Per the eng sync (`source/meetings/2026-04-24-eng-sync-alert-cadence.md`), this was due 2026-05-01. No ingestion record for it exists. The 6-week estimate is pre-detailed-design and remains unsharpened.\n\n---\n\n### 4. Who does \"weekly-as-default, real-time as opt-in\" serve \u2014 and who does it exclude?\n\n**Served:**\n\n- **Compliance ops accounts** (Acme/Jamie, Stripe/Marcus, and any subsequent account matching that pattern): the design gives them exactly what they've been building for themselves. No behavior change required. Friction removed.\n- **New accounts** default into the calm experience, removing the channel-proliferation failure mode Acme hit (Slack + in-app + email stacked onto daily email, creating an alert wall the team routed around).\n- **Sam Okafor / Brex** \u2014 *conditionally*. Sam endorsed this design directly when the PM proposed it: \"That would be ideal, actually. I don't want to fight your defaults for the rest of our contract. Let me opt in to the cadence I need.\" The design satisfies him *if* the opt-in is accessible, self-serve, and discoverable without CS involvement.\n\n**Excluded or disadvantaged:**\n\n- **Operational-risk ops accounts that don't find the opt-in.** Sam is technically savvy, proactive (reached out via feature-request email), and willing to advocate internally. He will find the opt-in if it exists. The question is whether the median fraud/AML/T&S ops lead at a mid-market company has the same profile. If opt-in requires a CS ticket or is buried three settings pages deep, the design fails that persona in practice even if it satisfies it in theory.\n- **Sales prospects where real-time cadence is a hard requirement.** If the product's positioning continues to lead with compliance-audit, operational-risk ops teams evaluating competitors may self-select out before ever learning real-time opt-in exists. The funnel problem Sam described (\"the compliance-ops branding probably hides us\") doesn't go away with opt-in; it requires positioning work.\n- **Accounts already on the product that are operational-risk ops but haven't escalated.** Sam reached out because he cares. Others may be quietly working around the product or using it below its potential. The CS segmentation pass is the mechanism to find them before they churn silently.\n\n---\n\n### The Brex contradiction \u2014 standing on its own\n\nTo be explicit about what the Brex interview (`source/interviews/2026-05-06-brex-ops-sam-okafor.md`) is and is not:\n\nIt is **not** a counter-vote in a 2-vs-1 customer survey. It is a finding that the investigation's unit of analysis was wrong. \"Mid-market ops\" is not a homogeneous persona. The compliance-ops/operational-risk-ops split is a structural discovery \u2014 not a preference difference but a job-to-be-done difference. Jamie Chen and Sam Okafor share a product tier and a title. They are doing fundamentally different work. The product is being used to audit compliance controls at Acme and Stripe; it is being used to feed a live SOC at Brex.\n\nWhat follows from that:\n1. H-V1 (compliance ops batch weekly) is a valid hypothesis \u2014 for compliance ops. It was over-scoped before Sam's interview. The re-scoping is not a weakening of the evidence; it is a precision correction. The 2-account pattern still holds within its now-narrowed scope.\n2. H-V2 (operational-risk ops requires real-time as prerequisite) is a new hypothesis at N=1. It is low confidence. It is not yet validated. But it is not dismissible \u2014 Sam's use case is real, his churn signal is credible, and the segment he represents may be larger than current CS visibility suggests.\n3. The persona split has implications for every downstream decision: design, pricing, positioning, and CS segmentation. A decision that treats \"mid-market ops\" as one persona will be wrong for some meaningful fraction of the customer base. How large that fraction is remains the open question.\n\n---\n\n**State of the case as of 2026-05-07:**\n\n| Hypothesis | Confidence | Evidence count | What's needed |\n|---|---|---|---|\n| H-V1: compliance ops batch weekly | low | N=2 independent accounts | 1 more interview (Notion); then eligible for promotion |\n| H-V2: operational-risk ops needs real-time | low | N=1 | 2 more interviews (fraud/AML/T&S) |\n| H-F1: calm-mode is 1\u20132 sprints | high | Eng Lead confirmed | No further validation needed |\n| H-F2: real-time is 6 weeks + ops burden | high (feasibility) / medium (cost) | Eng Lead + team confirmed | Sharpen with tech doc (overdue) |\n| H-B1: calm-mode commands WTP | low | N=1 (Acme only) | 3+ accounts; ask explicitly in next renewal interviews |\n| H-B2: real-time tier commands WTP | low | N=1 (Brex, advocacy context) | 2+ more interviews; CS contract context for Brex |\n\nNo verdict offered. The case as laid out is the pre-decision audit anchor.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:full_trail_synthesized",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 8,
+      "input": "turn-08-market-vanta-changelog.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 228.19,
+      "returncode": 0,
+      "cost_usd": 0.4769344,
+      "agent_response": "Done. Here's what was created/updated:\n\n**Created:**\n- `source/market/2026-05-08-vanta-real-time-alerts.md` \u2014 verbatim immutable archive of the artifact\n- `ingestion/market/2026-05-08-vanta.md` \u2014 tagged synthesis with route log\n- `knowledge/market/competitors/vanta.md` \u2014 durable competitor profile: Real-Time Alerts feature, $5K pricing, two-sided competitive pressure, design direction and operational framing corroboration\n\n**Updated:**\n- `knowledge/market/landscape.md` \u2014 Vanta added as the first entry under Direct competitors\n- `hypotheses/notification-frequency.md`:\n  - **H-B2 Evidence for** \u2014 added Vanta market anchor as a second evidence row (competitor signal tagged to `source/market/...`; provenance distinguishes it from the Sam Okafor customer WTP row)\n  - **H-B2 Open questions** \u2014 added caveats: Vanta signal is a market anchor, not direct customer WTP; do not treat the two rows as independent confirmations; Enterprise vs. mid-market pricing gap unestablished\n  - **H-F2 Open questions** \u2014 added Vanta's \"opt-in, not default\" design corroboration and two-sided competitive pressure note\n  - **Meta / Last updated** \u2014 refreshed to reflect this ingestion\n- `hypotheses/INDEX.md` \u2014 active row updated to reflect new H-B2 evidence and H-F2 competitive context\n\n**What was intentionally not touched:** H-V1 and H-V2 (value risk). The Vanta signal is a viability anchor, not a value signal, and Vanta's testimonial persona (fraud/security ops) is operational-risk ops \u2014 not compliance ops.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/market/*vanta*.md",
+          "passed": true,
+          "detail": "matched: ['source/market/2026-05-08-vanta-real-time-alerts.md']"
+        },
+        {
+          "name": "file_modified_glob:knowledge/market/landscape.md OR knowledge/market/trends.md OR knowledge/market/competitors/*.md OR hypotheses/*.md",
+          "passed": true,
+          "detail": "changed: ['knowledge/market/landscape.md', 'knowledge/market/competitors/vanta.md', 'hypotheses/INDEX.md', 'hypotheses/notification-frequency.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:risk_area_routing",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 9,
+      "input": "turn-09-interview-notion-ops.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 600.09,
+      "returncode": -1,
+      "cost_usd": 0.0,
+      "agent_response": "",
+      "stderr_tail": "TIMEOUT after 600s",
+      "error": "timeout",
+      "structural": [
+        {
+          "name": "hypothesis_evidence_count_increased_for:H-V1",
+          "passed": true,
+          "detail": "file changed=True, evidence links now=16 (hypotheses/notification-frequency.md)"
+        },
+        {
+          "name": "file_modified:knowledge/users/insights.md",
+          "passed": true,
+          "detail": "modified: knowledge/users/insights.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:insight_promoted_with_dissent_preserved",
+          "passed": false,
+          "detail": "verdict=FAIL | target=file:knowledge/users/insights.md | reason=Notion interview is absent as an evidence row (header claims N=3: Acme, Stripe, Notion but Evidence section links only Acme and Stripe), and Notion's ops-risk subteam (Priya) is not named in the dissent section as dissent-confirming evidence"
+        }
+      ]
+    },
+    {
+      "turn": 10,
+      "input": "turn-10-decision-moment.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 322.41,
+      "returncode": 0,
+      "cost_usd": 0.6410015499999999,
+      "agent_response": "Decision file written and index updated. Here's what was created:\n\n**`decisions/2026-05-13-defer-real-time-default-add-opt-in.md`** \u2014 status: pending\n\nThe file hits all 7 required sections:\n\n1. **What we're deciding** \u2014 Context + Decision sections: weekly-digest default for all customers, real-time as per-user opt-in paid add-on (~$5K/year anchor), gated to operational-risk roles.\n\n2. **Why** \u2014 References all evidence sources by name: Acme/Jamie Chen, Stripe/Marcus Adelana, Notion/Priya Iyer (three compliance-ops confirmations hitting the H-V1 threshold); Brex/Sam Okafor and Priya's ops-risk subteam (H-V2 at N=2); Diana Park's eng feasibility call; Vanta market signal; churn analytics. The \"why\" acknowledges explicitly that churn causation is circumstantial and H-V2 is one account short of the trigger.\n\n3. **Explicitly NOT doing** \u2014 Both rejected extremes are named with provenance-tagged evidence rows: real-time-as-default (why it's wrong for compliance ops + ops posture) and no-real-time-at-all (Brex churn path + Vanta competitive gap).\n\n4. **Brex dissent** \u2014 Named as `### Brex dissent`, not buried. Sam's exact position, the friction he'll absorb, and the remaining churn risk are stated plainly.\n\n5. **Reversal conditions** \u2014 Three specific, observable checks: CS segmentation data + 90-day churn delta segmented by persona type; pricing team sign-off + renewal notes flagging discoverability/price as a stated blocker; next operational-risk ops interview result contradicting the opt-in framing.\n\n6. **Date and status** \u2014 2026-05-13, `pending`.\n\n7. **Evidence trail** \u2014 9 evidence rows, all with working `[source/...]` links using correct `../source/` relative paths from `decisions/`. Two \"Explicitly NOT doing\" rows also tagged. Pre-save count: 11 rows, 11 tags \u2014 no orphans.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:decisions/*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-05-13-defer-real-time-default-add-opt-in.md', 'decisions/INDEX.md', 'decisions/_SCHEMA.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:decision_quality",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:decisions/*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [
+      {
+        "name": "judge:audit_trail_navigable",
+        "passed": true,
+        "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+      }
+    ],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T19:41:53.597404+00:00",
+  "cost": {
+    "total_usd": 5.1265,
+    "max_usd": null,
+    "by_kind": {
+      "turn": 4.398,
+      "judge": 0.7286
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.36822575
+      },
+      {
+        "kind": "judge",
+        "label": "hypothesis_proposed_not_promoted",
+        "cost": 0.05131480000000001
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.5504382999999999
+      },
+      {
+        "kind": "judge",
+        "label": "feasibility_risk_updated",
+        "cost": 0.057558050000000006
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.54406235
+      },
+      {
+        "kind": "judge",
+        "label": "market_signal_added",
+        "cost": 0.05326505000000001
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.5435101499999999
+      },
+      {
+        "kind": "judge",
+        "label": "insight_still_not_promoted",
+        "cost": 0.05200305
+      },
+      {
+        "kind": "turn",
+        "label": "turn-5",
+        "cost": 0.2576895
+      },
+      {
+        "kind": "judge",
+        "label": "low_signal_rejected",
+        "cost": 0.0493173
+      },
+      {
+        "kind": "turn",
+        "label": "turn-6",
+        "cost": 0.707503
+      },
+      {
+        "kind": "judge",
+        "label": "contradiction_surfaced",
+        "cost": 0.06912304999999999
+      },
+      {
+        "kind": "turn",
+        "label": "turn-7",
+        "cost": 0.30858655
+      },
+      {
+        "kind": "judge",
+        "label": "full_trail_synthesized",
+        "cost": 0.06310455000000001
+      },
+      {
+        "kind": "turn",
+        "label": "turn-8",
+        "cost": 0.4769344
+      },
+      {
+        "kind": "judge",
+        "label": "risk_area_routing",
+        "cost": 0.0634628
+      },
+      {
+        "kind": "turn",
+        "label": "turn-9",
+        "cost": 0.0
+      },
+      {
+        "kind": "judge",
+        "label": "insight_promoted_with_dissent_preserved",
+        "cost": 0.0748593
+      },
+      {
+        "kind": "turn",
+        "label": "turn-10",
+        "cost": 0.6410015499999999
+      },
+      {
+        "kind": "judge",
+        "label": "decision_quality",
+        "cost": 0.07280955
+      },
+      {
+        "kind": "judge",
+        "label": "audit_trail_navigable",
+        "cost": 0.12177075000000001
+      }
+    ]
+  }
+}

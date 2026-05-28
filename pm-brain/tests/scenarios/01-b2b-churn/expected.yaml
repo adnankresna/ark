@@ -1,0 +1,150 @@
+scenario: 01-b2b-churn
+description: |
+  B2B SaaS PM, mid-market compliance tool, six active features. Four-week investigation of why mid-market
+  churn is up 4 points QoQ. Exercises hypothesis promotion, contradiction surfacing, contradiction-without-silent-overwrite,
+  and decision drafting from evidence trail.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-interview-acme-ops.md
+    structural:
+      - file_exists_glob: source/interviews/*acme*.md OR source/interviews/*chen*.md OR source/interviews/*jamie*.md
+      - file_exists_glob: ingestion/interviews/*acme*.md OR ingestion/interviews/*chen*.md OR ingestion/interviews/*jamie*.md
+      # Agent may name the stakeholder file after the person (jamie-chen.md) or the account (acme-ops.md) — both are valid.
+      - file_modified_glob: stakeholders/*acme*.md OR stakeholders/*chen*.md OR stakeholders/*jamie*.md OR stakeholders/*ops*.md
+      - hypothesis_count_at_least: 1  # H-V1 (value-risk hypothesis) should be proposed
+    content:
+      - judge: hypothesis_proposed_not_promoted
+        rubric: judges/hypothesis_proposed.md
+        target_glob: hypotheses/*.md
+        expected_meaning: "a value-risk hypothesis is proposed for real-time alerts (negative value for mid-market ops); status is candidate/proposed, NOT promoted"
+        must_not: "promote the insight after one observation"
+
+  - turn: 2
+    input: turn-02-meeting-eng-sync.md
+    structural:
+      - file_exists_glob: source/meetings/*eng-sync*.md
+      - file_exists_glob: ingestion/meetings/*eng-sync*.md
+    content:
+      - judge: feasibility_risk_updated
+        rubric: judges/risk_area_updated.md
+        target_glob: hypotheses/*.md
+        risk_area: feasibility
+        expected_meaning: "feasibility risk for the alert feature is updated with the 6-week build estimate"
+
+  - turn: 3
+    input: turn-03-analytics-churn-snapshot.md
+    structural:
+      - file_exists_glob: ingestion/adhoc/*churn*.md OR ingestion/market/*churn*.md
+      - file_modified: knowledge/product/metrics.md
+    content:
+      - judge: market_signal_added
+        rubric: judges/market_signal.md
+        expected_meaning: "churn-up-4pp and notification-overload signal lands in product or market layer; does NOT bind directly to H2 yet"
+        must_not: "fabricate a causal claim between churn and H2 from one analytics snapshot"
+
+  - turn: 4
+    input: turn-04-interview-stripe-compliance.md
+    structural:
+      # Agent may name the source file after the company (stripe), the person, or the role (compliance) — accept any.
+      - file_exists_glob: source/interviews/*stripe*.md OR source/interviews/*compliance*.md OR source/interviews/2026-*compliance*.md
+      - hypothesis_evidence_count_increased_for: H-V1   # value-risk hypothesis from turn 1
+    content:
+      - judge: insight_still_not_promoted
+        rubric: judges/insight_promotion.md
+        target_file: knowledge/users/insights.md
+        expected_meaning: "weekly-batch insight has 2 observations, NOT promoted yet (threshold is 3 independent)"
+
+  - turn: 5
+    input: turn-05-slack-pricing-thread.md
+    structural:
+      - file_exists_glob: ingestion/adhoc/*pricing*.md OR ingestion/meetings/*pricing*.md
+      - hypothesis_evidence_count_unchanged_for: H-V1
+    content:
+      - judge: low_signal_rejected
+        rubric: judges/low_signal.md
+        expected_meaning: "the pricing-channel chatter does NOT get false-promoted to H-V1 evidence; lands in adhoc/ or pricing notes"
+        must_not: "add pricing chatter as evidence for the value-risk hypothesis"
+
+  - turn: 6
+    input: turn-06-interview-contradicting.md
+    structural:
+      - file_exists_glob: source/interviews/*brex*.md
+      - file_modified_glob: hypotheses/*.md
+    content:
+      - judge: contradiction_surfaced
+        rubric: judges/contradiction_surfaced.md
+        target_glob: hypotheses/*.md
+        expected_meaning: "agent flags that Brex interview contradicts H-V1's framing; the contradiction is named in the hypothesis file under evidence-against or a contradictions section"
+        must_not: "silently demote H-V1 without surfacing the conflict, or flatten Brex into agreement"
+
+  - turn: 7
+    input: turn-07-decision-trigger.md
+    # Synthesis-only turn: the agent thinks out loud, may not write to hypotheses/.
+    # The judge below evaluates agent_response text directly (passed via scenario_context).
+    structural: []
+    content:
+      - judge: full_trail_synthesized
+        rubric: judges/decision_trigger.md
+        expected_meaning: "agent's response references all prior evidence including the Brex contradiction; names what's still ambiguous; does NOT pretend the case is fully resolved"
+        must_not: "draft a decision while burying the contradiction"
+
+  - turn: 8
+    input: turn-08-market-vanta-changelog.md
+    structural:
+      - file_exists_glob: source/market/*vanta*.md
+      # Agent may route the Vanta signal into market knowledge, into competitors/, or into a hypothesis viability row — accept any.
+      - file_modified_glob: knowledge/market/landscape.md OR knowledge/market/trends.md OR knowledge/market/competitors/*.md OR hypotheses/*.md
+    content:
+      - judge: risk_area_routing
+        rubric: judges/risk_area_routing.md
+        expected_meaning: "Vanta's paid real-time tier binds to viability risk on the hypothesis, not value risk"
+
+  - turn: 9
+    input: turn-09-interview-notion-ops.md
+    structural:
+      - hypothesis_evidence_count_increased_for: H-V1
+      - file_modified: knowledge/users/insights.md
+    content:
+      - judge: insight_promoted_with_dissent_preserved
+        rubric: judges/insight_promoted_with_dissent.md
+        target_file: knowledge/users/insights.md
+        expected_meaning: "weekly-batch insight is now promoted (3-of-3 supporting), AND the Brex dissent is preserved (minority signal kept, not flattened)"
+
+  - turn: 10
+    input: turn-10-decision-moment.md
+    structural:
+      - file_exists_glob: decisions/*.md
+      - file_modified: decisions/INDEX.md
+    content:
+      - judge: decision_quality
+        rubric: judges/decision_quality.md
+        target_glob: decisions/*.md
+        expected_meaning: |
+          decision file references H-V1 (the value-risk hypothesis), lists supporting evidence by name, names the contradiction explicitly,
+          contains a specific 'what would reverse this' field (not vague — must be observable),
+          status is 'pending' or 'decided' depending on the trigger prompt
+        must_not: "draft a decision with no reversal condition, or with a vague reversal condition like 'if things change'"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - all_decisions_have_reversal_condition: true
+    - no_orphan_evidence: true        # every evidence row links to a source/ file
+    - no_silent_hypothesis_demotion: true  # any demotion has an evidence-against trail
+  content:
+    - judge: audit_trail_navigable
+      rubric: judges/audit_trail.md
+      expected_meaning: |
+        starting from the decision in turn 10, the audit trail is two clicks deep:
+        decision → hypothesis → ingestion record → source artifact.
+        every step is a working markdown link.

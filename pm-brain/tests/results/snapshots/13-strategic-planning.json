@@ -1,0 +1,282 @@
+{
+  "scenario": "13-strategic-planning",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-ezwbrmva",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T20:11:32.673521+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 257.37,
+      "returncode": 0,
+      "cost_usd": 0.47049979999999997,
+      "agent_response": "All 10 files written. Here's what was created/updated:\n\n---\n\n**Block 1 \u2014 strategy.md** (`knowledge/strategy.md`)\nPopulated with north-star metric, Q3 priorities (ranked), explicit non-goals (mobile UI + pricing freeze), and the watershed-vs-reliability tension. Link added to the mobile-UI decision.\n\n**Block 2 \u2014 Decision** (`decisions/2026-04-30-defer-mobile-ui.md` + `decisions/INDEX.md`)\nDecision record created per schema \u2014 all evidence rows tagged, reversal conditions specific and observable. Added to INDEX under \"Recently decided.\"\n\n**Block 3 \u2014 Hypotheses** (`hypotheses/watershed-level-view.md`, `hypotheses/admin-billing-portal.md`, `hypotheses/INDEX.md`)\nBoth files created in full schema format (all five risk sections). Evidence rows carry provenance tags. Mira Patel's evidence for watershed-level-view references the source file directly (path-typed). One flag in open questions: the Anand Iyer tag is `(industry-knowledge)` as PM-specified, but noted for replacement with a direct source record once one exists. Both hypotheses added to INDEX.\n\n**Block 4 \u2014 Ingestion** (`source/interviews/2026-05-14-mira-patel-cascadia.md`, `ingestion/interviews/2026-05-14-mira-patel-cascadia.md`, `knowledge/users/insights.md`)\nVerbatim source preserved. Synthesis routes to hypothesis H-V1, strategy tension, and insights.md. Watershed friction theme promoted to `knowledge/users/insights.md` \u2014 meets the bar (3rd customer signal in 6 weeks, decision-relevant, multi-source).\n\n**Block 5 \u2014 Feature file** (`knowledge/product/features/weekly-snapshot.md`)\nCreated per schema. Hypothesis link is marked \"not yet created \u2014 target of /risk.\" ETL dependency risk called out explicitly in open questions (same fragile pipeline as the strategy tension).\n\n**One flag for PM:** The two earlier watershed interviews referenced in the strategy tension (pre-dating 2026-05-10) are not yet ingested. They're cited in strategy.md and insights.md but have no source/ingestion records. Pull them in when available to complete the provenance chain.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:knowledge/strategy.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/strategy.md']"
+        },
+        {
+          "name": "file_modified:knowledge/strategy.md",
+          "passed": true,
+          "detail": "modified: knowledge/strategy.md"
+        },
+        {
+          "name": "file_exists_glob:decisions/2026-04-30*mobile*.md OR decisions/2026-04-30*defer*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-04-30-defer-mobile-ui.md', 'decisions/2026-04-30-defer-mobile-ui.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*watershed*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/watershed-level-view.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*admin*billing*.md OR hypotheses/*billing*portal*.md OR hypotheses/*admin-billing*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/admin-billing-portal.md', 'hypotheses/admin-billing-portal.md', 'hypotheses/admin-billing-portal.md']"
+        },
+        {
+          "name": "file_modified:hypotheses/INDEX.md",
+          "passed": true,
+          "detail": "modified: hypotheses/INDEX.md"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*patel*.md OR source/interviews/*cascadia*.md OR source/interviews/2026-05-14*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-05-14-mira-patel-cascadia.md', 'source/interviews/2026-05-14-mira-patel-cascadia.md', 'source/interviews/2026-05-14-mira-patel-cascadia.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*patel*.md OR ingestion/interviews/*cascadia*.md OR ingestion/interviews/2026-05-14*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-05-14-mira-patel-cascadia.md', 'ingestion/interviews/2026-05-14-mira-patel-cascadia.md', 'ingestion/interviews/2026-05-14-mira-patel-cascadia.md']"
+        },
+        {
+          "name": "file_modified:knowledge/users/insights.md",
+          "passed": true,
+          "detail": "modified: knowledge/users/insights.md"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/features/*weekly-snapshot*.md OR knowledge/product/features/*snapshot*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/features/weekly-snapshot.md', 'knowledge/product/features/weekly-snapshot.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-strategy-check.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 157.48,
+      "returncode": 0,
+      "cost_usd": 0.3192658,
+      "agent_response": "Report written to `maintenance/log/2026-05-17-strategy-check.md`. Here is the full output:\n\n---\n\n## Strategy Check \u2014 2026-05-17\n\n**Anchored to:** `knowledge/strategy.md` as of 2026-05-17. Read-only \u2014 no strategy edits applied.\n\n---\n\n### 1. Strategy clauses under pressure\n\n| Clause | Pressuring items | Strongest signal |\n|---|---|---|\n| Priority 2 \u2014 Protect dashboard reliability | `watershed-level-view` H-F1 + existing tension | Eng memo: sub-basin aggregation raises outage probability `(strategy.md \u00a7 Tensions, 2026-05-10)` |\n| Priority 3 \u2014 Avoid surface-area expansion | `admin-billing-portal` H-V1 | Admin portal is a new feature area, not one of the existing three `(intuition, Riley Chen, 2026-05-08)` |\n| Priority 1 \u2014 Deepen research-segment workflow fit | `admin-billing-portal` H-V1 | Mid-market billing admin has no path to moving weekly active research-customer count `(intuition, Riley Chen, 2026-05-08)` |\n| Non-goal \u2014 No new pricing tiers | `admin-billing-portal` H-B1 (acknowledged caveat) | Seat management could blur toward enabling pricing structures `(intuition, Riley Chen, 2026-05-08)` |\n\nNot under pressure: North-star definition, Non-goal: No mobile UI (resolved by explicit decision).\n\n---\n\n### 2. Decisions that may drift\n\n**None.** `decisions/2026-04-30-defer-mobile-ui.md` is explicit divergence \u2014 it instantiates `strategy.md \u00a7 Non-goals: No mobile UI` directly, with documented reversal condition. Not drift.\n\n---\n\n### 3. Hypotheses that may drift\n\n**`admin-billing-portal` \u2014 DRIFTS from strategy.** Three specific violations:\n\n- **vs. Priority 1** (`every roadmap bet must demonstrably reduce friction for hydrologists, climate scientists, or watershed analysts`): Mid-market self-serve billing management is not research-segment workflow depth. No path to the north-star metric established. The hypothesis file's own open question calls this out. Evidence is entirely sales-proxied: `(intuition, Riley Chen, 2026-05-08)`.\n\n- **vs. Priority 3** (`no new feature areas; deepen the existing three`): An admin billing portal is a net-new feature area \u2014 not Regional Climate Dashboard, Anomaly Detection, or Sensor Health.\n\n- **vs. Non-goal: No new pricing tiers** (unconfirmed, scope-dependent): H-B1 caveat is already flagged in the file; implementation scope determines whether the line is crossed.\n\n**This is genuine drift, not explicit divergence.** No PM decision has overridden Priority 1 or Priority 3. The hypothesis should be killed or suspended before further investment, or the PM should log an explicit override decision naming which strategy clauses it overrides and why.\n\n---\n\n**`watershed-level-view` \u2014 ALIGNED, but blocked by the existing unresolved tension.**\n\nH-V1 directly supports Priority 1. Not drift. Two issues to watch:\n\n- H-F1 lives inside the \"Watershed-level granularity vs. data-pipeline reliability\" tension \u2014 the hypothesis cannot promote until the eng spike is done and the tension resolves.\n- Provenance gap: H-V1 is marked medium confidence citing \"3 customer interviews,\" but only 1 is anchored (`source/interviews/2026-05-14-mira-patel-cascadia.md`). The two earlier interviews referenced in `strategy.md \u00a7 Tensions` (opened 2026-05-10) have no `source/` or `ingestion/` files. This doesn't change the drift verdict but does weaken the confidence claim's defensibility.\n\n---\n\n### 4. Ingestion signals worth watching\n\nOne ingestion file in range: Mira Patel (2026-05-14) \u2014 correctly routed, no new tensions.\n\n**Watch \u2014 two unanchored early watershed interviews.** The strategy tension opened 2026-05-10 cites \"3+ customer interviews\" but only one has been individually ingested. Retrieval task, not a PM judgment call.\n\nAnand Iyer (Stanford, 2026-05-16) is a correlated signal, same user population, same theme \u2014 **not an independent confirmation** for confidence-level purposes (same-domain independence check per CLAUDE.md).\n\nMarket landscape is template-state (no competitor files). No market signals to check.\n\n---\n\n### 5. Proposed new tensions (drafts only)\n\n**None proposed.** `admin-billing-portal` drift does not cross the tension threshold:\n\n- Not recurring by independent sources (2\u20133 sales flags from the same channel, not separate customer research).\n- Not high-confidence (zero customer interview evidence, low confidence rating).\n\nThe right resolution is killing or suspending the hypothesis, not opening a strategy tension. If the PM decides to pursue it, that's an explicit strategy override decision, not a tension.\n\n---\n\n### 6. Closed-loop check \u2014 existing tensions\n\n**\"Watershed-level granularity vs. data-pipeline reliability\" (opened 2026-05-10) \u2014 Live. Not candidate for archival.**\n\n- Demand side strengthening: three named instances (Mira Patel being the most recent, plus Anand Iyer as correlated). Customer urgency is rising.\n- Supply side (pipeline risk): eng memo is referenced in `strategy.md` but not individually ingested; severity is unanchored. The eng spike (watershed H-F1) is the prerequisite for closing this tension in either direction.\n- What closes it: eng spike completes \u2192 either (a) pipeline risk is manageable (resolve toward shipping) or (b) risk is high (resolve toward deferral or prototype-first). Hold until then.\n\n---\n\n### Summary\n\n| Finding | Severity | PM action needed |\n|---|---|---|\n| `admin-billing-portal` drifts from Priority 1 + Priority 3 + possibly Non-goal pricing | **High** | Kill / suspend / or log an explicit strategy override decision |\n| Two early watershed interviews unanchored (H-V1 provenance gap) | Medium | No \u2014 retrieval task |\n| Watershed tension live, blocked on eng spike | Medium | No \u2014 eng spike unblocks it |\n| Market landscape is empty | Low | No \u2014 PM-fillable |\n\n---\n\n**Apply any of these strategy edits? (name which / no)**",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:maintenance/log/*strategy-check*.md OR maintenance/log/2026-05-17*.md",
+          "passed": true,
+          "detail": "matched: ['maintenance/log/2026-05-17-strategy-check.md', 'maintenance/log/2026-05-17-strategy-check.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:strategy_check_cites_clauses",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-risk.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 203.27,
+      "returncode": 0,
+      "cost_usd": 0.37224440000000003,
+      "agent_response": "Files written. Here is the surface-back.\n\n---\n\n## /risk \u2014 Weekly Snapshot \u2014 5-area scan\n\n### Risk areas\n\n| Area | Status | Gap |\n|---|---|---|\n| **Value** | stub drafted (H-V1) | No dedicated ingestion artifact for weekly-snapshot demand specifically; substitution risk (does digest replace logins?) is the highest-consequence untested question |\n| **Usability** | stub drafted (H-U1) | Format (PDF vs. HTML, what to surface, how to render delta) entirely open at design stage; no prototype or customer test yet |\n| **Feasibility** | stub drafted (H-F1) | PDF generation cost unknown; ETL dependency unconfirmed (likely the same fragile pipeline from the strategy tension); email delivery infra baseline absent |\n| **Viability** | stub drafted (H-B1) | Email delivery at scale has marginal cost; if non-trivial, either absorbing it needs finance sign-off or passing it on violates the Q3 pricing freeze non-goal |\n| **Other (timing)** | stub drafted (H-O1) | Feature is at design stage with no milestones; Q3 is locked; classification question (new surface area vs. Anomaly Detection deepening) unresolved |\n\n---\n\n### 1\u20133 highest-leverage tests\n\n1. **Value / substitution test** (H-V1 \u2014 highest leverage): A 5-minute interview segment with 3\u20135 research-segment customers asking explicitly: \"If you received this digest, would you still log in that day?\" A \"no\" majority kills the feature's case for the north-star metric before any engineering work starts. Run this before design progresses.\n\n2. **Feasibility spike** (H-F1): A 3-point engineering memo covering: (a) PDF rendering cost at 100 and 500 customers, (b) Friday-morning ETL error rate over 4 weeks, (c) whether email delivery infra exists or is new build. This resolves the three largest unknown unknowns in one move and is cheap (1\u20132 days eng time).\n\n3. **Q3 classification call** (H-O1): PM + eng scoping call to get an effort estimate and explicitly decide whether this is \"Anomaly Detection deepening\" or \"new feature area.\" If classified as new surface, the feature cannot ship Q3 under current strategy. This decision costs one meeting and unblocks everything downstream.\n\n---\n\n### Non-goal check (`knowledge/strategy.md \u00a7 Non-goals`)\n\n**Two potential violations, one certain, one conditional:**\n\n1. **\"Avoid surface-area expansion\"** (Priority 3): \"No new feature areas this quarter; deepen the existing three.\" A weekly email digest is a new delivery channel. Whether it counts as a new feature area or a deepening of Anomaly Detection is genuinely ambiguous \u2014 but the ambiguity must be resolved by PM judgment, not left to drift. H-O1 tracks this. **Action required before design progresses.**\n\n2. **\"No new pricing tiers or upcharges\"** (explicit Q3 non-goal): If email delivery at scale carries non-trivial per-seat cost and cannot be absorbed, shipping this feature requires either a pricing decision (overriding the non-goal) or descoping to a cohort small enough to absorb. H-B1 tracks this. Conditional on the feasibility cost estimate.\n\n---\n\nFiles written:\n- `hypotheses/weekly-snapshot.md` \u2014 created (5 stubs, all `active`)\n- `hypotheses/INDEX.md` \u2014 weekly-snapshot row added\n- `knowledge/product/features/weekly-snapshot.md` \u2014 Risks section and Linked \u00a7 Hypotheses updated",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:hypotheses/*weekly-snapshot*.md OR hypotheses/*snapshot*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/weekly-snapshot.md', 'hypotheses/weekly-snapshot.md']"
+        },
+        {
+          "name": "file_modified_glob:knowledge/product/features/*weekly-snapshot*.md OR knowledge/product/features/*snapshot*.md",
+          "passed": true,
+          "detail": "changed: ['knowledge/product/features/weekly-snapshot.md', 'knowledge/product/features/weekly-snapshot.md']"
+        },
+        {
+          "name": "file_modified:hypotheses/INDEX.md",
+          "passed": true,
+          "detail": "modified: hypotheses/INDEX.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:risk_walks_five_areas",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-plan.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 447.02,
+      "returncode": 0,
+      "cost_usd": 0.5893374499999999,
+      "agent_response": "Files written. Here is the plan.\n\n---\n\n## /plan \u2014 Reduce weekly-dashboard load time by 40%, Q3 2026\n\n---\n\n### 1. What we already know\n\n**Strategy alignment (pre-existing):**\n- Q3 Priority 2 already commits to this domain: \"Protect dashboard reliability \u2014 keep the morning-refresh SLA at >98% for our top 3 enterprise customers.\" [`knowledge/strategy.md \u00a7 1\u20132 quarter priorities`] The 40% target makes an existing commitment measurable; this is not a new direction.\n- Strategy tension \"Watershed-level granularity vs. data-pipeline reliability\" (opened 2026-05-10) explicitly names \"basin-level ETL's growing fragility (eng debt)\" and references an engineering memo flagging that the pipeline's outage probability is already elevated. [`knowledge/strategy.md \u00a7 Tensions`] The performance problem and the ETL fragility are the same underlying infrastructure risk.\n\n**What's missing from the system:**\n- No baseline metric for dashboard load time exists. `knowledge/product/metrics.md` is an empty template. \"40% reduction\" is currently unmeasurable \u2014 establishing a baseline is the prerequisite to everything else.\n- No hypothesis file covered dashboard performance before this session. All three existing hypothesis files address watershed-view (H-V1 medium confidence), admin-billing (H-V1 low confidence), and weekly-snapshot (5 stubs, all low confidence). [`hypotheses/INDEX.md`]\n- No ingestion artifact existed for Sasha's delay report before this session. The signal was referenced in strategy.md's tension entry but never individually captured. Created now.\n- No stakeholder files exist for Sasha or Jordan. [`stakeholders/INDEX.md`]\n\n**Adjacent feature dependency:**\n- Weekly Snapshot (`knowledge/product/features/weekly-snapshot.md`) explicitly depends on the same ETL pipeline and adds concentrated Friday-morning load. [`hypotheses/weekly-snapshot.md` H-F1] Any ETL performance work has a dual beneficiary \u2014 and a dual risk surface.\n\n---\n\n### 2. Assumption vs. evidence\n\n**Evidence (externally sourced):**\n- Basin-level ETL has transient timeouts causing morning-refresh delays. `(stakeholder-verbal, Sasha, 2026-05-17)` \u2014 single internal signal, not yet independently confirmed by customer accounts or eng logs.\n- The ETL pipeline has documented structural fragility \u2014 an engineering memo (referenced in strategy tension, not ingested separately) flagged increased outage probability if sub-basin aggregation is added. `(chat, no artifact)` \u2014 the memo exists; it hasn't been ingested as a source file.\n\n**Assumptions (not yet evidence):**\n- The 40% target is achievable through targeted ETL optimization (query tuning, retry logic, caching) without a full pipeline rewrite in Q3. `(intuition, PM, 2026-05-17)`\n- The ETL timeouts are the primary cause of perceived load time \u2014 not frontend rendering, CDN, or API-layer bottlenecks. `(chat, no artifact)` \u2014 Sasha named ETL; the causal layer has not been formally profiled.\n- The customer impact is sufficient to warrant a dedicated Q3 objective rather than absorption into the reliability backlog. `(intuition, PM, 2026-05-17)`\n- Jordan's team has Q3 capacity for this alongside watershed-view pipeline hardening and Weekly Snapshot ETL work. `(intuition, PM, 2026-05-17)` \u2014 three ETL-adjacent objectives competing for the same pipeline team is the central viability risk.\n- The \"top 3 enterprise customers\" referenced in the SLA commitment are the same accounts Sasha is describing. `(chat, no artifact)` \u2014 not confirmed.\n\n---\n\n### 3. Who to interview\n\n**Internal (named, urgent):**\n- **Sasha** (role unknown \u2014 CSM, support, or eng): primary signal source. Need: which customer accounts reported delays, frequency, duration of incidents, whether any have escalated formally. Run `/prep sasha` before the call; no stakeholder file exists yet.\n- **Jordan** (eng lead): technical authority on ETL scope. Need: ETL timeout diagnosis, root-cause hypothesis, rough effort estimate for targeted fix vs. full rewrite. Run `/prep jordan`; no stakeholder file exists yet.\n- **Riley Chen** (Weekly Snapshot owner): dependency coordination. ETL changes affect or benefit Weekly Snapshot's Friday-morning delivery window. Must be in the loop before any ETL fix is finalized.\n\n**External (segments, unnamed):**\n- **Top 3 enterprise customers** (names not in system \u2014 Sasha has the list): validate that morning load time is in their top 3 complaints; establish tolerance threshold; confirm whether they've already escalated or are close to it.\n- **Research-segment power users** (hydrologists, watershed analysts per `knowledge/users/personas.md`): the morning-check-in is their primary usage pattern. If they're hitting delays, that directly tensions Priority 1 (deepen research-segment workflow fit). No interview exists on performance experience.\n\n**Coverage gap:** Every existing ingestion artifact covers watershed-level granularity (Mira Patel 2026-05-14 + 2 earlier interviews). Performance/reliability experience is a complete blind spot in the interview record. The first interview specifically on load time needs to happen before experiments are scoped.\n\n---\n\n### 4. Hypotheses to open\n\nNew file: `hypotheses/dashboard-load-time.md` (created). Five candidate stubs, all low confidence.\n\n| # | Risk area | Hypothesis | Test |\n|---|---|---|---|\n| H-V1 | Value | Reducing load time by \u226540% will increase research-segment weekly active count by removing friction that deters the morning-check habit | 5-min interview segment with 3\u20135 enterprise users: \"Does load time affect how often you check?\" + pre/post active count measurement |\n| H-U1 | Usability | A 40% improvement will be perceptible to users in the morning-refresh context (not masked by network/browser variance) | Pilot rollout to 2 accounts + 1-question post-survey (\"Does it feel faster?\") vs. measured delta |\n| H-F1 | Feasibility | ETL transient timeouts can be reduced by \u226540% through targeted optimization (not a full rewrite) within Q3 | Engineering spike: pull ETL logs, profile bottleneck layer, estimate targeted-fix effort vs. full rewrite \u2014 output a 3-point feasibility memo |\n| H-B1 | Viability | Q3 eng capacity is sufficient for load-time work without displacing watershed-view or weekly-snapshot ETL work | Jordan capacity-planning session: map three ETL-adjacent objectives against remaining Q3 eng-weeks |\n| H-O1 | Other (signal validity) | Sasha's delay signal is systemic and worsening, not an isolated transient incident | Pull ETL timeout logs for the past 4 weeks; plot error rate and timing \u2014 is it trending up or flat/random? |\n\n**H-F1 and H-O1 are the highest-priority hypotheses.** Everything else is contingent on them. If H-O1 says the signal is isolated, there's no Q3 objective. If H-F1 says a rewrite is required, the scope blows out of Q3.\n\n---\n\n### 5. Experiments to run\n\nSequenced \u2014 each gates the next.\n\n**Experiment 1 \u2014 ETL diagnostic + baseline instrumentation (weeks 1\u20132)**\nPull ETL timeout logs for the past 4 weeks; plot error rate by day and hour. Instrument p50/p95/p99 dashboard load time for the morning-refresh window (6\u20139 AM) for the top 3 enterprise accounts. Establish the baseline.\n- **Success:** Baseline p95 established; timeout pattern identified (trending vs. isolated).\n- **Invalidation:** Load time data shows no material degradation vs. a reasonable target baseline \u2192 the customer impact claim is overstated. Pause, revalidate the problem statement with Sasha before proceeding.\n\n**Experiment 2 \u2014 Root-cause + scoping spike (weeks 2\u20133)**\nJordan's team diagnoses the timeout mechanism (ETL query layer, retry storm, upstream data source, or application/API layer) and scopes targeted fix options with effort estimates. Output: 3-point memo \u2014 timeout source confirmed, fix options with eng-weeks, whether 40% is achievable without a full rewrite.\n- **Success:** Clear path to \u226540% improvement with a credible estimate \u22648 eng-weeks.\n- **Invalidation:** Full pipeline rewrite required, OR the bottleneck is not ETL-layer (frontend/CDN instead) \u2192 the scope and approach change materially; pause and reframe before any implementation.\n\n**Experiment 3 \u2014 Capacity alignment (week 3\u20134)**\nJordan and PM map three ETL-adjacent Q3 objectives (load-time fix, watershed-view pipeline hardening, Weekly Snapshot ETL dependency) against remaining Q3 capacity. Determine whether they overlap (same work) or compete (separate workstreams).\n- **Success:** Capacity is sufficient for all three (or two are the same work) \u2192 commit the objective.\n- **Invalidation:** Any objective is displaced \u2192 PM makes an explicit trade-off before proceeding.\n\n**Experiment 4 \u2014 Fix implementation in staging (weeks 4\u20139)**\nImplement the highest-leverage targeted fix in a staging environment; simulate Monday-morning load patterns.\n- **Success:** p95 \u226460% of baseline on 2 consecutive Monday simulations.\n- **Invalidation:** <25% improvement after the highest-leverage fix \u2192 either the wrong layer was targeted, or 40% requires sequential improvements; re-scope before rollout.\n\n**Experiment 5 \u2014 Phased rollout (weeks 9\u201312)**\nRoll out to 1\u20132 enterprise accounts; measure real p95 for 3 Mondays. Monitor SLA error rate.\n- **Success:** \u226540% p95 reduction confirmed in production; SLA error rate unchanged or improved.\n- **Invalidation:** Load time improves but SLA error rate increases \u2192 the fix introduced a new fragility. Roll back, investigate.\n\n**Experiment 6 \u2014 SLA validation across top 3 enterprise accounts (weeks 12\u201313)**\nFull rollout; confirm >98% SLA maintained for 4 consecutive weeks.\n- **Success:** \u226540% load time reduction + >98% SLA \u2192 objective met.\n- **Invalidation:** SLA drops below 98% \u2192 traded speed for reliability. Escalate.\n\n---\n\n### 6. Decision points\n\n**D1 \u2014 Is the degradation real and systemic? (end of week 2)**\nUnlock: ETL log analysis + baseline instrumentation complete.\n- Go: Error rate >2% on 3+ weeks, or clearly trending up, AND root cause is ETL-layer \u2192 proceed to scoping spike.\n- No-go: Isolated/random events AND rate <1% \u2192 do not assign a Q3 objective; move to reliability backlog. File: [`decisions/2026-05-17-dashboard-load-time-q3-objective.md`]\n\n**D2 \u2014 Is \u226540% achievable without a full rewrite in Q3? (end of week 3)**\nUnlock: Jordan's 3-point scoping memo.\n- Go: Targeted fix achievable in \u22648 eng-weeks \u2192 commit the objective.\n- No-go: Full rewrite required OR >8 eng-weeks \u2192 reframe as a partial improvement or defer to Q4.\n\n**D3 \u2014 Does this fit Q3 capacity? (end of week 4)**\nUnlock: Jordan capacity-planning session across all three ETL workstreams.\n- Go: No displacement of higher-priority bets \u2192 commit.\n- No-go: Forced trade-off with watershed-view pipeline hardening (Priority 1 enabler) \u2192 PM explicitly decides which to subordinate.\n\n**D4 \u2014 Does staging hit the 40% target? (week 9)**\nUnlock: Staging measurement data (2+ Monday simulations).\n- Go: \u226540% p95 improvement confirmed \u2192 proceed to phased rollout.\n- No-go: <40% after the targeted fix \u2192 either renegotiate the target or add a second fix layer before rollout.\n\n---\n\n### Constraints from `strategy.md \u00a7 Non-goals`\n\n- **No mobile UI** \u2014 this plan is backend ETL, not a UI change. No conflict.\n- **No new pricing tiers or upcharges** \u2014 this is a reliability improvement. No conflict unless ETL infrastructure cost is non-trivial and finance requires a customer-facing charge to cover it. If that happens, this non-goal blocks Q3 ship on those terms (same bind as Weekly Snapshot's H-B1). Flag early.\n\n---\n\n### Stakeholder alignment conversations the plan requires\n\n| Stakeholder | Ask | When | Note |\n|---|---|---|---|\n| **Sasha** | Full account impact report: which customers, how often, duration, escalation status | Before D1 | Run `/prep sasha`; no stakeholder file exists \u2014 create one from this call |\n| **Jordan** | Root-cause diagnosis + scoping memo (Exp 2) + capacity alignment (Exp 3) | Week 2\u20133 | Run `/prep jordan`; no stakeholder file exists |\n| **Riley Chen** | ETL dependency coordination \u2014 how does the fix approach affect Weekly Snapshot's Friday ETL window? | Before Exp 4 | Weekly Snapshot H-F1 is the parallel risk; changes must be coordinated |\n| **Top 3 enterprise customers** | Validate load time is a top complaint; establish expectations | Before D1 | Sasha has account list; PM + CSM should be on these calls |\n\n---\n\n### What would make this plan unwise\n\nIf Experiment 2 (root-cause spike) reveals that the morning-refresh delays are not ETL-layer \u2014 that is, the bottleneck is frontend rendering, CDN behavior, or application-level query volume \u2014 then the approach changes significantly and the 40% target becomes a different, likely harder-to-scope problem than the one currently assumed. Separately, if Q3 engineering capacity is already fully allocated to watershed-level-view pipeline hardening (which the open strategy tension implies is increasingly urgent) and Weekly Snapshot ETL work, adding a third ETL-adjacent objective creates a three-way competition for the same team rather than parallel progress. The plan assumes slack capacity that hasn't been confirmed. Finally, Sasha's signal is a single stakeholder-verbal input with no customer-side corroboration yet \u2014 if the ETL log analysis (Experiment 1) shows a flat or low error rate with no trend, the urgency case for a named Q3 objective weakens, and the work is better handled as ongoing reliability hygiene rather than an explicit target. The diagnostic spike (weeks 1\u20132) is the cheapest falsification available: run it before committing.\n\n---\n\n### Files written this session\n\n| File | Action |\n|---|---|\n| `source/adhoc/2026-05-17-plan-dashboard-load-time.md` | Created \u2014 verbatim artifact |\n| `ingestion/adhoc/2026-05-17-plan-dashboard-load-time.md` | Created \u2014 synthesis + routing |\n| `knowledge/product/features/dashboard-load-time.md` | Created \u2014 feature stub |\n| `hypotheses/dashboard-load-time.md` | Created \u2014 5 candidate stubs (H-V1 through H-O1) |\n| `decisions/2026-05-17-dashboard-load-time-q3-objective.md` | Created \u2014 pending go/no-go decision |\n| `hypotheses/INDEX.md` | Updated \u2014 dashboard-load-time added |\n| `decisions/INDEX.md` | Updated \u2014 pending decision added |\n\nNothing committed to `knowledge/strategy.md`. No strategy tension added \u2014 the existing tension already covers this ETL domain. Next session entry point: D1 after Experiment 1 results are in.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*plan*.md OR ingestion/adhoc/*dashboard-load*.md OR ingestion/adhoc/2026-05-17*plan*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-05-17-plan-dashboard-load-time.md', 'ingestion/adhoc/2026-05-17-plan-dashboard-load-time.md', 'ingestion/adhoc/2026-05-17-plan-dashboard-load-time.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:plan_has_six_blocks",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "input": "turn-05-ideate.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 231.88,
+      "returncode": 0,
+      "cost_usd": 0.3137453,
+      "agent_response": "Ideation session captured. Here are the results:\n\n---\n\n## Ideation: Watershed-Level Granularity Friction\n\n**Anchored on:** H-V1 (medium confidence), strategy Priority 1, and the open tension in `strategy.md \u00a7 Tensions`. Market files were sparse \u2014 no competitor detail available. Six directions ranked below.\n\n---\n\n### Direction 1 \u2014 Lightweight non-ETL watershed prototype\n**What:** Pre-generate HUC-12 aggregations for a bounded set of watersheds (PNW focus) via a one-time batch job. Serve as a read-only view within the Regional Climate Dashboard to 2\u20133 pilot customers.\n\n**Strongest evidence:** H-V1 test plan explicitly names this path. Strategy tension resolution option (b) endorses it. Mira Patel (Cascadia) is an identified willing pilot. [`ingestion/interviews/2026-05-14-mira-patel-cascadia.md`]\n\n**Strategy:** Serves Priority 1. No ETL risk \u2014 protects Priority 2. Stays inside existing feature surface (Priority 3). No pricing impact.\n\n**Hypothesis:** Tests H-V1 (adoption); surfaces early data for H-U1 (usability) and H-F1 (feasibility at scale). No contradiction.\n\n**Thinnest next step:** 30-min eng scoping \u2014 which 3\u20135 watersheds to pre-render, what refresh cadence (nightly batch), and whether Cascadia + one additional customer can pilot in 2 weeks. No architecture commitment.\n\n---\n\n### Direction 2 \u2014 Pre-computed scheduled aggregation pipeline\n**What:** Build a separate nightly batch job materializing HUC-12 aggregations into a dedicated read table. Watershed views query this table \u2014 not the fragile real-time ETL.\n\n**Strongest evidence:** Engineering memo (referenced in H-F1 and strategy tension) flags real-time sub-basin aggregation as an outage risk. Mira's current workflow already uses day-old exports \u2014 near-real-time is acceptable to her. [`ingestion/interviews/2026-05-14-mira-patel-cascadia.md`; `hypotheses/watershed-level-view.md H-F1`]\n\n**Strategy:** Serves Priority 1 and Priority 2 simultaneously \u2014 isolation architecture is the resolution of the tension, not just a workaround. No new surface area.\n\n**Hypothesis:** Directly tests H-F1 (feasibility). If eng confirms viability, unblocks H-V1 testing at scale.\n\n**Thinnest next step:** One-week eng spike \u2014 estimate effort and outage-probability delta between (a) separate scheduled aggregation job vs. (b) modifying the real-time ETL. Spike output is the decision input for H-F1.\n\n---\n\n### Direction 3 \u2014 Watershed context persistence (saved spatial filter)\n**What:** Let users set a persistent \"active watershed\" that filters all basin-level data automatically across sessions. No new aggregations, no ETL.\n\n**Strongest evidence:** Mira's exact words \u2014 \"I keep having to export and re-cut\" \u2014 the word \"re-cut\" implies *recurrent* friction, which persistence directly addresses. [`ingestion/interviews/2026-05-14-mira-patel-cascadia.md`]\n\n**Strategy:** Priority 1. Zero ETL risk. UI state management only. No pricing impact.\n\n**Hypothesis:** Tests a narrower sub-question of H-V1 \u2014 does eliminating recurrence friction (without new data granularity) restore engagement? If no: confirms the real need is HUC-12 aggregation, not session state. **Risk:** Might solve the wrong problem. Requires one discovery question first: \"If TerraDash remembered your watershed between sessions, would that eliminate the manual step \u2014 or are you still missing the right aggregation level?\"\n\n---\n\n### Direction 4 \u2014 HUC-level granularity switcher\n**What:** UI control within Regional Climate Dashboard to toggle spatial granularity (basin \u2192 sub-basin \u2192 watershed). Zero ETL cost *if* HUC-12 data already exists in the database.\n\n**Strongest evidence:** H-U1 explicitly calls out HUC-12 selection UI as undefined. [`hypotheses/watershed-level-view.md H-U1`]\n\n**Strategy:** Priority 1. Tight Priority 3 fit. ETL risk conditional on whether data already exists at HUC-12.\n\n**Hypothesis:** Tests H-U1 directly. Tests H-V1 conditional on one prior discovery question.\n\n**Blocker:** One 30-minute eng conversation before any design work: \"Do we store data at HUC-12 granularity internally, or only at basin level?\"\n\n---\n\n### Direction 5 \u2014 Export API / programmatic watershed slicing \u26a0\ufe0f OFF-STRATEGY\n**What:** Structured API endpoint keyed by HUC code \u2014 researchers pull watershed data into R/Python without re-cutting in TerraDash.\n\n**Why off-strategy:** The north-star is **weekly active research-customer count (3+ logins/week).** An API that substitutes for UI sessions directly undermines it. Also adds new surface area (Priority 3). If PM decides to pursue: discovery question first \u2014 \"If you could pull watershed data via API, would you still open TerraDash most days, or would it become a background data source?\" The answer determines whether this helps or kills the north-star.\n\n---\n\n### Direction 6 \u2014 Watershed-as-first-class-object UX redesign \u26a0\ufe0f OFF-STRATEGY\n**What:** Restructure dashboard navigation around watersheds as the primary lens. Hydrologist picks watershed first; all dashboards/anomalies render through that context.\n\n**Why off-strategy:** **Violates Priority 3** \u2014 this is surface restructuring, not feature deepening. High disruption to non-watershed users on existing basin-level navigation. Correct long-term direction; wrong quarter. Candidate for Q4 north-star redesign if PM pivots strategy.\n\n---\n\n### Ranking summary\n\n| Rank | Direction | Strategy fit | ETL risk | Hypothesis impact |\n|------|-----------|-------------|----------|-------------------|\n| 1 | Non-ETL prototype | \u2713\u2713 | None | Tests H-V1, H-U1, H-F1 |\n| 2 | Pre-computed aggregation | \u2713\u2713 | Isolated | Directly populates H-F1 |\n| 3 | Context persistence | \u2713 | None | Sub-question of H-V1 |\n| 4 | HUC-level switcher | \u2713 | Conditional | Tests H-U1 |\n| 5 | Export API | \u26a0\ufe0f OFF | Unknown | Conflicts with north-star |\n| 6 | Watershed-first redesign | \u26a0\ufe0f OFF | None | Priority 3 violation |\n\n---\n\nSession written to `ingestion/adhoc/2026-05-17-ideate-watershed-friction.md`. Directions 1 and 2 have the strongest evidence and cleanest strategy fit \u2014 both thread the reliability tension by avoiding real-time ETL changes. Direction 3 is worth testing first with a single discovery question since it costs nearly nothing to validate. No hypotheses promoted \u2014 drafts only per spec.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*ideate*.md OR ingestion/adhoc/*watershed*.md OR ingestion/adhoc/2026-05-17*ideate*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-05-17-ideate-watershed-friction.md', 'ingestion/adhoc/2026-05-17-ideate-watershed-friction.md', 'ingestion/adhoc/2026-05-17-ideate-watershed-friction.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*watershed*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/watershed-level-view.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:ideate_grounded_directions",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:ingestion/adhoc/*ideate*.md OR ingestion/adhoc/*watershed*.md OR ingestion/adhoc/2026-05-17*ideate*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T20:33:36.591686+00:00",
+  "cost": {
+    "total_usd": 2.3125,
+    "max_usd": 7.0,
+    "by_kind": {
+      "turn": 2.0651,
+      "judge": 0.2475
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.47049979999999997
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.3192658
+      },
+      {
+        "kind": "judge",
+        "label": "strategy_check_cites_clauses",
+        "cost": 0.056965550000000004
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.37224440000000003
+      },
+      {
+        "kind": "judge",
+        "label": "risk_walks_five_areas",
+        "cost": 0.053006300000000006
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.5893374499999999
+      },
+      {
+        "kind": "judge",
+        "label": "plan_has_six_blocks",
+        "cost": 0.06745455
+      },
+      {
+        "kind": "turn",
+        "label": "turn-5",
+        "cost": 0.3137453
+      },
+      {
+        "kind": "judge",
+        "label": "ideate_grounded_directions",
+        "cost": 0.07003005
+      }
+    ]
+  }
+}

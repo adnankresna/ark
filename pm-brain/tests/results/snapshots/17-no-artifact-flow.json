@@ -1,0 +1,169 @@
+{
+  "scenario": "17-no-artifact-flow",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-shfpz7sp",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T23:06:57.036038+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-intuition.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 63.64,
+      "returncode": 0,
+      "cost_usd": 0.16559405000000002,
+      "agent_response": "Done. Here's what was captured and what was not:\n\n**Created:**\n- `hypotheses/trial-too-short.md` \u2014 H-V1, status `active`, confidence `low`. Single evidence row: `(intuition, PM, 2026-05-18)`. Open questions section flags the absence of any documented backing, the confound risk (self-selected extension-askers), and what would need to be true to elevate confidence.\n- `hypotheses/INDEX.md` \u2014 updated with the new entry under Active.\n\n**Not created:**\n- No `source/` file \u2014 correct. The PM explicitly had no artifact. Fabricating one to satisfy the schema would violate the \"never fabricate\" and source-preservation rules. The `(intuition, PM, 2026-05-18)` tag honestly labels what this is.\n- No `ingestion/` file \u2014 same reason. Nothing to synthesize from.\n\n**Status note:** The schema has no \"candidate\" status; `active` is the lowest lifecycle state (\"being tested, evidence accumulating\"). Confidence is set to `low` to signal this is a first-pass hunch.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:hypotheses/*trial*.md OR hypotheses/*7-day*.md OR hypotheses/*extension*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/trial-too-short.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-verbal-eng-lead.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 141.29,
+      "returncode": 0,
+      "cost_usd": 0.2864304,
+      "agent_response": "Done. Here's what landed and where:\n\n**Files written (4):**\n\n1. **`hypotheses/trial-too-short.md`** \u2014 Added a second evidence row under H-V1 `Evidence for:`:\n   - Paraphrase of Mateus's verbal: median aha moment for converting accounts is day 5\u20136; day 4 threshold = high conversion; day 6+ = trial exhaustion before commit. Tagged `(stakeholder-verbal, mateus-okafor, 2026-05-18)`.\n   - Confidence bumped `low \u2192 medium` \u2014 two independent signals now exist (PM intuition from Intercom DMs + eng lead verbal from separate instrumented vantage). Not `partially-validated`: we still don't have the actual chart.\n   - Added two caveats to `Open questions`: (a) the analytics chart exists but hasn't been pulled yet \u2014 ingest separately when available; (b) N and methodology unknown until the export is reviewed.\n   - File-level status remains `active`.\n\n2. **`stakeholders/mateus-okafor.md`** \u2014 Created. Minimal profile: eng lead, high influence, low friction. Touchpoint log records the 2026-05-18 verbal walk-over with a one-line summary. Open ask: pull the analytics chart. Fields with no data are `TODO`.\n\n3. **`stakeholders/INDEX.md`** \u2014 Added Mateus to the roster row.\n\n4. **`hypotheses/INDEX.md`** \u2014 Updated the trial-too-short entry to reflect medium confidence and two-source evidence state.\n\n**No source/ files created** \u2014 the artifact was a verbal exchange with no recording, email, or document. Provenance is `(stakeholder-verbal, mateus-okafor, 2026-05-18)` directly on the evidence row, which is the correct schema treatment for this case.\n\n**Pending:** The analytics chart Mateus mentioned is a gap. When you pull the export, ingest it as `source/adhoc/` or `source/market/` (or a meetings artifact) and it will become a separate, stronger evidence row that can further raise confidence or sharpen the day-threshold claims.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_modified_glob:hypotheses/*trial*.md OR hypotheses/*7-day*.md OR hypotheses/*extension*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/trial-too-short.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*mateus*.md OR stakeholders/*okafor*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/mateus-okafor.md', 'stakeholders/mateus-okafor.md']"
+        },
+        {
+          "name": "file_modified:stakeholders/INDEX.md",
+          "passed": true,
+          "detail": "modified: stakeholders/INDEX.md"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-industry-pattern.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 70.96,
+      "returncode": 0,
+      "cost_usd": 0.15719355,
+      "agent_response": "**Landed.** Here's where and how:\n\n**File:** `hypotheses/trial-too-short.md` \u2014 new section `## Viability risk / H-B1`\n\n**Placement rationale:** The PM explicitly said not to add this as an \"Evidence for\" row on H-V1 alongside Mateus's verbal. The schema's Viability risk slot (H-B1) is the right home \u2014 it frames the competitive outlier position as a distinct risk category (is this positioning intentional?) rather than as corroborating value-hypothesis evidence.\n\n**Provenance:** Single `(industry-knowledge)` row \u2014 no date, per the form's convention for background facts. The claim is tagged correctly: PD/Opsgenie/Squadcast/FireHydrant at 14 days, Better Stack + us at 7 days.\n\n**Safeguards applied:**\n- The Open questions section explicitly calls out that `(industry-knowledge)` is verifiable-public-facts territory and product-specific cohort data carries more weight for the actual decision.\n- The outlier-isn't-inherently-risk framing is captured \u2014 the risk is an *unintentional* outlier, not the outlier per se.\n- No confidence bump to H-V1; the two hypotheses are separate with different evidentiary bases.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_modified_glob:hypotheses/*trial*.md OR hypotheses/*7-day*.md OR hypotheses/*extension*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/trial-too-short.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-review-and-draft.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 219.42,
+      "returncode": 0,
+      "cost_usd": 0.3742369499999999,
+      "agent_response": "---\n\n## Review complete \u2014 what's now in the brain\n\n**Recommendation: no decision draft.** Here's why, and what the path forward is.\n\n---\n\n### 1. Trust profile of the trial-length hypothesis\n\n| Row | Provenance | Trust |\n|---|---|---|\n| H-V1.1: Strong converters requested trial extensions; non-requesters bounced | `(intuition, PM, 2026-05-18)` | **Low** \u2014 felt sense from Intercom DMs, no audit anchor, \"strong converter\" undefined |\n| H-V1.2: Eng-side analytics show day-5/6 aha moment; late activators exhaust trial | `(stakeholder-verbal, mateus-okafor, 2026-05-18)` | **Medium** \u2014 verbal from an independent data-owning vantage, but underlying chart not reviewed; N and window unknown |\n| H-B1.1: Category standard is 14-day (PagerDuty, Opsgenie, Squadcast, FireHydrant) | `(industry-knowledge)` | **Low** \u2014 establishes norms, not our product's conversion logic |\n\nEvery row is non-documented. No ingested artifact exists. No cohort analysis has been run. No documented customer calls.\n\n---\n\n### 2. Is this at the decision bar?\n\nNo. The case for trial extension is directionally coherent \u2014 PM intuition, an eng verbal corroborating from an independent data vantage, and a category-norm outlier all pointing the same way. But:\n\n- **For:** The pattern is consistent. Three independent-ish signals align. Mateus's verbal is the most valuable \u2014 if the chart holds up, it becomes a real data anchor.\n- **Against:** None of the evidence has been stress-tested. The extension-requester confound (self-selected motivated cohort) is unaddressed. The analytical export hasn't been pulled. No customer has said \"I would have converted if I had two more weeks\" in a documented, attributable form. A decision to change the product default for all trials on this evidence base would be epistemically undersupported.\n\n**What would close the gap:** The evidence plan names three gates \u2014 any two of them close the decision:\n1. Mateus's analytics chart exported and ingested (N \u2265 50, day-5/6 cliff visible)\n2. Cohort analysis: extension-requesters vs. non-requesters conversion rate\n3. \u2265 2 verbatim Intercom transcripts with trial-length-friction quotes ingested to source/\n\n---\n\n### 3. What was written\n\n- **Created** `knowledge/product/trial-length-evidence-plan.md` \u2014 actionable, prioritized, with names (Mateus Okafor), channels (Slack DM, Intercom search), target dates (2026-05-21 through 2026-05-28), and a clear decision gate.\n- **Updated** `hypotheses/trial-too-short.md` \u2014 Last updated field now reflects the /review and links to the plan.\n- **Created** `maintenance/log/2026-05-18.md` \u2014 review log with trust-profile findings and what was edited.\n\nThe fastest next move: Slack Mateus for the analytics export. That single pull may be enough to shift the picture significantly.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:knowledge/product/trial-length-evidence-plan.md OR decisions/2026-05-18*trial*.md OR decisions/2026-05*trial*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/trial-length-evidence-plan.md']"
+        },
+        {
+          "name": "all_internal_links_valid",
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:no_artifact_trust_profile",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T23:15:17.888128+00:00",
+  "cost": {
+    "total_usd": 1.0359,
+    "max_usd": 8.0,
+    "by_kind": {
+      "turn": 0.9835,
+      "judge": 0.0524
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.16559405000000002
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.2864304
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.15719355
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.3742369499999999
+      },
+      {
+        "kind": "judge",
+        "label": "no_artifact_trust_profile",
+        "cost": 0.0524123
+      }
+    ]
+  }
+}

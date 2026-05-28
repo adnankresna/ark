@@ -1,0 +1,64 @@
+scenario: 11-ingest-shapes
+description: |
+  Four-turn commands-coverage scenario. Each turn invokes a literal slash command for
+  one of the four registered /ingest kinds (interview, meeting, market, adhoc). Tests
+  that the slash command is dispatched correctly, each kind produces both a source/
+  audit anchor AND an ingestion/ synthesis record, and the agent routes evidence to
+  the right durable area for the kind.
+
+  This is a commands-coverage scenario — synthesis-quality judging is covered by
+  01, 02, 04, 09, 10.
+
+pass_threshold:
+  structural: 1.0
+  content: 1.0  # No content judges; pass requires the structural fingerprint only.
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-ingest-interview.md
+    structural:
+      # /ingest interview must preserve source verbatim and route to ingestion/.
+      - file_exists_glob: source/interviews/*patel*.md OR source/interviews/*mira*.md OR source/interviews/*cascadia*.md OR source/interviews/2026-05-14*.md
+      - file_exists_glob: ingestion/interviews/*patel*.md OR ingestion/interviews/*mira*.md OR ingestion/interviews/*cascadia*.md OR ingestion/interviews/2026-05-14*.md
+      # A user-insights touch is expected when a recurring customer-pain theme lands.
+      - file_modified: knowledge/users/insights.md
+
+  - turn: 2
+    input: turn-02-ingest-meeting.md
+    structural:
+      # /ingest meeting must preserve source verbatim and route to ingestion/.
+      - file_exists_glob: source/meetings/*rivera*.md OR source/meetings/*carlos*.md OR source/meetings/2026-05-15*.md OR source/meetings/*1-1*.md OR source/meetings/*1on1*.md OR source/meetings/*cs*.md
+      - file_exists_glob: ingestion/meetings/*rivera*.md OR ingestion/meetings/*carlos*.md OR ingestion/meetings/2026-05-15*.md OR ingestion/meetings/*1-1*.md OR ingestion/meetings/*cs*.md
+      # The meeting names three stakeholders — at least one stakeholder file should land
+      # (Carlos as the meeting counterpart is the most likely; Helena or Jordan are also
+      # acceptable since both got named in the meeting body).
+      - file_exists_glob: stakeholders/*rivera*.md OR stakeholders/*carlos*.md OR stakeholders/*park*.md OR stakeholders/*helena*.md OR stakeholders/*liu*.md OR stakeholders/*jordan*.md
+      - file_modified: stakeholders/INDEX.md
+
+  - turn: 3
+    input: turn-03-ingest-market.md
+    structural:
+      # /ingest market must preserve source verbatim and route to ingestion/.
+      - file_exists_glob: source/market/*aurelia*.md OR source/market/*watershed*.md OR source/market/2026-05-16*.md OR source/market/*competitor*.md
+      - file_exists_glob: ingestion/market/*aurelia*.md OR ingestion/market/*watershed*.md OR ingestion/market/2026-05-16*.md OR ingestion/market/*competitor*.md
+      # Routes to a market knowledge file — competitor file OR landscape.
+      - file_exists_glob: knowledge/market/competitors/*aurelia*.md OR knowledge/market/landscape.md OR knowledge/market/*aurelia*.md
+
+  - turn: 4
+    input: turn-04-ingest-adhoc.md
+    structural:
+      # /ingest adhoc must preserve source verbatim and route to ingestion/.
+      - file_exists_glob: source/adhoc/*pipeline*.md OR source/adhoc/*sasha*.md OR source/adhoc/*slack*.md OR source/adhoc/2026-05-16*.md OR source/adhoc/*reliability*.md
+      - file_exists_glob: ingestion/adhoc/*pipeline*.md OR ingestion/adhoc/*sasha*.md OR ingestion/adhoc/*slack*.md OR ingestion/adhoc/2026-05-16*.md OR ingestion/adhoc/*reliability*.md
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - all_decisions_have_reversal_condition: true
+    - no_silent_hypothesis_demotion: true

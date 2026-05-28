@@ -1,0 +1,248 @@
+{
+  "scenario": "09-ideation",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-am1fodld",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T17:50:23.718381+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-populated-brain.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 265.78,
+      "returncode": 0,
+      "cost_usd": 0.40872470000000005,
+      "agent_response": "All 15 files are in place. Here's what landed where:\n\n**5 source files (verbatim audit anchors, original dates):** `source/interviews/2026-01-22-northstar.md`, `source/interviews/2026-02-18-brillstone.md`, `source/interviews/2026-04-09-pacific-greens.md`, `source/market/2026-03-15-brex-smart-match.md`, `source/adhoc/2026-04-15-cs-monthly-march.md`.\n\n**5 ingestion files (synthesis layer):** matching slugs under `ingestion/interviews/` (all three interviews), `ingestion/market/` (Brex note), and `ingestion/adhoc/` (CS monthly). Each links back to its source file.\n\n**3 knowledge files updated/created:** `knowledge/users/insights.md` \u2014 Friday-batch insight from Artifact 4 as written; `knowledge/product/roadmap.md` \u2014 Now/Next/Later entries from Artifact 7 verbatim; `knowledge/market/competitors/brex.md` \u2014 Brex Smart Match entry placed in the competitors subdirectory (consistent with the brain's existing `knowledge/market/competitors/` directory structure).\n\n**1 hypothesis file created:** `hypotheses/auto-categorization.md` \u2014 exact content from Artifact 8, status `promoted`, last-updated 2026-02-25, no new evidence rows added.\n\n**1 index updated:** `hypotheses/INDEX.md` \u2014 auto-categorization listed under Promoted. Nothing was synthesized beyond what was in the eight artifacts; no new hypotheses opened; no promotions made.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*northstar*.md OR source/interviews/2026-01-22*.md OR source/interviews/*dana*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-01-22-northstar.md', 'source/interviews/2026-01-22-northstar.md']"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*brillstone*.md OR source/interviews/2026-02-18*.md OR source/interviews/*marcus*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-02-18-brillstone.md', 'source/interviews/2026-02-18-brillstone.md']"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*pacific*.md OR source/interviews/*greens*.md OR source/interviews/2026-04-09*.md OR source/interviews/*jenna*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-04-09-pacific-greens.md', 'source/interviews/2026-04-09-pacific-greens.md', 'source/interviews/2026-04-09-pacific-greens.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*northstar*.md OR ingestion/interviews/2026-01-22*.md OR ingestion/interviews/*dana*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-01-22-northstar.md', 'ingestion/interviews/2026-01-22-northstar.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*brillstone*.md OR ingestion/interviews/2026-02-18*.md OR ingestion/interviews/*marcus*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-02-18-brillstone.md', 'ingestion/interviews/2026-02-18-brillstone.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*pacific*.md OR ingestion/interviews/*greens*.md OR ingestion/interviews/2026-04-09*.md OR ingestion/interviews/*jenna*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-04-09-pacific-greens.md', 'ingestion/interviews/2026-04-09-pacific-greens.md', 'ingestion/interviews/2026-04-09-pacific-greens.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*brex*.md OR source/**/*competitor*.md OR knowledge/market/*competitor*.md OR knowledge/market/*landscape*.md OR ingestion/**/*brex*.md OR ingestion/**/*competitor*.md",
+          "passed": true,
+          "detail": "matched: ['source/market/2026-03-15-brex-smart-match.md', 'knowledge/market/landscape.md', 'ingestion/market/2026-03-15-brex-smart-match.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*cs*monthly*.md OR source/**/*cs-monthly*.md OR source/**/*priya*.md OR source/**/2026-04-15*.md OR ingestion/**/*cs*monthly*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-04-15-cs-monthly-march.md', 'source/adhoc/2026-04-15-cs-monthly-march.md', 'source/adhoc/2026-04-15-cs-monthly-march.md', 'ingestion/adhoc/2026-04-15-cs-monthly-march.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/roadmap.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/roadmap.md']"
+        },
+        {
+          "name": "file_modified:knowledge/product/roadmap.md",
+          "passed": true,
+          "detail": "modified: knowledge/product/roadmap.md"
+        },
+        {
+          "name": "file_exists_glob:knowledge/users/insights.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/users/insights.md']"
+        },
+        {
+          "name": "file_modified:knowledge/users/insights.md",
+          "passed": true,
+          "detail": "modified: knowledge/users/insights.md"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*auto-categorization*.md OR hypotheses/*categorization*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/auto-categorization.md', 'hypotheses/auto-categorization.md']"
+        },
+        {
+          "name": "hypothesis_count_at_least:1",
+          "passed": true,
+          "detail": "found 1 non-stub hypothesis files (total .md = 1)"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-context-check.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 37.26,
+      "returncode": 0,
+      "cost_usd": 0.11526775,
+      "agent_response": "Here's the current state of the brain:\n\n---\n\n**1. Hypotheses**\n\n- **`auto-categorization` (H-V1):** \"Customers will adopt and trust ML-driven transaction categorization if accuracy is above 85%.\" \u2014 **Status: Promoted** (2026-02-25). Engineering scoping is in progress; no test results yet. No other hypotheses exist \u2014 the Active and Demoted sections are empty.\n\n**2. Most recent customer signal**\n\n- **CS Monthly: March 2026** \u2014 ingested 2026-04-15 (adhoc). Priya Iyer (CS lead) shared that receipt-matching has been the #3 support ticket category for four consecutive months (35\u201340 tickets/month since Dec 2025). The failure split: ~60% false-positive auto-match (\"got it wrong\"), ~40% no suggestion at all. The headline: the dominant failure mode is bad matches, not missing ones.\n\nBefore that: Pacific Greens interview (2026-04-09), then Brex Smart Match market signal (2026-03-15).\n\n**3. Insights promoted to `knowledge/users/insights.md`**\n\n- One active theme: **\"Finance teams batch receipt processing on Fridays\"** \u2014 supported by the Northstar and Brillstone interviews plus product telemetry (38% of weekly receipt-matching activity on Fridays). Confidence is medium. No other promoted themes.\n\n**4. Open roadmap question**\n\n- Yes, in the **Jul\u2013Sep Next horizon:** the processing side of the funnel (matching, categorization, reporting) hasn't had a roadmap slot since auto-categorization v1 in February. The question as written: *\"What's the under-explored adjacency to expense capture?\"* \u2014 flagged `(intuition, PM, 2026-04-22)` but not yet framed as a specific bet.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": []
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-ideation-prompt.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 103.0,
+      "returncode": 0,
+      "cost_usd": 0.16486425,
+      "agent_response": "I have everything I need. This is a Type B synthesis task \u2014 here's the substantive case.\n\n---\n\n## Candidate hypotheses\n\n### Candidate 1 (strong): Confidence-scored fuzzy receipt matching\n\n**Name:** Fuzzy Match \u2014 Value Risk H-V1\n\n**Belief:** Finance teams processing 200+ receipts/month will reduce month-end close time by two or more days if FlowExpense provides confidence-scored fuzzy vendor matching with one-click confirmation, replacing the current manual reconciliation loop.\n\n**Why this is under-explored:** Three interviews independently named receipt matching as their sole headline pain. The hypothesis roster has `auto-categorization.md` but nothing for fuzzy matching \u2014 the brain has strong evidence but no formal hypothesis file. The roadmap explicitly flags the processing side as an open question (`[knowledge/product/roadmap.md](./knowledge/product/roadmap.md)`, the \"under-explored adjacency\" note from 2026-04-22).\n\n**Supporting evidence:**\n\n- Northstar (Dana, Jan): 60% of ~400-500 receipts/month require manual reconciliation due to fuzzy vendor name variants and tip-adjusted amounts. Stated ideal: fuzzy match + suggestion-with-confirm UX. `[ingestion/interviews/2026-01-22-northstar.md](./ingestion/interviews/2026-01-22-northstar.md)`\n- Brillstone (Marcus, Feb): Finance team has stopped trusting auto-match entirely \u2014 manually re-verifies all suggestions. Brex named as the alternative, latent churn risk present. `[ingestion/interviews/2026-02-18-brillstone.md](./ingestion/interviews/2026-02-18-brillstone.md)`\n- Pacific Greens (Jenna, Apr): \"Two days earlier close\" as a concrete, named time-value outcome from faster matching. Small/local vendor strings diverge most. `[ingestion/interviews/2026-04-09-pacific-greens.md](./ingestion/interviews/2026-04-09-pacific-greens.md)`\n- CS monthly (March): Receipt-matching is #3 support ticket category at 35-40 tickets/month for four consecutive months \u2014 this is base-wide, not just three interview accounts. `[ingestion/adhoc/2026-04-15-cs-monthly-march.md](./ingestion/adhoc/2026-04-15-cs-monthly-march.md)`\n- Brex (Mar): Shipped a direct analog (confidence-scored fuzzy match, 80% threshold, one-click confirm). Claimed 40% adoption in two weeks \u2014 fastest-adopted feature in 18 months. The UX design matches what Northstar and Brillstone independently described as their preferred interaction model. `[ingestion/market/2026-03-15-brex-smart-match.md](./ingestion/market/2026-03-15-brex-smart-match.md)`\n\n**Validation gate:** Recruit 3-5 accounts (from current receipt-matching ticket reporters \u2014 CS has them). Instrument a prototype with confidence-scored suggestions. Measure: (a) does time-to-match-completion drop, (b) does manual-reverification rate drop, (c) do users click confirm or override? The \"two days earlier close\" metric from Pacific Greens is the right outcome measure if we can get close-cycle timing data.\n\n---\n\n### Candidate 2 (weaker but analytically distinct): Precision matters more than recall for trust recovery\n\n**Name:** Fuzzy Match \u2014 Precision-First Trust Hypothesis\n\n**Belief:** Finance teams that have experienced repeated false-positive auto-matches have abandoned the match-review workflow entirely; shipping higher match volume (recall) without first reducing wrong matches (precision) will fail to recover usage because trust, once broken by false positives, does not restore automatically.\n\n**Why this is under-explored and distinct from Candidate 1:** Candidate 1 is about whether fuzzy matching delivers value. This candidate is about the design constraint that governs whether a shipped fuzzy-match feature gets *used*. These are different bets. The brain has a specific quantitative signal that only appears in the CS monthly and is not yet framed anywhere:\n\n- CS monthly: 60% of receipt-matching tickets are false-positive auto-match (\"got it wrong, had to undo\"), vs. 40% \"no suggestion at all.\" The higher failure mode is bad matching, not absence of matching. `[ingestion/adhoc/2026-04-15-cs-monthly-march.md](./ingestion/adhoc/2026-04-15-cs-monthly-march.md)`\n- Brillstone (Marcus): \"Finance team has stopped trusting FlowExpense auto-match for anything beyond exact vendor-name matches. Team manually re-verifies all auto-match suggestions.\" This is the behavioral expression of the trust-erosion mechanism. `[ingestion/interviews/2026-02-18-brillstone.md](./ingestion/interviews/2026-02-18-brillstone.md)`\n\nThese two artifacts together describe a trust-erosion loop: false positives \u2192 manual re-verification of everything \u2192 team learns to ignore suggestions \u2192 the feature provides zero efficiency gain even when it's technically correct.\n\n**Why this is weaker:** Two sources, not three. The mechanism (trust erosion suppresses feature adoption) is inferred, not directly stated by users. Brillstone named the behavior but didn't connect it to adoption failure explicitly \u2014 that inference is mine. It's also partially dependent on Candidate 1 being built; we can't test precision-vs-recall without having a fuzzy match feature to instrument.\n\n**Validation gate:** Pull match-review completion rates segmented by historical false-positive rate in the account. If accounts with high false-positive history show lower review-completion rates than accounts with lower false-positive history, the trust mechanism is real. Alternatively: ask Brillstone's Marcus directly \u2014 \"if we fixed the wrong-match problem first, would your team start reviewing suggestions again?\"\n\n---\n\n## Where I'd focus\n\nCandidate 1 is the obvious bet \u2014 three independent interviews, four months of CS data, a competitor who shipped the same thing and got fast adoption. The evidence is about as clean as it gets for a pre-hypothesis candidate.\n\nCandidate 2 is analytically important *because it constrains how Candidate 1 should be built*. If the precision-first hypothesis is right, the success metric for a fuzzy-match feature is not \"more matches suggested\" but \"fewer matches that require undoing.\" That's a different optimization target and a different QA bar. I'd propose it as a sub-hypothesis inside the fuzzy-match file rather than a standalone hypothesis \u2014 it's not a separate feature bet, it's a design bet within the same feature.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:candidates_grounded_in_brain",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:no_generic_slop",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-pick-and-stub.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 201.35,
+      "returncode": 0,
+      "cost_usd": 0.33295005,
+      "agent_response": "Done. Here's what was created and updated:\n\n**Created:** `hypotheses/receipt-matching.md`\n- Status: `proposed` (as requested \u2014 pre-commitment candidate)\n- Four hypotheses: H-V1 (value), H-U1 (usability), H-F1 (feasibility), H-B1 (viability)\n- Every evidence row carries a path-typed markdown link to an existing artifact: the three interview ingestion files, the Brex market ingestion, and the CS monthly adhoc ingestion\n- No fabricated evidence \u2014 H-B1 Evidence against and H-V1 Evidence against are explicitly `(none)` where appropriate\n- Explicit promote/kill thresholds under `Open questions / caveats:` with named observable bars (e.g., \"\u22653 accounts, \u226530% time reduction\", \"\u226585% precision on \u2265500 receipt pairs\")\n\n**Updated:** `hypotheses/INDEX.md` \u2014 added a `## Proposed` section with a one-line entry; `auto-categorization.md` is untouched.\n\nThe key judgment calls made: the engineering spike (H-F1) should gate before any user-facing prototype work; the false-positive trust erosion from current exact-match failures is the most honest evidence against the usability hypothesis and worth calling out explicitly.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:hypotheses/*receipt*.md OR hypotheses/*matching*.md OR hypotheses/*smart-match*.md OR hypotheses/*fuzzy*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/receipt-matching.md', 'hypotheses/receipt-matching.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*auto-categorization*.md OR hypotheses/*categorization*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/auto-categorization.md', 'hypotheses/auto-categorization.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:proposed_not_promoted",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (2 match)"
+        },
+        {
+          "name": "judge:explicit_validation_gates",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (2 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": "no decision files yet (vacuous pass)"
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T18:00:53.037843+00:00",
+  "cost": {
+    "total_usd": 1.2465,
+    "max_usd": null,
+    "by_kind": {
+      "turn": 1.0218,
+      "judge": 0.2247
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.40872470000000005
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.11526775
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.16486425
+      },
+      {
+        "kind": "judge",
+        "label": "candidates_grounded_in_brain",
+        "cost": 0.0541138
+      },
+      {
+        "kind": "judge",
+        "label": "no_generic_slop",
+        "cost": 0.0537438
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.33295005
+      },
+      {
+        "kind": "judge",
+        "label": "proposed_not_promoted",
+        "cost": 0.05877355
+      },
+      {
+        "kind": "judge",
+        "label": "explicit_validation_gates",
+        "cost": 0.05807005
+      }
+    ]
+  }
+}

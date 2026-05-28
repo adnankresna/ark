@@ -1,0 +1,136 @@
+scenario: 13-strategic-planning
+description: |
+  Five-turn commands-coverage scenario for the strategic-planning verbs: /strategy-check,
+  /risk, /plan, /ideate. Each turn invokes the literal slash command. Tests that each
+  command is dispatched literally, behaves per its spec (strategy-check is read-only and
+  clause-citing, risk walks all 5 areas and drafts stubs for gaps, plan produces the 6-block
+  shape, ideate stays evidence-grounded and doesn't auto-promote).
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed.md
+    structural:
+      # strategy.md populated with the seeded content.
+      - file_exists_glob: knowledge/strategy.md
+      - file_modified: knowledge/strategy.md
+      # The prior decision file lands.
+      - file_exists_glob: decisions/2026-04-30*mobile*.md OR decisions/2026-04-30*defer*.md
+      - file_modified: decisions/INDEX.md
+      # Two active hypotheses + INDEX touch.
+      - file_exists_glob: hypotheses/*watershed*.md
+      - file_exists_glob: hypotheses/*admin*billing*.md OR hypotheses/*billing*portal*.md OR hypotheses/*admin-billing*.md
+      - file_modified: hypotheses/INDEX.md
+      # The interview lands in source + ingestion + routes to insights.
+      - file_exists_glob: source/interviews/*patel*.md OR source/interviews/*cascadia*.md OR source/interviews/2026-05-14*.md
+      - file_exists_glob: ingestion/interviews/*patel*.md OR ingestion/interviews/*cascadia*.md OR ingestion/interviews/2026-05-14*.md
+      - file_modified: knowledge/users/insights.md
+      # The feature folder entry lands.
+      - file_exists_glob: knowledge/product/features/*weekly-snapshot*.md OR knowledge/product/features/*snapshot*.md
+
+  - turn: 2
+    input: turn-02-strategy-check.md
+    structural:
+      # /strategy-check may write the drift report under maintenance/log.
+      - file_exists_glob: maintenance/log/*strategy-check*.md OR maintenance/log/2026-05-17*.md
+    content:
+      - judge: strategy_check_cites_clauses
+        rubric: judges/strategy_check_cites_clauses.md
+        expected_meaning: |
+          The turn-2 response (and/or the maintenance/log drift report) cites SPECIFIC strategy.md
+          clauses for every drift call — by clause name (e.g., "Priority 1: deepen research-segment
+          workflow fit", "Non-goal 1: no mobile UI") and ideally by quote. Vague calls like
+          "decision X drifts from strategy" without naming WHICH clause fail.
+
+          AND: the response surfaces the admin-billing-portal hypothesis as a candidate for
+          pressure on Priority 1 / Priority 3 (deepen research / avoid surface-area expansion),
+          since it targets mid-market rather than the research segment.
+
+          AND: it does NOT flag the mobile-UI defer decision as drift — that's divergence
+          (explicit override), not drift.
+
+          AND: it does NOT silently edit knowledge/strategy.md (any proposed new tension is
+          surfaced as a draft, not committed).
+        must_not: "edit knowledge/strategy.md without explicit PM sign-off, flag the mobile-UI defer decision as drift (it's divergence), or make drift calls without citing a specific strategy clause"
+
+  - turn: 3
+    input: turn-03-risk.md
+    structural:
+      # /risk drafts stubs for gap areas under default autonomy ("act and tell").
+      # We expect at least one NEW hypothesis file linked to weekly-snapshot.
+      - file_exists_glob: hypotheses/*weekly-snapshot*.md OR hypotheses/*snapshot*.md
+      # The feature file gets updated to reference the new linked hypothesis.
+      - file_modified_glob: knowledge/product/features/*weekly-snapshot*.md OR knowledge/product/features/*snapshot*.md
+      # INDEX touched as new hypotheses land.
+      - file_modified: hypotheses/INDEX.md
+    content:
+      - judge: risk_walks_five_areas
+        rubric: judges/risk_walks_five_areas.md
+        expected_meaning: |
+          The turn-3 response walks ALL FIVE risk areas explicitly (value, usability, feasibility,
+          viability, other) and marks each as `[have hypothesis | stub drafted | confirmed | demoted]`
+          plus one line on what's missing. Stubs are drafted for the gap areas (feasibility,
+          viability, other). New stubs are NOT auto-promoted (status `candidate` or `active`,
+          NOT `promoted`).
+        must_not: "skip any of the 5 risk areas, auto-promote any new stub to `promoted` or `partially-validated`, or refuse to draft stubs (the spec is explicit: default autonomy = act and tell)"
+
+  - turn: 4
+    input: turn-04-plan.md
+    structural:
+      # /plan should write a draft session artifact under ingestion/adhoc.
+      - file_exists_glob: ingestion/adhoc/*plan*.md OR ingestion/adhoc/*dashboard-load*.md OR ingestion/adhoc/2026-05-17*plan*.md
+    content:
+      - judge: plan_has_six_blocks
+        rubric: judges/plan_has_six_blocks.md
+        expected_meaning: |
+          The turn-4 response contains all SIX expected plan blocks in order: (1) what we already
+          know with brain citations, (2) assumption vs evidence with provenance tags, (3) who to
+          interview with named users/segments and coverage gaps, (4) hypotheses to open across the
+          5 risk areas with a test for each, (5) experiments to run with success/invalidation
+          criteria, (6) decision points with the evidence that unlocks each.
+
+          AND: the response names the strategy non-goals that bound the plan (no mobile UI; no
+          new pricing tiers).
+
+          AND: the response includes a paragraph on what would make the plan unwise (falsification
+          handle).
+        must_not: "produce fewer than 6 blocks, skip the non-goal constraint section, or skip the 'what would make this unwise' falsification paragraph"
+
+  - turn: 5
+    input: turn-05-ideate.md
+    structural:
+      # /ideate may write the session artifact under ingestion/adhoc.
+      - file_exists_glob: ingestion/adhoc/*ideate*.md OR ingestion/adhoc/*watershed*.md OR ingestion/adhoc/2026-05-17*ideate*.md
+      # The existing watershed-level-view hypothesis is NOT promoted by /ideate (status stays active).
+      - file_exists_glob: hypotheses/*watershed*.md
+    content:
+      - judge: ideate_grounded_directions
+        rubric: judges/ideate_grounded_directions.md
+        target_glob: ingestion/adhoc/*ideate*.md OR ingestion/adhoc/*watershed*.md OR ingestion/adhoc/2026-05-17*ideate*.md
+        expected_meaning: |
+          Turn-5 response generates 3-7 solution directions, each tagged with brain evidence
+          (path-typed `[ingestion/...]` / `[source/...]` / `[knowledge/...]` references that
+          actually exist in the brain). NO generic SaaS best-practice ideas without brain
+          citations. Each direction names which strategy priority it serves and which non-goal
+          it might violate. At least one direction has its thinnest-viable-next-step named
+          concretely.
+
+          AND: no hypothesis is auto-promoted by this turn — the existing watershed-level-view
+          hypothesis status stays `active`. No new hypothesis file is committed; directions are
+          drafts only.
+        must_not: "propose directions citing brain artifacts that don't exist, auto-promote any hypothesis from /ideate, OR produce 'generic best-practice' directions (AI summaries, chatbots, dashboards) not tied to specific brain artifacts"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - all_decisions_have_reversal_condition: true
+    - no_silent_hypothesis_demotion: true

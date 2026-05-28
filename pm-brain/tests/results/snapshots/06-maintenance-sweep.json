@@ -1,0 +1,311 @@
+{
+  "scenario": "06-maintenance-sweep",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-0ui_c_xf",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T17:48:37.660326+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-accumulated-state.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 205.45,
+      "returncode": 0,
+      "cost_usd": 0.5991127,
+      "agent_response": "Done. Here's what was created:\n\n**Source files (verbatim audit anchors):**\n- `source/adhoc/2026-02-09-watch-sync-slack-thread.md` \u2014 Devi's Slack thread\n- `source/adhoc/2026-02-12-watch-sync-cs-email.md` \u2014 Devi's fuller-cut email\n- `source/adhoc/2026-02-12-watch-sync-amplitude-notes.md` \u2014 Maya's Amplitude notes\n\n**Ingestion files (synthesized, linked back to source):**\n- `ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md`\n- `ingestion/adhoc/2026-02-12-watch-sync-cs-email.md`\n- `ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md`\n\n**Hypothesis:**\n- `hypotheses/weekly-email-summary.md` \u2014 `status: promoted` (2026-02-20); A/B test result (+0.2pp, p=0.71, 2026-03-28) preserved verbatim in the file with a note in Open questions that the status field is stale decision debt\n\n**Knowledge:**\n- `knowledge/product/onboarding-funnel.md` \u2014 November 2025 7-step snapshot, `Last updated: 2025-11-22`. No December redesign mentioned \u2014 staleness preserved intentionally.\n\n**Decision:**\n- `decisions/2025-12-18-onboarding-redesign-to-4-step.md` \u2014 4-step redesign, status: decided, result 68% conversion added 2026-01-20. No back-link into the knowledge file.\n\n**Stakeholder:**\n- `stakeholders/jordan-pm.md` \u2014 Jordan Reyes as of 2026-03-08. Described as current peer PM (staleness preserved intentionally).\n\n**INDEX updates:**\n- `hypotheses/INDEX.md` \u2014 weekly-email-summary listed under Promoted with staleness flag\n- `decisions/INDEX.md` \u2014 onboarding redesign listed under Recently decided\n- `stakeholders/INDEX.md` \u2014 Jordan Reyes added to roster",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/adhoc/*slack*.md OR source/adhoc/*cx-signal*.md OR source/meetings/*slack*.md OR source/**/*2026-02-09*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-02-09-watch-sync-slack-thread.md', 'source/adhoc/2026-02-09-watch-sync-slack-thread.md']"
+        },
+        {
+          "name": "file_exists_glob:source/adhoc/*email*.md OR source/adhoc/*devi*.md OR source/**/*2026-02-12*devi*.md OR source/**/*watch-sync*.md OR source/**/*2026-02-12*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-02-12-watch-sync-cs-email.md', 'source/adhoc/2026-02-09-watch-sync-slack-thread.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'source/adhoc/2026-02-12-watch-sync-cs-email.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md']"
+        },
+        {
+          "name": "file_exists_glob:source/adhoc/*analytics*.md OR source/adhoc/*amplitude*.md OR source/**/*amplitude*.md OR source/**/*2026-02-12*amplitude*.md OR source/**/*funnel-cut*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*slack*.md OR ingestion/adhoc/*cx-signal*.md OR ingestion/**/*2026-02-09*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md', 'ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*email*.md OR ingestion/adhoc/*devi*.md OR ingestion/**/*2026-02-12*devi*.md OR ingestion/**/*watch-sync*email*.md OR ingestion/**/*2026-02-12*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-12-watch-sync-cs-email.md', 'ingestion/adhoc/2026-02-12-watch-sync-cs-email.md', 'ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'ingestion/adhoc/2026-02-12-watch-sync-cs-email.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*analytics*.md OR ingestion/adhoc/*amplitude*.md OR ingestion/**/*amplitude*.md OR ingestion/**/*funnel-cut*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*weekly*email*.md OR hypotheses/*email*summary*.md OR hypotheses/*weekly-email*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/onboarding-funnel.md OR knowledge/product/*onboarding*funnel*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/onboarding-funnel.md', 'knowledge/product/onboarding-funnel.md']"
+        },
+        {
+          "name": "file_exists_glob:decisions/2025-12-18*.md OR decisions/2025-12*onboarding*.md OR decisions/2025-12*redesign*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2025-12-18-onboarding-redesign-to-4-step.md', 'decisions/2025-12-18-onboarding-redesign-to-4-step.md', 'decisions/2025-12-18-onboarding-redesign-to-4-step.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/jordan-pm.md OR stakeholders/*jordan*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/jordan-pm.md', 'stakeholders/jordan-pm.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-maintenance-sweep.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 171.69,
+      "returncode": 0,
+      "cost_usd": 0.2811979,
+      "agent_response": "I have everything I need. Here is the maintenance sweep plan \u2014 text only, nothing written to disk.\n\n---\n\n## Maintenance sweep plan \u2014 2026-05-17\n\nConfirmed: I understand that nothing in `source/` is touched, moved, or archived under any scenario. The source files are permanent audit anchors.\n\n---\n\n### Candidate 1 \u2014 `hypotheses/weekly-email-summary.md` (status mismatch \u2014 the explicit ask)\n\n**What it is.** The hypothesis file for the weekly email summary feature. `status: promoted`.\n\n**Why it's a candidate.** The A/B test concluded 2026-03-28 with +0.2pp (p = 0.71), which satisfies the documented kill condition (<1pp lift). The file even calls this out in its own Open questions section: \"Status field not yet updated after the test concluded on 2026-03-28 \u2014 this is decision debt (~7 weeks stale as of ingestion).\" As of today (2026-05-17) the status has been wrong for **~7 weeks**. The `hypotheses/INDEX.md` also still lists it under \"Promoted\" with a note flagging it as pending demotion \u2014 so both files are misaligned with the evidence they contain.\n\n**What I'd propose.** Change `status: promoted` \u2192 `status: demoted`. Add a `Resolution` sentence confirming the A/B result triggered the kill condition. Move the INDEX entry from \"Promoted\" to \"Demoted / killed.\" No file moves needed \u2014 the kill evidence is already in the file.\n\n**What would be lost.** Nothing of substance. The full A/B result and evidence trail are already in the file. The only thing that disappears is a misleading `status: promoted` that could cause the brain to treat this as an active direction in a future retrieval.\n\n---\n\n### Candidate 2 \u2014 `knowledge/product/onboarding-funnel.md` (stale, superseded)\n\n**What it is.** A snapshot of the 7-step onboarding funnel with October 2025 cohort numbers. Last updated: `2025-11-22`.\n\n**Why it's a candidate.** The 4-step flow shipped 2025-12-22 and was validated (68% conversion, per the decision record). The current file describes a flow that **no longer exists** and funnel numbers from a cohort that is now ~7 months old. The decision record (`decisions/2025-12-18-onboarding-redesign-to-4-step.md`) explicitly notes \"the 7-step flow goes into the design archive\" as the consequence of the decision being validated. The file was never updated to reflect this.\n\n**What I'd propose.** Two options: (a) Add a superseded header at the top of the file linking to the decision and the post-ship 68% metric, keep it as a historical baseline, and create a new `knowledge/product/onboarding-funnel.md` for the current 4-step flow. Or (b) update the file in-place to reflect the current 4-step flow and move the 7-step content to `knowledge/product/archive/onboarding-funnel-7step.md`. Option (b) matches the existing `features/archive/` convention.\n\n**What would be lost.** The 7-step funnel numbers (53% end-to-end, per-step dropoffs) are the baseline comparison for the 4-step improvement. They're also captured in the decision file. If we archive to `archive/`, nothing is truly lost \u2014 the decision record links to both.\n\n---\n\n### Candidate 3 \u2014 `stakeholders/jordan-pm.md` (relationship debt \u2014 departed)\n\n**What it is.** Jordan Reyes, peer PM for the Marketplace surface. Last touched: 2026-03-08.\n\n**Why it's a candidate.** The touchpoint log reads: \"2026-03-08 \u2014 last 1:1 before Jordan's departure.\" Jordan has departed the org. Keeping this as an active stakeholder creates noise in any `/prep` workflow that loads the stakeholder roster. The Communication style and Open asks fields are also both `TODO` \u2014 they were never filled in.\n\n**What I'd propose.** Add `status: departed` to the frontmatter (or top of the snapshot section). Update `stakeholders/INDEX.md` to reflect departed status in the roster row. Do not archive or move the file \u2014 the two substantive concerns Jordan raised (home-screen Marketplace real estate, shared analytics latency) may have been inherited by a successor PM, and a future session should flag whether those concerns are still live without needing to reconstruct that Jordan raised them.\n\n**What would be lost.** If we simply mark departed without noting succession, we lose the thread on whether the Marketplace PM's open asks transferred. The analytics latency complaint especially \u2014 that was a known eng debt item, not personal to Jordan.\n\n---\n\n### Candidate 4 \u2014 `decisions/INDEX.md` \u2014 \"Recently decided\" section is stale framing\n\n**What it is.** The decisions roster. The \"Recently decided\" section lists the onboarding redesign decision from 2025-12-18 \u2014 which is ~5 months ago.\n\n**Why it's a candidate.** Per the INDEX template, \"Recently decided\" is meant to be the last 30 days. The decision is validated (result logged 2026-01-20: 68% conversion). There's no section in the current INDEX schema for \"validated and closed\" decisions. The entry isn't wrong, but it's been miscategorized for months, and any retrieval that scans \"Recently decided\" will read it as current.\n\n**What I'd propose.** Add a \"Validated / closed\" section to `decisions/INDEX.md` and move the entry there. The schema comment at the top says \"Append-only log\" \u2014 this change is additive, not destructive. Alternatively, the decision INDEX could just have a \"Decided\" bucket (no time qualifier) with sub-labels.\n\n**What would be lost.** Nothing \u2014 the decision file itself is the source of truth and stays unchanged.\n\n---\n\n### Candidate 5 \u2014 Three `ingestion/adhoc/` watch-sync files (unpromoted high-confidence signal)\n\n**What they are.** Three ingestion files covering the same watch-sync churn event in sequence: `2026-02-09-watch-sync-slack-thread.md`, `2026-02-12-watch-sync-cs-email.md`, `2026-02-12-watch-sync-amplitude-notes.md`.\n\n**Why they're candidates.** The amplitude notes file itself flags this: \"A future maintenance sweep may want to consolidate these three adhoc records into one canonical churn-event record.\" More importantly, the underlying signal clearly meets the memory promotion bar: recurring (confirmed by 3 independent sources), decision-relevant (Devi recommended pulling watch sync from onboarding), high-confidence (CS tickets + Amplitude confirm the bug-exposure mechanism), and obviously useful beyond this session. Yet no knowledge promotion has occurred: there is no `knowledge/product/features/watch-sync.md`, no hypothesis file, and no decision record capturing what was done with this (did watch sync get pulled from onboarding? was the bug fixed?). The signal is sitting in `ingestion/` as orphaned working memory.\n\n**What I'd propose.** Two distinct actions: (1) Consolidate the three adhoc ingestions into a summary note in `knowledge/product/` \u2014 or create a `knowledge/product/features/watch-sync.md` that captures current feature status and links to all three ingestion artifacts. (2) Create a decision record for whatever was actually decided about watch sync \u2014 if \"pull from onboarding\" happened, it should be logged; if the bug was fixed and the feature reinstated, that's also a decision. This is **the largest unresolved decision debt in the brain right now** given the magnitude of the churn signal (22-point retention gap, the largest single-feature cohort gap in 12 months per the Amplitude notes).\n\n**What would be lost.** The three ingestion files individually show the progression of discovery (Slack alert \u2192 CS segmentation \u2192 Amplitude confirmation). That audit trail of how confidence was built is worth preserving. Consolidation should summarize, not replace; the source files are permanent and the ingestion files can remain. What should be added, not removed.\n\n---\n\n### Candidate 6 \u2014 `knowledge/product/onboarding-funnel.md` related: no current-state funnel document exists (gap, not redundancy)\n\nThis is a gap rather than a staleness issue, but it's worth naming: after the 4-step flow shipped, there is no current-state funnel document. The old file describes the 7-step flow; the decision record mentions 68% end-to-end conversion but doesn't provide per-step breakdown of the new flow. If anyone loads funnel context for a future onboarding task, they'll get data for a flow that no longer exists. This pairs with Candidate 2 above \u2014 resolving Candidate 2 also resolves this.\n\n---\n\n### Archive convention question\n\nYou asked me to propose a convention for files outside `hypotheses/` and `knowledge/product/features/` before anything moves.\n\nMy recommendation:\n\n- **Stakeholders (`stakeholders/`):** Use a `status: departed` frontmatter flag rather than a file move. Rationale: the roster is small, the history is valuable for successor context, and a file move creates a dead link in `stakeholders/INDEX.md` that would need updating. A flag keeps the file discoverable while signaling it's not active.\n- **Knowledge files (`knowledge/product/`, `knowledge/market/`, etc.):** Use `<folder>/archive/` subfolders, matching the existing `knowledge/product/features/archive/` convention. A superseded document like the 7-step funnel file belongs in `knowledge/product/archive/onboarding-funnel-7step.md`, not renamed with a prefix or only flagged in frontmatter \u2014 a move makes retrieval intent unambiguous (archive = historical, not current).\n- **Decisions:** No archiving needed. Status fields (`decided`, `superseded`) already serve this purpose per the schema.\n- **I would not use `_archive/`** (underscore prefix). It's visually similar to `_SCHEMA.md` naming and some tools treat leading-underscore directories as hidden or meta. The `archive/` subfolder is cleaner and matches the existing pattern.\n\n---\n\n### Summary count\n\n| # | File(s) | Issue type |\n|---|---|---|\n| 1 | `hypotheses/weekly-email-summary.md` + `hypotheses/INDEX.md` | Status mismatch \u2014 should be demoted, not promoted |\n| 2 | `knowledge/product/onboarding-funnel.md` | Stale \u2014 describes a retired flow, superseded by the Dec 2025 decision |\n| 3 | `stakeholders/jordan-pm.md` | Relationship debt \u2014 departed stakeholder still active in roster |\n| 4 | `decisions/INDEX.md` | Stale framing \u2014 5-month-old decision under \"Recently decided\" |\n| 5 | `ingestion/adhoc/` (3 watch-sync files) | Unpromoted signal \u2014 orphaned working memory, missing decision record |\n| 6 | (gap) No current onboarding funnel document | Pairs with #2 \u2014 current-state not documented anywhere |\n\nSix candidates (or five if you count the funnel gap as the same issue as #2). None pre-filtered to make the sweep look tidy \u2014 the watch-sync orphan (#5) is the most actionable item and the one I'd prioritize, given it represents both unlogged decision debt and a retention signal of unusual magnitude.\n\nWhat do you want to execute first?",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:hypotheses/*weekly*email*.md OR hypotheses/*email*summary*.md OR hypotheses/*weekly-email*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/onboarding-funnel.md OR knowledge/product/*onboarding*funnel*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/onboarding-funnel.md', 'knowledge/product/onboarding-funnel.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/jordan-pm.md OR stakeholders/*jordan*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/jordan-pm.md', 'stakeholders/jordan-pm.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*slack*.md OR ingestion/adhoc/*cx-signal*.md OR ingestion/**/*2026-02-09*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md', 'ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*email*.md OR ingestion/adhoc/*devi*.md OR ingestion/**/*2026-02-12*devi*.md OR ingestion/**/*watch-sync*email*.md OR ingestion/**/*2026-02-12*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-12-watch-sync-cs-email.md', 'ingestion/adhoc/2026-02-12-watch-sync-cs-email.md', 'ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'ingestion/adhoc/2026-02-12-watch-sync-cs-email.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*analytics*.md OR ingestion/adhoc/*amplitude*.md OR ingestion/**/*amplitude*.md OR ingestion/**/*funnel-cut*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:redundancy_identified",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:plan_not_silently_executed",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-what-would-we-lose.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 138.23,
+      "returncode": 0,
+      "cost_usd": 0.25996215,
+      "agent_response": "I have everything I need. Here is the lossiness analysis for each candidate.\n\n---\n\n## Lossiness analysis\n\n### 1. The three redundant churn ingestions\n\n**Files:** `ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md`, `ingestion/adhoc/2026-02-12-watch-sync-cs-email.md`, `ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md`\n\n**Q1 \u2014 Signal loss.** No signal would be erased. Every number, quote, and characterization in all three ingestion files has a verbatim audit anchor in `source/adhoc/` (same three slugs). The ingestion files are synthesized summaries; the actual raw content is preserved in source regardless of what we do to the ingestion layer. Consolidating the three into one ingestion file is purely a reduction of duplication in the synthesis layer.\n\n**Q2 \u2014 Link loss.** No other file in the brain links to any of the three ingestion files. A repo-wide grep for `watch-sync` and `churn` hit exactly six files \u2014 the three ingestion files and their three source counterparts. The only cross-references are the `Related:` / `Precursor:` links the ingestion files use to point at each other. Those self-references disappear in a consolidation, but there is nothing external pointing in that would go dead.\n\n**Q3 \u2014 Audit trail.** Sound. Any downstream artifact that cited this signal would link to `source/adhoc/2026-02-09-watch-sync-slack-thread.md` et al., not to the ingestion files. The source files are permanent and wouldn't be touched. Someone following a provenance tag six months from now would still land on the verbatim Slack thread, CS email, or Amplitude notes.\n\n**Q4 \u2014 What the consolidated record must carry to preserve the three triangulating perspectives.**\n\nThe three ingestion files are not three copies of the same thing. They carry distinct framings:\n\n- **2026-02-09 Slack (Devi's CS framing):** First-wave qualitative pattern \u2014 Devi's conjecture that churn is concentrated in watch-sync adopters, Marco's \"angry churn\" characterization (~40 tickets in 4 days, half reporting uninstall within 2 days), and Maya's request for the segmented cut. This is the causal hypothesis being formed, not yet confirmed.\n- **2026-02-12 CS email (Devi's fuller cut):** First quantified confirmation \u2014 84 tickets over the full week, 31 of 84 users already uninstalled before CS could respond, median time-from-ticket-to-uninstall 1.8 days, and Devi's explicit recommendation to pull watch sync from onboarding. This is the CS read: the problem is bad enough to act on.\n- **2026-02-12 Amplitude (Maya's funnel cut):** Causal mechanism confirmation \u2014 4,210 watch-sync-enabled users at 34.2% retention vs. 11,580 non-watch users at 56.1%, 22-point gap (largest single-feature cohort gap in 12 months), median time-to-churn 3.1 days (cliff, not fade), 68% of churners triggered `sync_attempt_failed` before leaving, 32% who didn't trigger the bug had 51% retention. This is the quantitative proof that bug *exposure* \u2014 not watch-sync enablement as a category \u2014 is the mechanism.\n\nA consolidated record must:\n- Keep the three perspectives as dated, attributed sections (or clearly labeled subsections) \u2014 not flatten them into one homogeneous evidence list\n- Flag the ticket count discrepancy (40 in 4 days vs. 84 in 8 days) as a different time window, not a contradiction\n- Preserve Marco's \"angry churn\" framing as a CS characterization, separately from Maya's Amplitude-derived \"cliff not fade\" framing \u2014 both describe the same phenomenon from different vantage points and reinforce each other\n- Keep the causal-mechanism finding (the `sync_attempt_failed` / 68% split) explicitly attributed to the Amplitude pull, not to Devi's read\n- Link all three source files: `source/adhoc/2026-02-09-watch-sync-slack-thread.md`, `source/adhoc/2026-02-12-watch-sync-cs-email.md`, `source/adhoc/2026-02-12-watch-sync-amplitude-notes.md`\n\n---\n\n### 2. Weekly-email-summary hypothesis\n\n**File:** `hypotheses/weekly-email-summary.md`\n\n**Q5 \u2014 What we'd lose by demoting now vs. leaving as-is.**\n\nHonest answer: nothing. The A/B test result is already fully recorded in the file \u2014 in the Evidence-against section and in the appended \"A/B test result\" block (dated 2026-03-28). The kill condition is documented: <1pp lift. The actual result was +0.2pp, p = 0.71. The open-rate degradation (21% \u2192 9% over the test window) is recorded. The hypothesis file itself calls this out as \"decision debt.\"\n\nDemoting changes exactly one field (`status: promoted` \u2192 `status: demoted`) and moves the INDEX entry from \"Promoted\" to \"Demoted / killed.\" The file stays in the repo \u2014 per the schema, demoted hypotheses are kept to prevent re-running the same wrong bet. No evidence, no provenance tag, no test data is erased.\n\nOne actual gap worth noting: the hypothesis references `../knowledge/product/features/weekly-email-summary.md` in its Meta section, but that feature file doesn't exist anywhere in the repo. That link is already broken independent of any demotion action.\n\n---\n\n### 3. Onboarding-funnel knowledge file\n\n**File:** `knowledge/product/onboarding-funnel.md` \u2014 dated 2025-11-22, describes the 7-step flow with October 2025 cohort numbers\n\n**Q6 \u2014 Would we lose the November funnel numbers if we archived this file?**\n\nPartially, not fully. The decision record `decisions/2025-12-18-onboarding-redesign-to-4-step.md` preserves two of the headline numbers: the 22% dropoff at the wearable-connect step and the 53% end-to-end signup-to-first-workout conversion (both cited in the Context section and as an evidence row). The decision also explicitly notes that \"no `source/` artifact exists for the export\" \u2014 provenance is stakeholder-verbal from the analytics team.\n\nWhat the decision record does NOT preserve:\n- The full step-by-step funnel table (Step 1\u21922: 88%, Step 2\u21923: 96%, Step 3\u21924: 94%, Step 4\u21925: 78%, Step 5\u21926: 81%, Step 6\u21927: 99%)\n- The structured 7-step flow description as a numbered list\n- The \"Known issues\" framing (wearable connect as explicit worst step, forced first-workout selection as a second issue)\n\nArchiving the file means losing the full funnel table and the 7-step flow structure detail. The two headline numbers are safe in the decision record. The intermediate step rates would be gone.\n\nNo other file in the repo links to `knowledge/product/onboarding-funnel.md` \u2014 the grep for \"onboarding-funnel\" returned zero matches outside the file itself. So no link loss from other files. The only concern is the data loss above.\n\n---\n\n### 4. Jordan-pm stakeholder file\n\n**File:** `stakeholders/jordan-pm.md`\n\n**Q7 \u2014 Active references that would go dead if the file moves.**\n\nOne reference only: the roster row in `stakeholders/INDEX.md` (line 10), which links `./jordan-pm.md`. That row would need to be updated to point to the new location if the file moves to an archive.\n\nNo decision file, no hypothesis file, no knowledge file, and no ingestion record anywhere in the repo references jordan-pm by name or by file path. The grep for \"jordan\" (case-insensitive) hit only `stakeholders/INDEX.md` and `stakeholders/jordan-pm.md` itself.\n\nSubstantively: the jordan-pm file is thin. The Communication style and Open asks fields are both `TODO \u2014 not captured`. The touchpoint log has one entry (\"last 1:1 before Jordan's departure, no ingestion record\"). Jordan appears to have left the company as of 2026-03-08. Moving the file to a stakeholder archive would be low-risk \u2014 the only thing that breaks is the INDEX row, which would need updating from `./jordan-pm.md` to wherever it moves.\n\n---\n\n**Summary across candidates**\n\n| Candidate | Signal loss | Link loss | Audit trail | Verdict |\n|---|---|---|---|---|\n| 3 churn ingestions \u2192 1 consolidated | None (source files survive) | None (no inbound links) | Sound (source links are stable) | Safe to consolidate; consolidated record must preserve 3 distinct attributed sections |\n| Weekly-email-summary demotion | None (A/B result already in file) | None beyond INDEX entry | Sound | Nothing lost; `status` field is just stale metadata |\n| Onboarding-funnel archival | Partial \u2014 full step table lost; two headline numbers safe in decision | None (no inbound links) | Gap \u2014 no `source/` artifact exists for these numbers | Archive only if full step table is re-preserved somewhere first |\n| Jordan-pm file move | None (file is thin; departure noted) | One: INDEX.md roster row | Sound (no downstream audit links) | Safe to move; one INDEX row to update |",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:hypotheses/*weekly*email*.md OR hypotheses/*email*summary*.md OR hypotheses/*weekly-email*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/onboarding-funnel.md OR knowledge/product/*onboarding*funnel*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/onboarding-funnel.md', 'knowledge/product/onboarding-funnel.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/jordan-pm.md OR stakeholders/*jordan*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/jordan-pm.md', 'stakeholders/jordan-pm.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*slack*.md OR ingestion/adhoc/*cx-signal*.md OR ingestion/**/*2026-02-09*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md', 'ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*email*.md OR ingestion/adhoc/*devi*.md OR ingestion/**/*2026-02-12*devi*.md OR ingestion/**/*watch-sync*email*.md OR ingestion/**/*2026-02-12*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-12-watch-sync-cs-email.md', 'ingestion/adhoc/2026-02-12-watch-sync-cs-email.md', 'ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'ingestion/adhoc/2026-02-12-watch-sync-cs-email.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*analytics*.md OR ingestion/adhoc/*amplitude*.md OR ingestion/**/*amplitude*.md OR ingestion/**/*funnel-cut*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:lossiness_analyzed",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-execute-approved-subset.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 210.16,
+      "returncode": 0,
+      "cost_usd": 0.4647153499999999,
+      "agent_response": "Done. Here's the confirmation summary:\n\n---\n\n**What got consolidated:**\n`ingestion/adhoc/2026-q1-watch-sync-churn-event.md` is the canonical record. It cites all three source artifacts \u2014 `source/adhoc/2026-02-09-watch-sync-slack-thread.md`, `source/adhoc/2026-02-12-watch-sync-cs-email.md`, and `source/adhoc/2026-02-12-watch-sync-amplitude-notes.md` \u2014 as named links in the header and as provenance tags on every evidence row. All three perspectives are preserved in labeled sections: Perspective 1 (Devi / CS framing), Perspective 2 (Marco / ticket pattern), Perspective 3 (Maya / Amplitude cut). The three original ingestion files are now tombstones at their original paths, each linking to the canonical record and naming which perspective covers their content.\n\n**What got archived and to what convention:**\nBoth files were archived using the same convention: content moved to an `archive/` subfolder within the same area directory, original path replaced with a tombstone. `knowledge/product/onboarding-funnel.md` \u2192 `knowledge/product/archive/onboarding-funnel.md`; `stakeholders/jordan-pm.md` \u2192 `stakeholders/archive/jordan-pm.md`. The archived stakeholder file has a one-line note at the top: \"Jordan left PulseFit on 2026-03-15. The Marketplace surface is now owned by Priya Nair.\"\n\n**What didn't get touched:**\n`hypotheses/weekly-email-summary.md` \u2014 not opened, not read, not modified, not mentioned in any file written this turn.\n\n**Inbound links updated:**\n`stakeholders/INDEX.md` line 10 was updated from `./jordan-pm.md` to `./archive/jordan-pm.md`. That was the only inbound link to either archived file \u2014 no other file in the brain linked to `knowledge/product/onboarding-funnel.md` or `stakeholders/jordan-pm.md`. The three tombstoned ingestion files cross-referenced each other; those links still resolve (tombstones are at the original paths). The `source/adhoc/` files contain informational text referencing the ingestion paths \u2014 those still resolve to the tombstones, which redirect to the canonical record. No broken-link risk from this work.\n\n**Nothing in `source/` was touched.** All three source files remain exactly as they were.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*watch-sync*churn*.md OR ingestion/adhoc/*q1*churn*.md OR ingestion/adhoc/*2026-02*watch*sync*.md OR ingestion/adhoc/*churn*event*.md OR ingestion/**/*watch-sync-churn*.md OR ingestion/**/*q1-2026-churn*.md OR ingestion/**/*consolidated*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-q1-watch-sync-churn-event.md', 'ingestion/adhoc/2026-q1-watch-sync-churn-event.md', 'ingestion/adhoc/2026-02-09-watch-sync-slack-thread.md', 'ingestion/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'ingestion/adhoc/2026-02-12-watch-sync-cs-email.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/archive/*onboarding-funnel*.md OR knowledge/product/_archive/*onboarding-funnel*.md OR knowledge/_archive/**/*onboarding-funnel*.md OR knowledge/archive/**/*onboarding-funnel*.md OR archive/knowledge/**/*onboarding-funnel*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/archive/onboarding-funnel.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/archive/*jordan*.md OR stakeholders/_archive/*jordan*.md OR stakeholders/archive/jordan-pm.md OR archive/stakeholders/*jordan*.md OR _archive/stakeholders/*jordan*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/archive/jordan-pm.md', 'stakeholders/archive/jordan-pm.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*weekly*email*.md OR hypotheses/*email*summary*.md OR hypotheses/*weekly-email*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md', 'hypotheses/weekly-email-summary.md']"
+        },
+        {
+          "name": "file_exists_glob:source/adhoc/*slack*.md OR source/adhoc/*cx-signal*.md OR source/meetings/*slack*.md OR source/**/*2026-02-09*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-02-09-watch-sync-slack-thread.md', 'source/adhoc/2026-02-09-watch-sync-slack-thread.md']"
+        },
+        {
+          "name": "file_exists_glob:source/adhoc/*email*.md OR source/adhoc/*devi*.md OR source/**/*2026-02-12*devi*.md OR source/**/*watch-sync*.md OR source/**/*2026-02-12*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-02-12-watch-sync-cs-email.md', 'source/adhoc/2026-02-09-watch-sync-slack-thread.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'source/adhoc/2026-02-12-watch-sync-cs-email.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md']"
+        },
+        {
+          "name": "file_exists_glob:source/adhoc/*analytics*.md OR source/adhoc/*amplitude*.md OR source/**/*amplitude*.md OR source/**/*2026-02-12*amplitude*.md OR source/**/*funnel-cut*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md', 'source/adhoc/2026-02-12-watch-sync-amplitude-notes.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:audit_trail_preserved",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T18:01:33.167853+00:00",
+  "cost": {
+    "total_usd": 1.908,
+    "max_usd": null,
+    "by_kind": {
+      "turn": 1.605,
+      "judge": 0.303
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.5991127
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.2811979
+      },
+      {
+        "kind": "judge",
+        "label": "redundancy_identified",
+        "cost": 0.0606618
+      },
+      {
+        "kind": "judge",
+        "label": "plan_not_silently_executed",
+        "cost": 0.0599878
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.25996215
+      },
+      {
+        "kind": "judge",
+        "label": "lossiness_analyzed",
+        "cost": 0.057791800000000004
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.4647153499999999
+      },
+      {
+        "kind": "judge",
+        "label": "audit_trail_preserved",
+        "cost": 0.1245223
+      }
+    ]
+  }
+}

@@ -1,0 +1,139 @@
+scenario: 04-persona-emergence
+description: |
+  Four-turn persona-emergence scenario. PM seeds a brain state with two confirmed personas
+  (Recruiter, Hiring Manager) plus a recent decision that leaned on both. Two interviews then
+  surface a role that fits neither persona (Hiring Operations Coordinator / Talent Operations
+  Lead). The brain must (a) recognize the misfit at turn 2, (b) NOT auto-create a new persona
+  file from a single signal, (c) accumulate evidence across turns 2-3, and (d) only at turn 4,
+  on PM request, draft a candidate persona with status `proposed`, full evidence trail, and an
+  explicit promotion gate — leaving the original two personas untouched.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-existing-personas.md
+    structural:
+      # Two persona files exist, one per persona, under knowledge/users/personas/.
+      - file_exists_glob: knowledge/users/personas/recruiter.md OR knowledge/users/personas/*recruiter*.md
+      - file_exists_glob: knowledge/users/personas/hiring-manager.md OR knowledge/users/personas/*hiring-manager*.md OR knowledge/users/personas/*hiring_manager*.md
+      # Insights file populated.
+      - file_modified: knowledge/users/insights.md
+      # 2026-04 decision recreated and INDEX updated.
+      - file_exists_glob: decisions/2026-04*.md
+      - file_modified: decisions/INDEX.md
+    content:
+      - judge: existing_personas_preserved
+        rubric: judges/existing_personas_preserved.md
+        target_glob: knowledge/users/personas/*.md
+        expected_meaning: |
+          Turn 1 creates exactly two persona files (Recruiter, Hiring Manager) under
+          knowledge/users/personas/. Each persona file carries its job-to-be-done,
+          observed behaviors, pain points with provenance tags, and a Last revised date
+          of 2026-04-02 (preserved, NOT relabeled to today). No third persona file is
+          created at this turn.
+        must_not: "create a third persona file at turn 1, relabel the 2026-04-02 last-revised dates to 2026-05-17, or fold the two personas into a single combined file"
+
+  - turn: 2
+    input: turn-02-interview-first-misfit.md
+    structural:
+      # Raw artifact preserved under source/.
+      - file_exists_glob: source/interviews/*sam*.md OR source/interviews/*chen*.md OR source/interviews/2026-05-06*.md OR source/interviews/*midco*.md
+      # Synthesis routed under ingestion/.
+      - file_exists_glob: ingestion/interviews/*sam*.md OR ingestion/interviews/*chen*.md OR ingestion/interviews/2026-05-06*.md OR ingestion/interviews/*midco*.md
+      # Working-memory area updated (insights or observations).
+      - file_modified: knowledge/users/insights.md OR knowledge/users/observations.md OR knowledge/users/segments.md
+    content:
+      - judge: misfit_recognized
+        rubric: judges/misfit_recognized.md
+        expected_meaning: |
+          Turn 2 ingests the Sam Chen interview. The agent's response (or the synthesis it
+          writes) explicitly recognizes that Sam's role does not fit Recruiter (she doesn't
+          source / screen / own candidate experience) and does not fit Hiring Manager (she
+          doesn't make the hire/no-hire call). The signal is captured in
+          insights/observations, NOT force-fit into the closest existing persona. No new
+          persona file is created at this turn — one interview is below the bar.
+        must_not: "force Sam into Recruiter or Hiring Manager, create a new persona file from a single interview, or drop the role-fit signal entirely"
+      - judge: no_premature_persona
+        rubric: judges/no_premature_persona.md
+        expected_meaning: |
+          At end of turn 2, the directory knowledge/users/personas/ contains ONLY the
+          original two persona files (Recruiter, Hiring Manager). No third file has been
+          created for Coordinator / Hiring Operations / Talent Operations / Scheduler /
+          any variant. A single interview is below the bar for persona creation. The
+          signal lives in insights/observations, ready to accumulate.
+        must_not: "create any new persona file under knowledge/users/personas/ at turn 2, or edit the two existing persona files to absorb the new signal"
+
+  - turn: 3
+    input: turn-03-interview-second-misfit.md
+    structural:
+      # Second interview preserved + synthesized.
+      - file_exists_glob: source/interviews/*maya*.md OR source/interviews/*okonkwo*.md OR source/interviews/2026-05-14*.md OR source/interviews/*largeco*.md
+      - file_exists_glob: ingestion/interviews/*maya*.md OR ingestion/interviews/*okonkwo*.md OR ingestion/interviews/2026-05-14*.md OR ingestion/interviews/*largeco*.md
+      # Working-memory area updated (the pattern is now showing twice).
+      - file_modified: knowledge/users/insights.md OR knowledge/users/observations.md OR knowledge/users/segments.md
+    content:
+      - judge: no_premature_persona
+        rubric: judges/no_premature_persona.md
+        expected_meaning: |
+          Turn 3 has the agent answer the PM's explicit "does this fit either persona we
+          have?" question honestly — the gap is named, the two interviews are linked as a
+          recurring pattern in insights/observations. The agent does NOT create a new
+          persona file (the PM said not to). At end of turn 3, knowledge/users/personas/
+          still contains only the original Recruiter and Hiring Manager files.
+        must_not: "create a new persona file at turn 3, or edit the existing persona files to absorb the new signal"
+
+  - turn: 4
+    input: turn-04-propose-new-persona.md
+    structural:
+      # Candidate persona file now appears.
+      - file_exists_glob: knowledge/users/personas/hiring-operations.md OR knowledge/users/personas/*hiring-ops*.md OR knowledge/users/personas/*hiring_operations*.md OR knowledge/users/personas/*talent-operations*.md OR knowledge/users/personas/*talent-ops*.md
+    content:
+      - judge: persona_proposed_with_evidence
+        rubric: judges/persona_proposed_with_evidence.md
+        target_glob: knowledge/users/personas/*hiring*operation*.md OR knowledge/users/personas/*hiring-ops*.md OR knowledge/users/personas/*talent*operation*.md OR knowledge/users/personas/*talent-ops*.md
+        expected_meaning: |
+          The new persona file exists under knowledge/users/personas/ with status
+          `proposed` or `candidate` clearly stated. Evidence rows (behaviors, pain points,
+          JTBD) carry provenance tags from the canonical enum citing BOTH the Sam Chen and
+          Maya Okonkwo interviews. The file contains an explicit "what would promote this
+          from proposed to confirmed?" section with a specific, observable bar — not
+          "more interviews" but something like "N more interviews from companies of size
+          X-Y showing the same separation from recruiter/HM workflows." The 2026-04-12
+          decision's remaining-ambiguity note is referenced (link from new persona to
+          decision), but the decision file itself is not rewritten.
+        must_not: "create the persona with status `confirmed` / `active`, omit the promotion gate, leave evidence rows untagged, or rewrite the 2026-04-12 decision"
+      - judge: existing_personas_preserved
+        rubric: judges/existing_personas_preserved.md
+        target_glob: knowledge/users/personas/*.md
+        expected_meaning: |
+          At end of turn 4, the Recruiter and Hiring Manager persona files are content-
+          identical to their turn-1 form: same JTBD, same observed behaviors, same pain
+          points, same Last revised: 2026-04-02. The new persona is additive — it must
+          not have caused edits to either existing persona file.
+        must_not: "edit Recruiter or Hiring Manager at turn 4 to absorb operational-coordination signal, change their Last revised dates, or fold them into a unified persona"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - all_decisions_have_reversal_condition: true
+  content:
+    - judge: existing_personas_preserved
+      rubric: judges/existing_personas_preserved.md
+      target_glob: knowledge/users/personas/*.md
+      expected_meaning: |
+        At final state there are at least three persona files: Recruiter, Hiring Manager,
+        and the new candidate (Hiring Operations or similar slug). The Recruiter and
+        Hiring Manager files retain their 2026-04-02 last-revised date and their original
+        JTBD / behaviors / pain content — the new persona did NOT cause edits to either.
+        The new persona file is clearly marked `proposed` or `candidate`; the two original
+        personas remain at confirmed/active status (whatever the schema uses for "in use").
+      must_not: "edit Recruiter or Hiring Manager to absorb operational-coordination signal, change their last-revised dates, or promote the new persona to the same status as the originals"

@@ -1,0 +1,104 @@
+scenario: 09-ideation
+description: |
+  Four-turn ideation scenario. PM seeds 4 months of accumulated brain state (3 customer interviews,
+  an insights entry, a competitor note, a CS monthly, a roadmap with an open question, and one stalled
+  hypothesis as distractor), then asks the brain to propose under-explored hypotheses the existing
+  evidence would support but that nobody has framed yet. Tests forward synthesis from existing artifacts:
+  candidates must be grounded in specific brain citations, NOT auto-promoted, with explicit validation
+  gates, and not generic-best-practice slop.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-populated-brain.md
+    structural:
+      # Three customer interviews preserved under source/.
+      - file_exists_glob: source/interviews/*northstar*.md OR source/interviews/2026-01-22*.md OR source/interviews/*dana*.md
+      - file_exists_glob: source/interviews/*brillstone*.md OR source/interviews/2026-02-18*.md OR source/interviews/*marcus*.md
+      - file_exists_glob: source/interviews/*pacific*.md OR source/interviews/*greens*.md OR source/interviews/2026-04-09*.md OR source/interviews/*jenna*.md
+      # Three interviews routed through ingestion/.
+      - file_exists_glob: ingestion/interviews/*northstar*.md OR ingestion/interviews/2026-01-22*.md OR ingestion/interviews/*dana*.md
+      - file_exists_glob: ingestion/interviews/*brillstone*.md OR ingestion/interviews/2026-02-18*.md OR ingestion/interviews/*marcus*.md
+      - file_exists_glob: ingestion/interviews/*pacific*.md OR ingestion/interviews/*greens*.md OR ingestion/interviews/2026-04-09*.md OR ingestion/interviews/*jenna*.md
+      # Competitor note (Brex auto-matching) landed somewhere reasonable.
+      - file_exists_glob: source/**/*brex*.md OR source/**/*competitor*.md OR knowledge/market/*competitor*.md OR knowledge/market/*landscape*.md OR ingestion/**/*brex*.md OR ingestion/**/*competitor*.md
+      # CS monthly preserved.
+      - file_exists_glob: source/**/*cs*monthly*.md OR source/**/*cs-monthly*.md OR source/**/*priya*.md OR source/**/2026-04-15*.md OR ingestion/**/*cs*monthly*.md
+      # Roadmap entry populated (and explicitly contains the open question).
+      - file_exists_glob: knowledge/product/roadmap.md
+      - file_modified: knowledge/product/roadmap.md
+      # Insights entry populated.
+      - file_exists_glob: knowledge/users/insights.md
+      - file_modified: knowledge/users/insights.md
+      # The stalled distractor hypothesis exists.
+      - file_exists_glob: hypotheses/*auto-categorization*.md OR hypotheses/*categorization*.md
+      # Hypothesis count is exactly 1 (the distractor only — no new hypotheses opened from bulk seed).
+      - hypothesis_count_at_least: 1
+
+  - turn: 2
+    input: turn-02-context-check.md
+    structural: []  # Q&A inventory turn — agent should not modify files.
+
+  - turn: 3
+    input: turn-03-ideation-prompt.md
+    structural: []  # Ideation in response text only — no new hypothesis files yet.
+    content:
+      - judge: candidates_grounded_in_brain
+        rubric: judges/candidates_grounded_in_brain.md
+        expected_meaning: |
+          Turn 3 candidates each cite at least two specific artifacts FROM THE BRAIN (path-typed
+          references to existing source/, ingestion/, or knowledge/ files seeded in turn 1). The
+          receipt-matching candidate is named (under that name or an equivalent like "smart match" /
+          "fuzzy receipt matching"). NO citations to invented files. NO claims sourced only from
+          (industry-knowledge) without brain-citations alongside.
+        must_not: "fabricate citations to files that don't exist, OR propose candidates whose only motivation is competitive necessity / training-data industry knowledge without naming the specific brain artifacts that corroborate it"
+      - judge: no_generic_slop
+        rubric: judges/no_generic_slop.md
+        expected_meaning: |
+          Turn 3 candidates are specifically motivated by SPECIFIC brain artifacts. No generic SaaS
+          ideas (AI summaries, dashboards, integrations, mobile refresh) appear unless they trace back
+          to a brain artifact. No "also consider…" tail of unmotivated ideas.
+        must_not: "propose generic best-practice features (AI summaries, dashboards, chatbots) not tied to a specific seeded artifact, OR append an unmotivated 'also consider' list"
+
+  - turn: 4
+    input: turn-04-pick-and-stub.md
+    structural:
+      # A NEW hypothesis file exists referencing receipt-matching (under any reasonable slug).
+      - file_exists_glob: hypotheses/*receipt*.md OR hypotheses/*matching*.md OR hypotheses/*smart-match*.md OR hypotheses/*fuzzy*.md
+      # The stalled auto-categorization hypothesis is NOT touched this turn.
+      - file_exists_glob: hypotheses/*auto-categorization*.md OR hypotheses/*categorization*.md
+      # No new decision file (PM was explicit: this is a hypothesis, not a decision).
+    content:
+      - judge: proposed_not_promoted
+        rubric: judges/proposed_not_promoted.md
+        target_glob: hypotheses/*.md
+        expected_meaning: |
+          Turn 4 hypothesis file has file-level Status set to `proposed` (or `active`), NOT `promoted`,
+          NOT `partially-validated`, NOT blank. The existing auto-categorization hypothesis is unchanged
+          in status, last-updated date (2026-02-25), and evidence rows. No new decision file was
+          created from this turn.
+        must_not: "auto-promote the new hypothesis from existing evidence, OR change the auto-categorization hypothesis's status / evidence rows, OR draft a decision file from this turn's work"
+      - judge: explicit_validation_gates
+        rubric: judges/explicit_validation_gates.md
+        target_glob: hypotheses/*.md
+        expected_meaning: |
+          Turn 4 hypothesis file has an explicit promotion condition AND an explicit kill / demote
+          condition, both written as observable thresholds tied to specific evidence types (specific
+          interview counts, specific metric values, specific customer-segment validation, specific
+          test outcomes). NOT vague ("more evidence needed", "validate with users", "TBD").
+        must_not: "write validation gates as vague placeholders ('more evidence needed', 'TBD', 'validate with users'), OR omit either the promotion or the kill condition"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - all_decisions_have_reversal_condition: true
+    - no_silent_hypothesis_demotion: true

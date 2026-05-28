@@ -1,0 +1,67 @@
+scenario: 17-no-artifact-flow
+description: |
+  Four-turn scenario built entirely on non-path-typed provenance — every observation
+  enters the brain as (intuition, ...), (stakeholder-verbal, ...), (industry-knowledge),
+  or (chat, no artifact). There are no transcripts to upload, no Slack screenshots, no
+  analytics exports. Tests whether the brain captures faithfully, refuses to fabricate
+  source/ artifacts, distinguishes high-trust from low-trust signals when asked, and
+  avoids drafting a confident decision off a soft-only trust profile.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-intuition.md
+    structural:
+      # Hypothesis file created — name flexible.
+      - file_exists_glob: hypotheses/*trial*.md OR hypotheses/*7-day*.md OR hypotheses/*extension*.md
+      # No source/ file should have been created for an intuition. We cannot directly
+      # assert absence at the harness level; the content judge for turn 4 covers it.
+
+  - turn: 2
+    input: turn-02-verbal-eng-lead.md
+    structural:
+      # Hypothesis file updated with the verbal evidence row.
+      - file_modified_glob: hypotheses/*trial*.md OR hypotheses/*7-day*.md OR hypotheses/*extension*.md
+      # Mateus stakeholder file created and INDEX touched.
+      - file_exists_glob: stakeholders/*mateus*.md OR stakeholders/*okafor*.md
+      - file_modified: stakeholders/INDEX.md
+
+  - turn: 3
+    input: turn-03-industry-pattern.md
+    structural:
+      - file_modified_glob: hypotheses/*trial*.md OR hypotheses/*7-day*.md OR hypotheses/*extension*.md
+
+  - turn: 4
+    input: turn-04-review-and-draft.md
+    structural:
+      # Agent must pick one path. We accept either file existing.
+      - file_exists_glob: knowledge/product/trial-length-evidence-plan.md OR decisions/2026-05-18*trial*.md OR decisions/2026-05*trial*.md
+      # Whichever path was taken, the brain should be link-coherent.
+      - all_internal_links_valid: true
+    content:
+      - judge: no_artifact_trust_profile
+        rubric: judges/no_artifact_trust_profile.md
+        target: agent_response
+        expected_meaning: |
+          The agent surfaces the trust profile of the trial-length hypothesis explicitly
+          (each row's provenance form named), picks ONE path (evidence-collection plan OR
+          decision draft) with a clear recommendation, and executes it. If the plan path,
+          named artifacts and channels are specific. If the decision path, status is
+          pending/proposed with an explicit trust-profile section. No fabricated source/
+          files for any of the three soft-evidence rows.
+        must_not: "draft a status:decided decision off three soft rows; fabricate any source/ file; produce a generic 'gather more evidence' plan"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true
+  content: []

@@ -1,0 +1,205 @@
+{
+  "scenario": "16-corrupt-state-recovery",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-grvc3kbb",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T23:06:54.092729+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-broken-state.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 82.2,
+      "returncode": 0,
+      "cost_usd": 0.26269855,
+      "agent_response": "All files created. Here is a summary of what was written and confirmation that all four defects are preserved as-is:\n\n---\n\n**Files created (9 total):**\n\n| File | Status |\n|---|---|\n| `source/interviews/2026-02-14-acme-marketing.md` | Clean source anchor |\n| `ingestion/interviews/2026-02-14-acme-marketing.md` | Synthesis, valid source link |\n| `hypotheses/long-window-attribution.md` | **Contains defects 1 and 3** |\n| `stakeholders/INDEX.md` | **Contains defect 2** |\n| `stakeholders/priya-sundaram.md` | Clean |\n| `stakeholders/leah-okwu.md` | Clean |\n| `ingestion/adhoc/2026-03-05-warehouse-pricing.md` | **Contains defect 4** |\n| `ingestion/INDEX.md` | Updated with both records |\n\n**File NOT created (intentional):**\n- `stakeholders/jorge-mendes.md` \u2014 listed in INDEX but absent from disk\n\n---\n\n**Four planted defects, preserved verbatim:**\n\n1. **Broken hypothesis link** \u2014 `hypotheses/long-window-attribution.md` links to `../ingestion/interviews/2026-02-14-acme-priya.md`, which does not exist. The real file is `2026-02-14-acme-marketing.md`.\n\n2. **Missing stakeholder file** \u2014 `stakeholders/INDEX.md` references `jorge-mendes.md` but that file was not created.\n\n3. **Under-evidenced promoted hypothesis** \u2014 `hypotheses/long-window-attribution.md` carries `status: promoted` with only one supporting evidence row (promotion bar is typically higher).\n\n4. **Broken source link in adhoc ingestion** \u2014 `ingestion/adhoc/2026-03-05-warehouse-pricing.md` links to `source/adhoc/2026-03-05-warehouse-pricing.md`, which does not exist.\n\nNothing was repaired. The brain is in its intentionally inconsistent state, ready for the next turn's `/review`.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/2026-02-14*.md OR source/interviews/*acme*marketing*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-02-14-acme-marketing.md', 'source/interviews/2026-02-14-acme-marketing.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/2026-02-14-acme-marketing.md OR ingestion/interviews/*acme*marketing*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-02-14-acme-marketing.md', 'ingestion/interviews/2026-02-14-acme-marketing.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*long-window*.md OR hypotheses/*attribution*.md OR hypotheses/long-window-attribution.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/long-window-attribution.md', 'hypotheses/long-window-attribution.md', 'hypotheses/long-window-attribution.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/priya-sundaram.md OR stakeholders/*priya*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/priya-sundaram.md', 'stakeholders/priya-sundaram.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/leah-okwu.md OR stakeholders/*leah*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/leah-okwu.md', 'stakeholders/leah-okwu.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/2026-03-05-warehouse-pricing.md OR ingestion/adhoc/*warehouse*pricing*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-03-05-warehouse-pricing.md', 'ingestion/adhoc/2026-03-05-warehouse-pricing.md']"
+        },
+        {
+          "name": "file_modified:stakeholders/INDEX.md",
+          "passed": true,
+          "detail": "modified: stakeholders/INDEX.md"
+        },
+        {
+          "name": "file_modified:ingestion/INDEX.md",
+          "passed": true,
+          "detail": "modified: ingestion/INDEX.md"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-review.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 225.96,
+      "returncode": 0,
+      "cost_usd": 0.3060138,
+      "agent_response": "I now have everything needed. Let me compile the full /review audit report.\n\n---\n\n## /review \u2014 2026-05-18\n\n### What changed this week\n\nNothing this week. The last ingest was `2026-03-05-warehouse-pricing.md` \u2014 the brain has been idle for 74 days. Leah Okwu's file was touched 2026-05-10, but there's no content change visible (likely just a last-touched update). All five structural issues below predate this week.\n\n---\n\n## Structural inconsistencies \u2014 findings and plan\n\n### Finding 1: Broken link in H-LWA evidence table\n\n**What's broken.** `hypotheses/long-window-attribution.md`, line 14, links to `../ingestion/interviews/2026-02-14-acme-priya.md`. That file does not exist. The actual file is `ingestion/interviews/2026-02-14-acme-marketing.md`.\n\n**Likely cause.** Slug mismatch at creation time \u2014 the interviewee's name (`priya`) was used instead of the account/team slug (`acme-marketing`) that the ingestion file actually received.\n\n**What's at stake.** This is the only evidence row in the hypothesis. The audit chain \u2014 from promoted hypothesis \u2192 evidence \u2192 ingestion \u2192 source \u2014 is broken at the first link. Anyone following the provenance trail gets a 404. The underlying file exists and is correct; only the link is wrong.\n\n**Recommendation.** Update the link in the hypothesis file to `../ingestion/interviews/2026-02-14-acme-marketing.md`. The target file is correct; this is a one-field fix. No judgment required.\n\n---\n\n### Finding 2: Orphan row in stakeholders/INDEX.md \u2014 jorge-mendes\n\n**What's broken.** `stakeholders/INDEX.md` has a row for `jorge-mendes` (CEO, Plotline; last touched 2026-04-30) linking to `jorge-mendes.md`. That file does not exist.\n\n**Likely cause.** The INDEX entry was written without creating the stakeholder file, or the file was created and then accidentally deleted or never committed. Last-touched 2026-04-30 suggests this was an active stakeholder as recently as 18 days ago.\n\n**What's at stake.** If the row is removed, you lose the signal that this stakeholder was tracked and recently touched \u2014 and retrieval in a future session will not surface him. If a file is created from scratch, it would be a stub with only what's in the INDEX row (CEO, Plotline), which is thin but better than nothing.\n\n**What to fix.** Two options:\n- **Option A (recommended):** Create a minimal `stakeholders/jorge-mendes.md` stub (role, slug, first-contact: 2026-04-30 or earlier) and leave filling it out to the PM. The INDEX row was intentional.\n- **Option B:** Remove the INDEX row if the PM confirms this stakeholder is no longer tracked. Don't do this without explicit PM confirmation.\n\n**Recommendation.** Do not repair silently. Raise to PM: \"Does jorge-mendes.md need to be created, or should the INDEX entry be removed?\" The last-touched date is suspicious \u2014 something happened April 30 that triggered the entry.\n\n---\n\n### Finding 3: H-LWA absent from hypotheses/INDEX.md\n\n**What's broken.** `hypotheses/INDEX.md` has all four sections (Active, Promoted, Demoted, Archived) empty. `hypotheses/long-window-attribution.md` exists with `Status: promoted` and `Promoted on: 2026-02-20`. It should appear in `## Promoted`.\n\n**Likely cause.** The hypothesis file was created and the status was set to `promoted`, but the INDEX was not updated in the same turn \u2014 a direct violation of `CLAUDE.md \u00a7INDEX maintenance`.\n\n**What's at stake.** Future sessions routing through the INDEX (which CLAUDE.md mandates) will not find this hypothesis. It is effectively invisible to retrieval unless someone happens to list the directory.\n\n**Recommendation.** Add the H-LWA entry to `## Promoted` in `hypotheses/INDEX.md`. Unambiguous fix, no PM judgment required. This can be repaired in the next turn.\n\n---\n\n### Finding 4: Missing source file for warehouse-pricing adhoc\n\n**What's broken.** `ingestion/adhoc/2026-03-05-warehouse-pricing.md` links to `../../source/adhoc/2026-03-05-warehouse-pricing.md`. The `source/adhoc/` directory exists (`.gitkeep` present) but that file is absent.\n\n**Likely cause.** The ingestion record was written without first preserving the source \u2014 violating `CLAUDE.md \u00a7Source preservation \u2014 hard rule`. Or the source file was written and lost (never committed, or deleted).\n\n**What's at stake.** The warehouse-pricing analysis is cited in `ingestion/INDEX.md` as routing to H-LWA. It contains the \"$8k/month enterprise workaround\" pricing ceiling claim. Without a source file, that claim has no audit anchor. You cannot verify what the raw analysis actually said, which matters if the pricing ceiling is ever contested.\n\n**What to fix.** Two options:\n- **Option A:** If the original analysis document exists somewhere (spreadsheet, doc, email), copy it verbatim into `source/adhoc/2026-03-05-warehouse-pricing.md` now.\n- **Option B (if original is gone):** Annotate the ingestion file with a note that the source file is missing and the ingestion record is the closest available artifact. Do not fabricate a source file.\n\n**Recommendation.** Ask the PM: \"Does the original warehouse pricing analysis still exist? If so, I'll copy it verbatim to source. If not, I'll annotate the ingestion record as provenance-incomplete.\" Do not repair silently.\n\n---\n\n### Finding 5: H-LWA status mismatch \u2014 promoted on thin evidence, wrong schema, no decision\n\nThis is the most complex finding. Three problems are entangled:\n\n**5a. Evidence count is below the promotion bar.**\n\nThe hypothesis file has one evidence row (the Acme interview \u2014 currently with a broken link per Finding 1). The warehouse-pricing adhoc is listed in `ingestion/INDEX.md` as routing to this hypothesis but does not appear in the hypothesis file's evidence table. Even if it were added, that would be: 1 customer interview + 1 internal analysis. The internal analysis is correlational and same-domain (it estimates the pricing ceiling, not independently confirming the core demand claim). The audit criterion you specified \u2014 \"promoted with fewer than 3 independent supporting observations\" \u2014 applies here. The evidence base is 1 strong but single-source signal.\n\n**5b. The file doesn't follow the schema.**\n\n`hypotheses/long-window-attribution.md` uses a bespoke format: a flat markdown table instead of risk-area sections (Value risk, Usability risk, etc.), no Meta section (Feature, Status, Created, Last updated fields), and no provenance tags in the proper format. `Evidence against: (none currently captured)` is prose commentary \u2014 the schema requires `_(none yet)_` or no bullets. The schema's `_SCHEMA.md` pre-save check would catch all of these.\n\n**5c. No decision file was created at promotion.**\n\n`_SCHEMA.md \u00a7Promotion rule` requires: \"Create a corresponding decision file in `decisions/` referencing the hypothesis.\" No file in `decisions/` exists (only `INDEX.md` and `_SCHEMA.md`). `maintenance/INDEX.md \u00a73` surfaces: \"Promoted hypotheses without a corresponding decision \u2192 draft the decision.\"\n\n**What to fix \u2014 options:**\n\nFor the status question specifically: was this promotion PM-deliberate? If yes, the judgment call is defensible (Priya's signal is strong, specific, and accompanied by observable WTP behavior \u2014 a multi-FTE workaround). If no, the hypothesis should be demoted to `partially-validated` until a second independent customer confirms the demand. The evidence base doesn't satisfy the 3-source bar.\n\n- **Option A:** Keep `promoted`. Rationale: the signal quality from Priya is very high \u2014 she named a specific window, cited WTP behavior (authorized a pipeline), and named the kill condition. Acknowledge the thin evidence base explicitly in the file under `Open questions / caveats`. Draft the missing decision record.\n- **Option B:** Demote to `partially-validated`. Rationale: one interview, however strong, is one interview. Add the warehouse-pricing adhoc to the evidence table. Plan a second confirmatory customer conversation before recommending a build.\n\n**Recommendation.** Flag for PM judgment \u2014 do not auto-demote or auto-keep. The PM should answer: \"Did I deliberately promote this, or did it happen automatically?\" At minimum, regardless of that answer: (a) fix the schema format, (b) add the warehouse-pricing adhoc to the evidence table (it was routed there but never recorded), (c) draft the decision file. Those three are unambiguous regardless of the status question.\n\n---\n\n## Freshness and drift\n\n**Strategy.md \u2014 critically empty.** The file is a blank template. No north-star metric, no priorities, no non-goals. Every planning, prioritization, and review task routes through this file. This is not a structural error but it means the brain has been operating without a strategy anchor since init. This requires PM input; nothing can be inferred. Raise prominently: before the next planning or strategy-check task, this file must be filled in.\n\n**knowledge/users/insights.md \u2014 no promoted themes despite 94 days of evidence.** The Acme interview contains a clear, decision-relevant user insight (enterprise B2B customers with long consideration cycles build warehouse workarounds to compensate for short attribution windows). This is decision-relevant and directly shaped a promoted hypothesis. It has not been promoted to `insights.md`. Caveat: only one source (Acme), so it doesn't meet the \"2+ independent users\" bar strictly. Recommendation: promote with explicit single-source caveat noted. Don't block promotion on a bar that isn't reachable yet when the insight is clearly decision-relevant.\n\n**Priya Sundaram \u2014 relationship debt.** Last touched 2026-02-14 (94 days). Quarterly CAB cadence is 90 days \u2014 borderline overdue. Open thread (long-window attribution) has progressed to a promoted hypothesis status. She should be updated on where the feature stands. Flag for your next 1:1 prep.\n\n**Leah Okwu \u2014 hollow file despite weekly 1:1.** Last touched 2026-05-10 (8 days ago, recently active) but the file contains only role and cadence \u2014 no open threads, concerns, goals, or touchpoint log. Weekly 1:1 at engineering lead level should generate content. Either the 1:1s aren't being logged, or the file update isn't happening. Flag: what's live with Leah right now?\n\n---\n\n## What to take to 1:1s\n\n**Priya Sundaram (next CAB call \u2014 overdue):**\n- H-LWA is promoted. Does she know? Is the warehouse pipeline still running?\n- What's her timeline pressure? Is there a renewal, a team reorg, anything that would change her WTP?\n- Can she connect you with other accounts that might corroborate the demand signal?\n\n**Leah Okwu (next Wednesday):**\n- File is empty \u2014 no prep material exists. Before the 1:1, fill in what you remember from recent conversations.\n- What's Leah's read on feasibility for long-window attribution if that hypothesis lands in the build queue?\n\n**Jorge Mendes (Plotline CEO):**\n- File is missing (Finding 2). Can't prep until it's created or the INDEX entry is resolved.\n\n---\n\n## Summary \u2014 what needs PM judgment vs. what's a clean fix\n\n| Finding | PM judgment required? | Recommended next action |\n|---|---|---|\n| 1 \u2014 Broken H-LWA link | No | Fix link in next turn |\n| 2 \u2014 jorge-mendes orphan row | **Yes** \u2014 create stub or remove? | Ask PM before touching |\n| 3 \u2014 H-LWA missing from hypotheses/INDEX.md | No | Add INDEX entry in next turn |\n| 4 \u2014 Missing source/adhoc file | **Yes** \u2014 original artifact recoverable? | Ask PM |\n| 5a \u2014 H-LWA promotion evidence thin | **Yes** \u2014 deliberate or automatic? | Ask PM; at minimum draft the decision |\n| 5b \u2014 H-LWA schema violations | No | Reformat in next turn |\n| 5c \u2014 No decision for promoted hypothesis | No | Draft decision in next turn (PM confirms) |\n| strategy.md blank | **Yes** \u2014 PM must fill in | Raise before next planning task |\n| insights.md no themes | No (with caveat flag) | Promote Acme theme with single-source note |\n| Priya overdue | **Yes** \u2014 schedule CAB call | PM action |\n| Leah file hollow | **Yes** \u2014 PM recall required | PM fills in before next 1:1 |\n\nNothing has been repaired in this turn. All clean fixes (1, 3, 5b, 5c, insights.md promotion) are ready to execute on your say-so. The judgment items need your input first.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:hypotheses/*long-window*.md OR hypotheses/*attribution*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/long-window-attribution.md', 'hypotheses/long-window-attribution.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/priya-sundaram.md OR stakeholders/*priya*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/priya-sundaram.md', 'stakeholders/priya-sundaram.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/2026-03-05-warehouse-pricing.md OR ingestion/adhoc/*warehouse*pricing*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-03-05-warehouse-pricing.md', 'ingestion/adhoc/2026-03-05-warehouse-pricing.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:structural_audit_surfaced",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-repair.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 131.27,
+      "returncode": 0,
+      "cost_usd": 0.24049840000000003,
+      "agent_response": "Done. Here's what changed for each defect:\n\n---\n\n**Defect 1 \u2014 broken link** (`long-window-attribution.md`)\nFixed: `2026-02-14-acme-priya.md` \u2192 `2026-02-14-acme-marketing.md`. Evidence row now links to the real file and uses the schema's markdown-link provenance format.\n\n**Defect 2 \u2014 missing Jorge Mendes file** (`stakeholders/jorge-mendes.md`)\nCreated stub with role (CEO, Plotline), influence (high), last-touched (2026-04-30). All unknown fields carry `TODO`. Touchpoint log records the provenance as `(stub, no artifact yet)`. File is findable via the existing INDEX row.\n\n**Defect 3 \u2014 over-promoted hypothesis** (`long-window-attribution.md`)\nStatus changed: `promoted` \u2192 `partially-validated`. Evidence-against row added naming the demotion reason with `(chat, no artifact)` provenance. Original Acme evidence-for row preserved with corrected link. Status-history table records both the original 2026-02-20 promotion and the 2026-05-18 retraction. `hypotheses/INDEX.md` moved the entry from the (empty) Promoted section to a new Partially validated section.\n\n**Defect 4 \u2014 orphan source link** (`ingestion/adhoc/2026-03-05-warehouse-pricing.md`)\nRemoved the broken `source/adhoc/2026-03-05-warehouse-pricing.md` link. Provenance updated to `(chat, no artifact)` with a note explaining the session was thinking-out-loud and unrecoverable. The ~$8k/month signal is preserved.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_modified_glob:hypotheses/*long-window*.md OR hypotheses/*attribution*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/long-window-attribution.md', 'hypotheses/long-window-attribution.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/jorge-mendes.md OR stakeholders/*jorge*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/jorge-mendes.md', 'stakeholders/jorge-mendes.md']"
+        },
+        {
+          "name": "file_modified_glob:ingestion/adhoc/2026-03-05-warehouse-pricing.md OR ingestion/adhoc/*warehouse*pricing*.md",
+          "passed": true,
+          "detail": "changed: ['ingestion/adhoc/2026-03-05-warehouse-pricing.md', 'ingestion/adhoc/2026-03-05-warehouse-pricing.md']"
+        },
+        {
+          "name": "all_internal_links_valid",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "no_silent_hypothesis_demotion",
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:repair_with_audit_trail",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*long-window*.md OR hypotheses/*attribution*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T23:14:26.320282+00:00",
+  "cost": {
+    "total_usd": 0.9245,
+    "max_usd": 8.0,
+    "by_kind": {
+      "turn": 0.8092,
+      "judge": 0.1153
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.26269855
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.3060138
+      },
+      {
+        "kind": "judge",
+        "label": "structural_audit_surfaced",
+        "cost": 0.0631933
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.24049840000000003
+      },
+      {
+        "kind": "judge",
+        "label": "repair_with_audit_trail",
+        "cost": 0.05206305
+      }
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+scenario: 10-promotion-gate
+description: |
+  Four-turn promotion-gate scenario. PM seeds a `proposed` hypothesis with mixed-quality evidence
+  across the 5 schema risk areas (well-covered Value, gap on Feasibility, gap on Viability), then
+  asks the brain to evaluate whether promotion is justified. Tests whether the brain weighs
+  evidence by provenance tier, walks all 5 risk areas, resists premature promotion with specific
+  named gaps, ingests gap-filling artifacts cleanly, and finally drafts promotion as a decision
+  artifact rather than a silent status mutation.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-mixed-evidence.md
+    structural:
+      # Two recorded customer interviews preserved verbatim under source/interviews/.
+      - file_exists_glob: source/interviews/*westside*.md OR source/interviews/*okonkwo*.md OR source/interviews/2026-04-02*.md
+      - file_exists_glob: source/interviews/*bayfront*.md OR source/interviews/*gallego*.md OR source/interviews/2026-04-09*.md
+      # The two recorded interviews route to ingestion/ synthesis.
+      - file_exists_glob: ingestion/interviews/*westside*.md OR ingestion/interviews/*okonkwo*.md OR ingestion/interviews/2026-04-02*.md
+      - file_exists_glob: ingestion/interviews/*bayfront*.md OR ingestion/interviews/*gallego*.md OR ingestion/interviews/2026-04-09*.md
+      # Hypothesis file created with the expected slug.
+      - file_exists_glob: hypotheses/*same-day*rebooking*.md OR hypotheses/*rebooking*flow*.md OR hypotheses/*same*day*refill*.md
+    content: []  # Turn-1 provenance tagging is enforced by the final-state `no_orphan_evidence`
+                 # structural check. The "is the hypothesis proposed-not-promoted, with the right
+                 # evidence-mix shape" question is judged at turn 2 via `evidence_quality_evaluated`
+                 # and `risk_coverage_assessed`, which can only pass if turn 1 seeded correctly.
+
+  - turn: 2
+    input: turn-02-promotion-question.md
+    structural: []  # Evaluation turn — brain should EVALUATE on this turn, not ACT. The content
+                    # judges and the final-state `no_silent_hypothesis_demotion` check enforce
+                    # "no resolution this turn." A structural "file does not exist" assertion isn't
+                    # supported by the harness (and would be brittle anyway — the brain may
+                    # legitimately update `Last updated:` on the hypothesis without changing status).
+    content:
+      - judge: evidence_quality_evaluated
+        rubric: judges/evidence_quality_evaluated.md
+        expected_meaning: |
+          The agent's turn-2 response names SPECIFIC counts per provenance tier — e.g.,
+          "2 path-typed ingestion records, 1 stakeholder-verbal, 1 intuition, 1 industry-knowledge
+          supporting; 1 stakeholder-verbal flagging a feasibility concern." The response weighs
+          these by trust tier (path-typed > stakeholder-verbal > intuition / industry-knowledge),
+          not as undifferentiated count. Vague summaries like "we have several pieces of evidence"
+          do not pass.
+        must_not: "treat evidence as an undifferentiated count, or omit the provenance-tier weighing entirely"
+      - judge: risk_coverage_assessed
+        rubric: judges/risk_coverage_assessed.md
+        expected_meaning: |
+          The agent's turn-2 response walks through ALL FIVE risk areas the schema defines
+          (Value, Usability, Feasibility, Viability, Other) and names for each whether evidence
+          exists, what tier, and whether the area is empty. Skipping any of the 5 areas — or
+          merging "Viability" silently into "we need a business case" without enumerating the
+          full set — does not pass.
+        must_not: "walk only 3 or 4 risk areas, or invent risk areas not in the schema (e.g., 'Ethical' as a separate top-level area when the schema uses Other for that)"
+      - judge: correct_first_call
+        rubric: judges/correct_first_call.md
+        expected_meaning: |
+          The agent's turn-2 response concludes that promotion is NOT YET warranted, and names
+          the SPECIFIC missing pieces: (a) the Feasibility concern from Sam is uninvestigated —
+          a real scope estimate is needed, and (b) the Viability risk has no business-case
+          evidence at all — retention modeling / pricing case needed. Vague "we need more
+          evidence" does not pass. A premature YES (promote anyway despite the gaps) fails.
+          The hypothesis file's status field remains `proposed` (no silent mutation).
+        must_not: "promote despite the named gaps, soften to a 'lean toward promotion' without naming the specific gaps, or recommend a status flip on this turn"
+
+  - turn: 3
+    input: turn-03-pm-fills-gap.md
+    structural:
+      # The feasibility memo (Sam, 2026-05-12) preserved under source/.
+      - file_exists_glob: source/adhoc/*feasibility*.md OR source/meetings/*feasibility*.md OR source/adhoc/*sam*.md OR source/meetings/*sam*.md OR source/**/2026-05-12*.md
+      # The business case (Casey + Priya, 2026-05-15) preserved under source/.
+      - file_exists_glob: source/adhoc/*business*case*.md OR source/adhoc/*retention*.md OR source/adhoc/*viability*.md OR source/**/2026-05-15*.md
+      # Both get matching ingestion/ synthesis records.
+      - file_exists_glob: ingestion/adhoc/*feasibility*.md OR ingestion/meetings/*feasibility*.md OR ingestion/adhoc/*sam*.md OR ingestion/**/2026-05-12*.md
+      - file_exists_glob: ingestion/adhoc/*business*case*.md OR ingestion/adhoc/*retention*.md OR ingestion/adhoc/*viability*.md OR ingestion/**/2026-05-15*.md
+      # Hypothesis file modified — new evidence rows added under Feasibility and Viability.
+      - file_modified_glob: hypotheses/*same-day*rebooking*.md OR hypotheses/*rebooking*flow*.md OR hypotheses/*same*day*refill*.md
+    content: []  # No content judge this turn — turn 4 will judge whether the gap-filling was sufficient.
+
+  - turn: 4
+    input: turn-04-second-promotion-pass.md
+    structural:
+      # A promotion decision file exists, dated this turn.
+      - file_exists_glob: decisions/2026-05*.md
+      - file_modified: decisions/INDEX.md
+      # Hypothesis file may or may not have status-flipped — but if it did, the decision file MUST exist
+      # (covered by the file_exists_glob above). The final-state no_silent_hypothesis_demotion check
+      # plus the correct_second_call judge enforce the "no silent flip" rule.
+      - file_modified_glob: hypotheses/*same-day*rebooking*.md OR hypotheses/*rebooking*flow*.md OR hypotheses/*same*day*refill*.md
+    content:
+      - judge: correct_second_call
+        rubric: judges/correct_second_call.md
+        target_glob: decisions/2026-05*.md
+        expected_meaning: |
+          The agent either (a) drafts the promotion as a `decisions/2026-05*.md` file with status
+          `proposed` (or `pending`), evidence rows from BOTH April customer signal AND May
+          feasibility/business artifacts each tagged with provenance from the canonical enum, a
+          specific observable reversal condition, an "Explicitly NOT doing" section, and named
+          remaining ambiguities — and only THEN (optionally) flips the hypothesis status with
+          explicit narration referencing the decision file; OR (b) holds the line and explains a
+          specific further gap. Silent status mutation on the hypothesis without a decision file
+          fails. Vague reversal conditions ("if things change") fail. Missing provenance on
+          decision evidence rows fails. Default expectation: promotion-via-decision.
+        must_not: "silently flip the hypothesis status to promoted without the decision file existing, omit the reversal condition, leave decision evidence rows untagged, or omit either the April customer evidence or the May feasibility/viability evidence from the decision rationale"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - all_decisions_have_reversal_condition: true
+    - no_silent_hypothesis_demotion: true
+  content:
+    - judge: audit_trail
+      rubric: judges/audit_trail.md
+      expected_meaning: |
+        Starting from the May 17 promotion decision, the audit trail reaches BOTH the original
+        April customer-interview evidence (Westside, Bayfront) AND the May feasibility memo +
+        business case via working markdown links through hypothesis → ingestion → source/.
+        The promotion is legible: a reader can see what evidence supports promotion, which
+        provenance tier each evidence row carries, and what reversal condition would unwind it.

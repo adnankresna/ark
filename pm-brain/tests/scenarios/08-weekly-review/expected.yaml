@@ -1,0 +1,134 @@
+scenario: 08-weekly-review
+description: |
+  Four-turn holistic /review scenario. PM seeds a busy brain holding five simultaneous things-
+  worth-surfacing (a drifting hypothesis, an aging insight, a stale-and-relevant stakeholder,
+  an expiring decision reversal condition, and a healthy hypothesis), then asks the brain for
+  a comprehensive weekly /review. Tests whether the brain surfaces ALL five categories with
+  specific named artifacts, orders them by what blocks active work first, and resists either
+  flagging everything equally or collapsing into a single narrative thread. Turn 4 forces a
+  prioritization call that must defensibly exclude the healthy hypothesis.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-busy-brain.md
+    structural:
+      # Two hypothesis files seeded.
+      - file_exists_glob: hypotheses/*alert-noise*.md OR hypotheses/*alert_noise*.md OR hypotheses/*noise-reduction*.md
+      - file_exists_glob: hypotheses/*api-latency*.md OR hypotheses/*p99*.md OR hypotheses/*latency*.md
+      # March-10 decision record exists.
+      - file_exists_glob: decisions/2026-03-10*.md OR decisions/2026-03*rotation*.md
+      - file_modified: decisions/INDEX.md
+      # Two stakeholder files exist.
+      - file_exists_glob: stakeholders/*ravi*.md OR stakeholders/*chen*.md
+      - file_exists_glob: stakeholders/*sam*.md OR stakeholders/*tran*.md
+      - file_modified: stakeholders/INDEX.md
+      # Insights file exists and has been populated (it's a scaffold file — modified, not created).
+      - file_modified: knowledge/users/insights.md
+      # Source artifacts preserved verbatim with original dates.
+      - file_exists_glob: source/research/*2026-03-05*.md OR source/research/*oncall*survey*.md OR source/**/*2026-03-05*survey*.md
+      - file_exists_glob: source/meetings/*2026-03-30*.md OR source/meetings/*ravi*.md OR source/**/*ravi*.md
+      - file_exists_glob: source/interviews/*2026-01-29*.md OR source/interviews/*mendoza*.md
+      - file_exists_glob: source/interviews/*2026-04-18*.md OR source/interviews/*datapeak*.md
+      # Matching ingestion synthesis files.
+      - file_exists_glob: ingestion/research/*2026-03-05*.md OR ingestion/research/*oncall*survey*.md OR ingestion/**/*2026-03-05*survey*.md
+      - file_exists_glob: ingestion/meetings/*2026-03-30*.md OR ingestion/meetings/*ravi*.md OR ingestion/**/*ravi*.md
+      - file_exists_glob: ingestion/interviews/*2026-01-29*.md OR ingestion/interviews/*mendoza*.md
+      - file_exists_glob: ingestion/interviews/*2026-04-18*.md OR ingestion/interviews/*datapeak*.md
+    content: []  # Seed-fidelity is covered indirectly by turn-3 judges (which depend on dates / status / reversal-condition having been preserved).
+
+  - turn: 2
+    input: turn-02-add-fresh-signal.md
+    structural:
+      # The May 12 customer call lands as both source and ingestion.
+      - file_exists_glob: source/interviews/*2026-05-12*.md OR source/interviews/*helio*.md OR source/interviews/*customer*may*.md
+      - file_exists_glob: ingestion/interviews/*2026-05-12*.md OR ingestion/interviews/*helio*.md OR ingestion/interviews/*customer*may*.md
+      # The alert-noise-reduction hypothesis picks up the partial-contradiction signal.
+      - file_modified_glob: hypotheses/*alert-noise*.md OR hypotheses/*alert_noise*.md OR hypotheses/*noise-reduction*.md
+    content: []  # Content fidelity on the partial-contradiction shape is covered by turn-3's multiple_categories_surfaced judge (the drift category).
+
+  - turn: 3
+    input: turn-03-weekly-review.md
+    structural: []  # /review is synthesis-only; output is in the agent response. Same caveat as scenario 03.
+    content:
+      - judge: multiple_categories_surfaced
+        rubric: judges/multiple_categories_surfaced.md
+        expected_meaning: |
+          The /review response names AT LEAST 4 of the 5 seeded categories of finding by
+          specific artifact: drift on alert-noise-reduction (60% vs 80% threshold question),
+          stale-and-relevant stakeholder Ravi Chen (Eng Lead, last touched 2026-03-30, owns
+          the bet the drift is on), the expiring March-10 reversal condition (NPS < 32 by
+          end of May 2026), the aging insight on alert grouping by service (single-source,
+          2026-01-29, unrefreshed for ~4 months), and the healthy api-latency-p99-vs-p95
+          hypothesis. Specific names required, not generic "some things are aging."
+        must_not: "produce a flat 'everything's fine' sweep, omit two or more of the five categories, or substitute generic phrasing ('some hypotheses are drifting') for the specific named artifacts"
+      - judge: priority_ordering
+        rubric: judges/priority_ordering.md
+        expected_meaning: |
+          The /review orders findings such that items blocking active work (the alert-noise-
+          reduction roadmap bet) come before items that can wait. Specifically: at least one
+          of {stale-relevant-Ravi, expiring-reversal-March-10} appears BEFORE the aging
+          insight on alert grouping. The healthy api-latency hypothesis is noted briefly at
+          the end, not in the action column. The ordering is explicit (numbered list, headers
+          like "blocking this week / drifting / aging / healthy", or comparable structure) —
+          a flat unordered dump fails this judge even if it names all five categories.
+        must_not: "produce a flat unordered list, or place the aging insight / healthy hypothesis ahead of the stale-relevant stakeholder and expiring reversal condition"
+      - judge: expiring_reversal_flagged
+        rubric: judges/expiring_reversal_flagged.md
+        expected_meaning: |
+          The /review names the SPECIFIC March-10 decision file (decisions/2026-03-10-on-
+          call-rotation-rework.md or equivalent path), the SPECIFIC deadline (end of May
+          2026 / 2026-05-31), AND the SPECIFIC metric the reversal hinges on (NPS among
+          on-call engineers below 32). Not "a decision is approaching review." Not "we have
+          something to revisit at end of month." The three concrete details must appear.
+        must_not: "describe the expiring reversal abstractly without naming the decision file, the deadline, and the NPS<32 metric"
+      - judge: healthy_not_overhyped
+        rubric: judges/healthy_not_overhyped.md
+        expected_meaning: |
+          The api-latency-p99-vs-p95 hypothesis is mentioned in the review (so the PM knows
+          it's tracked) and is characterized as healthy / on-track / quietly accumulating
+          evidence. It is NOT framed as needing action this week, NOT placed alongside the
+          drift / stakeholder / decision items in the action column, and (looking ahead to
+          turn 4) will not appear in the top-two action picks. The brain resists the temptation
+          to flag a healthy item just to make the review look thorough.
+        must_not: "frame the healthy hypothesis as needing action this week, or place it alongside the time-pressured items rather than in a separate 'healthy / tracked / no action' section"
+
+  - turn: 4
+    input: turn-04-prioritize-action.md
+    structural: []  # Turn 4 is a recommendation, not a write. No new decision files, no status flips.
+    content:
+      - judge: priority_ordering
+        rubric: judges/priority_ordering.md
+        expected_meaning: |
+          Turn 4's top-two pick is consistent with turn 3's ordering: the two items chosen
+          are drawn from {stale-relevant-Ravi, expiring-reversal-March-10, drift-on-alert-
+          noise-reduction} — items that are either time-pressured (the May-31 deadline, the
+          7-week-stale stakeholder owning the bet under drift) or block the active roadmap
+          commitment (the drift signal itself). The healthy api-latency hypothesis is NOT
+          in the top two. The aging insight (alert grouping by service) is NOT in the top
+          two — it has waited 4 months and can wait one more week.
+        must_not: "pick the healthy api-latency hypothesis as one of the top two, or pick the aging insight when at least two of the time-pressured items remain unchosen"
+      - judge: healthy_not_overhyped
+        rubric: judges/healthy_not_overhyped.md
+        expected_meaning: |
+          Turn 4's top-two does NOT include the api-latency-p99-vs-p95 hypothesis. The brain
+          has correctly identified that "healthy and quietly building" is not the same as
+          "needs action this week." If api-latency is mentioned in the response at all, it
+          is mentioned only to explicitly defend NOT picking it ("api-latency is healthy —
+          it doesn't need attention this week"), not as a candidate that lost to a tiebreaker.
+        must_not: "include the api-latency-p99-vs-p95 hypothesis in the top-two action picks"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - all_decisions_have_reversal_condition: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true

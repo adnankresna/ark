@@ -1,0 +1,240 @@
+{
+  "scenario": "07-migration-mode",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-ortoipke",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T18:24:50.034799+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-migrate-folder.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 359.48,
+      "returncode": 0,
+      "cost_usd": 0.5346894999999999,
+      "agent_response": "Migration complete. Here's the routing summary:\n\n---\n\n## (1) What landed where\n\n**16 files created across 8 artifacts.**\n\n### `source/` (verbatim originals \u2014 never edited)\n\n| File | Kind | Date |\n|---|---|---|\n| `source/adhoc/2025-11-12-strategy-q4-2025.md` | adhoc | 2025-11-12 |\n| `source/adhoc/2025-12-04-persona-platform-engineer.md` | adhoc | 2025-12-04 |\n| `source/adhoc/2026-01-08-roadmap-h1-2026.md` | adhoc | 2026-01-08 |\n| `source/adhoc/2026-01-22-persona-sre.md` | adhoc | 2026-01-22 |\n| `source/market/2026-02-09-landscape-q1-2026.md` | market | 2026-02-09 |\n| `source/interviews/2026-03-11-sam-vega.md` | interviews | 2026-03-11 |\n| `source/interviews/2026-04-08-reina-cho.md` | interviews | 2026-04-08 |\n| `source/meetings/2026-04-22-budget-update-h2.md` | meetings | 2026-04-22 |\n\n### `ingestion/` (synthesis files \u2014 one per artifact)\n\n| File | Summary |\n|---|---|\n| `ingestion/adhoc/2025-11-12-strategy-q4-2025.md` | Strategy memo: $5.4M ARR, +38% YoY, shift-left thesis, 3 strategic bets, 3 anti-bets |\n| `ingestion/adhoc/2025-12-04-persona-platform-engineer.md` | Platform Engineer persona: wedge buyer, from 14 interviews Sept\u2013Nov 2025 |\n| `ingestion/adhoc/2026-01-08-roadmap-h1-2026.md` | H1 2026 roadmap: Q1 all shipped, Q2 in-flight, H2 assumptions (now stale vs. budget email) |\n| `ingestion/adhoc/2026-01-22-persona-sre.md` | SRE persona: secondary buyer, from 9 interviews Dec 2025\u2013Jan 2026 |\n| `ingestion/market/2026-02-09-landscape-q1-2026.md` | Competitive landscape: 4 competitors, OprOS positioning, 3 trends |\n| `ingestion/interviews/2026-03-11-sam-vega.md` | Sam Vega (Acme, Platform Eng): strong NL-alerting signal, positive SLO beta, anti audit-log |\n| `ingestion/interviews/2026-04-08-reina-cho.md` | Reina Cho (Globex, Dir SRE): audit log is expansion blocker, NL alerting is \"a toy,\" $140k \u2192 $400k upside contingent |\n| `ingestion/meetings/2026-04-22-budget-update-h2.md` | Hannah Berg (CFO): +28% YoY Q1 miss, net retention 102%, all H2 net-new headcount deferred, mid-May deadline for revised scope |\n\nBoth indexes (`source/INDEX.md` and `ingestion/INDEX.md`) updated with roster tables.\n\n---\n\n## (2) Routing decisions I wasn't fully certain about\n\n**Strategy memo and roadmap \u2192 `adhoc/`.** Neither is an interview, meeting, or market artifact. The `adhoc/` description (\"anything the PM thinks is worth capturing\") fits, and both source/ingestion schema pairs are internally consistent. If you'd prefer a `knowledge/` subfolder for PM-authored strategy docs, say so and I'll move them.\n\n**CFO email \u2192 `meetings/`.** It's an email, not a meeting transcript. I routed it to `meetings/` because it carries the same content type \u2014 a leadership directive from a named stakeholder \u2014 and the `meetings/` mode explicitly covers \"decisions made\" and \"stakeholder-specific signals.\" Alternative would be `adhoc/`. Happy to reclassify.\n\n**No contradictions resolved, no hypotheses created, no `knowledge/` files written** \u2014 held back per your migration instructions. The ingestion files flag the contradictions I spotted (Sam vs. Reina on audit logs and NL alerting; roadmap headcount vs. budget email; strategy net-retention precondition vs. actual Q1 net retention) without taking positions on them.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/strategy/*.md OR source/**/strategy*.md OR source/adhoc/*strategy*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2025-11-12-strategy-q4-2025.md']"
+        },
+        {
+          "name": "file_exists_glob:source/personas/*platform*.md OR source/users/personas/*platform*.md OR source/**/persona*platform*.md OR source/adhoc/*platform*engineer*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2025-12-04-persona-platform-engineer.md']"
+        },
+        {
+          "name": "file_exists_glob:source/personas/*sre*.md OR source/users/personas/*sre*.md OR source/**/persona*sre*.md OR source/adhoc/*persona*sre*.md OR source/adhoc/*sre*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-01-22-persona-sre.md', 'source/adhoc/2026-01-22-persona-sre.md']"
+        },
+        {
+          "name": "file_exists_glob:source/market/*.md OR source/competitive/*.md OR source/**/landscape*.md OR source/**/competitive*.md",
+          "passed": true,
+          "detail": "matched: ['source/market/2026-02-09-landscape-q1-2026.md']"
+        },
+        {
+          "name": "file_exists_glob:source/roadmap/*.md OR source/**/roadmap*.md OR source/strategy/*roadmap*.md OR source/adhoc/*roadmap*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-01-08-roadmap-h1-2026.md']"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*acme*.md OR source/interviews/*sam*.md OR source/interviews/2026-03*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-03-11-sam-vega.md', 'source/interviews/2026-03-11-sam-vega.md']"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*globex*.md OR source/interviews/*reina*.md OR source/interviews/2026-04*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-04-08-reina-cho.md', 'source/interviews/2026-04-08-reina-cho.md']"
+        },
+        {
+          "name": "file_exists_glob:source/exec/*.md OR source/adhoc/*budget*.md OR source/adhoc/*cfo*.md OR source/adhoc/*hannah*.md OR source/**/*budget*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-04-22-budget-update-h2.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/**/*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/INDEX.md', 'ingestion/adhoc/2025-11-12-strategy-q4-2025.md', 'ingestion/adhoc/2025-12-04-persona-platform-engineer.md', 'ingestion/adhoc/2026-01-08-roadmap-h1-2026.md', 'ingestion/adhoc/2026-01-22-persona-sre.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*acme*.md OR ingestion/interviews/*sam*.md OR ingestion/interviews/2026-03*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-03-11-sam-vega.md', 'ingestion/interviews/2026-03-11-sam-vega.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*globex*.md OR ingestion/interviews/*reina*.md OR ingestion/interviews/2026-04*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-04-08-reina-cho.md', 'ingestion/interviews/2026-04-08-reina-cho.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:conservative_ingestion",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:ingestion/**/*.md (8 match)"
+        },
+        {
+          "name": "judge:no_premature_promotion",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (0 match)"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-review-migration.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 48.79,
+      "returncode": 0,
+      "cost_usd": 0.13490255,
+      "agent_response": "Here's the full routing walkthrough.\n\n---\n\n## What landed and where\n\n**8 artifacts ingested.** Each has a matching `source/` and `ingestion/` pair.\n\n| Artifact | `source/` path | `ingestion/` path | Kind chosen |\n|---|---|---|---|\n| Sam Vega interview (2026-03-11) | `source/interviews/2026-03-11-sam-vega.md` | `ingestion/interviews/2026-03-11-sam-vega.md` | `interviews` |\n| Reina Cho interview (2026-04-08) | `source/interviews/2026-04-08-reina-cho.md` | `ingestion/interviews/2026-04-08-reina-cho.md` | `interviews` |\n| Competitive landscape Q1 2026 | `source/market/2026-02-09-landscape-q1-2026.md` | `ingestion/market/2026-02-09-landscape-q1-2026.md` | `market` |\n| CFO email \u2014 H2 budget (2026-04-22) | `source/meetings/2026-04-22-budget-update-h2.md` | `ingestion/meetings/2026-04-22-budget-update-h2.md` | `meetings` |\n| Strategy Q4 2025 memo | `source/adhoc/2025-11-12-strategy-q4-2025.md` | `ingestion/adhoc/2025-11-12-strategy-q4-2025.md` | `adhoc` |\n| Platform Engineer persona | `source/adhoc/2025-12-04-persona-platform-engineer.md` | `ingestion/adhoc/2025-12-04-persona-platform-engineer.md` | `adhoc` |\n| Roadmap H1 2026 | `source/adhoc/2026-01-08-roadmap-h1-2026.md` | `ingestion/adhoc/2026-01-08-roadmap-h1-2026.md` | `adhoc` |\n| SRE persona | `source/adhoc/2026-01-22-persona-sre.md` | `ingestion/adhoc/2026-01-22-persona-sre.md` | `adhoc` |\n\n---\n\n## Genuinely ambiguous routing\n\n**The CFO email \u2192 `source/meetings/`.** This one I wasn't certain about. The artifact is an email (Hannah Berg \u2192 Aisha, Mateo, Jin), not a meeting record. The `meetings/` kind was picked because it's a real named-participant business exchange with a clear operational output (budget constraint). But `adhoc/` would have been equally defensible \u2014 it's a one-way communication, not a discussion transcript.\n\nIf you'd prefer emails like this live under `adhoc/` (or want an `exec/` kind introduced for board/CFO communications), I can move it. The routing choice doesn't affect the synthesis content, just where retrieval finds it.\n\nThe strategy memo, personas, and roadmap all went to `adhoc/` \u2014 those are internal authored documents with no natural home in `interviews/`, `meetings/`, or `market/`. That felt clean.\n\n---\n\n## Constraint confirmations\n\n- **No new `hypotheses/` files created.** Only the scaffold files (`INDEX.md`, `_SCHEMA.md`) exist.\n- **No new `knowledge/` content beyond the scaffold.** All `knowledge/` files (`strategy.md`, `product/metrics.md`, `product/roadmap.md`, `users/insights.md`, `users/personas.md`, `users/segments.md`, `market/landscape.md`, `market/trends.md`, `org/`) are unmodified scaffold files. Nothing was promoted into long-term knowledge.\n- **No new stakeholder files.** `stakeholders/` contains only `INDEX.md` and `_SCHEMA.md`.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": []
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-surface-tensions.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 116.06,
+      "returncode": 0,
+      "cost_usd": 0.17787535,
+      "agent_response": "Here is the conflict map. Nine tensions, ordered roughly by strategic weight.\n\n---\n\n## Cross-artifact tension map\n\n---\n\n**T1 \u2014 Strategy anti-bet on compliance vs. Reina's expansion being blocked by compliance**\n\n- **Side A:** Audit-log / compliance features are an explicit anti-bet.\n  `source/adhoc/2025-11-12-strategy-q4-2025.md` \u2014 \"The buyers we want don't care about SOC2 audit trails; the buyers who do care are not in our ICP.\"\n- **Side B:** A current $140k customer's expansion plan is frozen until audit logs ship, and her compliance team has veto.\n  `source/interviews/2026-04-08-reina-cho.md` \u2014 \"It's the #1 thing keeping us from expanding our OperatorOS footprint... we've already pushed back our expansion plan from Q2 to 'whenever Aisha ships audit logs.'\"\n- **Why it matters:** The anti-bet was written assuming the compliance buyer is outside the ICP. Reina is already inside the tent; the question is whether the ICP definition was wrong, or whether Globex Health is an edge case you should consciously accept as a ceiling.\n\n---\n\n**T2 \u2014 Natural-language alerting: Sam says \"that's the feature,\" Reina says \"that's a toy\"**\n\n- **Side A:** A staff platform engineer at a 14-month, $95k ACV customer says NL alerting is the renewal driver and would unlock coverage on services with zero alerts today.\n  `source/interviews/2026-03-11-sam-vega.md`\n- **Side B:** A director of SRE at a 9-month, $140k ACV customer calls it a toy, says it adds review burden, and would disable it.\n  `source/interviews/2026-04-08-reina-cho.md`\n- **Why it matters:** These aren't just preference differences \u2014 they reflect the platform-engineer vs. SRE persona split. NL alerting may be a wedge feature for one persona and an anti-feature for the other. Shipping it as default-on may win Sam and lose Reina.\n\n---\n\n**T3 \u2014 H2 roadmap headcount assumptions vs. CFO deferral \u2014 every H2 delivery is now undersized**\n\n- **Side A:** H2 roadmap was scoped around a team of 20 (16 + 4 hires by July 1) plus a DevRel hire.\n  `source/adhoc/2026-01-08-roadmap-h1-2026.md` \u2014 \"Hiring plan assumes +4 eng (currently 16, going to 20 by July 1) and +1 DevRel.\"\n- **Side B:** All net-new H2 engineering hires are deferred; team stays at 16. DevRel deferred indefinitely. Hannah explicitly calls out SLO GA + service catalog + NL alerting GA as assumed against the larger team.\n  `source/meetings/2026-04-22-budget-update-h2.md`\n- **Why it matters:** The H2 roadmap is not executable as written. Every committed delivery needs to be re-scoped against a 16-person team, which means at least one of the three H2 bets gets cut or slipped.\n\n---\n\n**T4 \u2014 Strategy's \"what needs to be true\" conditions are already violated**\n\n- **Side A:** Strategy approval was conditional on net retention \u2265 105% and ARR growth continuing at the +38% YoY pace.\n  `source/adhoc/2025-11-12-strategy-q4-2025.md` \u2014 \"Net retention stays >= 105%.\"\n- **Side B:** Q1 2026 actuals: growth at +28% YoY (vs. +38% modeled), NRR at 102% (vs. 108% prior, 105% floor).\n  `source/meetings/2026-04-22-budget-update-h2.md`\n- **Why it matters:** The strategy was explicitly written with reversal conditions, and both conditions have already been broken. The strategy has not been formally revisited.\n\n---\n\n**T5 \u2014 SLO builder GA timing: Q3 in the strategy memo vs. Q2 in the roadmap**\n\n- **Side A:** Strategy memo treats SLO builder GA as a Q3 2026 commitment.\n  `source/adhoc/2025-11-12-strategy-q4-2025.md` \u2014 \"SLO builder GA in Q3 2026.\"\n- **Side B:** H1 roadmap targets SLO builder GA by end of Q2 2026, with 50 paying accounts.\n  `source/adhoc/2026-01-08-roadmap-h1-2026.md`\n- **Why it matters:** A one-quarter gap between internal documents that both Mateo reviewed. Either the strategy memo was superseded by the roadmap (and isn't updated), or the roadmap accelerated the target without updating strategy. If SLO builder slips back to Q3 due to headcount freeze, the roadmap missed, but the strategy was right \u2014 for the wrong reasons.\n\n---\n\n**T6 \u2014 Landscape flags compliance demand as \"volume is climbing\" vs. strategy's absolute prohibition**\n\n- **Side A:** PM's own competitive landscape doc flags compliance/audit-trail asks as an emerging and growing signal in regulated industries.\n  `source/market/2026-02-09-landscape-q1-2026.md` \u2014 \"Audit-trail / compliance asks coming up in regulated industries (healthcare, fintech). NOT our ICP today, but the volume is climbing.\"\n- **Side B:** Strategy memo treats compliance as a hard anti-bet with no revisitation condition.\n  `source/adhoc/2025-11-12-strategy-q4-2025.md`\n- **Why it matters:** The landscape doc was written after the strategy memo. The PM flagged the signal but didn't update the strategy to include a revisitation threshold. Reina's interview (T1) is now the third data point. There's no trigger in the strategy for reconsidering this anti-bet.\n\n---\n\n**T7 \u2014 Platform engineer persona: wedge buyer who \"owns reliability of the platform\" vs. SRE persona: secondary but ALSO owns reliability \u2014 both use SLO builder and alerting**\n\n- **Side A:** Platform engineer is the wedge buyer. Their reliability ownership is the *internal developer platform* (CI/CD, observability defaults, standardization).\n  `source/adhoc/2025-12-04-persona-platform-engineer.md`\n- **Side B:** SRE is secondary. Their reliability ownership is *production services* (error budgets, SLOs, on-call, incident response) \u2014 which is exactly where SLO builder and alerting live.\n  `source/adhoc/2026-01-22-persona-sre.md`\n- **Why it matters:** The H2 pitch is a \"reliability platform\" (SLO builder + service catalog). That pitch lands squarely in SRE territory, not platform-engineer territory. If the wedge buyer is the platform engineer but the reliability-platform story resonates more with the SRE, there's a persona mismatch in the H2 go-to-market.\n\n---\n\n**T8 \u2014 SRE persona doc says SREs are NOT economic buyers at mid-market \u2014 but Reina IS a paying customer making an expansion decision at 450 engineers**\n\n- **Side A:** SRE persona: \"They have meaningful influence on observability spend but are usually NOT the economic buyer at mid-market scale.\"\n  `source/adhoc/2026-01-22-persona-sre.md`\n- **Side B:** The same doc says \"At large enterprise scale they often ARE the economic buyer, with $200k-2M ACV authority.\" Reina is a Director of SRE at 450 engineers, $140k ACV, and is explicitly the person deciding whether to expand or hold.\n  `source/interviews/2026-04-08-reina-cho.md`\n- **Why it matters:** The \"mid-market vs. large enterprise\" line in the persona doc is doing a lot of work, and it's not drawn clearly. Globex Health sits at the edge. OperatorOS is treating Reina as secondary persona when she's actually holding a $260k+ expansion decision.\n\n---\n\n**T9 \u2014 Sam's audit-log requirement for NL alerting (\"generated config has to be auditable\") points toward the feature OperatorOS said it would never build**\n\n- **Side A:** Sam enthusiastically endorses NL alerting but sets an explicit condition: \"The generated config has to be auditable \u2014 I need to see exactly what got created.\"\n  `source/interviews/2026-03-11-sam-vega.md`\n- **Side B:** Audit trails are an explicit anti-bet. The strategy memo and Sam himself say compliance-grade audit logs are not needed \u2014 but Sam's own NL alerting requirement introduces a lightweight audit need (show me what the LLM generated, show me the diff).\n  `source/adhoc/2025-11-12-strategy-q4-2025.md`\n- **Why it matters:** This is the thinnest tension \u2014 Sam isn't asking for SOC2-grade audit logs \u2014 but it signals that \"audit\" is a spectrum and the anti-bet may be drawn too broadly. If you ship NL alerting, you need some form of change visibility to make it trustworthy, which means building in the direction of the anti-bet.\n\n---\n\nThe three tensions you flagged are confirmed (T2, T3, and the Q4-strategy-vs-April-reality which spans T1/T4). The ones you may not have been tracking: T5 (SLO builder timing inconsistency between the two internal docs), T7 (the persona mismatch in the H2 reliability-platform pitch), T8 (Reina is actually in the SRE-as-economic-buyer range the persona doc carves out), and T9 (NL alerting's own requirements nudge toward the audit-trail anti-bet).",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:tensions_named",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-propose-first-hypothesis.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 180.43,
+      "returncode": 0,
+      "cost_usd": 0.32338684999999995,
+      "agent_response": "Done. Here's the summary:\n\n---\n\n**(a) Hypothesis filename:** `hypotheses/natural-language-alerting.md`\n\n**(b) Sources cited (all with working `../source/` links):**\n\n| Source | What it contributes |\n|---|---|\n| `source/interviews/2026-03-11-sam-vega.md` | Positive signal: zero-alert-coverage problem, personal renewal commitment, auditability threshold requirements |\n| `source/interviews/2026-04-08-reina-cho.md` | Negative signal: \"a toy,\" would disable it, LLM-config reliability concern, opt-in request |\n| `source/adhoc/2025-11-12-strategy-q4-2025.md` | NLA as approved H1 strategic bet #2; \"lower activation cost for developer persona\" framing |\n| `source/market/2026-02-09-landscape-q1-2026.md` | \"Multiple, growing\" demand signal \u2014 directional support without persona breakdown |\n\n**(c) Falsification conditions:**\n\n**Kill it** if: structured interviews with 6\u20138 accounts show (a) the positive/negative split does not correlate with buyer persona \u2014 i.e., platform-engineer-led accounts outside Acme also reject it \u2014 OR (b) CRM segmentation reveals SRE-first accounts hold \u226560% of current ACV and the churn risk from shipping NLA outweighs the upsell case, OR (c) the engineering spike reveals hallucination rates on complex threshold expressions exceed production-safe tolerances.\n\n**Promote it** if: \u22654/6 platform-engineer-buyer accounts confirm they have the same zero-alert-coverage problem Sam described AND confirm intent to adopt NLA; CRM shows platform-engineer accounts represent \u226540% of ACV; and the trust-risk hypothesis (H-O1) proves vertical-specific (HIPAA) rather than broadly present in the SRE-director persona.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "hypothesis_count_at_least:1",
+          "passed": true,
+          "detail": "found 1 non-stub hypothesis files (total .md = 1)"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*alert*.md OR hypotheses/*natural*.md OR hypotheses/*language*.md OR hypotheses/*nl*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/natural-language-alerting.md', 'hypotheses/natural-language-alerting.md', 'hypotheses/natural-language-alerting.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:hypothesis_proposed_from_artifacts",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [
+      {
+        "name": "judge:hypothesis_audit_trail",
+        "passed": true,
+        "detail": "verdict=PASS | target=glob:hypotheses/*.md (1 match)"
+      }
+    ],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T18:37:03.273984+00:00",
+  "cost": {
+    "total_usd": 1.4829,
+    "max_usd": null,
+    "by_kind": {
+      "turn": 1.1709,
+      "judge": 0.3121
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.5346894999999999
+      },
+      {
+        "kind": "judge",
+        "label": "conservative_ingestion",
+        "cost": 0.07775530000000001
+      },
+      {
+        "kind": "judge",
+        "label": "no_premature_promotion",
+        "cost": 0.04995355
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.13490255
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.17787535
+      },
+      {
+        "kind": "judge",
+        "label": "tensions_named",
+        "cost": 0.05998705
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.32338684999999995
+      },
+      {
+        "kind": "judge",
+        "label": "hypothesis_proposed_from_artifacts",
+        "cost": 0.06326405
+      },
+      {
+        "kind": "judge",
+        "label": "hypothesis_audit_trail",
+        "cost": 0.06110005
+      }
+    ]
+  }
+}

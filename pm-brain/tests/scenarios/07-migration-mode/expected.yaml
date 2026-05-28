@@ -1,0 +1,115 @@
+scenario: 07-migration-mode
+description: |
+  Four-turn migration-mode scenario. PM (Aisha, OperatorOS — API monitoring devtools) bulk-imports
+  8 messy pre-existing PM artifacts on day 0 of using PM Brain, with explicit instructions to
+  route everything to source/, write conservative ingestion/ syntheses, and NOT auto-promote
+  anything into hypotheses/ or knowledge/ until reviewed. Tests the conservative-ingestion
+  contract promised by prompts/migration.md: source preservation, no premature promotion,
+  explicit tension surfacing on demand, and on-demand drafting of the first hypothesis with
+  source-cited provenance.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-migrate-folder.md
+    structural:
+      # All 8 artifacts preserved verbatim under source/, routed by kind.
+      - file_exists_glob: source/strategy/*.md OR source/**/strategy*.md OR source/adhoc/*strategy*.md
+      - file_exists_glob: source/personas/*platform*.md OR source/users/personas/*platform*.md OR source/**/persona*platform*.md OR source/adhoc/*platform*engineer*.md
+      - file_exists_glob: source/personas/*sre*.md OR source/users/personas/*sre*.md OR source/**/persona*sre*.md OR source/adhoc/*persona*sre*.md OR source/adhoc/*sre*.md
+      - file_exists_glob: source/market/*.md OR source/competitive/*.md OR source/**/landscape*.md OR source/**/competitive*.md
+      - file_exists_glob: source/roadmap/*.md OR source/**/roadmap*.md OR source/strategy/*roadmap*.md OR source/adhoc/*roadmap*.md
+      - file_exists_glob: source/interviews/*acme*.md OR source/interviews/*sam*.md OR source/interviews/2026-03*.md
+      - file_exists_glob: source/interviews/*globex*.md OR source/interviews/*reina*.md OR source/interviews/2026-04*.md
+      - file_exists_glob: source/exec/*.md OR source/adhoc/*budget*.md OR source/adhoc/*cfo*.md OR source/adhoc/*hannah*.md OR source/**/*budget*.md
+      # Synthesis records exist for the migrated artifacts. At least 6 ingestion files.
+      - file_exists_glob: ingestion/**/*.md
+      - file_exists_glob: ingestion/interviews/*acme*.md OR ingestion/interviews/*sam*.md OR ingestion/interviews/2026-03*.md
+      - file_exists_glob: ingestion/interviews/*globex*.md OR ingestion/interviews/*reina*.md OR ingestion/interviews/2026-04*.md
+    content:
+      - judge: conservative_ingestion
+        rubric: judges/conservative_ingestion.md
+        target_glob: ingestion/**/*.md
+        expected_meaning: |
+          Ingestion synthesis records exist for the migrated artifacts and faithfully summarize
+          what each artifact says WITHOUT inferring claims the artifact doesn't make. Each
+          ingestion record links back to its corresponding source/ artifact by relative path.
+          Dates are preserved from the originals (2025-11 through 2026-04) — not relabeled
+          to 2026-05-17.
+        must_not: "infer claims the source artifact doesn't make, relabel dates to today, or rewrite originals in-place under source/"
+      - judge: no_premature_promotion
+        rubric: judges/no_premature_promotion.md
+        target_glob: hypotheses/*.md
+        expected_meaning: |
+          At the end of turn 1, NO hypothesis file has been created under hypotheses/ beyond
+          the scaffold's INDEX.md and _SCHEMA.md. The brain held back — per the PM's explicit
+          instructions to NOT promote anything during the migration. Similarly, no new files
+          have been created under knowledge/ beyond the scaffold defaults.
+        must_not: "create any hypothesis file under hypotheses/ this turn, or write any new content into knowledge/ beyond the scaffold defaults"
+
+  - turn: 2
+    input: turn-02-review-migration.md
+    structural: []  # Q&A turn — walking through routing. No file writes required.
+    content: []     # Light turn; content judging happens at the content-heavy turns.
+
+  - turn: 3
+    input: turn-03-surface-tensions.md
+    structural: []  # Synthesis-only turn — output is the agent's response text.
+    content:
+      - judge: tensions_named
+        rubric: judges/tensions_named.md
+        expected_meaning: |
+          The agent's response names AT LEAST 3 specific cross-artifact tensions, each citing
+          the source artifacts on both sides by path. The set must include at minimum: (a)
+          the natural-language-alerting conflict (Acme/Sam positive vs Globex/Reina negative),
+          AND (b) one of the strategy-vs-reality tensions (the Q4 strategy bet's anti-compliance
+          stance vs the Globex audit-trail signal, OR the H1 roadmap commits vs the CFO budget
+          cut). Tensions are enumerated (not buried in prose), with both sides named, and the
+          agent does NOT propose resolutions in this turn.
+        must_not: "smooth the conflicts into prose, propose resolutions, or claim there are no significant contradictions"
+
+  - turn: 4
+    input: turn-04-propose-first-hypothesis.md
+    structural:
+      - hypothesis_count_at_least: 1
+      - file_exists_glob: hypotheses/*alert*.md OR hypotheses/*natural*.md OR hypotheses/*language*.md OR hypotheses/*nl*.md
+    content:
+      - judge: hypothesis_proposed_from_artifacts
+        rubric: judges/hypothesis_proposed_from_artifacts.md
+        target_glob: hypotheses/*.md
+        expected_meaning: |
+          Exactly one new hypothesis file exists under hypotheses/ (excluding INDEX.md and
+          _SCHEMA.md). Status is `proposed`. Evidence rows carry provenance tags from the
+          canonical enum and cite source/ artifacts that actually exist on disk (the Acme
+          interview AND the Globex interview, at minimum). Both Sam's positive signal AND
+          Reina's negative signal appear as evidence rows — the negative is NOT smoothed out.
+          Open questions / caveats name what the brain doesn't yet know (e.g., whether the
+          split tracks persona, company size, or vertical). Risk-area coverage is present
+          per the schema.
+        must_not: "promote the hypothesis directly to active or promoted status, omit the negative Globex signal, or use evidence rows without provenance tags"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true
+  content:
+    - judge: hypothesis_audit_trail
+      rubric: judges/hypothesis_audit_trail.md
+      target_glob: hypotheses/*.md
+      expected_meaning: |
+        Starting from the one hypothesis drafted in turn 4, the audit trail reaches the
+        underlying source/ artifacts (Acme interview, Globex interview, and any other
+        cited source) via working markdown links — directly via [source/...] citation
+        and/or through hypothesis → ingestion → source/. A reader can see the original
+        artifacts the hypothesis rests on, including the dissenting Globex signal.
+        Scenario 07 ends with a hypothesis (no decision yet) — use the hypothesis-rooted
+        rubric, not the decision-rooted audit_trail.md.

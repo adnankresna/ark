@@ -1,0 +1,283 @@
+{
+  "scenario": "08-weekly-review",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-gh4aqm3i",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T17:35:09.120730+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-busy-brain.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 348.38,
+      "returncode": 0,
+      "cost_usd": 0.67420085,
+      "agent_response": "State is in. Here's what was created:\n\n**Source files (4):**\n- `source/research/2026-03-05-oncall-alert-survey.md`\n- `source/meetings/2026-03-30-ravi-1on1.md`\n- `source/interviews/2026-01-29-mendoza-interview.md`\n- `source/interviews/2026-04-18-datapeak-interview.md`\n\n**Ingestion files (4):**\n- `ingestion/research/2026-03-05-oncall-alert-survey.md`\n- `ingestion/meetings/2026-03-30-ravi-1on1.md`\n- `ingestion/interviews/2026-01-29-mendoza-interview.md`\n- `ingestion/interviews/2026-04-18-datapeak-interview.md`\n\n**Hypotheses (2):**\n- `hypotheses/alert-noise-reduction.md` \u2014 status `promoted`, dated 2026-03-18, H-V1 with two evidence rows + four caveats\n- `hypotheses/api-latency-p99-vs-p95.md` \u2014 status `active`, three evidence rows across independent signals\n\n**Decision (1):**\n- `decisions/2026-03-10-on-call-rotation-rework.md` \u2014 status `decided`, three evidence rows with provenance, two \"not doing\" rows, reversal trigger (NPS <32 by end of May)\n\n**Stakeholders (2):**\n- `stakeholders/ravi-chen.md` \u2014 last touched 2026-03-30\n- `stakeholders/sam-tran.md` \u2014 last touched 2026-05-05\n\n**Knowledge update:**\n- `knowledge/users/insights.md` \u2014 \"On-call engineers want alert grouping by service\" added as Active theme, single-source (Mendoza, 2026-01-29), with forward note that the March survey's 11 grouping mentions are corroborating but not yet merged in\n\n**INDEX updates:** hypotheses, decisions, and stakeholders INDEXes all updated to reflect the new entries.\n\nOne schema note for the record: the artifact specified `proposed` as the P99 hypothesis status, but the hypothesis schema only accepts `active | partially-validated | promoted | demoted | archived`. I used `active` (evidence accumulating, no contradictions) \u2014 this is the correct equivalent.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:hypotheses/*alert-noise*.md OR hypotheses/*alert_noise*.md OR hypotheses/*noise-reduction*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/alert-noise-reduction.md', 'hypotheses/alert-noise-reduction.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*api-latency*.md OR hypotheses/*p99*.md OR hypotheses/*latency*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/api-latency-p99-vs-p95.md', 'hypotheses/api-latency-p99-vs-p95.md', 'hypotheses/api-latency-p99-vs-p95.md']"
+        },
+        {
+          "name": "file_exists_glob:decisions/2026-03-10*.md OR decisions/2026-03*rotation*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-03-10-on-call-rotation-rework.md', 'decisions/2026-03-10-on-call-rotation-rework.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*ravi*.md OR stakeholders/*chen*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/ravi-chen.md', 'stakeholders/ravi-chen.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*sam*.md OR stakeholders/*tran*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/sam-tran.md', 'stakeholders/sam-tran.md']"
+        },
+        {
+          "name": "file_modified:stakeholders/INDEX.md",
+          "passed": true,
+          "detail": "modified: stakeholders/INDEX.md"
+        },
+        {
+          "name": "file_modified:knowledge/users/insights.md",
+          "passed": true,
+          "detail": "modified: knowledge/users/insights.md"
+        },
+        {
+          "name": "file_exists_glob:source/research/*2026-03-05*.md OR source/research/*oncall*survey*.md OR source/**/*2026-03-05*survey*.md",
+          "passed": true,
+          "detail": "matched: ['source/research/2026-03-05-oncall-alert-survey.md', 'source/research/2026-03-05-oncall-alert-survey.md', 'source/research/2026-03-05-oncall-alert-survey.md']"
+        },
+        {
+          "name": "file_exists_glob:source/meetings/*2026-03-30*.md OR source/meetings/*ravi*.md OR source/**/*ravi*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-03-30-ravi-1on1.md', 'source/meetings/2026-03-30-ravi-1on1.md', 'source/meetings/2026-03-30-ravi-1on1.md']"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*2026-01-29*.md OR source/interviews/*mendoza*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-01-29-mendoza-interview.md', 'source/interviews/2026-01-29-mendoza-interview.md']"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*2026-04-18*.md OR source/interviews/*datapeak*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-04-18-datapeak-interview.md', 'source/interviews/2026-04-18-datapeak-interview.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/research/*2026-03-05*.md OR ingestion/research/*oncall*survey*.md OR ingestion/**/*2026-03-05*survey*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/research/2026-03-05-oncall-alert-survey.md', 'ingestion/research/2026-03-05-oncall-alert-survey.md', 'ingestion/research/2026-03-05-oncall-alert-survey.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/meetings/*2026-03-30*.md OR ingestion/meetings/*ravi*.md OR ingestion/**/*ravi*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/meetings/2026-03-30-ravi-1on1.md', 'ingestion/meetings/2026-03-30-ravi-1on1.md', 'ingestion/meetings/2026-03-30-ravi-1on1.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*2026-01-29*.md OR ingestion/interviews/*mendoza*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-01-29-mendoza-interview.md', 'ingestion/interviews/2026-01-29-mendoza-interview.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*2026-04-18*.md OR ingestion/interviews/*datapeak*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-04-18-datapeak-interview.md', 'ingestion/interviews/2026-04-18-datapeak-interview.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-add-fresh-signal.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 78.02,
+      "returncode": 0,
+      "cost_usd": 0.2116478,
+      "agent_response": "Done. Here's what was written:\n\n**Created:**\n- `source/interviews/2026-05-12-helio-networks-interview.md` \u2014 verbatim transcript, audit anchor, never to be edited\n- `ingestion/interviews/2026-05-12-helio-networks-interview.md` \u2014 synthesis, routing notes, PM's internal note preserved verbatim\n\n**Updated** `hypotheses/alert-noise-reduction.md`:\n- `Last updated` \u2192 2026-05-17\n- Added one **Evidence against** row under H-V1 \u2014 Toby's explicit \"60% = better week / 80% = sustainable on-call\" framing, linked to `source/` anchor\n- Added a new **Open questions / caveats** bullet \u2014 flags that the 60% threshold has not been modeled by account noise-volume tier, and names this as a one-signal-but-strong tension that warrants PM review before Friday's `/review`\n\nThe hypothesis **status is unchanged** (still `promoted`). Direction holds; the threshold is the open question.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*2026-05-12*.md OR source/interviews/*helio*.md OR source/interviews/*customer*may*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-05-12-helio-networks-interview.md', 'source/interviews/2026-05-12-helio-networks-interview.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*2026-05-12*.md OR ingestion/interviews/*helio*.md OR ingestion/interviews/*customer*may*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-05-12-helio-networks-interview.md', 'ingestion/interviews/2026-05-12-helio-networks-interview.md']"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*alert-noise*.md OR hypotheses/*alert_noise*.md OR hypotheses/*noise-reduction*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/alert-noise-reduction.md', 'hypotheses/alert-noise-reduction.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-weekly-review.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 258.01,
+      "returncode": 0,
+      "cost_usd": 0.5378511,
+      "agent_response": "Now the synthesis \u2014 ordered for Monday.\n\n---\n\n## Weekly review \u2014 2026-05-17\n\nHere's what's on the brain, ordered by what should land on Monday first.\n\n---\n\n### 1. NPS reversal-condition deadline \u2014 8 days (closes May 25)\n\n**Decision:** `decisions/2026-03-10-on-call-rotation-rework.md`\n\nYou committed: if on-call NPS among affected accounts drops below 32 by end of May 2026, revisit the rotation model. Baseline was 41 (March survey). That window closes in 8 days.\n\nThe problem: no one is named as owning the measurement, no workflow exists for what reversal looks like if triggered, and it's not on any calendar. If you get a sub-32 number on May 28 with no prep, you're scrambling during crunch. Before you can act on the decision you already made, you need: (a) who runs the NPS check and when exactly, (b) what the reversal process looks like, (c) whether the March 41 baseline is still a valid comparison point after six weeks of rollout.\n\nThis is the most time-pressured item. Nothing else on this list has a hard date in 8 days.\n\n---\n\n### 2. Ravi Chen \u2014 48 days, engineering risk unvalidated (blocks Q2 execution)\n\n**Stakeholder:** `stakeholders/ravi-chen.md` \u2014 Last touched: 2026-03-30.\n\nRavi owns the engineering execution of your Q2 headline bet. His March 30 estimate was 6 weeks, one senior engineer, for the rules engine rework \u2014 with an explicit flag that overrun eats Q3 buffer. The April 6 weekly cadence you agreed to dropped after two meetings. His open ask (\"loop me in before any major scope change\") has been honored by default because no scope change has happened \u2014 but that's different from active communication.\n\nWhat you don't know right now: whether scoping has started, whether the 6-week estimate is still holding, and whether any early risks have emerged that Ravi is carrying alone. The working session lapse means his risk channel is dark. This needs a sync this week \u2014 not because anything is confirmed wrong, but because you're 7 weeks into a bet whose execution risk lives entirely with one person you haven't talked to.\n\n---\n\n### 3. 60% alert-noise-reduction target \u2014 promoted hypothesis under active tension (needs resolution before ship)\n\n**Hypothesis:** `hypotheses/alert-noise-reduction.md` \u2014 Status: promoted, driving Q2.\n\nThe hypothesis is well-grounded: 31/47 survey respondents said \"fewer/smarter alerts,\" March was clean signal. But Toby Reyes (Helio Networks, top-15 ARR, 22 months on platform, most credible voice in your customer base by account size and tenure) told you on May 12 that 60% gets them \"a better week\" and 80% is \"a sustainable on-call\" \u2014 and he framed those as \"different products in terms of impact.\" His baseline is 15+ pages/night; 60% reduction leaves ~5 non-actionable pages/night, still not \"sleep through the night.\"\n\nThe tension: your promoted hypothesis and Q2 roadmap commitment are built on a survey median. Toby's signal is less numerous but higher-confidence, more recent, and comes from your highest-value accounts. Neither Datapeak (Maria Velazquez said 30% would be \"transformative\") nor Mendoza (Jordan Park wants grouping more than volume) contradict the 60% target \u2014 but they're also different account profiles.\n\nThere is no decision record for the alert-noise-reduction Q2 commitment itself. The reversal condition in `decisions/2026-03-10-on-call-rotation-rework.md` covers the rotation model, not the noise target. The hypothesis has a post-ship measurement trigger (`>50% of accounts achieve \u226560% \u2192 fully validated`) but no pre-ship reversal condition for the target itself.\n\nWhat needs resolution before shipping: is 60% the committed threshold for all accounts, or is the effective target tiered by account noise volume? If 60% holds universally, document why Helio's dissent doesn't change it (the most defensible reason would be that their pain is config-quality-specific, which Ravi already flagged as a caveat). If it's tiered, the Q2 scope and the commitment language need to change.\n\n---\n\n### 4. Alert grouping \u2014 corroborated, not yet a hypothesis (becoming a structural gap)\n\n**Insight:** `knowledge/users/insights.md` \u00a7 \"On-call engineers want alert grouping by service\"\n\nAs of this sweep, the grouping signal has three sources: Jordan Park/Mendoza (2026-01-29), the March survey (11/47, second-highest ask), and Toby Reyes/Helio (2026-05-12 \u2014 acknowledged it as a separate axis from volume). The note in insights.md said \"needs corroboration before it can drive a decision.\" It has the corroboration now \u2014 I've updated the entry to reflect that.\n\nWhat it doesn't have is a hypothesis or an explicit scope decision. Grouping competes with noise reduction for engineering attention. Jordan Park's view is that grouping is actually higher-leverage than volume for her accounts. Leaving this in insights with no hypothesis is actively misleading \u2014 it signals \"not tracked\" when it is, in fact, accumulating evidence.\n\nThe decision is yours (Q2 vs Q3), but the tracking gap should close this week: either `hypotheses/alert-grouping.md` exists, or strategy has a note saying it's consciously deferred.\n\n---\n\n### 5. Strategy and metrics infrastructure \u2014 structurally dark (lower urgency, high recurring cost)\n\n`knowledge/strategy.md` is an unfilled template. `knowledge/product/metrics.md` is an unfilled template. `knowledge/users/personas.md` and `segments.md` are TODOs.\n\nThese aren't causing acute failures today, but every strategy-tension check, prioritization review, and maintenance sweep runs partially blind without them. The on-call NPS baseline (41, target 45+) exists in a decision record \u2014 it should be in metrics.md. The north-star metric and Q2 priorities exist somewhere in the PM's head \u2014 they should be in strategy.md. This is the kind of debt that costs a few minutes now and a confusing hour per month until it's done.\n\n---\n\n### What looks healthy\n\n**`hypotheses/api-latency-p99-vs-p95.md`** \u2014 active, last updated 2026-05-05, tied to Sam Tran's signal (2026-05-05), clean provenance, testable decision trigger. Nothing concerning. No action needed unless the Sam Tran sync is overdue (check his stakeholder file if you haven't).\n\n**Decision record hygiene** \u2014 the one decision record that exists (`decisions/2026-03-10-on-call-rotation-rework.md`) is well-formed: options considered, evidence tagged with provenance, reversal condition stated. The process is sound; the gap is that the alert-noise-reduction bet itself has no decision record yet.\n\n**Source file discipline** \u2014 every ingested artifact has a matching `source/` file. The audit chain is intact.\n\n---\n\n### Monday list, ordered\n\n1. Name the NPS measurement owner and get it on the calendar for May 25 week. 8 days.\n2. Sync with Ravi Chen. Get a current status on scoping, re-baseline the 6-week estimate, restart cadence.\n3. Decide on the 60% vs 80% alert-noise-reduction target \u2014 do you need a tiered threshold, or can you close Helio's dissent with a documented rationale?\n4. Grouping scope decision \u2014 Q2 or Q3? One sentence in strategy.md or a new hypothesis file.\n5. At some point this sprint: populate `knowledge/strategy.md` and `knowledge/product/metrics.md`. Not urgent today, but the debt compounds weekly.\n\nNothing was resolved or status-flipped in this turn. Maintenance log written to `maintenance/log/2026-05-17.md`. The `insights.md` grouping entry was updated to reflect its current corroboration state \u2014 that was a factual addition, not a judgment call.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:multiple_categories_surfaced",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:priority_ordering",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:expiring_reversal_flagged",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:healthy_not_overhyped",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-prioritize-action.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 192.01,
+      "returncode": 0,
+      "cost_usd": 0.2389656,
+      "agent_response": "Now I have the full picture. This is a Type B synthesis task \u2014 here's the substantive analysis.\n\n---\n\n## Top two: NPS reversal-condition measurement + Ravi Chen sync\n\n---\n\n### Pick 1: Measure the on-call NPS reversal condition (decision: `decisions/2026-03-10-on-call-rotation-rework.md`)\n\n**Why this one, why now.** The rotation rework decision has a hard reversal condition: on-call NPS < 32 by end of May 2026. Today is May 17. End of May is 14 days out \u2014 but realistically, the measurement needs to land by May 25 to leave any action time if it triggers. Nobody owns it. No workflow is documented. No measurement is scheduled.\n\nThis is the only item in the brain with a non-negotiable deadline that is already inside two weeks. Every other open item degrades gradually; this one has a cliff. If NPS has dropped below 32 and the PM doesn't find out until June 1, there's nothing to do \u2014 the reversal window has passed and the decision's governance is broken. The baseline was 41, the target is 45+, and the rollout has been live since March 15. That's 63 days of deployment with zero NPS reads since the decision was made.\n\n**Cost of waiting another week.** Waiting until May 24 to start measurement means results likely come in May 30-31 \u2014 no runway for a course-correction decision if triggered. If the number is bad, the PM is reactive rather than ahead of it.\n\n**First move Monday.** Name an owner for the measurement (most likely Ravi's team or whoever runs the March survey instrument). Schedule the survey send for May 19-20 so results land May 25 week. Document what \"reversal triggered\" means operationally: who convenes, what's the call, who's informed.\n\n---\n\n### Pick 2: Ravi Chen sync (stakeholder: `stakeholders/ravi-chen.md`)\n\n**Why this one, why now.** Ravi is the engineering owner of the Q2 headline bet. The last touchpoint was March 30 \u2014 48 days ago. The weekly working sessions agreed on April 6 dropped after two meetings. The capacity estimate (6-week rules engine rework, one senior engineer) has not been revalidated in 48 days.\n\nThe Q2 alert-noise-reduction bet has no delivery risk signal since March. That's not a good sign \u2014 it means the PM is operating on a 48-day-old assumption that the work is on track. If Ravi's engineer has been pulled into other work, or if the 6-week estimate has drifted, the PM doesn't know. With Q2 ending sometime in June-July, the window to absorb any slippage is shrinking.\n\nThe Ravi sync also unblocks two other open items that can't be resolved without him:\n- **P99 latency hypothesis (H-F1)** has no engineering scoping at all. Sam Tran surfaced two more accounts with the same pattern on May 5. This needs a scoping conversation before it can go anywhere.\n- **60% vs 80% target tension** \u2014 Toby Reyes (Helio, top-15 ARR) said 60% gets them \"a better week\" but 80% is \"a sustainable on-call\" \u2014 \"different products in terms of impact.\" Before the PM decides whether to revise the target, Ravi needs to weigh in on what 80% would cost. That's a Ravi question before it's a PM decision.\n\n**Cost of waiting another week.** The 60% vs 80% tension is approaching a shipping deadline. If the team is building to 60% and that number turns out to be wrong for high-volume accounts, the later that gets surfaced, the more expensive the fix. Every week without a Ravi sync is a week the PM can't know whether the delivery timeline is intact or whether the target is landing where it needs to.\n\n**First move Monday.** Slack Ravi to schedule a working session this week. Agenda: (a) re-baseline the 6-week scoping \u2014 is it still one senior engineer, is the timeline intact; (b) bring the Helio signal on 60% vs 80% and ask whether 80% is achievable in Q2 or requires a tiered approach; (c) scope the P99 latency question so H-F1 can either promote or die.\n\n---\n\n### Why not the others this week\n\n**60% vs 80% target tension (Item 3).** This is real and needs resolution before shipping \u2014 but resolving it without Ravi's engineering input is premature. The Ravi sync is the prerequisite. Handle it in that conversation, not as a separate first move.\n\n**Alert grouping promotion (Item 4).** Three evidence sources, meets the promotion bar \u2014 but it's a background decision with no Q2 delivery dependency. A week's delay costs nothing concrete.\n\n**Knowledge/strategy gaps (Item 5).** Structural debt. Important, not urgent. It's not blocking anything shipping this week.\n\n---\n\n### Is two the right number?\n\nYes. The NPS measurement and the Ravi sync are genuinely independent \u2014 one is a governance/measurement act, the other is a relationship/alignment act. Both can happen Monday morning without depending on each other's output. Adding a third item (the 60% vs 80% decision) would be wrong because it's downstream of the Ravi sync \u2014 that decision should happen in or after that conversation, not before.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:priority_ordering",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:healthy_not_overhyped",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T17:50:23.259005+00:00",
+  "cost": {
+    "total_usd": 2.0007,
+    "max_usd": null,
+    "by_kind": {
+      "turn": 1.6627,
+      "judge": 0.338
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.67420085
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.2116478
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.5378511
+      },
+      {
+        "kind": "judge",
+        "label": "multiple_categories_surfaced",
+        "cost": 0.05824755
+      },
+      {
+        "kind": "judge",
+        "label": "priority_ordering",
+        "cost": 0.0579478
+      },
+      {
+        "kind": "judge",
+        "label": "expiring_reversal_flagged",
+        "cost": 0.055984549999999994
+      },
+      {
+        "kind": "judge",
+        "label": "healthy_not_overhyped",
+        "cost": 0.0571243
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.2389656
+      },
+      {
+        "kind": "judge",
+        "label": "priority_ordering",
+        "cost": 0.0542953
+      },
+      {
+        "kind": "judge",
+        "label": "healthy_not_overhyped",
+        "cost": 0.05442405000000001
+      }
+    ]
+  }
+}

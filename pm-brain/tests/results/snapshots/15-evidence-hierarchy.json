@@ -1,0 +1,235 @@
+{
+  "scenario": "15-evidence-hierarchy",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-3p_c2nkv",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T23:21:46.259284+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-decision.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 320.98,
+      "returncode": 0,
+      "cost_usd": 0.6340176500000001,
+      "agent_response": "Done. Here's what was created and routed:\n\n**Source anchors (verbatim, never-edited):**\n- `source/interviews/2026-03-09-quartzline-dana-okafor.md` \u2014 Dana Okafor interview transcript\n- `source/meetings/2026-03-17-henrik-sso-scoping.md` \u2014 Henrik's eng scoping note\n- `source/adhoc/2026-03-26-sso-decision-record.md` \u2014 decision record artifact verbatim (also preserves the embedded CS quarterly review + Q1 close-loss citations)\n\n**Ingestion syntheses:**\n- `ingestion/interviews/2026-03-09-quartzline-dana-okafor.md`\n- `ingestion/meetings/2026-03-17-henrik-sso-scoping.md`\n\n**Hypothesis file:** `hypotheses/enterprise-sso-q4.md` \u2014 three hypotheses (H-V1 value, H-B1 viability, H-F1 feasibility), all with tagged evidence rows, all status `promoted`. **Note:** the schema's valid status for \"the decision was made on the strength of this evidence\" is `promoted`, not `validated` \u2014 `validated` is not in the schema enum. Using `promoted` per the schema.\n\n**Decision file:** `decisions/2026-03-26-enterprise-sso-q4.md` \u2014 full schema-compliant record, five evidence rows + two \"explicitly not doing\" rows, all with provenance tags, three specific reversal conditions.\n\n**INDEX updates:** `hypotheses/INDEX.md` (Promoted section) and `decisions/INDEX.md` (Recently decided section) both carry the new row.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*quartzline*.md OR source/interviews/*dana*.md OR source/interviews/2026-03-09*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-03-09-quartzline-dana-okafor.md', 'source/interviews/2026-03-09-quartzline-dana-okafor.md', 'source/interviews/2026-03-09-quartzline-dana-okafor.md']"
+        },
+        {
+          "name": "file_exists_glob:source/meetings/*sso*.md OR source/adhoc/*sso*.md OR source/meetings/*scoping*.md OR source/adhoc/*scoping*.md OR source/**/*henrik*.md OR source/**/2026-03-17*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-03-17-henrik-sso-scoping.md', 'source/adhoc/2026-03-26-sso-decision-record.md', 'source/meetings/2026-03-17-henrik-sso-scoping.md', 'source/meetings/2026-03-17-henrik-sso-scoping.md', 'source/meetings/2026-03-17-henrik-sso-scoping.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*decision*.md OR source/adhoc/*sso*decision*.md OR source/**/2026-03-26*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-03-26-sso-decision-record.md', 'source/adhoc/2026-03-26-sso-decision-record.md', 'source/adhoc/2026-03-26-sso-decision-record.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*quartzline*.md OR ingestion/interviews/*dana*.md OR ingestion/interviews/2026-03-09*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-03-09-quartzline-dana-okafor.md', 'ingestion/interviews/2026-03-09-quartzline-dana-okafor.md', 'ingestion/interviews/2026-03-09-quartzline-dana-okafor.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*sso*.md OR hypotheses/*enterprise*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/enterprise-sso-q4.md', 'hypotheses/enterprise-sso-q4.md']"
+        },
+        {
+          "name": "file_exists_glob:decisions/2026-03*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-03-26-enterprise-sso-q4.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-ceo-verbal.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 148.25,
+      "returncode": 0,
+      "cost_usd": 0.36556525,
+      "agent_response": "Done. Here's what was captured and where:\n\n---\n\n## What I did\n\n**Files created:**\n- `ingestion/meetings/2026-05-18-naveen-sso-verbal.md` \u2014 synthesis of the verbal exchange. Notes the verbal-only provenance explicitly, extracts the signal, routes to hypothesis and stakeholder, flags open questions (deal names, CS corroboration, capacity trade-off), and records the tension with the March decision.\n- `stakeholders/naveen-acharya.md` \u2014 first stakeholder file for Naveen; touchpoint logged with the 2026-05-18 verbal and the 2026-03-26 decision approval. Open ask noted (Maya owes read by 2026-05-21).\n\n**Files updated:**\n- `hypotheses/enterprise-sso-q4.md` \u2014 added one Evidence against bullet to **H-B1** (Q4 is correct delivery window) tagged `(stakeholder-verbal, naveen-acharya, 2026-05-18)`. Added an Open questions note linking back to the ingestion file. Updated `Last updated` to 2026-05-18. **Status, confidence, and all other fields unchanged.**\n- `stakeholders/INDEX.md` \u2014 added Naveen to the roster.\n\n**No source/ file created.** PM explicitly directed otherwise; the provenance schema covers verbal exchanges via `(stakeholder-verbal, ...)` without requiring a source artifact.\n\n---\n\n## Hierarchy tension \u2014 flagged explicitly\n\nThe documented March decision (`decisions/2026-03-26-enterprise-sso-q4.md`, status: decided) commits SSO to Q4. Naveen was listed as an **approver of that decision**. His 2026-05-18 verbal asking for Q3 is a position shift from his own approval.\n\nPer the evidence hierarchy, an explicit PM decision outranks a stakeholder verbal. The March decision's reversal conditions are specific:\n1. Three or more confirmed lost/stalled deals in a quarter citing SSO as the **primary** blocker with **documented sales-call notes** \u2014 wish-list mentions don't qualify.\n2. A formal SOC 2 / SOX cure-period notice.\n3. Realtime-cursors slipping its Q3 milestone by more than 4 weeks.\n\nNaveen's verbal does not meet any of these: no deal names, no documentation, unspecified timeframe. It is a watch item, not a trigger. **No decision was changed this turn.** The signal is preserved cleanly so you can assess it by Friday with full provenance.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*naveen*.md OR ingestion/adhoc/*ceo*.md OR ingestion/adhoc/*sso*verbal*.md OR ingestion/adhoc/2026-05-18*.md OR ingestion/meetings/*1-1*naveen*.md OR ingestion/meetings/2026-05-18*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/meetings/2026-05-18-naveen-sso-verbal.md']"
+        },
+        {
+          "name": "file_modified_glob:stakeholders/*naveen*.md OR stakeholders/*acharya*.md",
+          "passed": true,
+          "detail": "changed: ['stakeholders/naveen-acharya.md', 'stakeholders/naveen-acharya.md']"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*sso*.md OR hypotheses/*enterprise*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/enterprise-sso-q4.md', 'hypotheses/enterprise-sso-q4.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-draft-q3-roadmap.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 126.24,
+      "returncode": 0,
+      "cost_usd": 0.3457297,
+      "agent_response": "Done. Here's the summary for the Naveen meeting:\n\n---\n\n## What's in the Q3 roadmap\n\n**Two decided items, both Platform team (Henrik Vasquez):**\n\n1. **Realtime-cursors GA** \u2014 4 engineers, ~11 weeks. Strongest evidence in the brain: hard blocker in 7 enterprise-pipeline accounts, directly implicated in 2 Q1 close-losses. The core justification for holding Q3 against SSO pressure.\n\n2. **Export-API rebuild** \u2014 2 engineers, ~8 weeks. Committed in the March decision as the second parallel track. Business rationale for this item independently is not spelled out in the brain \u2014 the documented record treats it as a given commitment rather than a defended priority. If anyone challenges it on Friday, you'll want that justification on hand.\n\n## What's deferred\n\n**Enterprise SSO bundle (full 14-week package)** \u2014 deferred to Q4 2026. The documented reason: zero hard pipeline blockers right now (vs. 7 for realtime-cursors), Q3 capacity fully booked, Q4 enables a coherent Enterprise tier launch with pricing leverage. One customer (Quartzline, N=1) confirmed Q4 acceptable.\n\n## The tension you need to own going into Friday\n\n**Naveen wants SSO in Q3. He approved the March decision that put it in Q4.** His 2026-05-18 verbal cites \"late-stage deals\" but provided no names and no documentation. The decision's reversal condition #1 requires 3+ confirmed lost/stalled deals with documented sales-call notes \u2014 that bar is not met.\n\nThe actionable move before Friday: ask Sales or CS to pull the specific deals Naveen is referencing. If they're real and documented, you have a basis to discuss reopening the Q3 scope. If they're not documented, you walk into the meeting with the March decision intact and the reversal conditions as your frame. Don't commit to a Q3 SSO change in the room without seeing the deal data \u2014 a Q3 pull means cannibalizing realtime-cursors engineering, which is currently blocking more revenue than SSO is.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:knowledge/product/roadmap-q3-2026.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/roadmap-q3-2026.md']"
+        },
+        {
+          "name": "file_modified:knowledge/product/roadmap.md",
+          "passed": true,
+          "detail": "modified: knowledge/product/roadmap.md"
+        },
+        {
+          "name": "file_exists_glob:decisions/2026-03*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-03-26-enterprise-sso-q4.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:evidence_hierarchy_respected",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:knowledge/product/roadmap-q3-2026.md (1 match)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-resolve.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 138.42,
+      "returncode": 0,
+      "cost_usd": 0.2625045,
+      "agent_response": "Done. Here is what changed and what didn't:\n\n---\n\n**What changed**\n\n1. **`decisions/2026-03-26-enterprise-sso-q4.md`** \u2014 added a `## Watch items` section immediately before `## Linked`. It records Naveen's 2026-05-18 verbal with its provenance tag, names Reversal Condition #1 explicitly, states that the verbal does not yet meet it, and links to the watch-items plan. Status remains `decided`. No content anywhere else in the file was touched.\n\n2. **`knowledge/product/sso-watch-items.md`** \u2014 new file. Four-step evidence-collection plan: (1) pull the April\u2013May lost/stalled pipeline list, (2) ask Naveen to name the specific deals, (3) get AE call notes for each named deal, (4) classify primary blocker per deal against the four-check table from the reversal condition. Review window: **2026-06-01**. The file explicitly states what it does not authorize (no Q3 move, no status change, no re-opening of capacity trade-offs).\n\n3. **`knowledge/product/roadmap-q3-2026.md`** \u2014 `## Active Tension` section rewritten: the header now states \"the decision stands\" and points directly to `sso-watch-items.md` and the 2026-06-01 review date. The Friday meeting answer to \"what about SSO?\" is now one clear sentence plus a link. Watch-items file also added to `## Linked Sources`.\n\n**What didn't change**\n\n- `decisions/2026-03-26-enterprise-sso-q4.md` status: still `decided`.\n- `hypotheses/enterprise-sso-q4.md` status: still `promoted` (H-B1 and all others untouched).\n- No hypothesis confidence levels changed.\n- No new ingestion records or source files \u2014 the Naveen verbal already had its `source/`-equivalent capture in `ingestion/meetings/2026-05-18-naveen-sso-verbal.md` (verbal-only, correctly provenance-tagged).\n\n**Audit trail for a reader:** Decision file \u2192 Watch items section \u2192 `sso-watch-items.md` (which links back to both the decision file and the Naveen verbal ingestion record). The chain is complete in both directions.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:knowledge/product/sso-watch-items.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/sso-watch-items.md']"
+        },
+        {
+          "name": "file_modified_glob:decisions/2026-03*.md",
+          "passed": true,
+          "detail": "changed: ['decisions/2026-03-26-enterprise-sso-q4.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*sso*.md OR hypotheses/*enterprise*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/enterprise-sso-q4.md', 'hypotheses/enterprise-sso-q4.md']"
+        },
+        {
+          "name": "file_modified:knowledge/product/roadmap-q3-2026.md",
+          "passed": true,
+          "detail": "modified: knowledge/product/roadmap-q3-2026.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:hierarchy_resolution_recorded",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:decisions/2026-03*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T23:34:12.200604+00:00",
+  "cost": {
+    "total_usd": 1.7248,
+    "max_usd": 8.0,
+    "by_kind": {
+      "turn": 1.6078,
+      "judge": 0.117
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.6340176500000001
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.36556525
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.3457297
+      },
+      {
+        "kind": "judge",
+        "label": "evidence_hierarchy_respected",
+        "cost": 0.05891155
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.2625045
+      },
+      {
+        "kind": "judge",
+        "label": "hierarchy_resolution_recorded",
+        "cost": 0.058068800000000004
+      }
+    ]
+  }
+}

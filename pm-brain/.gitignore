@@ -1,0 +1,33 @@
+# Test run outputs (gitignored by default; pin snapshots manually if needed)
+# Ignore all .json files directly in tests/results/ (timestamped per-run outputs)
+# but allow the curated tests/results/snapshots/ directory through for newsletter readers.
+tests/results/*.json
+tests/results/*.log
+
+# Kept work dirs from --keep-workdir runs (debug artifacts; never committed)
+tests/workdir/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Env
+.env
+.env.local
+
+# Claude Code runtime artifacts (per-machine, never shared)
+.claude/scheduled_tasks.lock
+.claude/projects/

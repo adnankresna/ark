@@ -1,0 +1,229 @@
+{
+  "scenario": "14-install-greenfield",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-tsakcxs0",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T22:53:13.456220+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-install.md",
+      "model": "sonnet",
+      "timeout_s": 1200,
+      "duration_s": 745.34,
+      "returncode": 0,
+      "cost_usd": 1.9777662999999999,
+      "agent_response": "74 files committed. Here's the hand-off.\n\n---\n\n## Three things to do before Friday\n\n**1. Ingest today \u2014 right now.**\nPaste your most recent customer interview transcript from Notion (`Customer Calls/2026/`). Run `/ingest interview <paste>`. The system will write `source/interviews/`, `ingestion/interviews/`, update `knowledge/users/insights.md`, and touch relevant hypotheses. This is the highest-leverage 10 minutes you can spend \u2014 every session without ingestion is memory that evaporates.\n\n**2. Prep your next 1:1 \u2014 Monday with Naveen.**\nBefore Monday morning, run `/prep naveen-rao`. The system will surface his open asks, the funding-decision context (6 weeks), and suggested talking points. Given the Henrik Pauls quarterly check-in is also imminent, use the Naveen 1:1 to align on what story you're telling Henrik.\n\n**3. Run `/review` this Friday.**\nThis is non-negotiable. Set a recurring calendar block Friday afternoon. The system dies when this doesn't happen. First review will flag the cluster-collapse escalation status, the query-builder GA decision timeline, and the 30+ PM-fillable TODOs across stakeholder files.\n\n---\n\n## Self-test receipt\n\n```\nSelf-test receipt \u2014 2026-05-18\n- Ingestion shapes routed: 4/4 (interview, meeting, market, adhoc \u2014 all routed per ingest.md spec).\n- Commands resolved: 6/6 (ingest, prep, review, ideate, risk, plan \u2014 all spec files present).\n- Links walked: 106. Apparent broken: 4. Real broken: 0.\n  (4 links are inside schema code-fence examples in _SCHEMA.md files \u2014 illustrative, not live.)\n- Coverage checks: 6/6 categories scanned.\n  - Feature \u2192 hypothesis: 4/4 features have hypothesis files.\n  - Hypothesis \u2194 feature: 4/4 hypothesis files link back to feature.\n  - Promoted hypothesis \u2192 decision: none promoted yet (correct).\n  - Decision \u2192 hypothesis: no decisions yet (correct).\n  - Stakeholder touchpoints \u2192 ingestion: all init-level, no orphan links.\n  - Feature \u2192 stakeholders affected: 4/4 feature files list stakeholders. \u2713\n- TODO fields: 70 total. ~14 in scaffold template files (expected). ~30 PM-fillable in stakeholder/feature files.\n- Contradictions surfaced: 2 (see below).\n- Commit: ab7a67a \u2014 feat: initialize PM brain (74 files, 3,442 insertions).\n```\n\n---\n\n## Contradictions\n\n**C1: North-star is ARR ($1M by Q3), but the biggest near-term quality risk is churn of your largest logo.**\n- Signal: Marcus Webb (Brillstone) has escalated the cluster-collapse bug for 2 weeks with no resolution. Brillstone is your biggest logo and likely your highest-ACV account.\n- Tensions: ARR growth requires new logos, but churn of Brillstone damages both ARR and the Series A narrative simultaneously. The cluster-collapse bug is a retention risk that competes for Devon Park's sprint with the activation improvements needed to hit TTFI <3 min.\n- Lives in: `stakeholders/marcus-webb.md \u00a7 Concerns`, `knowledge/strategy.md \u00a7 Tensions \u00a7 T1`, `hypotheses/anomaly-clustering.md \u00a7 H-O1`.\n\n**C2: Logo strategy (Priority 2) targets DevTools companies, but all current customers are outside that ICP.**\n- Signal: Brillstone (biggest logo) and Cascadia Health (design partner) are neither DevTools nor developer-platform companies. The $80k prospect (Northbridge Logistics) is also outside the ICP.\n- Tensions: Closing Northbridge advances ARR toward Q3 but doesn't help the Series A logo story. Pursuing DevTools lighthouse customers requires a different sales motion with no existing warm path.\n- Lives in: `knowledge/strategy.md \u00a7 Tensions \u00a7 T1`.\n\n---\n\n## 2\u20133 scaffold gaps worth filling soon\n\n1. **`knowledge/strategy.md \u00a7 Explicit non-goals` is empty.** This is the highest-leverage 15 minutes in the system. Without it, any new feature request is debatable. Suggest three candidates from the interview; you confirm which to commit.\n\n2. **Marcus Webb's cluster-collapse status is undocumented.** The escalation is the highest-friction open item. Before Monday's 1:1 with Naveen, run `/ingest meeting <your notes from any Marcus conversation>` to capture what's been said and what the fix timeline is. Right now it's a verbal understanding with no anchor.\n\n3. **Query-builder GA criteria don't exist.** The June decision is 6 weeks away and no pass/fail bar is defined. Run `/decide query-builder-ga` when ready, or at minimum add the criteria to `knowledge/product/features/query-builder.md \u00a7 Open questions` this week.\n\n---\n\n## What was built\n\nTelemetron's PM Brain is a fully wired markdown knowledge system committed to git (`ab7a67a`): north-star strategy, 4 feature files with linked hypotheses across the 5 risk areas, 8 stakeholder files with influence/friction tagged, org rituals encoding your Monday/Wednesday/first-Tuesday cadence, market landscape anchoring Datadog and Honeycomb as primary monitors, and data/discovery rules mapping PostHog, Stripe, Intercom, Linear, Notion, and Slack as canonical sources. The hook at `.claude/hooks/validate_brain_file.py` fires on every Write/Edit to enforce schema. The system is ready for its first real artifact.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists:CLAUDE.md",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "file_exists:INDEX.md",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "file_exists:README.md",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "file_exists_glob:hypotheses/_SCHEMA.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/_SCHEMA.md']"
+        },
+        {
+          "name": "file_exists_glob:decisions/_SCHEMA.md",
+          "passed": true,
+          "detail": "matched: ['decisions/_SCHEMA.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/_SCHEMA.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/_SCHEMA.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/strategy.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/strategy.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/roadmap.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/roadmap.md']"
+        },
+        {
+          "name": "file_exists_glob:rules/discovery.md",
+          "passed": true,
+          "detail": "matched: ['rules/discovery.md']"
+        },
+        {
+          "name": "file_exists_glob:rules/data.md",
+          "passed": true,
+          "detail": "matched: ['rules/data.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/INDEX.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/INDEX.md']"
+        },
+        {
+          "name": "file_exists_glob:source/INDEX.md",
+          "passed": true,
+          "detail": "matched: ['source/INDEX.md']"
+        },
+        {
+          "name": "file_exists_glob:maintenance/INDEX.md OR maintenance/*.md",
+          "passed": true,
+          "detail": "matched: ['maintenance/INDEX.md', 'maintenance/INDEX.md']"
+        },
+        {
+          "name": "file_exists_glob:docs/schemas.md",
+          "passed": true,
+          "detail": "matched: ['docs/schemas.md']"
+        },
+        {
+          "name": "file_exists:.claude/settings.json",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "file_exists:.claude/hooks/validate_brain_file.py",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "file_contains_any:knowledge/strategy.md ; telemetron OR $1M ARR OR time-to-first-insight OR lighthouse",
+          "passed": true,
+          "detail": "matched: ['knowledge/strategy.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*naveen*.md OR stakeholders/*rao*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/naveen-rao.md', 'stakeholders/naveen-rao.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*cara*.md OR stakeholders/*lin*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/cara-lin.md', 'stakeholders/cara-lin.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*marcus*.md OR stakeholders/*webb*.md OR stakeholders/*brillstone*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/marcus-webb.md', 'stakeholders/marcus-webb.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*henrik*.md OR stakeholders/*pauls*.md OR stakeholders/*bowline*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/henrik-pauls.md', 'stakeholders/henrik-pauls.md']"
+        },
+        {
+          "name": "file_modified:stakeholders/INDEX.md",
+          "passed": true,
+          "detail": "modified: stakeholders/INDEX.md"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/features/*anomaly*.md OR knowledge/product/features/*clustering*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/features/anomaly-clustering.md', 'knowledge/product/features/anomaly-clustering.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/features/*slack*.md OR knowledge/product/features/*alert*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/features/slack-alerts.md', 'knowledge/product/features/slack-alerts.md']"
+        },
+        {
+          "name": "file_exists_glob:knowledge/product/features/*query*.md OR knowledge/product/features/*builder*.md",
+          "passed": true,
+          "detail": "matched: ['knowledge/product/features/query-builder.md', 'knowledge/product/features/query-builder.md']"
+        },
+        {
+          "name": "file_contains_any:knowledge/org/tools.md OR rules/data.md ; posthog OR linear OR intercom",
+          "passed": true,
+          "detail": "matched: ['knowledge/org/tools.md', 'rules/data.md']"
+        },
+        {
+          "name": "file_contains_any:CLAUDE.md ; act and tell",
+          "passed": true,
+          "detail": "matched: ['CLAUDE.md']"
+        },
+        {
+          "name": "file_contains_any:CLAUDE.md ; weekly OR friday",
+          "passed": true,
+          "detail": "matched: ['CLAUDE.md']"
+        },
+        {
+          "name": "all_internal_links_valid",
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:install_handoff_shape",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "file_contains_any:.claude/settings.json ; validate_brain_file.py",
+        "passed": true,
+        "detail": "matched: ['.claude/settings.json']"
+      },
+      {
+        "name": "file_exists_glob:knowledge/strategy.md",
+        "passed": true,
+        "detail": "matched: ['knowledge/strategy.md']"
+      },
+      {
+        "name": "file_exists_glob:knowledge/product/features/*.md",
+        "passed": true,
+        "detail": "matched: ['knowledge/product/features/anomaly-clustering.md', 'knowledge/product/features/query-builder.md', 'knowledge/product/features/runbook-suggestions.md', 'knowledge/product/features/slack-alerts.md', 'knowledge/product/features/_SCHEMA.md']"
+      },
+      {
+        "name": "file_exists_glob:stakeholders/*.md",
+        "passed": true,
+        "detail": "matched: ['stakeholders/cara-lin.md', 'stakeholders/devon-park.md', 'stakeholders/henrik-pauls.md', 'stakeholders/INDEX.md', 'stakeholders/marcus-webb.md']"
+      },
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T23:05:45.558953+00:00",
+  "cost": {
+    "total_usd": 2.037,
+    "max_usd": 10.0,
+    "by_kind": {
+      "turn": 1.9778,
+      "judge": 0.0592
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 1.9777662999999999
+      },
+      {
+        "kind": "judge",
+        "label": "install_handoff_shape",
+        "cost": 0.05918555
+      }
+    ]
+  }
+}

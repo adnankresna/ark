@@ -1,0 +1,110 @@
+scenario: 15-evidence-hierarchy
+description: |
+  Four-turn evidence-hierarchy scenario. PM seeds a documented March-2026 decision to
+  defer enforced-SSO to Q4 (full audit trail: customer interview + eng scoping note +
+  decision record with reversal conditions). The CEO then drops a verbal "we need it in
+  Q3" claim in a Monday 1:1 — no source/ artifact, single channel, no named deals. PM
+  asks the agent to draft a Q3 roadmap, then explicitly resolves by keeping the
+  documented decision and capturing the verbal as a watch-item against the named
+  reversal conditions.
+
+  Tests whether the brain respects evidence hierarchy: a documented decision with audit
+  trail outranks an undocumented verbal claim, even from the CEO, until the verbal is
+  corroborated against the reversal criteria.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-decision.md
+    structural:
+      # All three March artifacts preserved verbatim under source/.
+      - file_exists_glob: source/interviews/*quartzline*.md OR source/interviews/*dana*.md OR source/interviews/2026-03-09*.md
+      - file_exists_glob: source/meetings/*sso*.md OR source/adhoc/*sso*.md OR source/meetings/*scoping*.md OR source/adhoc/*scoping*.md OR source/**/*henrik*.md OR source/**/2026-03-17*.md
+      - file_exists_glob: source/**/*decision*.md OR source/adhoc/*sso*decision*.md OR source/**/2026-03-26*.md
+      # Synthesis routed into ingestion/.
+      - file_exists_glob: ingestion/interviews/*quartzline*.md OR ingestion/interviews/*dana*.md OR ingestion/interviews/2026-03-09*.md
+      # Hypothesis file created.
+      - file_exists_glob: hypotheses/*sso*.md OR hypotheses/*enterprise*.md
+      # Decision record created.
+      - file_exists_glob: decisions/2026-03*.md
+      - file_modified: decisions/INDEX.md
+
+  - turn: 2
+    input: turn-02-ceo-verbal.md
+    structural:
+      # The verbal capture should land in ingestion/ (not source/, which is for actual artifacts).
+      # Naming flexible — could be tagged by stakeholder, by topic, or by date.
+      - file_exists_glob: ingestion/adhoc/*naveen*.md OR ingestion/adhoc/*ceo*.md OR ingestion/adhoc/*sso*verbal*.md OR ingestion/adhoc/2026-05-18*.md OR ingestion/meetings/*1-1*naveen*.md OR ingestion/meetings/2026-05-18*.md
+      # Stakeholder file for Naveen should be touched (verbal claim recorded).
+      - file_modified_glob: stakeholders/*naveen*.md OR stakeholders/*acharya*.md
+      # Hypothesis or watch-list should be updated to reflect the new signal.
+      - file_modified_glob: hypotheses/*sso*.md OR hypotheses/*enterprise*.md
+      # We can't structurally assert "no fabricated source/ file for a verbal claim" —
+      # the turn-3 judge catches downstream failures from a botched turn-2 capture.
+
+  - turn: 3
+    input: turn-03-draft-q3-roadmap.md
+    structural:
+      # The roadmap file must exist at the requested path.
+      - file_exists_glob: knowledge/product/roadmap-q3-2026.md
+      # The existing roadmap.md should be modified to add a pointer.
+      - file_modified: knowledge/product/roadmap.md
+      # The decision file must still exist and not have been silently rewritten.
+      - file_exists_glob: decisions/2026-03*.md
+    content:
+      - judge: evidence_hierarchy_respected
+        rubric: judges/evidence_hierarchy_respected.md
+        target_glob: knowledge/product/roadmap-q3-2026.md
+        expected_meaning: |
+          The Q3 roadmap does NOT include enforced-SSO as a Q3 line item. The roadmap
+          surfaces the verbal-vs-documented tension explicitly (in a "Considered and
+          deferred" or "Watch items" section, or in a tensions block). The verbal claim
+          is named with its provenance (single-channel, undocumented). The reversal
+          conditions from the March decision are referenced as the bar that would need to
+          be cleared for SSO to move into Q3.
+        must_not: "silently include SSO in Q3 because the CEO said so; rewrite the March decision; bury the verbal claim entirely"
+
+  - turn: 4
+    input: turn-04-resolve.md
+    structural:
+      # New watch-items file at requested path.
+      - file_exists_glob: knowledge/product/sso-watch-items.md
+      # Decision file modified (watch-items section added) — NOT replaced.
+      - file_modified_glob: decisions/2026-03*.md
+      # Hypothesis status unchanged means the file may still be touched but status field stays `validated`.
+      # We can't assert "field unchanged" structurally, so we rely on the content judge + no_silent_hypothesis_demotion.
+      - file_exists_glob: hypotheses/*sso*.md OR hypotheses/*enterprise*.md
+      # Roadmap file updated to point at watch-items.
+      - file_modified: knowledge/product/roadmap-q3-2026.md
+    content:
+      - judge: hierarchy_resolution_recorded
+        rubric: judges/evidence_hierarchy_respected.md
+        target_glob: decisions/2026-03*.md
+        expected_meaning: |
+          The March decision file gained a "Watch items" section that records the
+          2026-05-18 verbal from Naveen, with provenance tagged as verbal-only.
+          Status remains `decided` — the PM explicitly said do not change the
+          decision. The original reversal conditions are NOT softened: the
+          three-confirmed-lost-deals-with-primary-blocker-docs bar is preserved
+          verbatim as the criterion the verbal claim is being held to. The
+          watch-items file at knowledge/product/sso-watch-items.md exists and is
+          reachable from the decision file via markdown link, and from there back
+          to the 2026-05-18 verbal capture in ingestion/. No parallel/forked
+          decision file was created.
+        must_not: "change the decision status; soften the reversal conditions; fork a parallel decision file"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - all_decisions_have_reversal_condition: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true
+  content: []  # Per-turn content judges cover the cross-cutting behavior.

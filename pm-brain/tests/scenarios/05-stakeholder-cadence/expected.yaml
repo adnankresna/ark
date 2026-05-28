@@ -1,0 +1,123 @@
+scenario: 05-stakeholder-cadence
+description: |
+  Four-turn stakeholder-cadence scenario. PM seeds a roster of 5 stakeholders with realistic
+  Last-touched dates (3 recent, 2 stale on cadence) plus an active hypothesis about deprecating
+  Custom Dashboards. PM then drives toward a deprecation decision. Tests whether the brain
+  surfaces the stale stakeholders whose stake in THIS decision creates real risk (Diana CS-VP,
+  Marcus Sales-Director) while staying silent about the stale stakeholder who is not implicated
+  (Helena CFO) — i.e., that the brain filters cadence flags by relevance, not by staleness alone.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-stakeholders.md
+    structural:
+      # Five stakeholder files seeded.
+      - file_exists_glob: stakeholders/*priya*.md OR stakeholders/*shah*.md
+      - file_exists_glob: stakeholders/*jordan*.md OR stakeholders/*liu*.md
+      - file_exists_glob: stakeholders/*diana*.md OR stakeholders/*okonkwo*.md
+      - file_exists_glob: stakeholders/*marcus*.md OR stakeholders/*avila*.md
+      - file_exists_glob: stakeholders/*helena*.md OR stakeholders/*vargas*.md OR stakeholders/*cfo*.md
+      # Hypothesis file created for the feature under question.
+      - file_exists_glob: hypotheses/*custom-dashboards*.md OR hypotheses/*custom_dashboards*.md OR hypotheses/*dashboards*.md
+      # Ingestion record + matching source artifact.
+      - file_exists_glob: ingestion/adhoc/*custom-dashboards*.md OR ingestion/adhoc/*dashboards*.md OR ingestion/**/*custom-dashboards*.md
+      - file_exists_glob: source/adhoc/*custom-dashboards*.md OR source/adhoc/*dashboards*.md OR source/**/*custom-dashboards*.md
+      # Stakeholders INDEX touched (roster refreshed).
+      - file_modified: stakeholders/INDEX.md
+    content:
+      - judge: stakeholder_cadence_tracked
+        rubric: judges/stakeholder_cadence_tracked.md
+        target_glob: stakeholders/*.md
+        expected_meaning: |
+          All five stakeholder files exist and each carries a parseable Last-touched (or
+          equivalent last-1:1) date matching what the PM provided in the seed turn. Dates
+          are preserved exactly — Diana 2026-03-22, Marcus 2026-04-12, Helena 2026-03-08,
+          Priya 2026-05-08, Jordan 2026-05-12. The brain has NOT silently renormalized any
+          of these to "today" or to a guessed recent date.
+        must_not: "fabricate cadence dates the PM did not supply, or relabel any of the seeded 1:1 dates to 2026-05-17"
+
+  - turn: 2
+    input: turn-02-decision-context.md
+    structural: []  # Q&A recall turn — no writes expected; no structural assertion.
+    content: []
+
+  - turn: 3
+    input: turn-03-review.md
+    structural: []  # /review is synthesis-only; output is in the agent response.
+    content:
+      - judge: overdue_surfaced_in_review
+        rubric: judges/overdue_surfaced_in_review.md
+        expected_meaning: |
+          Weekly /review surfaces the Custom Dashboards decision as a major item, AND
+          surfaces specifically Diana (CS VP, last 1:1 2026-03-22) AND Marcus (Sales
+          Director, last 1:1 2026-04-12) as stakeholders the PM should contact before
+          drafting the decision. Both are named by role, both have specific dates cited
+          (not "a while ago"). The framing connects their stale cadence to their stake in
+          the Custom Dashboards decision specifically — not to generic relationship debt.
+        must_not: "flag stakeholders only as a generic cadence list with no link to the Custom Dashboards decision, or fail to cite specific dates"
+      - judge: irrelevant_overdue_not_flagged
+        rubric: judges/irrelevant_overdue_not_flagged.md
+        expected_meaning: |
+          The /review response does NOT flag Helena (CFO, last 1:1 2026-03-08) in the
+          context of the Custom Dashboards decision — even though her cadence is the
+          STALEST of the five. The brain distinguishes "stale AND relevant to current
+          work" from "stale generally." Helena may be mentioned in a separate general-
+          cadence note if the brain produces one, but she must NOT appear in the list of
+          stakeholders the PM should contact before drafting THIS decision.
+        must_not: "flag Helena as a should-talk-to-before-Custom-Dashboards-lands stakeholder, or include her in the decision's pre-launch check"
+
+  - turn: 4
+    input: turn-04-decision-draft.md
+    structural:
+      - file_exists_glob: decisions/2026-05*.md
+      - file_modified: decisions/INDEX.md
+      # Hypothesis file modified (status may change to support `decided` later, or evidence-against grows, or pre-launch checks linked).
+      - file_modified_glob: hypotheses/*custom-dashboards*.md OR hypotheses/*dashboards*.md
+    content:
+      - judge: relevant_overdue_flagged_on_decision
+        rubric: judges/relevant_overdue_flagged_on_decision.md
+        target_glob: decisions/2026-05*.md
+        expected_meaning: |
+          The drafted decision file (or the response text wrapping it) names Diana AND
+          Marcus as stakeholders the PM should speak with BEFORE this decision lands.
+          Their roles AND last-1:1 dates are cited (Diana CS VP / 2026-03-22; Marcus Sales
+          Director / 2026-04-12). The reason each is implicated in THIS decision is named
+          (Diana — CS sees the most Custom Dashboards usage and owns the renewal motion;
+          Marcus — uses Custom Dashboards in demos / RFP coverage). Helena (CFO) is NOT
+          named in this pre-launch check because her stake in this decision is minimal.
+          Decision status is `pending` per the canonical decision schema (or `proposed` as a synonym). Reversal condition is specific and observable.
+        must_not: "omit the pre-launch stakeholder check, flag Helena in the pre-launch check, or fail to cite specific dates for Diana and Marcus"
+      - judge: irrelevant_overdue_not_flagged
+        rubric: judges/irrelevant_overdue_not_flagged.md
+        target_glob: decisions/2026-05*.md
+        expected_meaning: |
+          The drafted decision file does NOT name Helena (CFO) in the pre-launch / talk-to-
+          before-this-lands section, despite her being the stakeholder with the stalest 1:1
+          cadence in the brain. The brain has correctly filtered cadence flags by relevance
+          to THIS decision, not by raw staleness.
+        must_not: "include Helena in the decision's pre-launch stakeholder check"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - all_decisions_have_reversal_condition: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true
+  content:
+    - judge: stakeholder_cadence_tracked
+      rubric: judges/stakeholder_cadence_tracked.md
+      target_glob: stakeholders/*.md
+      expected_meaning: |
+        At final state, all five stakeholder files still carry parseable Last-touched dates
+        matching the seeded values (modulo any legitimate touchpoint additions during the
+        scenario — but no silent renormalizations to today). The cadence data is the
+        canonical input to the cadence-flag behavior; it must remain intact and inspectable.

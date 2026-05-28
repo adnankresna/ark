@@ -1,0 +1,191 @@
+scenario: 02-inherited-folder
+description: |
+  Consumer fintech PM (Maya) inherits predecessor's folder cold. Bulk-imports 10 mixed-trust artifacts at turn 1,
+  then works through tensions, fresh interviews, contradiction resolution, staleness sweep, and a Q4 decision
+  drafted from mixed-trust evidence. Exercises post-bulk-ingest migration behaviors that the init-mode prompts produce.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-bulk-import.md
+    # Bulk import of 10 mixed-trust artifacts requires ~22-30 file writes (source/+ingestion/
+    # for each + hypothesis files + INDEX updates). Sonnet has timed out at 600s on this turn
+    # under default settings. Extend the budget; this is a genuinely high-throughput turn.
+    timeout_s: 1200
+    structural:
+      # All ten inherited artifacts should land in source/ verbatim. Pattern-by-pattern check.
+      - file_exists_glob: source/**/*strategy*.md
+      - file_exists_glob: source/**/*roadmap*q3*.md OR source/**/*q3*roadmap*.md OR source/**/2026-q3*.md
+      - file_exists_glob: source/**/*roadmap*q4*.md OR source/**/*q4*draft*.md OR source/**/*alex*draft*.md
+      - file_exists_glob: source/**/*personas*.md OR source/**/*jordan*personas*.md
+      - file_exists_glob: source/**/*priya*.md OR source/interviews/*priya*.md
+      - file_exists_glob: source/**/*tom*.md OR source/interviews/*tom*.md
+      - file_exists_glob: source/**/*competitor*.md OR source/**/*landscape*.md
+      - file_exists_glob: source/**/*metrics*.md OR source/**/*snapshot*.md
+      - file_exists_glob: source/**/*pricing*.md OR source/**/*slack*pricing*.md OR source/**/*export*.md
+      - file_exists_glob: source/**/*feasibility*.md OR source/**/*devon*.md OR source/**/*eng*note*.md
+      - file_exists_glob: source/**/*cs*monthly*.md OR source/**/*cs-monthly*.md OR source/**/*riya*.md
+      # Hypotheses are opened (multiple candidate hypotheses from bulk evidence) but not over-promoted.
+      - hypothesis_count_at_least: 2
+    content:
+      - judge: bulk_ingest_caution
+        rubric: judges/bulk_ingest_caution.md
+        target_glob: hypotheses/*.md
+        expected_meaning: |
+          Agent acknowledges bulk-ingest framing and high-volume-but-low-trust shape; opens candidate hypotheses
+          without auto-promoting; surfaces (without resolving) at least two of the major tensions; preserves all
+          ten inherited artifacts in source/ with provenance/age tagging.
+        must_not: "auto-promote any hypothesis or insight from bulk-import alone, or silently merge the strategy / draft conflict"
+
+  - turn: 2
+    input: turn-02-tension-surface.md
+    structural: []  # Synthesis-only turn — agent may or may not write to files.
+    content:
+      - judge: tensions_enumerated
+        rubric: judges/tensions_enumerated.md
+        expected_meaning: |
+          Agent produces an enumerated conflict list with provenance per side; includes the strategy/draft conflict
+          explicitly; does NOT resolve anything.
+        must_not: "smooth the conflicts into prose or propose resolutions"
+
+  - turn: 3
+    input: turn-03-ceo-pressure.md
+    structural: []  # Direct PM prompt for a draft response, may not touch files.
+    content:
+      - judge: runway_draft
+        rubric: judges/runway_draft.md
+        expected_meaning: |
+          Agent helps draft a Slack reply that buys two weeks of legitimate runway without fabricating a roadmap;
+          memo outline names the tensions explicitly without committing to a direction.
+        must_not: "commit to a Q4 direction in the Slack reply or memo outline"
+
+  - turn: 4
+    input: turn-04-interview-priya.md
+    structural:
+      - file_exists_glob: source/interviews/*priya*may*.md OR source/interviews/*2026-05*priya*.md OR source/interviews/*priya*2026-05*.md
+      - file_exists_glob: ingestion/interviews/*priya*.md
+      # Priya is an interview subject. Agent may or may not have her in stakeholders/ — she may live in source/interviews/ only.
+      # Accept either a stakeholder file modification OR an insight-layer update.
+      - file_modified_glob: stakeholders/*priya*.md OR knowledge/users/insights.md OR ingestion/interviews/*priya*.md
+    content:
+      - judge: insight_promotion
+        rubric: judges/insight_promotion.md
+        target_file: knowledge/users/insights.md
+        expected_meaning: |
+          Priya's interview adds evidence to the 'Saver wants minimal' pattern (now 2-of-N including Jordan's old
+          research); the 'shared/couples' hypothesis gets a second-hand corroborating signal (Priya's sister anecdote)
+          but is NOT promoted yet. Threshold-respecting.
+        must_not: "promote shared-budgets insight from one second-hand anecdote"
+
+  - turn: 5
+    input: turn-05-eng-devon.md
+    structural:
+      - file_exists_glob: source/meetings/*devon*.md OR source/meetings/*eng*may*.md
+      - file_exists_glob: ingestion/meetings/*devon*.md OR ingestion/meetings/*eng*.md
+      - file_modified_glob: hypotheses/*.md
+    content:
+      - judge: risk_area_updated
+        rubric: judges/risk_area_updated.md
+        target_glob: hypotheses/*.md
+        risk_area: feasibility
+        expected_meaning: |
+          Devon's updated estimates (shared budgets now 12-14 weeks + spike, AI insights pricing-blocked,
+          leaderboards no demand signal) update the feasibility risk on the corresponding hypothesis/hypotheses.
+          Inherited March feasibility note is superseded for the shared-budgets line, not duplicated.
+
+  - turn: 6
+    input: turn-06-resolve-strategy-vs-roadmap.md
+    structural:
+      # Resolution itself becomes an artifact — Naomi conversation lands in source/+ingestion/.
+      - file_exists_glob: source/**/*naomi*.md OR source/meetings/*naomi*.md OR source/**/*ceo*sync*.md
+      - file_exists_glob: ingestion/**/*naomi*.md OR ingestion/meetings/*naomi*.md OR ingestion/**/*ceo*sync*.md
+      # Both the strategy and the draft must still exist (no silent delete) and be updated this turn.
+      - file_exists_glob: source/**/*strategy*.md
+      - file_exists_glob: source/**/*q4*.md OR source/**/*draft*.md
+    content:
+      - judge: contradiction_resolved_with_audit
+        rubric: judges/contradiction_resolved_with_audit.md
+        target_glob: knowledge/**/*.md
+        expected_meaning: |
+          Strategy v3 remains live (unchanged framing); draft Q4 roadmap marked withdrawn/superseded with reason
+          linked to today's CEO conversation; both artifacts cross-linked; resolution itself ingested; any hypotheses
+          biased by the draft are walked back with the resolution context.
+        must_not: "silently delete the draft, or rewrite strategy to absorb the draft's framing"
+
+  - turn: 7
+    input: turn-07-maintenance-sweep.md
+    structural: []  # Synthesis-only turn — staleness pass output is in agent response.
+    content:
+      - judge: staleness_flagged
+        rubric: judges/staleness_flagged.md
+        expected_meaning: |
+          Agent addresses each named artifact (personas, strategy, competitor analysis, Q3 roadmap, eng note)
+          with a calibrated retire/refresh/flag-and-keep call; distinguishes age from staleness; surfaces at least
+          one staleness flag the PM did not name.
+        must_not: "blanket-retire by age, or recommend retiring strategy v3 despite Naomi's confirmation"
+
+  - turn: 8
+    input: turn-08-interview-tom.md
+    structural:
+      - file_exists_glob: source/interviews/*tom*may*.md OR source/interviews/*2026-05*tom*.md OR source/interviews/*tom*2026-05*.md
+      - file_exists_glob: ingestion/interviews/*tom*.md
+      # Tom's interview is the third independent signal for shared-budgets — evidence count or hypothesis file should change.
+      # Hypothesis IDs vary by run (H-V1, H1, etc.) — assert via file modification instead of fixed ID.
+      - file_modified_glob: hypotheses/*shared*.md OR hypotheses/*couples*.md OR hypotheses/*budget*.md OR hypotheses/*.md
+    content:
+      - judge: insight_promoted_with_dissent
+        rubric: judges/insight_promoted_with_dissent.md
+        target_file: knowledge/users/insights.md
+        expected_meaning: |
+          With three independent signals (CS monthly trend + Priya's sister anecdote + Tom's direct ask with
+          switching threat), the shared-budgets insight should now be promoted. Counter-signals (Priya doesn't
+          want it for herself) are preserved, not flattened. Note: this is the FIRST insight in this scenario
+          that should cross the promotion threshold — bulk-import alone wasn't enough.
+        must_not: "flatten Priya's not-for-me signal, or promote without naming the competitive-loss threat from Tom"
+
+  - turn: 9
+    input: turn-09-q4-decision.md
+    structural:
+      - file_exists_glob: decisions/*.md
+      - file_modified: decisions/INDEX.md
+    content:
+      - judge: decision_provenance
+        rubric: judges/decision_provenance.md
+        target_glob: decisions/*.md
+        expected_meaning: |
+          Q4 decision file with per-row provenance tags (inherited / Maya-collected / CS / eng); status `proposed`;
+          specific observable reversal condition; explicit NOT-doing section with evidence per row; remaining
+          ambiguities named (stale personas, AI insights pricing).
+        must_not: "covertly resurrect Alex's withdrawn social pivot, omit reversal condition, or fail to tag provenance"
+
+  - turn: 10
+    input: turn-10-handoff-prep.md
+    structural: []  # Synthesis turn — output is a navigable map in the agent response (or a written summary file).
+    content:
+      - judge: audit_trail
+        rubric: judges/audit_trail.md
+        expected_meaning: |
+          A 'next PM' map: links to the Q4 decision, active hypotheses, the resolved strategy/draft conflict,
+          the stale-flag list, the customer list. Every link should resolve. Two clicks deep from decision to
+          original interview.
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - all_decisions_have_reversal_condition: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true
+  content:
+    - judge: audit_trail
+      rubric: judges/audit_trail.md
+      expected_meaning: |
+        Starting from the Q4 decision, every supporting evidence row is reachable via working markdown links
+        through hypothesis → ingestion → source/. Inherited-vs-Maya-collected provenance is preserved end-to-end.

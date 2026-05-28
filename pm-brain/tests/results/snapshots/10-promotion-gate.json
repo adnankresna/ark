@@ -1,0 +1,245 @@
+{
+  "scenario": "10-promotion-gate",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-vz4uyeaf",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T18:19:12.672854+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-mixed-evidence.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 391.42,
+      "returncode": 0,
+      "cost_usd": 0.5356135,
+      "agent_response": "All files written. Here's the ingestion summary.\n\n---\n\n**Ingestion complete.**\n\n**Files created (10 total):**\n\n| Kind | Path | Date |\n|---|---|---|\n| source/interviews | `source/interviews/2026-04-02-westside-okonkwo.md` | 2026-04-02 |\n| source/interviews | `source/interviews/2026-04-09-bayfront-gallego.md` | 2026-04-09 |\n| source/meetings | `source/meetings/2026-04-15-jordan-reilly-cs-vp.md` | 2026-04-15 |\n| source/adhoc | `source/adhoc/2026-04-05-pm-intuition-rebooking.md` | 2026-04-05 |\n| source/adhoc | `source/adhoc/2026-04-05-industry-knowledge-scheduling.md` | 2026-04-05 |\n| source/meetings | `source/meetings/2026-04-22-sam-whitford-eng.md` | 2026-04-22 |\n| ingestion/interviews | `ingestion/interviews/2026-04-02-westside-okonkwo.md` | 2026-04-02 |\n| ingestion/interviews | `ingestion/interviews/2026-04-09-bayfront-gallego.md` | 2026-04-09 |\n| hypothesis | `hypotheses/same-day-rebooking-flow.md` | created 2026-04-05 |\n| INDEX update | `hypotheses/INDEX.md` \u2014 added Proposed section | 2026-05-17 |\n\n---\n\n**Confirmation per requested items:**\n\n**(a) Hypothesis file path:** `hypotheses/same-day-rebooking-flow.md`\n\n**(b) Status field:** `proposed`\n> Schema deviation flagged: the schema enumerates `active | partially-validated | promoted | demoted | archived` \u2014 `proposed` is not in that list. Honored your explicit instruction regardless. If you want schema-compliance, `active` is the nearest valid value; that's a PM call for next turn.\n\n**(c) Per-risk-area evidence-row count:**\n\n| Risk area | Evidence-for | Evidence-against | Total |\n|---|---|---|---|\n| Value (H-V1) | 6 | 0 | **6** |\n| Usability (H-U1) | 0 | 0 | **0** |\n| Feasibility (H-F1) | 0 | 1 | **1** |\n| Viability (H-B1) | 0 | 0 | **0** |\n| Other (H-O1) | 0 | 0 | **0** |\n\nPre-save tag count verified: every evidence row carries exactly one provenance tag. Total evidence rows = 7; total tags = 7.\n\n**(d) Empty risk areas (no evidence rows):** Usability, Viability, Other. All three sections contain an honest `(none yet)` admission and meaningful open questions / next steps. No evidence was fabricated to fill them.\n\n**Provenance tags used across evidence rows:**\n- `[ingestion/interviews/...]` (path-typed, highest trust) \u2014 2 rows (Westside, Bayfront via synthesis pipeline)\n- `` `(stakeholder-verbal, Jordan Reilly, 2026-04-15)` `` \u2014 2 rows (CS request count, churn attribution)\n- `` `(stakeholder-verbal, Sam Whitford, 2026-04-22)` `` \u2014 1 row (calendar refactor concern)\n- `` `(intuition, PM, 2026-04-05)` `` \u2014 1 row (PM leverage read)\n- `` `(industry-knowledge)` `` \u2014 1 row (competitor signals, utilization rule of thumb \u2014 flagged for replacement)\n\n**Open action surfaced (not acted on \u2014 PM judgment required):** Sam Whitford offered a 2-day feasibility scope on 2026-04-22 and was never followed up with. The only feasibility signal is a flagged concern with no estimate. Following up on that scope is the single highest-priority uncertainty-reduction move before any promotion discussion.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*westside*.md OR source/interviews/*okonkwo*.md OR source/interviews/2026-04-02*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-04-02-westside-okonkwo.md', 'source/interviews/2026-04-02-westside-okonkwo.md', 'source/interviews/2026-04-02-westside-okonkwo.md']"
+        },
+        {
+          "name": "file_exists_glob:source/interviews/*bayfront*.md OR source/interviews/*gallego*.md OR source/interviews/2026-04-09*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-04-09-bayfront-gallego.md', 'source/interviews/2026-04-09-bayfront-gallego.md', 'source/interviews/2026-04-09-bayfront-gallego.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*westside*.md OR ingestion/interviews/*okonkwo*.md OR ingestion/interviews/2026-04-02*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-04-02-westside-okonkwo.md', 'ingestion/interviews/2026-04-02-westside-okonkwo.md', 'ingestion/interviews/2026-04-02-westside-okonkwo.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*bayfront*.md OR ingestion/interviews/*gallego*.md OR ingestion/interviews/2026-04-09*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-04-09-bayfront-gallego.md', 'ingestion/interviews/2026-04-09-bayfront-gallego.md', 'ingestion/interviews/2026-04-09-bayfront-gallego.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*same-day*rebooking*.md OR hypotheses/*rebooking*flow*.md OR hypotheses/*same*day*refill*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/same-day-rebooking-flow.md', 'hypotheses/same-day-rebooking-flow.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-promotion-question.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 69.57,
+      "returncode": 0,
+      "cost_usd": 0.1417016,
+      "agent_response": "Here is the full analysis. This is evaluation only \u2014 no files will be touched.\n\n---\n\n## 1. Provenance tier counts\n\nAll evidence lives under **H-V1 (Value)**. The other four risk areas are structurally empty or contain only open questions.\n\n**Supporting \u2014 6 rows:**\n\n| # | Claim summary | Tier | Area |\n|---|---|---|---|\n| 1 | Westside: 14% cancellation rate, 12\u201318 min manual refill, Dr. Okonkwo WTP \"double subscription\" | `[ingestion/interviews/2026-04-02-westside-okonkwo.md]` \u2014 **ingestion** (highest) | Value |\n| 2 | Bayfront: 11% cancellation rate, 3\u20135 hrs/wk refill effort, Maria Gallego asked unprompted for waitlist | `[ingestion/interviews/2026-04-09-bayfront-gallego.md]` \u2014 **ingestion** (highest) | Value |\n| 3 | Jordan Reilly: same-day refill is #3 most-cited feature request in Q1 CS ticket report, \"roughly double-digit accounts\" | `(stakeholder-verbal, Jordan Reilly, 2026-04-15)` \u2014 **stakeholder-verbal** (medium) | Value |\n| 4 | Jordan Reilly: two Q1 churned accounts cited \"built our own Airtable waitlist\" as contributing churn reason | `(stakeholder-verbal, Jordan Reilly, 2026-04-15)` \u2014 **stakeholder-verbal** (medium) | Value |\n| 5 | PM assessment: highest-leverage roadmap item this half | `(intuition, PM, 2026-04-05)` \u2014 **intuition** (low) | Value |\n| 6 | Phreesia/Solv/NexHealth all market waitlist as flagship; industry 5pp utilization \u2248 3pp margin rule | `(industry-knowledge)` \u2014 **industry-knowledge** (low) | Value |\n\n**Against \u2014 1 row:**\n\n| # | Claim summary | Tier | Area |\n|---|---|---|---|\n| 1 | Sam Whitford: refill flow requires calendar subsystem refactor; current calendar code is \"brittle\"; shimming would be regretted \"within two quarters\" | `(stakeholder-verbal, Sam Whitford, 2026-04-22)` \u2014 **stakeholder-verbal** (medium) | Feasibility |\n\n**Summary:** 2 ingestion + 2 stakeholder-verbal + 1 intuition + 1 industry-knowledge supporting; 1 stakeholder-verbal against. The supporting evidence is entirely concentrated in Value. The against signal is unresolved and uncontested.\n\n---\n\n## 2. Risk area coverage\n\n**Value (H-V1) \u2014 Non-empty, medium confidence.**\nTwo ingestion-anchored accounts with concrete pain data. Two corroborating stakeholder-verbal signals from CS (unverified against ticket system). The decision trigger the PM set requires: Finance confirmation of positive payback AND \u22653 independent customer confirmations. Current state: Finance has not been engaged; independent confirmations stand at 2, not 3. Neither condition is met.\n\n**Usability (H-U1) \u2014 Empty.**\nZero evidence for or against. No prototype exists. No usability sessions have been conducted. Maria Gallego's \"harassing\" notification concern lives correctly under Open Questions, not Evidence \u2014 it's a design constraint flag, not usability evidence. This area is a complete void.\n\n**Feasibility (H-F1) \u2014 One against, zero for.**\nSam Whitford flagged a calendar subsystem refactor as necessary and called the current codebase \"brittle\" with a \"we'll regret this within two quarters\" warning. He offered a 2-day scoping exercise as of 2026-04-22. As of 2026-05-17, he has not been asked to proceed. The single evidence entry is negative. The PM's own decision trigger requires Sam's scope to return \u22642 sprint-equivalents before this resolves \u2014 that scoping has not been run.\n\n**Viability (H-B1) \u2014 Empty.**\nZero evidence for or against. Finance has not been engaged. No business-case model exists. Jordan Reilly's verbal read that this is \"the single feature most likely to move retention in mid-market\" is captured in Open Questions with correct skepticism \u2014 it's not an evidence row because no model backs it. Retention impact (1pp vs 5pp vs noise) is entirely unknown.\n\n**Other risk (H-O1) \u2014 Empty.**\nZero evidence for or against. HIPAA implications of push-notifying waitlisted patients have not been reviewed. TCPA opt-in requirements for SMS/push have not been reviewed. No dependency mapping on EHR connectors or notification vendors has been done. Legal/compliance has not been engaged.\n\n---\n\n## 3. The call\n\n**Promotion is not warranted.** Not close.\n\nThe value case is genuinely interesting \u2014 two ingestion-anchored accounts with consistent pain, corroborating CS signal, and a plausible revenue-recovery thesis. That's a real foundation. But promotion requires the full set of risk areas to resolve to a confidence threshold sufficient to commit engineering, not just Value.\n\n**Specific gaps that must close before promotion is justified:**\n\n1. **Value (H-V1):** The PM's own decision trigger requires Finance confirmation of positive payback AND \u22653 independent customer confirmations. Third customer discovery call has not been run. Finance modeling has not been initiated. Jordan Reilly's \"double-digit accounts\" claim has not been verified against the actual CS ticket data. Two of three conditions the PM set are unmet.\n\n2. **Usability (H-U1):** The entire area is empty. There is no prototype and no usability data. At minimum, the 30-second task completion claim needs prototype testing with front-desk staff at Westside or Bayfront before this can be marked even partially validated. This is not a nice-to-have \u2014 usability evidence is a distinct risk gate, not a subset of value evidence.\n\n3. **Feasibility (H-F1):** An uncontested negative signal (Sam Whitford's refactor warning) with zero counterevidence. Sam offered a scope that would resolve or bound this concern in 2 days. That scope has not been commissioned in the 25 days since the warning was logged. This is the single lowest-effort gap to close: one ask to Sam produces the data needed to evaluate it.\n\n4. **Viability (H-B1):** No model, no Finance engagement, no retention sensitivity estimate. Jordan Reilly's verbal optimism about retention impact is categorized as Open Questions \u2014 correctly so. Until Finance produces a payback model against BrightSched's actual account utilization, this risk area remains open.\n\n5. **Other (H-O1):** No legal or compliance review. HIPAA and TCPA exposure for push-notifying waitlisted patients is real and has not been triaged. This is a blocking unknown \u2014 a compliance veto would reshape the entire flow.\n\n**What promotion would require, concretely:** H-V1 decision trigger met (Finance model positive + 3rd customer confirmation); H-U1 prototype testing showing <30 sec completion without patient complaints; H-F1 Sam's scope returning \u22642 sprint-equivalents; H-B1 Finance model positive payback <12 months; H-O1 legal confirming no material compliance blockers. Right now, zero of five decision triggers are met.\n\nThe hypothesis is well-structured and the value signal is worth pursuing \u2014 but it is at \"fund the next validation steps\" maturity, not \"promote and commit engineering\" maturity.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:evidence_quality_evaluated",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:risk_coverage_assessed",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:correct_first_call",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-pm-fills-gap.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 389.5,
+      "returncode": 0,
+      "cost_usd": 0.5365703,
+      "agent_response": "All files created and hypothesis updated. Here's the summary.\n\n---\n\n**Files written (4 new, 1 updated):**\n- `source/adhoc/2026-05-12-sam-whitford-feasibility-memo.md` \u2014 verbatim source, audit anchor\n- `source/adhoc/2026-05-15-casey-ito-business-case.md` \u2014 verbatim source, audit anchor\n- `ingestion/adhoc/2026-05-12-sam-whitford-feasibility-memo.md` \u2014 synthesis record\n- `ingestion/adhoc/2026-05-15-casey-ito-business-case.md` \u2014 synthesis record\n- `hypotheses/same-day-rebooking-flow.md` \u2014 H-F1 and H-B1 updated (evidence rows, confidence, open questions)\n\n---\n\n## Where things stand on promotability\n\n**Risk areas with evidence now:**\n\n- **Value (H-V1):** Solid. Two accounts with specific pain, VP CS verbal on ticket volume and churn attribution, industry corroboration. Confidence: medium. No meaningful gaps opened this turn.\n- **Feasibility (H-F1):** Moved from low to medium. Sam delivered the scope, withdrew his April concern, and recommends proceeding. Four evidence-for rows added. One non-trivial issue: the original decision trigger said \"\u22642 sprint-equivalents \u2192 resolved.\" Sam's point estimate is **3 sprints (\u00b11)**. The range's minimum touches 2, but the point estimate doesn't clear the trigger text. This needs a PM call before claiming feasibility is formally resolved.\n- **Viability (H-B1):** Moved from low to medium. Finance is now engaged, model is built, Priya's verbal sign-off is in. Meaningful progress. However: the decision trigger says \"positive payback period <12 months.\" The model shows breakeven ~Q2 year 2 \u2014 roughly 18 months under the upsell model. **The trigger as written is not met.** The retention-only math may push breakeven faster, but that path is not separately modeled. PM needs to either update the trigger threshold or separately model the retention-alone breakeven before treating viability as confirmed.\n\n**Risk areas with zero evidence:**\n\n- **Usability (H-U1):** Nothing. No prototype, no sessions, no patient-facing test. Maria Gallego's notification-fatigue note is a design constraint in discovery, not usability evidence. This is the biggest remaining gap before a promotion decision is defensible.\n- **Other/compliance (H-O1):** Nothing. HIPAA and TCPA review not done, EHR integration dependencies not mapped. This one is lower-cost to address (legal routing of a one-pager) but is still an open gate.\n\n**Net read:** Closer to promotable, but not promotable yet. The hypothesis went from \"two major risk areas with zero evidence\" to \"both have real medium-confidence evidence.\" That's a meaningful shift. What blocks promotion: (1) two risk areas still have no evidence at all; (2) both decision triggers have threshold problems that need PM attention before committing.\n\nIf you're heading toward a promotion decision next turn, the minimum I'd want in place: resolve the two trigger ambiguities explicitly (update the trigger text or produce the missing retention-only model for H-B1; make a call on the 3-sprint vs \u22642-sprint language for H-F1), and do at minimum a lightweight compliance routing for H-O1.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/adhoc/*feasibility*.md OR source/meetings/*feasibility*.md OR source/adhoc/*sam*.md OR source/meetings/*sam*.md OR source/**/2026-05-12*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-05-12-sam-whitford-feasibility-memo.md', 'source/adhoc/2026-05-12-sam-whitford-feasibility-memo.md', 'source/meetings/2026-04-22-sam-whitford-eng.md', 'source/adhoc/2026-05-12-sam-whitford-feasibility-memo.md']"
+        },
+        {
+          "name": "file_exists_glob:source/adhoc/*business*case*.md OR source/adhoc/*retention*.md OR source/adhoc/*viability*.md OR source/**/2026-05-15*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-05-15-casey-ito-business-case.md', 'source/adhoc/2026-05-15-casey-ito-business-case.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*feasibility*.md OR ingestion/meetings/*feasibility*.md OR ingestion/adhoc/*sam*.md OR ingestion/**/2026-05-12*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-05-12-sam-whitford-feasibility-memo.md', 'ingestion/adhoc/2026-05-12-sam-whitford-feasibility-memo.md', 'ingestion/adhoc/2026-05-12-sam-whitford-feasibility-memo.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*business*case*.md OR ingestion/adhoc/*retention*.md OR ingestion/adhoc/*viability*.md OR ingestion/**/2026-05-15*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-05-15-casey-ito-business-case.md', 'ingestion/adhoc/2026-05-15-casey-ito-business-case.md']"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*same-day*rebooking*.md OR hypotheses/*rebooking*flow*.md OR hypotheses/*same*day*refill*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/same-day-rebooking-flow.md', 'hypotheses/same-day-rebooking-flow.md']"
+        }
+      ],
+      "content": []
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-second-promotion-pass.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 401.73,
+      "returncode": 0,
+      "cost_usd": 0.62624715,
+      "agent_response": "Done. Here's what was written and why:\n\n---\n\n**Decision file created:** `decisions/2026-05-17-promote-same-day-rebooking-flow.md` \u2014 status `pending`, waiting on your sign-off to become `decided`.\n\n**Hypothesis status flipped:** `same-day-rebooking-flow.md` Meta status \u2192 `promoted`. H-V1, H-F1, and H-B1 individually marked `promoted` with resolution notes referencing the decision file. H-U1 and H-O1 left `active` \u2014 neither has been tested.\n\n**INDEXes updated:** decision appears in `decisions/INDEX.md \u00a7 Pending`; hypothesis moved to `hypotheses/INDEX.md \u00a7 Promoted` with a link to the decision file.\n\n---\n\n**Key things the decision file names explicitly:**\n\n*Explicitly NOT doing:* specific pricing tier (A vs B undecided), a specific GA date, cross-clinic/multi-tenant slot sharing, any wearable/Apple Watch integration, shipping without per-patient opt-in granularity.\n\n*Named ambiguities:* the +2.1pp retention lift assumes the churn-reason tag is causal (it isn't proven); iOS APNs policy exposure with no specified mitigation; pricing attach-rate (30%) untested with any customer; 5 design-partner accounts unconfirmed; HIPAA/TCPA legal review not done; H-U1 usability entirely untested pre-build.\n\n*Reversal conditions:* all four are specific and observable (scope doubling, material legal blocker, >90 sec task completion across \u22653 accounts, post-launch retention lift below +0.5pp).\n\nTo finalize: sign off on the decision file and I'll flip its status from `pending` to `decided`.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:decisions/2026-05*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-05-17-promote-same-day-rebooking-flow.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*same-day*rebooking*.md OR hypotheses/*rebooking*flow*.md OR hypotheses/*same*day*refill*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/same-day-rebooking-flow.md', 'hypotheses/same-day-rebooking-flow.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:correct_second_call",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:decisions/2026-05*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [
+      {
+        "name": "judge:audit_trail",
+        "passed": true,
+        "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+      }
+    ],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T18:41:10.968874+00:00",
+  "cost": {
+    "total_usd": 2.2151,
+    "max_usd": null,
+    "by_kind": {
+      "turn": 1.8401,
+      "judge": 0.3749
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.5356135
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.1417016
+      },
+      {
+        "kind": "judge",
+        "label": "evidence_quality_evaluated",
+        "cost": 0.0555538
+      },
+      {
+        "kind": "judge",
+        "label": "risk_coverage_assessed",
+        "cost": 0.0545133
+      },
+      {
+        "kind": "judge",
+        "label": "correct_first_call",
+        "cost": 0.05635705
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.5365703
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.62624715
+      },
+      {
+        "kind": "judge",
+        "label": "correct_second_call",
+        "cost": 0.0629118
+      },
+      {
+        "kind": "judge",
+        "label": "audit_trail",
+        "cost": 0.1455951
+      }
+    ]
+  }
+}

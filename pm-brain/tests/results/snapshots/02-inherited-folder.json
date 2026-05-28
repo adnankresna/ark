@@ -1,0 +1,500 @@
+{
+  "scenario": "02-inherited-folder",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-c2k4rsjd",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T21:26:24.179321+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-bulk-import.md",
+      "model": "sonnet",
+      "timeout_s": 1200,
+      "duration_s": 918.73,
+      "returncode": 0,
+      "cost_usd": 1.5296192499999999,
+      "agent_response": "All files written. Here is the routing summary Maya asked for.\n\n---\n\n## What landed where\n\n**22 source + ingestion files created** (11 source verbatim anchors + 11 synthesized ingestion records):\n\n| Artifact | Source | Ingestion |\n|---|---|---|\n| Strategy v3 (Alex, Nov '25) | `source/adhoc/2025-11-15-strategy-v3.md` | `ingestion/adhoc/2025-11-15-strategy-v3.md` |\n| Q3 roadmap \u2014 shipped (Alex + Devon, Feb '26) | `source/adhoc/2026-02-08-roadmap-q3.md` | `ingestion/adhoc/2026-02-08-roadmap-q3.md` |\n| Q4 draft \u2014 personal, never shared (Alex, Mar '26) | `source/adhoc/2026-03-22-roadmap-q4-draft.md` | `ingestion/adhoc/2026-03-22-roadmap-q4-draft.md` |\n| Personas research (Jordan Lee, Sep '24) | `source/adhoc/2024-09-10-personas-2024.md` | `ingestion/adhoc/2024-09-10-personas-2024.md` |\n| Interview \u2014 Priya M., Saver (Alex, Feb '26) | `source/interviews/2026-02-15-priya-m.md` | `ingestion/interviews/2026-02-15-priya-m.md` |\n| Interview \u2014 Tom K., Spender (Alex, Mar '26) | `source/interviews/2026-03-22-tom-k.md` | `ingestion/interviews/2026-03-22-tom-k.md` |\n| Competitor analysis (contractor, Nov '24) | `source/market/2024-11-01-competitor-analysis.md` | `ingestion/market/2024-11-01-competitor-analysis.md` |\n| Metrics snapshot (analytics, Apr '26) | `source/adhoc/2026-04-30-metrics-snapshot.md` | `ingestion/adhoc/2026-04-30-metrics-snapshot.md` |\n| Slack thread \u2014 export + pricing (Mar '26) | `source/meetings/2026-03-30-slack-pricing-export.md` | `ingestion/meetings/2026-03-30-slack-pricing-export.md` |\n| Eng feasibility note (Devon, Mar '26) | `source/adhoc/2026-03-25-eng-feasibility-note.md` | `ingestion/adhoc/2026-03-25-eng-feasibility-note.md` |\n| CS monthly April '26 (Riya) | `source/meetings/2026-04-30-cs-monthly.md` | `ingestion/meetings/2026-04-30-cs-monthly.md` |\n\n**Knowledge files updated:** `knowledge/product/metrics.md`, `knowledge/product/roadmap.md`, `knowledge/users/personas.md` (from Jordan's 2024 research, heavily age-caveated), `knowledge/users/insights.md` (2 promoted themes + 1 contradiction), `knowledge/market/landscape.md` (18-month-old snapshot, caveated).\n\n**Stakeholders created:** `alex-reyes.md` (departed, context only), `devon-park.md`, `riya-sundaram.md`. Sam from marketing appears in one Slack thread \u2014 not enough for a full file yet.\n\n**`knowledge/strategy.md` was NOT populated.** Strategy v3 is 18 months old and authored by a departed PM. That file requires your sign-off before I treat it as current. I'll flag it as the first thing to resolve in your next session.\n\n---\n\n## Candidate hypotheses opened (all proposed \u2014 none promoted)\n\n1. **`hypotheses/daily-loop.md`** \u2014 Do Q3 daily-loop features move the needle? Evidence is mixed: streak counter has 64% adoption, but sessions/week are still declining (2.4 \u2192 2.1) and W4 retention fell sharply. The feature may be working for some users but not arresting aggregate decline.\n\n2. **`hypotheses/complexity-tax.md`** \u2014 Are Q3 additions degrading Saver retention? Priya's interview is the clearest signal. Exit survey (12/42 cited \"cluttered\") is from the same user population, not an independent second source. Needs fresh churned-Saver interviews.\n\n3. **`hypotheses/shared-budgets-demand.md`** \u2014 Is the couples/roommate segment large enough to warrant building? CS ticket trend (4-month climb to #3), Tom K.'s specific ask, and 9/42 churned to Monarch all point the same direction. Build is 10 weeks + risky data model migration. Strategy v3 says defer to 2027+. Unresolved.\n\n4. **`hypotheses/social-engagement.md`** \u2014 Would social features help? Evidence is heavily against for the Saver + Spender core (both interviews: hard no; CS: near-zero demand). Alex's Q4 draft is the only \"for\" evidence, and it's an unpublished personal intuition. The Achiever segment (25%, est.) is unrepresented in the available interviews \u2014 the one possible exception.\n\n5. **`hypotheses/budget-alerts.md`** \u2014 Budget alerts as the path-of-least-resistance win? #1 CS ask by volume, strategy-aligned, no evidence against. No interview data yet. Build scope and notification architecture unknown.\n\n---\n\n## Most obvious tensions (not resolved \u2014 for your next session)\n\n**Tension 1: Strategy v3's \"no social\" vs. Alex's Q4 pivot thesis.** Strategy v3 (leadership-approved, Nov '25) explicitly lists social features as an anti-priority. Alex's personal Q4 draft (never shared, Mar '26) proposes social as the step-change. Alex himself flagged this: \"This is a real departure from strategy v3. I think the strategy needs an update.\" The metrics confirm he was right that retention is declining \u2014 but his social inference is not validated. The question for you: is the strategy still the strategy, or does the retention drop warrant revisiting it?\n\n**Tension 2: \"Solo-user focus / defer couples to 2027\" vs. the CS signal.** Strategy v3 says wait. CS ticket demand for shared budgets has climbed from #8 to #3 over four months. Nine churned Pro users explicitly said they left for Monarch's couples feature. This is the clearest case of a customer signal conflicting with a documented strategic choice. It doesn't mean the strategy is wrong \u2014 \"we know some users want this; we're deferring anyway\" is a defensible position \u2014 but it's not a gap, it's a decision that may need to be re-examined given the churn data.\n\n**Tension 3: Alex's \"export = Achiever ask\" vs. the evidence.** Alex classified CSV export as an Achiever-persona request and soft-no'd it. But Tom K. (classified Spender, not Achiever) also asked for export, with an analytical rationale (\"do my own analysis\"). CS shows it's the #2 most-requested feature at 31 tickets/month. Devon says it's \"trivial to build, few days.\" This may be a misclassification that's been holding back an easy win \u2014 or the Achiever framing is right for most of the requesters. Worth checking.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/**/*strategy*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2025-11-15-strategy-v3.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*roadmap*q3*.md OR source/**/*q3*roadmap*.md OR source/**/2026-q3*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-02-08-roadmap-q3.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*roadmap*q4*.md OR source/**/*q4*draft*.md OR source/**/*alex*draft*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-03-22-roadmap-q4-draft.md', 'source/adhoc/2026-03-22-roadmap-q4-draft.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*personas*.md OR source/**/*jordan*personas*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2024-09-10-personas-2024.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*priya*.md OR source/interviews/*priya*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-02-15-priya-m.md', 'source/interviews/2026-02-15-priya-m.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*tom*.md OR source/interviews/*tom*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-03-22-tom-k.md', 'source/interviews/2026-03-22-tom-k.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*competitor*.md OR source/**/*landscape*.md",
+          "passed": true,
+          "detail": "matched: ['source/market/2024-11-01-competitor-analysis.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*metrics*.md OR source/**/*snapshot*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-04-30-metrics-snapshot.md', 'source/adhoc/2026-04-30-metrics-snapshot.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*pricing*.md OR source/**/*slack*pricing*.md OR source/**/*export*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-03-30-slack-pricing-export.md', 'source/meetings/2026-03-30-slack-pricing-export.md', 'source/meetings/2026-03-30-slack-pricing-export.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*feasibility*.md OR source/**/*devon*.md OR source/**/*eng*note*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-03-25-eng-feasibility-note.md', 'source/adhoc/2026-03-25-eng-feasibility-note.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*cs*monthly*.md OR source/**/*cs-monthly*.md OR source/**/*riya*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-04-30-cs-monthly.md', 'source/meetings/2026-04-30-cs-monthly.md', 'source/interviews/2026-02-15-priya-m.md']"
+        },
+        {
+          "name": "hypothesis_count_at_least:2",
+          "passed": true,
+          "detail": "found 5 non-stub hypothesis files (total .md = 5)"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:bulk_ingest_caution",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (5 match)"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-tension-surface.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 329.15,
+      "returncode": 0,
+      "cost_usd": 0.49011970000000005,
+      "agent_response": "I have all the artifacts. Synthesizing now.\n\n---\n\n## Tension list \u2014 2026-05-17\n\n*Based on: source/adhoc/2025-11-15-strategy-v3.md, source/adhoc/2026-03-22-roadmap-q4-draft.md, source/adhoc/2026-02-08-roadmap-q3.md, source/adhoc/2026-04-30-metrics-snapshot.md, source/adhoc/2024-09-10-personas-2024.md, source/interviews/2026-02-15-priya-m.md, source/interviews/2026-03-22-tom-k.md, source/meetings/2026-03-30-slack-pricing-export.md, source/meetings/2026-04-30-cs-monthly.md, source/market/2024-11-01-competitor-analysis.md, source/adhoc/2026-03-25-eng-feasibility-note.md*\n\n---\n\n### Confirmed contradictions\n\n**1.** \"Social features are an explicit anti-priority \u2014 vanity engagement, doesn't reinforce the habit.\" (`source/adhoc/2025-11-15-strategy-v3.md`, Alex Reyes, 6 months ago, leadership-approved) **vs.** \"I think we need a step-change, and I think it's social. This is a real departure from strategy v3. I think the strategy needs an update.\" (`source/adhoc/2026-03-22-roadmap-q4-draft.md`, Alex Reyes, ~8 weeks ago, never socialized to eng or leadership) \u2014 **The same PM reversed his own approved strategy commitment four months after writing it, in a document no one else ever saw.**\n\nSame author, different times, large swing in direction. The Q4 draft explicitly names the contradiction. The strategy is the higher-authority document (leadership-approved). The Q4 draft is an unpublished personal hypothesis under obvious departure anxiety (\"I need to sell this to leadership\" \u2014 which never happened).\n\n---\n\n**2.** \"Solo-user focus. Our user is one person managing their own money. Defer couples/family to 2027 at earliest.\" (`source/adhoc/2025-11-15-strategy-v3.md`, Alex Reyes, 6 months ago, leadership-approved) **vs.** Shared budgets #8 Jan \u2192 #3 Apr CS ticket volume, 4-month consistent climb; 9/42 Pro churners cited \"switched to Monarch for couples.\" (`source/meetings/2026-04-30-cs-monthly.md`, Riya Sundaram, 17 days ago) \u2014 **The strategy defers the fastest-climbing CS request and the second-most-cited churn reason among a recent Pro exit cohort.**\n\nDifferent sources, different authors. Strategy is older and was a deliberate choice. CS signal is very recent, correlational, from a small absolute base (28 tickets/month from 120k MAU; n=42 exit survey). Not the same age \u2014 the CS signal postdates the strategy by five months and is the most current artifact in the folder.\n\n---\n\n**3.** \"It's an Achiever ask. We're trying to deprioritize Achiever. Soft no.\" (re: export, `source/meetings/2026-03-30-slack-pricing-export.md`, Alex Reyes, ~7 weeks ago) **vs.** Tom K. (Spender, free tier, 3 months): \"Export to a spreadsheet. I want to do my own analysis sometimes.\" (`source/interviews/2026-03-22-tom-k.md`, Alex Reyes, ~8 weeks ago) \u2014 **Alex categorized export as an Achiever-only ask in Slack 8 days after conducting an interview where a user classified as Spender asked for it; both artifacts are in his own folder.**\n\nSame author, same week. The Slack characterization and the interview are 8 days apart. This may not be a strategic contradiction \u2014 it might be that Alex chose to assign Tom's export request to the Achiever bucket regardless of Tom's persona classification, or simply didn't connect the two. Either way, the \"Achiever ask\" label isn't clean.\n\n---\n\n**4.** \"Social and shared budgets are table stakes for premium apps targeting users 25-40. Monarch's growth driven by couples segment. Tally should add shared budgets and AI insights to remain competitive in premium.\" (`source/market/2024-11-01-competitor-analysis.md`, unknown contractor, 18 months ago) **vs.** \"Social features \u2014 anti-priority. Couples/family \u2014 defer to 2027+.\" (`source/adhoc/2025-11-15-strategy-v3.md`, Alex Reyes, 6 months ago, leadership-approved) \u2014 **The strategy explicitly rejected both recommendations from the competitor analysis, which Alex had in his reference folder.**\n\nDifferent sources, 12 months apart. Strategy is newer and the higher-authority document. Whether Alex consciously overrode this analysis or wasn't looking at it when he wrote strategy v3 is unknown. The competitor analysis is a contractor deliverable with no named author; it was in Alex's \"reference\" subfolder, not his active strategy stack. It's also 18 months old \u2014 market conditions may have shifted. The direction of the tension (social/shared = competitor pressure; anti-social = strategy) is real regardless.\n\n---\n\n**5.** \"Get the median user from **1.2** to 3+ sessions/week.\" (`source/adhoc/2025-11-15-strategy-v3.md`, Alex Reyes, Nov 2025 \u2014 6 months ago) **vs.** \"Median sessions/week: **2.1** (Q1 '25: **2.4**; trending down).\" (`source/adhoc/2026-04-30-metrics-snapshot.md`, Analytics auto-generated, Apr 2026 \u2014 17 days ago) \u2014 **The strategy's stated baseline (1.2) is less than half what the metrics show for the same metric in an overlapping period.**\n\nDifferent sources, different ages. The strategy was written in Nov 2025. The metrics snapshot shows Q1 2025 (nine months before the strategy) was 2.4 sessions/week, declining to 2.1 by April 2026. The baseline of 1.2 in the strategy doesn't fit that trajectory. Possibilities: the strategy used a different denominator (e.g., median among new or inactive users only), it's a typo, or the metric definition differs. You do not have enough data in this folder to resolve it \u2014 but anyone quoting the strategy's 3+ target at the CEO sync should know the starting line is contested.\n\n---\n\n**6.** \"Streak counter: 64% MAU touch; 38% with active streak \u22653 days.\" \u2014 high adoption (`source/adhoc/2026-04-30-metrics-snapshot.md`, Analytics, Apr 2026 \u2014 17 days ago, same document) **vs.** \"Median sessions/week: 2.1, down from 2.4 in Q1 '25. W4 retention: 14.2%, down from 22.1% YoY.\" \u2014 engagement and retention declining (same document, same snapshot) \u2014 **The most-adopted Q3 feature co-exists in the same snapshot with declining sessions and a 36% YoY drop in W4 retention.**\n\nSingle source, internally contradictory. High adoption and declining retention are both true simultaneously. This is a correlation problem, not a measurement error: the analytics note says \"doesn't correlate cleanly with any single feature ship.\" The streak counter's adoption rate may be a selection effect (existing high-frequency users activate streaks; the feature didn't create the frequency). Not proven, but the adoption metric and the retention metric point in opposite directions.\n\n---\n\n**7.** \"The Achiever (~25% of base): loves leaderboards, progress visualization.\" (`source/adhoc/2024-09-10-personas-2024.md`, Jordan Lee, 20 months ago) **vs.** \"Almost zero asks for: leaderboards, social, AI insights.\" (`source/meetings/2026-04-30-cs-monthly.md`, Riya Sundaram, Apr 2026 \u2014 17 days ago) \u2014 **The persona research predicts an Achiever demand for leaderboards; recent CS aggregates show near-zero actual ask volume across the whole user base.**\n\nDifferent sources, different authors, 20-month gap. The personas are substantially stale (Jordan noted re-validation was due annually; it hasn't happened). The CS signal is an aggregate across all tiers and segments \u2014 it does not break out Achiever specifically, so the absence of leaderboard tickets doesn't prove Achievers don't want it; it could mean Achievers don't use CS to request it, or that Achievers have already left for other tools. Neither the interview evidence (zero Achiever interviews in this folder) nor the CS data settles whether Achievers want leaderboards. The real gap is that there are no Achiever interviews in any artifact in this folder.\n\n---\n\n### Ambiguous \u2014 might or might not be a contradiction\n\n**A.** \"AI insights rolling out across the market. Copilot's launch widely covered. Tally should add AI insights to remain competitive.\" (`source/market/2024-11-01-competitor-analysis.md`, contractor, 18 months ago) **vs.** \"AI-driven financial advice \u2014 anti-priority. Regulatory risk, not our wheelhouse.\" (`source/adhoc/2025-11-15-strategy-v3.md`, Alex Reyes, 6 months ago) \u2014 The competitor analysis describes \"AI insights\" as a weekly narrative summary (Copilot's version). Devon's feasibility note calls the same feature \"weekly money story, generated by an LLM \u2014 3 weeks to build; framed as storytelling, not advice.\" Strategy v3 blocks \"AI-driven financial advice\" on regulatory grounds. **These may be the same feature with different labels, or genuinely different products (summary vs. advice). If they're the same thing, it's a contradiction. If strategy v3 was blocking regulatory advice while the market is just producing summaries, there's no conflict.** The label difference is doing too much work to call this a clean X vs. NOT-X.\n\n**B.** Priya M. (Saver, Pro, 18 months): \"I don't want gamification. I want a calculator with categories.\" Streak counter cited as annoying. (`source/interviews/2026-02-15-priya-m.md`, Alex Reyes, ~3 months ago) **vs.** Tom K. (Spender, free tier, 3 months): \"The streak counter makes it feel less like a chore.\" (`source/interviews/2026-03-22-tom-k.md`, Alex Reyes, ~8 weeks ago) \u2014 These are two users with different preferences about the same feature, not two claims about the same fact. **This is different lenses (Saver vs. Spender), not a factual contradiction.** The tension is real but it's a product design problem \u2014 the same feature can't simultaneously satisfy both \u2014 not a conflict about what's true. Both data points are probably accurate as stated. Calling it a contradiction would flatten the actual signal.\n\n**C.** \"Almost zero asks for AI insights.\" (`source/meetings/2026-04-30-cs-monthly.md`, Riya Sundaram, Apr 2026) **vs.** Tom K. (Spender): \"Maybe? I don't really trust AI with money stuff. But I'd try it.\" (`source/interviews/2026-03-22-tom-k.md`, Alex Reyes, ~8 weeks ago) \u2014 Riya reports near-zero CS volume for AI insights. Tom expresses lukewarm curiosity. **This is almost certainly not a contradiction** \u2014 Tom's comment is speculative (\"I'd try it\") and CS volume is an active-request signal. You'd expect low CS volume even from a feature people would passively try. Not worth treating as a real conflict; flagging it because it could be misread as one.\n\n---\n\n### What this picture means for the CEO sync\n\nYou can honestly say: the folder contains six coherent external signals and four internal contradictions. The most serious are tensions 1 (Alex reversed his own strategy in private), 5 (the metric baseline in the strategy doesn't match the data), and 3 (the export segmentation call may be wrong based on evidence Alex himself collected). Tensions 2 and 4 are genuine strategic questions with no clean resolution from current data. Tension 7 is a data gap masquerading as a contradiction \u2014 it can't be resolved without Achiever interviews.\n\n---\n\n*Post-task: no file writes made beyond this synthesis. Strategy tensions require PM sign-off before writing to `knowledge/strategy.md` (per CLAUDE.md escalation rules). Maintenance log entry pending \u2014 no log directory yet exists; flag if you want me to create `maintenance/log/2026-05-17.md`.*",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:tensions_enumerated",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-ceo-pressure.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 204.59,
+      "returncode": 0,
+      "cost_usd": 0.37530695,
+      "agent_response": "Files written. Here are the deliverables:\n\n---\n\n## Slack reply to Naomi\n\n> Hey Naomi \u2014 I've been in Alex's folder. Quick flag before I iterate on his draft: it proposes social features as the Q4 bet (leaderboards, shared challenges), but that directly contradicts strategy v3, which lists social as an explicit anti-priority. Alex knew this and flagged the conflict in his notes \u2014 he just never resolved it before he left. Meanwhile April CS data has budget alerts and shared budgets as the #1 and #3 most-requested features, and neither made it into his draft.\n>\n> I don't want to hand you something I can't defend in a board Q&A \u2014 or put a direction in the pre-read that we'd need to walk back in August.\n>\n> What I can deliver by Friday: a one-page tension memo. Here's Alex's thesis, here's what the customer signals actually say, here's the specific conflict that needs to resolve before we commit. It's honest about where we are and gives the board the right framing for a new PM taking over.\n>\n> Then give me two more weeks \u2014 3\u20134 targeted customer calls, a feasibility check with Devon, and a 30-min session with you to confirm whether strategy v3 is still the bet or we're ready to update it. I can have a real Q4 plan with conviction behind it by May 30.\n>\n> Does that work? If you want I can frame the Friday memo as a board-ready \"here's the state + the commitment timeline\" rather than a gap doc.\n\n---\n\n## Friday memo outline\n\n**Q4 Direction: State of the Bet**\n*Maya Chen, PM \u2014 2026-05-09 (Day 12)*\n\n**The situation**\nNo committed Q4 plan. Alex's personal draft proposed a direction but was never shared with engineering or leadership before he left.\n\n**What Alex's draft says**\n- Theme: social engagement \u2014 leaderboards, shared challenges, public goals\n- Thesis: social is the step-change that breaks the retention plateau\n- Status: unsocialized personal draft; never scoped or costed with Devon\n\n**Why it isn't the answer as written**\n- Contradicts strategy v3 directly (social = explicit anti-priority)\n- CS April data: near-zero demand for social; top asks are budget alerts (#1, 47 tickets/month, 4-month trend) and shared budgets for couples (#3, climbing since January)\n- Alex acknowledged the conflict himself and never resolved it\n\n**What the signals point toward instead**\n- Budget alerts: high-demand, strategy-aligned (habit reinforcement), likely fast to build\n- Shared budgets (couples): strong and growing demand; strategy v3 defers to 2027 \u2014 that deferral may be worth revisiting\n- Retention plateau: Q3 features shipped but the data hasn't confirmed they moved the needle\n\n**What needs to resolve before we commit**\n1. Are budget alerts the clear Q4 anchor?\n2. Is the couples segment large enough to pull shared budgets forward from 2027?\n3. Is strategy v3's solo-user focus still the right bet at our current scale?\n\n**Resolution path**\n- May 19\u201323: 3\u20134 customer interviews + Devon feasibility check on top 2 candidates\n- May 26: PM presents direction options to Naomi for decision\n- May 30: Q4 direction committed and team briefed\n\n---\n\n**What I wrote to the brain:**\n- `source/adhoc/2026-05-06-ceo-pressure.md` \u2014 verbatim artifact preserved\n- `ingestion/adhoc/2026-05-06-ceo-pressure.md` \u2014 synthesis, routing, both deliverables saved\n- `stakeholders/naomi.md` \u2014 new CEO stakeholder file created\n- `stakeholders/INDEX.md` \u2014 Naomi added to roster\n- `knowledge/strategy.md \u00a7 Tensions` \u2014 T-01 added: social-pivot draft vs. strategy v3 vs. CS signals, with resolution options and open status\n\nThe Friday memo does not commit to a direction. The Slack message buys two weeks by naming the actual conflict precisely \u2014 which is more credible than vague \"I need more time.\"",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:runway_draft",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-interview-priya.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 640.72,
+      "returncode": -1,
+      "cost_usd": 0.0,
+      "agent_response": "",
+      "stderr_tail": "TIMEOUT after 600s",
+      "error": "timeout",
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*priya*may*.md OR source/interviews/*2026-05*priya*.md OR source/interviews/*priya*2026-05*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-05-11-priya-m-followup.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*priya*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-02-15-priya-m.md', 'ingestion/interviews/2026-05-11-priya-m-followup.md']"
+        },
+        {
+          "name": "file_modified_glob:stakeholders/*priya*.md OR knowledge/users/insights.md OR ingestion/interviews/*priya*.md",
+          "passed": true,
+          "detail": "changed: ['knowledge/users/insights.md', 'ingestion/interviews/2026-02-15-priya-m.md', 'ingestion/interviews/2026-05-11-priya-m-followup.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:insight_promotion",
+          "passed": true,
+          "detail": "verdict=PASS | target=file:knowledge/users/insights.md"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "input": "turn-05-eng-devon.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 259.92,
+      "returncode": 0,
+      "cost_usd": 0.5385902499999999,
+      "agent_response": "Done. Here's what was created and updated:\n\n---\n\n**Created (2 new files):**\n\n- `source/meetings/2026-05-12-devon-park.md` \u2014 verbatim audit anchor\n- `ingestion/meetings/2026-05-12-devon-park.md` \u2014 synthesis with routing notes\n\n**Updated (5 existing files):**\n\n- `stakeholders/devon-park.md` \u2014 first Maya 1:1 logged; open ask \"meet Devon\" closed; feasibility table updated to 12-14 wks + spike; communication style filled in; billing/spike/pricing open asks added; last-touched \u2192 2026-05-12\n- `stakeholders/INDEX.md` \u2014 Devon last-touched updated; note about \"not yet met\" corrected; high-friction note revised to reflect alignment shift\n- `hypotheses/shared-budgets-demand.md (H-V1)` \u2014 Devon verbal endorsement added as `(stakeholder-verbal, Devon Park, 2026-05-12)` evidence row; last-updated bumped\n- `hypotheses/shared-budgets-demand.md (H-F1)` \u2014 Evidence-against updated: 12-14 weeks (not 10) + 2-week spike required; March row kept but labeled as superseded\n- `hypotheses/social-engagement.md (H-V1)` \u2014 Devon's \"zero new CS/sales asks for leaderboards\" added as evidence-against; last-updated bumped\n- `ingestion/adhoc/2026-03-25-eng-feasibility-note.md` \u2014 Superseded banner added pointing to the 05-12 meeting\n\n**Held for PM \u2014 not written:**\n\n- `knowledge/strategy.md` \u2014 Devon's Achiever-weight framing (matching Jordan's personas + CS monthly) is approaching the tension threshold but not there yet. Two independent internal reads, not the multi-type evidence bar CLAUDE.md requires. Flagged in ingestion routing notes for PM to decide whether to elevate.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/meetings/*devon*.md OR source/meetings/*eng*may*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-05-12-devon-park.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/meetings/*devon*.md OR ingestion/meetings/*eng*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/meetings/2026-05-12-devon-park.md']"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/shared-budgets-demand.md', 'hypotheses/social-engagement.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:risk_area_updated",
+          "passed": false,
+          "detail": "verdict=UNPARSED | target=glob:hypotheses/*.md (6 match) | reason=empty judge response | error=claude_not_found"
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "input": "turn-06-resolve-strategy-vs-roadmap.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 482.32,
+      "returncode": 0,
+      "cost_usd": 0.76048435,
+      "agent_response": "The INDEX is clean. Here's a complete accounting of every change made and why:\n\n---\n\n## What changed\n\n### New files created\n\n**`source/meetings/2026-05-13-naomi-strategy-resolution.md`** \u2014 verbatim source anchor for the Naomi 1:1. Maya's account preserved exactly as given. Never to be edited.\n\n**`ingestion/meetings/2026-05-13-naomi-strategy-resolution.md`** \u2014 synthesis + routing: three decisions confirmed, links to all downstream files it triggered.\n\n**`decisions/2026-05-13-strategy-v3-confirmed.md`** \u2014 full decision record. Status: `decided`. Every Evidence and Explicitly-NOT-doing row carries a provenance tag. Reversal condition is specific and observable (formal strategy amendment with Naomi sign-off, or N\u22655 Achiever interviews + segment revenue proof).\n\n---\n\n### Files updated\n\n**`knowledge/strategy.md` \u2014 T-01 resolved.** Status changed from \"Open\" to \"Resolved 2026-05-13\" with links to the decision record and meeting ingestion. The shared budgets secondary tension is explicitly called out as still open \u2014 it was not resolved by this meeting.\n\n**`ingestion/adhoc/2026-03-22-roadmap-q4-draft.md` \u2014 status: SUPERSEDED.** Resolution block added explaining why it's retained (historical audit), who confirmed the withdrawal (Naomi), and what to read if you want the full story. Source file (`source/adhoc/2026-03-22-roadmap-q4-draft.md`) untouched \u2014 it's the audit anchor.\n\n**`hypotheses/social-engagement.md` \u2014 both hypotheses demoted.** File-level Status: `demoted`. Demotion note at top explains the conditions to reopen. H-V1 and H-F1 both carry Resolution notes with the decision record link. All existing evidence rows and their provenance tags preserved intact \u2014 the history of why this was even opened is the audit trail.\n\n**`hypotheses/INDEX.md`** \u2014 `social-engagement.md` removed from Active, added to Demoted with a one-line explanation and the reopen condition.\n\n**`decisions/INDEX.md`** \u2014 new decision added to Recently decided.\n\n**`stakeholders/naomi.md`** \u2014 2026-05-13 touchpoint added to the log; strategy reconcile open ask marked resolved; last-touched updated to 2026-05-13.\n\n**`knowledge/product/roadmap.md`** \u2014 Q4 \"Next\" section updated: Alex's draft is now explicitly described as not adopted (with the decision record link), so any future PM reading the roadmap will see the canonical answer in-place.\n\n---\n\n### What I left alone and why\n\n**`source/adhoc/2026-03-22-roadmap-q4-draft.md`** \u2014 never edited. It's the audit anchor; the rule is absolute.\n\n**`knowledge/users/insights.md` \u2014 Theme 1 (core users reject social)** stays exactly as is. The customer evidence there is correct and well-documented; the Naomi confirmation doesn't change what users told us, it just means the strategic decision now agrees with the evidence. No adjustment needed.\n\n**`hypotheses/shared-budgets-demand.md`** \u2014 untouched. Shared budgets is CS-demand-driven and independent of the social pivot. The secondary tension in strategy.md remains explicitly open.\n\n**Other active hypotheses** (daily-loop, complexity-tax, budget-alerts, minimal-mode) \u2014 none of these drew weight from the Alex draft. No rollback needed.\n\n**`knowledge/product/roadmap.md` \"Parked\" section \u2014 AI insights v1** \u2014 left as parked for cost reasons. The parked status predates and is independent of the strategic decision. The decision record's Remaining Ambiguities section notes this explicitly.\n\n---\n\n### One open item flagged\n\nThe shared budgets secondary tension was not addressed in the Naomi meeting. CS demand has climbed four consecutive months. Naomi confirmed strategy can be amended from evidence. This is the strongest candidate for a future strategy conversation \u2014 but it requires its own evidence review, not a byproduct of this resolution.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/**/*naomi*.md OR source/meetings/*naomi*.md OR source/**/*ceo*sync*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-05-13-naomi-strategy-resolution.md', 'source/meetings/2026-05-13-naomi-strategy-resolution.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/**/*naomi*.md OR ingestion/meetings/*naomi*.md OR ingestion/**/*ceo*sync*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/meetings/2026-05-13-naomi-strategy-resolution.md', 'ingestion/meetings/2026-05-13-naomi-strategy-resolution.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*strategy*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2025-11-15-strategy-v3.md', 'source/meetings/2026-05-13-naomi-strategy-resolution.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*q4*.md OR source/**/*draft*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-03-22-roadmap-q4-draft.md', 'source/adhoc/2026-03-22-roadmap-q4-draft.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:contradiction_resolved_with_audit",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:knowledge/**/*.md (11 match)"
+        }
+      ]
+    },
+    {
+      "turn": 7,
+      "input": "turn-07-maintenance-sweep.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 194.72,
+      "returncode": 0,
+      "cost_usd": 0.3798031,
+      "agent_response": "---\n\n## Staleness pass \u2014 May 2026\n\n**Context note:** Today is 2026-05-18. You're using this to decide what to re-verify before the Q4 decision next week.\n\n---\n\n### 1. Jordan's personas (Sept 2024) \u2014 20 months old\n**Verdict: flag-and-keep** (already labeled in `knowledge/users/personas.md`)\n\n- **Age:** 20 months. Annual re-validation was overdue even at ingestion.\n- **Why it might be stale:** Jordan departed 14 months ago. The 35/40/25 segment split is a 2024 estimate. The Achiever revenue claim (\"loudest in support, smallest in revenue\") is the direct source of the \"don't let Achiever asks drive the roadmap\" instruction \u2014 it has never been independently verified. There are zero Achiever interviews in the last 18 months. Priya and Tom loosely corroborate Saver/Spender archetypes but are two people, both interviewed by the same departed PM \u2014 not fully independent.\n- **What you'd want fresh:** 12\u201315 interviews across all three segments. Short survey (n=150+) to re-validate proportions. Specifically: confirm whether the Achiever revenue claim still holds before using it to justify a \"no\" to export or other Achiever-adjacent asks.\n- **Pre-Q4 caution:** Any roadmap argument that leans on a specific persona percentage is wobbly. The Saver/Spender/Achiever JTBD framing is still the best available frame \u2014 use it. Do not use the percentages as hard budget (\"this serves 40% of users\").\n\n---\n\n### 2. Strategy v3 (Nov 2025) \u2014 6 months old, confirmed 2026-05-13\n**Verdict: not stale** \u2014 Naomi confirmed in person five days ago.\n\n- **One critical gap:** `knowledge/strategy.md` north-star, priorities, and non-goals fields are **blank template placeholders**. The sessions/week target (3+) lives in metrics.md but not in strategy.md itself. You're heading into a Q4 commitment with the canonical strategy file empty. This isn't staleness \u2014 it's an unfilled document. Before the Q4 decision, this needs to be populated. PM provides the v3 content; brain writes it in.\n\n---\n\n### 3. Contractor competitor analysis (Nov 2024) \u2014 18 months old\n**Verdict: retire as current intelligence; keep as historical baseline**\n\n- **Age:** 18 months. Anonymous contractor, no methodology disclosed.\n- **Why it might be stale:** Copilot shipped AI in Oct '24 \u2014 18 months of market reaction is completely unknown. Monarch's pricing, growth, and feature set are unknown. New entrants are possible. \"Shared budgets = table stakes\" is the contractor's recommendation, not a validated claim.\n- **What you'd want fresh:** AppStore review volumes and current pricing for Monarch/Copilot/YNAB. A few hours hands-on in Monarch's couples flow specifically, given the CS churn signal (\"switched to Monarch for couples\").\n- **Pre-Q4 caution:** Do not cite \"table stakes\" as an established market fact in a Q4 proposal. The CS signal (9/42 Pro churners switched to Monarch for couples) is a more current reference point \u2014 but it's a small sample from one population.\n\n---\n\n### 4. Q3 roadmap (Feb 2026) \u2014 mostly shipped, ~3 months old\n**Verdict: flag-and-keep as historical record**\n\n- Shipped features are facts; they don't go stale as history.\n- One live item: goal-progress widget, expected ship ~2026-05-20. That's two days from now \u2014 needs a status check. Its adoption data (4% iOS MAU at 2 weeks) is too early to read.\n- No other action needed.\n\n---\n\n### 5. Devon's March feasibility note (March 2026) \u2014 partially superseded\n**Verdict: flag-and-keep** \u2014 superseded header already exists for shared budgets\n\n- **Superseded \u2014 do not use:** Shared budgets \"~10 weeks.\" Devon revised to 12\u201314 weeks + a required 2-week spike before sprint commitment (May 12 1:1). The old number is now stale. I've updated `knowledge/product/roadmap.md \u00a7 Later` this turn to reflect the corrected figure.\n- **Still current:** AI insights \"~3 weeks build\" \u2014 unchanged, but the pricing block is harder now (model costs worsened since March; Devon won't build without unit economics defined). Friend leaderboards \"~6 weeks\" \u2014 unchanged, but demand context has weakened (Devon: zero new CS/sales asks since Maya joined).\n\n---\n\n### 6. Things you didn't name \u2014 honest additions\n\n**A. `knowledge/strategy.md` \u2014 highest-priority gap before Q4**\nBlank template. Not stale \u2014 just unfilled. The decision you're making next week has no populated strategy anchor. Flag this as the single most urgent pre-decision action.\n\n**B. `knowledge/market/landscape.md`** \u2014 same vintage as the competitor analysis, already labeled. No new action.\n\n**C. \"~120k MAU\" in metrics.md** \u2014 tagged `(chat, no artifact)`. Provenance-weak, not stale. Confirm against actual analytics before using in board materials.\n\n**D. Alex's Q4 draft (March 2026)** \u2014 already marked superseded. Not a live proposal.\n\n**E. Alex Reyes stakeholder file** \u2014 Alex has departed. Low urgency, but the profile should be archived before Q4 planning relies on the stakeholder map.\n\n**F. Riya Sundaram** \u2014 last touched April 2026 (3 weeks ago). Not stale yet, but she's the strongest internal advocate for budget alerts + shared budgets. Worth a touch before the Q4 decision.\n\n---\n\n### Pre-Q4 summary table\n\n| Artifact | Age | Verdict | Risk if used without re-check |\n|---|---|---|---|\n| Jordan personas | 20 mo | Flag-and-keep (already labeled) | Segment percentages; Achiever revenue claim |\n| Strategy v3 | 6 mo | Not stale \u2014 confirmed | `strategy.md` is blank; populate before decision |\n| Competitor analysis | 18 mo | Retire as current intel | \"Table stakes\" claim has no current backing |\n| Q3 roadmap | 3 mo | Historical record | Widget status; old Devon estimate (now fixed) |\n| Devon March note | ~8 wk | Partially superseded | Shared budgets \"~10 weeks\" (fixed in roadmap.md) |\n| April metrics | 18 days | Current | Correlational \u2014 causation not established |\n| CS monthly | 18 days | Current | Small absolute ticket volumes; small exit survey N |\n\n**Edited this turn:** `knowledge/product/roadmap.md \u00a7 Later` \u2014 shared budgets estimate corrected from \"~10 weeks\" to \"12\u201314 weeks + 2-week spike.\" Log written to `maintenance/log/2026-05-18.md`.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:staleness_flagged",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 8,
+      "input": "turn-08-interview-tom.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 245.83,
+      "returncode": 0,
+      "cost_usd": 0.56043845,
+      "agent_response": "Done. Here's what was created and updated:\n\n---\n\n**Files created:**\n- `source/interviews/2026-05-18-tom-k-followup.md` \u2014 verbatim audit anchor\n- `ingestion/interviews/2026-05-18-tom-k-followup.md` \u2014 synthesis with routing notes\n\n**Files updated:**\n- `hypotheses/shared-budgets-demand.md` \u2014 H-V1 new evidence row (Tom follow-up with switching threat + UX model); confidence bumped **low \u2192 medium**; open questions extended with timing risk and substitution insight\n- `knowledge/users/insights.md` \u2014 Theme 2 updated with Tom follow-up; **Theme 3 added** (\"AI insights is a push, not a pull\")\n- `knowledge/market/landscape.md` \u2014 **Monarch competitive-loss signals table added** (first direct switching-intent signal on record)\n- `hypotheses/INDEX.md` \u2014 confidence row updated to medium\n- `maintenance/log/2026-05-18.md` \u2014 ingestion summary appended\n\n---\n\n**Key calls made:**\n\n- **Confidence bump (low \u2192 medium) on H-V1:** Justified by three independent signal types (CS 4-month trend, direct interview with temporal persistence, exit survey) plus a named competitor and stated switching timeline. Still all correlational; not promoting the hypothesis \u2014 that requires segment interviews + willingness-to-pay confirmation.\n- **Export/shared budgets as substitutes:** Added to open questions as a testable nuance \u2014 worth checking if others in the CS shared-budgets cohort also mentioned export.\n- **Tom's switching timeline is live:** If the shared-budgets decision extends into Q3/Q4, this user is likely already lost to Monarch. Worth flagging before any scheduling conversation.\n- **AI insights theme:** Two independent signals (CS aggregate + Tom direct) consistently show zero pull. Added as Theme 3 in insights.md \u2014 no hypothesis file yet, but the pattern is now tracked.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*tom*may*.md OR source/interviews/*2026-05*tom*.md OR source/interviews/*tom*2026-05*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-05-18-tom-k-followup.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*tom*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-03-22-tom-k.md', 'ingestion/interviews/2026-05-18-tom-k-followup.md']"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*shared*.md OR hypotheses/*couples*.md OR hypotheses/*budget*.md OR hypotheses/*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/shared-budgets-demand.md', 'hypotheses/shared-budgets-demand.md', 'hypotheses/INDEX.md', 'hypotheses/shared-budgets-demand.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:insight_promoted_with_dissent",
+          "passed": true,
+          "detail": "verdict=PASS | target=file:knowledge/users/insights.md"
+        }
+      ]
+    },
+    {
+      "turn": 9,
+      "input": "turn-09-q4-decision.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 272.77,
+      "returncode": 0,
+      "cost_usd": 0.4735107,
+      "agent_response": "Done. Here's what was created and why each constraint was honored:\n\n**Created:** `decisions/2026-05-18-q4-roadmap-direction.md`  \n**Updated:** `decisions/INDEX.md` (Pending section)\n\n---\n\n**Constraint-by-constraint accounting:**\n\n1. **Per-row provenance with inherited/fresh labels.** Every Evidence and NOT-doing row has both a `[INHERITED]` / `[FRESH]` label and a canonical provenance tag. Inherited rows call out what wasn't Maya-revalidated at origin \u2014 e.g., Tom K.'s March interview is `[INHERITED \u2014 not Maya-validated at origin; confirmed persistent by fresh May 2026 follow-up]`. The reader can tell at a glance.\n\n2. **Live strategy respected, no covert pivot.** The primary bet (Budget Alerts) is fully strategy v3-aligned. Shared budgets \u2014 which *does* bend strategy (v3 defers to 2027+) \u2014 is flagged explicitly as requiring a strategy amendment conversation with Naomi before any sprint commitment. The \"Explicitly NOT doing\" section has a dedicated row: \"shared budgets sprint without strategy amendment.\"\n\n3. **Specific, observable reversal condition.** Two: (a) By ~2026-10-01, budget-alert users' sessions/week not above 2.1 baseline AND W4 retention not above 14.2% \u2192 primary bet is wrong. (b) By 2026-06-06, spike finds no lightweight shared-view path \u2192 kill shared budgets track for Q4.\n\n4. **Explicit NOT doing with evidence.** Five rows: social (Naomi verbal + strategy), AI insights demand (Tom's quote), AI insights feasibility (Devon verbal prerequisite), export standalone (Tom's de-prioritization), shared budgets without amendment (strategy v3 citation).\n\n5. **Ambiguity named.** Seven items: 20-month-old personas (Achiever unresearched), budget alerts scope unconfirmed, push notification interaction unresolved, billing model for shared budgets, spike outcome unknown, north-star not yet Maya-confirmed, AI insights pricing has no owner.\n\n**Status is `proposed`** \u2014 the \"For pending decisions only\" section is filled with deadline (2026-05-23), blocker impact, owner (Maya), and the three specific missing-evidence items that gate sprint commitment.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:decisions/*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-05-13-strategy-v3-confirmed.md', 'decisions/2026-05-18-q4-roadmap-direction.md', 'decisions/INDEX.md', 'decisions/_SCHEMA.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:decision_provenance",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:decisions/*.md (2 match)"
+        }
+      ]
+    },
+    {
+      "turn": 10,
+      "input": "turn-10-handoff-prep.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 209.96,
+      "returncode": 0,
+      "cost_usd": 0.39541930000000003,
+      "agent_response": "Done. Here's what was produced and where it lives:\n\n---\n\n**Created:** [`docs/handoff-map.md`](docs/handoff-map.md)\n**Indexed at:** `INDEX.md \u00a7 Handoff` \u2014 one click from the entry point\n\n**What's in the map (telegraphic, all items linked to source files):**\n\n1. **Q4 decision** (`decisions/2026-05-18-q4-roadmap-direction.md`) \u2014 Budget Alerts primary, shared budgets spike authorized. Status: proposed, needs Naomi approval before 2026-05-23. Three remaining blockers named.\n\n2. **Active hypotheses** \u2014 all 5 mapped with top for/against rows and the specific source files behind each evidence row. Social engagement marked demoted with reversal condition.\n\n3. **Strategy conflict resolution** \u2014 decision record, Naomi meeting source, Alex's superseded draft all linked. Reversal condition stated. Notes that shared budgets' tension with strategy v3 is a *separate* open question, not resolved by the 2026-05-13 decision.\n\n4. **Stale artifacts** \u2014 ordered by re-validate-first priority: (1) `knowledge/strategy.md` is blank \u2014 highest urgency, needs PM content input; (2) Jordan personas (20 months, Achiever unverified); (3) competitor analysis (18 months, Monarch couples flow unknown). Lower-priority items noted as already labeled.\n\n5. **Customers** \u2014 table of 4 interviews (2 Maya-primary, 2 inherited from Alex), with 4 named discovery gaps and Riya Sundaram called out as the contact needed to reach the CS ticket cohorts.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:audit_trail",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [
+      {
+        "name": "judge:audit_trail",
+        "passed": true,
+        "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+      }
+    ],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T22:31:30.062331+00:00",
+  "cost": {
+    "total_usd": 6.3706,
+    "max_usd": 12.0,
+    "by_kind": {
+      "turn": 5.5033,
+      "judge": 0.8673
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 1.5296192499999999
+      },
+      {
+        "kind": "judge",
+        "label": "bulk_ingest_caution",
+        "cost": 0.08276404999999999
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.49011970000000005
+      },
+      {
+        "kind": "judge",
+        "label": "tensions_enumerated",
+        "cost": 0.06331455
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.37530695
+      },
+      {
+        "kind": "judge",
+        "label": "runway_draft",
+        "cost": 0.05440855
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.0
+      },
+      {
+        "kind": "judge",
+        "label": "insight_promotion",
+        "cost": 0.0533843
+      },
+      {
+        "kind": "turn",
+        "label": "turn-5",
+        "cost": 0.5385902499999999
+      },
+      {
+        "kind": "judge",
+        "label": "risk_area_updated",
+        "cost": 0.0
+      },
+      {
+        "kind": "turn",
+        "label": "turn-6",
+        "cost": 0.76048435
+      },
+      {
+        "kind": "judge",
+        "label": "contradiction_resolved_with_audit",
+        "cost": 0.08261829999999999
+      },
+      {
+        "kind": "turn",
+        "label": "turn-7",
+        "cost": 0.3798031
+      },
+      {
+        "kind": "judge",
+        "label": "staleness_flagged",
+        "cost": 0.0588038
+      },
+      {
+        "kind": "turn",
+        "label": "turn-8",
+        "cost": 0.56043845
+      },
+      {
+        "kind": "judge",
+        "label": "insight_promoted_with_dissent",
+        "cost": 0.05950355000000001
+      },
+      {
+        "kind": "turn",
+        "label": "turn-9",
+        "cost": 0.4735107
+      },
+      {
+        "kind": "judge",
+        "label": "decision_provenance",
+        "cost": 0.0765228
+      },
+      {
+        "kind": "turn",
+        "label": "turn-10",
+        "cost": 0.39541930000000003
+      },
+      {
+        "kind": "judge",
+        "label": "audit_trail",
+        "cost": 0.14574395
+      },
+      {
+        "kind": "judge",
+        "label": "audit_trail",
+        "cost": 0.19027575
+      }
+    ]
+  }
+}

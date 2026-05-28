@@ -1,0 +1,250 @@
+{
+  "scenario": "05-stakeholder-cadence",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-b3u0kz3_",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T18:49:55.864002+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-stakeholders.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 231.54,
+      "returncode": 0,
+      "cost_usd": 0.36800249999999995,
+      "agent_response": "State is seeded. Here's what was created:\n\n**Source (verbatim, never edited):**\n- `source/adhoc/2026-05-14-custom-dashboards-deprecation-case.md`\n\n**Ingestion synthesis:**\n- `ingestion/adhoc/2026-05-14-custom-dashboards-deprecation-case.md` \u2014 observations tagged as Observation / Interpretation / Assumption, open questions listed, routing to hypothesis + stakeholder files included. Not promoted to `knowledge/`.\n\n**Stakeholder files** (all under `stakeholders/`, schema-compliant, Last touched = actual 1:1 date):\n- `priya-shah.md` \u2014 last touched 2026-05-08\n- `jordan-liu.md` \u2014 last touched 2026-05-12\n- `diana-okonkwo.md` \u2014 last touched 2026-03-22; Open asks flags the owed Custom Dashboards conversation\n- `marcus-avila.md` \u2014 last touched 2026-04-12\n- `helena-vargas.md` \u2014 last touched 2026-03-08\n\n**Hypothesis file:**\n- `hypotheses/custom-dashboards-usage-decline.md` \u2014 status `active`, three hypotheses across Value (H-V1), Viability (H-B1), and Other/go-to-market (H-O1). Every evidence row carries a provenance tag (`[ingestion/adhoc/...]` for analytics + capacity data; `(stakeholder-verbal, ...)` for Diana's and Marcus's verbal signals). No fabricated signals. Diana's unresolved CS data and the undefined migration path are in Open questions, not Evidence.\n\n**Indexes updated:** `stakeholders/INDEX.md` (full roster) and `hypotheses/INDEX.md` (active entry).\n\nNo decision drafted. No promotions. No further action taken.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:stakeholders/*priya*.md OR stakeholders/*shah*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/priya-shah.md', 'stakeholders/priya-shah.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*jordan*.md OR stakeholders/*liu*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/jordan-liu.md', 'stakeholders/jordan-liu.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*diana*.md OR stakeholders/*okonkwo*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/diana-okonkwo.md', 'stakeholders/diana-okonkwo.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*marcus*.md OR stakeholders/*avila*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/marcus-avila.md', 'stakeholders/marcus-avila.md']"
+        },
+        {
+          "name": "file_exists_glob:stakeholders/*helena*.md OR stakeholders/*vargas*.md OR stakeholders/*cfo*.md",
+          "passed": true,
+          "detail": "matched: ['stakeholders/helena-vargas.md', 'stakeholders/helena-vargas.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*custom-dashboards*.md OR hypotheses/*custom_dashboards*.md OR hypotheses/*dashboards*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/custom-dashboards-usage-decline.md', 'hypotheses/custom-dashboards-usage-decline.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/adhoc/*custom-dashboards*.md OR ingestion/adhoc/*dashboards*.md OR ingestion/**/*custom-dashboards*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/adhoc/2026-05-14-custom-dashboards-deprecation-case.md', 'ingestion/adhoc/2026-05-14-custom-dashboards-deprecation-case.md', 'ingestion/adhoc/2026-05-14-custom-dashboards-deprecation-case.md']"
+        },
+        {
+          "name": "file_exists_glob:source/adhoc/*custom-dashboards*.md OR source/adhoc/*dashboards*.md OR source/**/*custom-dashboards*.md",
+          "passed": true,
+          "detail": "matched: ['source/adhoc/2026-05-14-custom-dashboards-deprecation-case.md', 'source/adhoc/2026-05-14-custom-dashboards-deprecation-case.md', 'source/adhoc/2026-05-14-custom-dashboards-deprecation-case.md']"
+        },
+        {
+          "name": "file_modified:stakeholders/INDEX.md",
+          "passed": true,
+          "detail": "modified: stakeholders/INDEX.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:stakeholder_cadence_tracked",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:stakeholders/*.md (5 match)"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-decision-context.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 83.43,
+      "returncode": 0,
+      "cost_usd": 0.19107635,
+      "agent_response": "I have everything needed. Here's the recall pass.\n\n---\n\n## Recall pass \u2014 Custom Dashboards deprecation\n\n### 1. Evidence trail\n\n**The headline case for deprecation is real and reasonably well-sourced.**\n\nUsage has collapsed by any measure: WAU dropped 78% (1,840 \u2192 412 users) and account-level usage dropped 57% (110 \u2192 47 accounts) over 12 months. Source: product analytics snapshot, 2026-05-01 [`ingestion/adhoc/2026-05-14-custom-dashboards-deprecation-case.md`].\n\nEngineering cost is meaningful: the viz team spends ~25% of its capacity on Custom Dashboards maintenance (bugs, perf, embed security patches), and retiring it frees ~1 FTE-quarter that goes directly into Explore, which is currently slipping. Source: Priya Shah 1:1, 2026-05-08 [`stakeholders/priya-shah.md`].\n\nStrategic context: Q3 framing described as \"fewer surfaces, sharper Explore.\" Custom Dashboards is the named surface to cut.\n\n**The counter-signal is also real.** 31 of the 47 remaining accounts use it weekly, with a median of 8 dashboards each and a P90 of 24. That is a deeply embedded power-user shape, not light casual usage. Diana Okonkwo (VP CS) verbally confirmed the pattern: \"the people who use Custom Dashboards REALLY use Custom Dashboards\" `(stakeholder-verbal, Diana Okonkwo, 2026-03-22)`. Marcus Avila (Dir Sales) still uses it as a standard demo beat \u2014 described as \"my Swiss Army knife\" as recently as 2026-04-12.\n\n**Hypothesis state (both active, no decisions logged):**\n- H-V1 (value decline): medium-high confidence \u2014 usage decline at population level is supported; power-user counter-signal limits confidence on *who* gets hurt.\n- H-B1 (capacity viability): medium-high confidence \u2014 direction is clear; exact number is from Priya's 1:1, not a formal audit.\n- H-O1 (GTM/stakeholder risk): medium confidence \u2014 flagged, not sized.\n\n**No decisions have been logged.** `decisions/` contains only the schema and index.\n\n---\n\n### 2. Open questions that are still live\n\nThese are the gaps that exist *right now* \u2014 before you draft anything:\n\n1. **WAU decline composition is unknown.** Did the 63 departed accounts churn off the platform or migrate to other Lumenscope surfaces? If they churned, the \"product survived without Custom Dashboards\" narrative is wrong \u2014 they left entirely. If they migrated, that validates the deprecation thesis. The brain does not have this.\n\n2. **Explore feature parity is unverified.** Explore is in beta with 12 accounts. Whether it covers the 31 weekly accounts' actual job-to-be-done (embedded workflows, 8\u201324 dashboards each) has not been tested. The migration path is stated as an assumption in the working note, not a validated finding.\n\n3. **CS exposure is unsized.** Diana has not been briefed. The 31 weekly accounts include CS-managed accounts, but which are renewal-at-risk, have contractual references to Custom Dashboards, or are in upcoming QBRs is unknown. This is both a substantive gap and a process risk.\n\n4. **Pipeline risk is unsized.** How many in-flight deals explicitly include Custom Dashboards in the pitch or RFP response is unknown. Marcus flagged in-flight RFPs but the count is zero-sourced.\n\n5. **Capacity figure is informal.** The 25% number is from Priya's verbal 1:1 note, not a formal sprint audit. Net capacity savings after migration support (CSM-touch or custom tooling for 31 weekly accounts) could shrink the FTE-quarter gain materially.\n\n6. **CS/analytics cross-validation is missing.** Diana's \"REALLY use it\" read is verbal and sourced to the most vocal accounts. Whether her qualitative read maps to the 47-account analytics cohort or a subset has not been checked.\n\n---\n\n### 3. What materially affects the decision framing\n\nThree things from the current brain state that you should walk into the draft knowing:\n\n**A. Strategy.md is empty.** The \"Q3 strategy: fewer surfaces, sharper Explore\" framing exists only in Sasha's working note \u2014 it is a self-description, not a documented strategic commitment. There is no formal strategy record in `knowledge/strategy.md` to anchor this decision to. When you draft for Naomi, \"this fits our Q3 strategy\" will need a real reference or the framing is soft.\n\n**B. Diana Okonkwo is un-briefed and has a known track record.** Her stakeholder file explicitly notes she has \"disagreed on previous deprecations\" and advocates hard for features with even small loyal user bases. Her 2026-03-22 flag about Custom Dashboards was never followed up. If Naomi asks whether CS has been looped in, the answer today is no \u2014 and the CS exposure from the 31 weekly accounts is precisely what Diana would raise.\n\n**C. The power-user concentration is the load-bearing uncertainty.** The 412 WAU headline supports a clean deprecation story. The 31-account power-user cohort (median 8 dashboards, P90 24) does not. These are two different decisions with different customer-impact narratives \u2014 and the brain currently has no evidence establishing whether those 31 accounts can be migrated, would churn, or would accept a managed transition. The decision you draft for Naomi will need to take a position on this. Right now, the evidence supports flagging the risk but not resolving it.\n\n---\n\n**What the brain does not have:** a feature file for Custom Dashboards (`knowledge/product/features/custom-dashboards.md` does not exist), any ingestion from a Diana conversation (owed and not scheduled), any interview data from the 31 weekly accounts, and any pipeline audit from Marcus. Every one of those would materially affect the decision \u2014 some more than others depending on how you weight migration risk vs. capacity gain.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": []
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-review.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 157.67,
+      "returncode": 0,
+      "cost_usd": 0.34219575,
+      "agent_response": "Now the review:\n\n---\n\n## Weekly /review \u2014 2026-05-17\n\n**System state:** Fresh brain with one real ingestion. What exists is clean. What's missing is what matters for Friday.\n\n---\n\n### The honest answer on your blind spot heading into Friday\n\n**You haven't talked to Diana Okonkwo in 56 days, and she explicitly asked for a conversation about Custom Dashboards on 2026-03-22 that never got scheduled.**\n\nShe's VP CS, owns 14 CSMs, owns the renewal motion for the 31 weekly accounts that are most affected by this deprecation. Her own words from the March 22 1:1: \"the people who use Custom Dashboards REALLY use Custom Dashboards\" \u2014 she was flagging the long-tail dependency problem before you had the analytics to quantify it. Her preferred style is sync and story-first, and she brings customer names to every conversation. She will have specific account names and renewal-at-risk numbers. You don't have any of that right now.\n\nThe hypothesis file (`hypotheses/custom-dashboards-usage-decline.md`) is honest about this: H-O1 explicitly states \"Diana Okonkwo has not been briefed; her CS team's actual renewal exposure from the 31 weekly accounts is unknown.\" The ingestion routing note says the same: \"Sasha needs to brief Diana before any deprecation decision.\" The gap is documented; the conversation still hasn't happened.\n\nIf you draft the decision without her input, you're writing the CS impact section on no data. When the decision lands, she'll surface the accounts that will push back \u2014 and you'll either revise or defend a decision you made without her. Neither outcome is good when she's high-influence with a track record of advocating hard for features with loyal users.\n\n**This is the one conversation that needs to happen before you draft.** Brief her today or tomorrow, not after the draft.\n\n---\n\n### Marcus Avila \u2014 the smaller blind spot (35 days)\n\nLast touched 2026-04-12. His open issue: in-flight RFP responses that reference Custom Dashboards, quantity unknown. H-O1 flags this but no pipeline audit has run. This is a 15-minute call \u2014 he prefers a quick Zoom. The question is simple: how many active deals have Custom Dashboards committed in the pitch, and does Explore cover the demo story? You need this before the H-O1 evidence section of the decision record can be written with confidence. Lower urgency than Diana but still a gap.\n\n---\n\n### No decision record is open yet \u2014 5 days to deadline\n\nThere is no `decisions/2026-05-17-custom-dashboards-deprecation.md` (or equivalent). The deadline is EOD Friday 2026-05-22. The decision schema requires evidence rows with provenance tags; H-V1 (usage decline) and H-B1 (viz team capacity) have solid tagged evidence from `ingestion/adhoc/2026-05-14-custom-dashboards-deprecation-case.md`. H-O1 (stakeholder/GTM risk) is thin until the Diana and Marcus conversations happen.\n\nMy recommendation: open a `pending` record now with the evidence you have, and fill in the Decision + Why sections after those two conversations. That way you're not writing a decision on Tuesday under time pressure with fresh stakeholder inputs.\n\n---\n\n### `knowledge/strategy.md` is empty \u2014 affects the decision record\n\nThe Q3 direction (\"fewer surfaces, sharper Explore\") appears only as an `Assumption` in the ingestion file. It has no entry in the canonical strategy file. A decision record citing strategic alignment will need a canonical reference. I'm not writing to strategy.md without your input \u2014 but if you tell me what the north-star and Q3 priorities are, I'll write them in the same turn.\n\n---\n\n### \"Naomi\" has no stakeholder file\n\nShe's referenced as the decision recipient (EOD Friday). She's not in the stakeholders index. Worth asking: is she a regular touchpoint who should be tracked?\n\n---\n\n### What's healthy\n\n- **Priya Shah** (last 2026-05-08, 9 days) and **Jordan Liu** (last 2026-05-12, 5 days) are current. Priya is aligned and has supplied the capacity data backing H-B1. No prep needed for either.\n- The hypothesis file `hypotheses/custom-dashboards-usage-decline.md` is epistemically clean \u2014 three risks named, evidence rows properly tagged, open questions honest, decision triggers specified. This is a good foundation for the decision draft.\n- The ingestion/source pair for 2026-05-14 is correctly filed. Verbatim source preserved, synthesis done, routing notes present.\n- Hypotheses index is accurate.\n\n---\n\n### Minor structural issue\n\n`hypotheses/custom-dashboards-usage-decline.md` links to `../knowledge/product/features/custom-dashboards.md`, which doesn't exist. Broken link \u2014 low urgency but will rot silently. I can create a stub feature file if you want.\n\n---\n\n**Bottom line for the week:** Brief Diana before anything else. Open the pending decision record so the deadline has a home. Get Marcus's pipeline number in a quick call. If you want me to draft the pending decision record or stub out the strategy file after your Diana conversation, say the word.\n\nMaintenance log written to `maintenance/log/2026-05-17.md`.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:overdue_surfaced_in_review",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        },
+        {
+          "name": "judge:irrelevant_overdue_not_flagged",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-decision-draft.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 220.71,
+      "returncode": 0,
+      "cost_usd": 0.35686385,
+      "agent_response": "Done. Here's what was created and updated:\n\n---\n\n**Created:** `decisions/2026-05-17-custom-dashboards-deprecation.md` \u2014 status: proposed\n\n**Updated:** `decisions/INDEX.md` \u2014 added to Pending with deadline and missing-evidence summary\n\n**Updated:** `hypotheses/custom-dashboards-usage-decline.md` \u2014 added decision-draft link in Meta; hypotheses remain `active` since the decision isn't decided yet\n\n---\n\n**Decision file highlights:**\n\n**Evidence rows (6 total, all tagged):**\n- 4 from `[ingestion/adhoc/2026-05-14-custom-dashboards-deprecation-case.md]` \u2014 usage decline data, power-user concentration, viz capacity figure, Explore beta context\n- 2 verbal: Diana Okonkwo (2026-03-22) on CS dependency, Marcus Avila (2026-04-12) on demo reliance\n\n**Explicitly NOT doing (3 rows, all tagged):**\n- Embed-flow rebuild and any new Custom Dashboards features (ingestion-sourced)\n- Zombie low-investment mode (PM intuition, 2026-05-17)\n- Generic bulk-migration playbook without per-account scoping (PM intuition, 2026-05-17)\n\n**Reversal condition:** Dual-condition \u2014 \u22653 churned accounts explicitly citing CD loss AND Explore parity confirmed >2 quarters away, both required simultaneously at 90 days post-announcement. Either alone is a different problem, not a reversal trigger.\n\n**Pre-launch checks (2 people \u2014 scoped to this decision, not general relationship debt):**\n\n- **Diana Okonkwo** \u2014 last 1:1 2026-03-22 (56 days). She asked to discuss Custom Dashboards at that meeting; the conversation was never scheduled. She owns the renewal motion for the 31 weekly accounts. Highest priority; needs sync before announcement.\n- **Marcus Avila** \u2014 last 1:1 2026-04-12 (35 days). CD is in his demo beat and active RFPs. Needs a 15-min Zoom to audit pipeline commitments and assess Explore as demo substitute. Left off: Priya (aligned, recent), Helena (stale but not implicated in this decision), Jordan (recent, not in the announcement blast radius).\n\n**Remaining ambiguities pulled from hypothesis open questions:** capacity figure unaudited, CS data not cross-validated against analytics, WAU drop cause unknown (migration vs. churn), migration effort unscoped, Explore parity unvalidated with power-user cohort.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:decisions/2026-05*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-05-17-custom-dashboards-deprecation.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*custom-dashboards*.md OR hypotheses/*dashboards*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/custom-dashboards-usage-decline.md', 'hypotheses/custom-dashboards-usage-decline.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:relevant_overdue_flagged_on_decision",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:decisions/2026-05*.md (1 match)"
+        },
+        {
+          "name": "judge:irrelevant_overdue_not_flagged",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:decisions/2026-05*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [
+      {
+        "name": "judge:stakeholder_cadence_tracked",
+        "passed": true,
+        "detail": "verdict=PASS | target=glob:stakeholders/*.md (5 match)"
+      }
+    ],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T19:02:06.078008+00:00",
+  "cost": {
+    "total_usd": 1.5985,
+    "max_usd": null,
+    "by_kind": {
+      "turn": 1.2581,
+      "judge": 0.3403
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.36800249999999995
+      },
+      {
+        "kind": "judge",
+        "label": "stakeholder_cadence_tracked",
+        "cost": 0.055431549999999996
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.19107635
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.34219575
+      },
+      {
+        "kind": "judge",
+        "label": "overdue_surfaced_in_review",
+        "cost": 0.0557918
+      },
+      {
+        "kind": "judge",
+        "label": "irrelevant_overdue_not_flagged",
+        "cost": 0.054497300000000005
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.35686385
+      },
+      {
+        "kind": "judge",
+        "label": "relevant_overdue_flagged_on_decision",
+        "cost": 0.06140055
+      },
+      {
+        "kind": "judge",
+        "label": "irrelevant_overdue_not_flagged",
+        "cost": 0.059687800000000006
+      },
+      {
+        "kind": "judge",
+        "label": "stakeholder_cadence_tracked",
+        "cost": 0.053525050000000005
+      }
+    ]
+  }
+}

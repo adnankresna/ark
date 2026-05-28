@@ -1,0 +1,247 @@
+{
+  "scenario": "03-drift-detection",
+  "run": 1,
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-cjv5icvq",
+  "kept_workdir": false,
+  "started_at": "2026-05-17T23:35:54.502860+00:00",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "turn-01-seed-old-state.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 252.12,
+      "returncode": 0,
+      "cost_usd": 0.437674,
+      "agent_response": "Done. Here's what was created:\n\n**Source (verbatim, audit anchors):**\n- `source/interviews/2026-01-08-brightsmile-linda-park.md` \u2014 Brightsmile interview transcript\n- `source/meetings/2026-01-15-marcus-wei-feasibility-note.md` \u2014 Marcus Wei feasibility note\n- `source/meetings/2026-01-22-provider-availability-sync-decision.md` \u2014 Original decision artifact (also serves as provenance for the CS December monthly churn reference)\n\n**Ingestion (synthesis):**\n- `ingestion/interviews/2026-01-08-brightsmile-linda-park.md` \u2014 Interview synthesis with observations/interpretations tagged\n- `ingestion/meetings/2026-01-15-marcus-wei-feasibility-note.md` \u2014 Feasibility note synthesis\n\n**Hypothesis:** `hypotheses/provider-availability-sync.md`\n- Status: `promoted` (three hypotheses: H-V1 value, H-F1 feasibility, H-B1 viability \u2014 all promoted)\n- Resolution note on each: decision 2026-01-22, feature GA 2026-03-20\n- All evidence rows carry path-typed provenance tags pointing to `source/` files\n\n**Decision:** `decisions/2026-01-22-provider-availability-sync.md`\n- Status: `decided`, date 2026-01-22\n- Four evidence rows, each tagged; one \"Explicitly NOT doing\" row (Apple v1) tagged\n- Reversal condition matches the original artifact verbatim\n\n**INDEX updates:** Both `hypotheses/INDEX.md` and `decisions/INDEX.md` updated with the new entries.\n\nOne provenance note: the CS December monthly churn data (3 of 11 departing accounts) was referenced inside the decision artifact but the original CS report was not provided. It's tagged to `source/meetings/2026-01-22-provider-availability-sync-decision.md` (the verbatim copy of the decision artifact that cites it) \u2014 honest about the chain of custody rather than fabricating a separate ingestion record.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*brightsmile*.md OR source/interviews/*linda*.md OR source/interviews/2026-01-08*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-01-08-brightsmile-linda-park.md', 'source/interviews/2026-01-08-brightsmile-linda-park.md', 'source/interviews/2026-01-08-brightsmile-linda-park.md']"
+        },
+        {
+          "name": "file_exists_glob:source/meetings/*feasibility*.md OR source/meetings/*marcus*.md OR source/adhoc/*feasibility*.md OR source/adhoc/*marcus*.md OR source/**/*feasibility*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-01-15-marcus-wei-feasibility-note.md', 'source/meetings/2026-01-15-marcus-wei-feasibility-note.md', 'source/meetings/2026-01-15-marcus-wei-feasibility-note.md']"
+        },
+        {
+          "name": "file_exists_glob:source/**/*decision*.md OR source/adhoc/*provider*.md OR source/adhoc/*availability*.md OR source/adhoc/*sync*.md",
+          "passed": true,
+          "detail": "matched: ['source/meetings/2026-01-22-provider-availability-sync-decision.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*brightsmile*.md OR ingestion/interviews/*linda*.md OR ingestion/interviews/2026-01-08*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-01-08-brightsmile-linda-park.md', 'ingestion/interviews/2026-01-08-brightsmile-linda-park.md', 'ingestion/interviews/2026-01-08-brightsmile-linda-park.md']"
+        },
+        {
+          "name": "file_exists_glob:hypotheses/*provider*.md OR hypotheses/*availability*.md OR hypotheses/*sync*.md",
+          "passed": true,
+          "detail": "matched: ['hypotheses/provider-availability-sync.md', 'hypotheses/provider-availability-sync.md', 'hypotheses/provider-availability-sync.md']"
+        },
+        {
+          "name": "file_exists_glob:decisions/2026-01*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-01-22-provider-availability-sync.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:hypothesis_proposed_not_promoted",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (1 match)"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "input": "turn-02-contradicting-interview.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 282.62,
+      "returncode": 0,
+      "cost_usd": 0.59252095,
+      "agent_response": "The hypothesis file is clean. Here's what was written:\n\n---\n\n**Files created / updated:**\n\n- **`source/interviews/2026-05-17-brightsmile-linda-park-followup.md`** \u2014 verbatim audit anchor, never to be edited.\n- **`ingestion/interviews/2026-05-17-brightsmile-linda-park-followup.md`** \u2014 synthesis with observations, interpretations, explicit tension flag, and routing to H-V1 and the 2026-01-22 decision.\n- **`hypotheses/provider-availability-sync.md`** \u2014 three changes:\n  - Last updated bumped to 2026-05-18.\n  - H-V1 `Evidence against` populated with a tagged, linked claim (WTP collapsed, double-bookings unchanged, disabling planned).\n  - H-V1 `Open questions` extended with: the tension note (same N=1 customer, January vs. May directly contradictory, do not demote on this signal alone), the root-cause diagnosis (soft blocks + \"personal calendar wins\" rule = false unavailability), and the one-way display alternative.\n  - H-B1 `Open questions` extended with the Dentrix read-only signal (flagged as unconfirmed, relayed via sales rep).\n\n**What remains open for PM judgment:**\n\n- H-V1 status held at `promoted` per your instruction. Whether to demote requires data from other enabled accounts \u2014 adoption rate, override-frequency, support-ticket volume at week 8. Those metrics were the stated decision trigger in the original hypothesis.\n- The \"personal calendar wins\" conflict-resolution rule (from the 2026-01-22 decision) is now the named proximate failure point. Whether to reverse or redesign (bidirectional \u2192 read-only) is a PM call, not a maintenance action.\n- No strategy tension created \u2014 this is still N=1; the strategy tension threshold requires recurring + multi-source signal.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:source/interviews/*brightsmile*may*.md OR source/interviews/2026-05-17*.md OR source/interviews/*linda*may*.md OR source/interviews/*followup*.md",
+          "passed": true,
+          "detail": "matched: ['source/interviews/2026-05-17-brightsmile-linda-park-followup.md', 'source/interviews/2026-05-17-brightsmile-linda-park-followup.md']"
+        },
+        {
+          "name": "file_exists_glob:ingestion/interviews/*brightsmile*may*.md OR ingestion/interviews/2026-05-17*.md OR ingestion/interviews/*linda*may*.md OR ingestion/interviews/*followup*.md",
+          "passed": true,
+          "detail": "matched: ['ingestion/interviews/2026-05-17-brightsmile-linda-park-followup.md', 'ingestion/interviews/2026-05-17-brightsmile-linda-park-followup.md']"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*provider*.md OR hypotheses/*availability*.md OR hypotheses/*sync*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/provider-availability-sync.md', 'hypotheses/provider-availability-sync.md', 'hypotheses/provider-availability-sync.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:contradiction_surfaced",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:hypotheses/*.md (1 match)"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "turn-03-review.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 258.28,
+      "returncode": 0,
+      "cost_usd": 0.38395435000000006,
+      "agent_response": "---\n\n## Weekly Review \u2014 2026-05-18\n\nMaintenance log written to `maintenance/log/2026-05-18.md`. Here's the substantive sweep.\n\n---\n\n### What's healthy\n\nThe hypothesis file (`hypotheses/provider-availability-sync.md`) is well-maintained. The May interview was ingested correctly \u2014 evidence-against row added, tension flagged in open questions, PM's internal note (\"don't auto-demote\") was honored. Source is preserved. Ingestion synthesis is clean. The brain handled the incoming contrary signal correctly at the file level.\n\n---\n\n### What's drifting or stale\n\n**Three critical gaps \u2014 not stale, never populated:**\n\n1. `knowledge/strategy.md` is all blank placeholders. No north-star metric, no Q2 priorities, no non-goals, no last-reviewed date. This means I cannot do a meaningful strategy-vs-signal comparison this sweep or any future sweep. Every drift check is blind without it.\n\n2. `knowledge/users/insights.md` has no active themes. Two interviews with Dr. Park across four months, plus a clear emergent finding about provider calendar behavior \u2014 none of it has been promoted to durable user knowledge. The memory promotion step was skipped at every turn.\n\n3. `stakeholders/INDEX.md` has an empty roster. Naomi Reyes and Marcus Wei are named as stakeholders informed in the January decision, but neither has a file. Relationship-debt detection is blind.\n\n**One mildly stale signal:** The CS December churn data (~5 months old, 11 departing accounts, \"provider scheduling\" as #2 churn reason) has never been refreshed post-GA. That's past the 60-day freshness default for market/CS intel. Whether provider scheduling is still driving churn in the post-GA cohort is unknown.\n\n---\n\n### Contradictions with the most recent customer signal\n\nThe May interview (`source/interviews/2026-05-17-brightsmile-linda-park-followup.md`) is the most recent customer signal. It surfaces four contradictions with current brain state. Not resolving any of them.\n\n**Contradiction 1 \u2014 \"Personal calendar wins\" vs. observed provider behavior**\n\nThe 2026-01-22 decision (`decisions/2026-01-22-provider-availability-sync.md`) adopted \"personal calendar wins\" as the conflict-resolution rule. That rule was built on a January interpretation: \"the practice's scheduling trust model is provider-self-managed \u2014 Dr. Park trusts providers to keep their own calendars accurate\" (`ingestion/interviews/2026-01-08-brightsmile-linda-park.md`). That interpretation was a forward-looking stated belief, not observed behavior.\n\nThe May signal directly refutes the underlying assumption. Providers do not maintain their personal calendars as scheduling authorities \u2014 they use them as scratchpads (\"BLOCKED \u2014 admin time\", \"BLOCKED \u2014 lunch with rep\"). Treating these as authoritative produces false-full schedules, increases front-desk override work, and resets those overrides on every re-sync. The design rule that went into production was built on an unvalidated trust model. The decision file itself flagged this: \"Conflict-resolution rule ('personal calendar wins') was Marcus Wei's engineering recommendation; needs PM ratification and surfacing in UX.\" That open item was never resolved before ship.\n\n**Contradiction 2 \u2014 H-V1 confidence label (\"high\") vs. post-GA outcome**\n\nH-V1 is marked `confidence: high`. Both evidence-for rows trace to N=1 stated preference (Brightsmile, January). The same N=1 source has now reversed on every metric: WTP dropped from $50/seat to ~$10/seat, double-booking rate is unchanged (~3/month before and after GA), front-desk work increased rather than decreased, and the practice is planning to disable the feature. The \"high\" confidence label is inconsistent with the current evidence picture. This is not a case for demotion on N=1 alone \u2014 population-level data is missing \u2014 but the label is misleading until additional accounts are heard from. Surfacing; not changing.\n\n**Contradiction 3 \u2014 Decision reversal condition half-triggered**\n\nThe 2026-01-22 decision specifies: \"Adoption < 20% of eligible practices (>3 providers) at week 8 post-GA, AND the practices that DID enable it report negative experience \u2192 revisit scope.\" We are at week 8 post-GA. Brightsmile is an enabled practice reporting a negative experience \u2014 the second half of the AND is confirmed. The first half (adoption rate) is not in the brain at all. The reversal condition cannot be fully evaluated without product analytics. This needs a data pull before the condition can be assessed.\n\n**Contradiction 4 \u2014 Dentrix competitive framing inverted**\n\nH-B1 treated Dentrix's competing sync as a threat that justified urgency to ship. The competitive risk was used as an accelerator in the January decision.\n\nThe May signal: Dentrix's version is reportedly read-only \u2014 it displays provider calendar to front desk as a hint, leaves OrthoSched-equivalent calendar front-desk-controlled. Dr. Park said this is \"better than what we built.\" If accurate, the market anchor is the display model, not bidirectional sync. OrthoSched may have over-built in the wrong direction. The competitive threat was real; the conclusion drawn from it may have been wrong. Note: Dentrix's model is unconfirmed \u2014 relayed from a sales rep conversation, not independent research. The tension stands with that caveat attached.\n\n---\n\n### What needs PM judgment before next sweep\n\n1. **Populate `knowledge/strategy.md`** \u2014 the brain is navigationally blind without it.\n2. **Review H-V1 confidence label** \u2014 \"high\" vs. something that better reflects the current evidence picture.\n3. **Pull adoption rate data** \u2014 to evaluate whether the full reversal condition in the January decision has triggered.\n4. **Dentrix verification** \u2014 independent check of their feature model before drawing competitive conclusions.\n5. **One-way display model** \u2014 PM to assess whether a v2 scope reverting to display-only is the right direction.\n6. **Stakeholder files for Naomi Reyes and Marcus Wei** \u2014 I need PM input on role/influence/friction before creating them.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [],
+      "content": [
+        {
+          "name": "judge:staleness_flagged",
+          "passed": true,
+          "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "turn-04-demotion-decision.md",
+      "model": "sonnet",
+      "timeout_s": 600,
+      "duration_s": 246.96,
+      "returncode": 0,
+      "cost_usd": 0.4192986,
+      "agent_response": "Done. Here's what was written:\n\n---\n\n**`decisions/2026-05-18-provider-availability-sync-apple-fastfollow.md`** \u2014 proposed, deadline EOD 2026-05-19\n\n**What we're deciding:** Whether to invest $100k / 6 weeks in Apple Calendar fast-follow, or take a different direction given the post-GA signal.\n\n**The contradiction is visible, not smoothed.** Evidence is split into two labeled blocks \u2014 \"January 2026 \u2014 original build rationale\" and \"May 2026 \u2014 post-GA signal (same account; directly contradicts January rows above).\" The Brightsmile rows are still there and still tagged; the May 17 rows directly call them out.\n\n**My recommendation:** Option 2 \u2014 Pivot to read-only. Redirect the Apple fast-follow eng budget to a one-way display model (provider calendar as hint; front desk stays authoritative). The mechanism of failure is identified; shipping Apple on the broken bidirectional model compounds it. Alternatives are named and kept visible (Hold if you want population data first; Proceed with Apple only if analytics show Brightsmile is an outlier).\n\n**Reversal conditions:** Specific and option-branching \u2014 if pivot: 3+ accounts show no elevated override rate AND \u22651 customer says bidirectional works (6-week checkpoint); if hold: resolves when analytics + 2 interviews are in hand, hard deadline 2026-06-02.\n\n**Explicitly NOT doing:** Spending the $100k on Apple now on the current model; treating this as a kill decision on N=1.\n\n**Remaining ambiguities:** Six named gaps \u2014 N=1 isolation risk, override-frequency data not yet pulled (fastest signal, should be in hand before Naomi's call), read-only pivot cost unknown, Dentrix unconfirmed, WTP for fixed product unknown, CS churn causality unestablished.\n\n**`decisions/INDEX.md`** and **`hypotheses/provider-availability-sync.md`** both updated to reference the new proposed decision.",
+      "stderr_tail": "",
+      "error": null,
+      "structural": [
+        {
+          "name": "file_exists_glob:decisions/2026-05*.md",
+          "passed": true,
+          "detail": "matched: ['decisions/2026-05-18-provider-availability-sync-apple-fastfollow.md']"
+        },
+        {
+          "name": "file_modified:decisions/INDEX.md",
+          "passed": true,
+          "detail": "modified: decisions/INDEX.md"
+        },
+        {
+          "name": "file_modified_glob:hypotheses/*provider*.md OR hypotheses/*availability*.md OR hypotheses/*sync*.md",
+          "passed": true,
+          "detail": "changed: ['hypotheses/provider-availability-sync.md', 'hypotheses/provider-availability-sync.md', 'hypotheses/provider-availability-sync.md']"
+        }
+      ],
+      "content": [
+        {
+          "name": "judge:decision_provenance",
+          "passed": true,
+          "detail": "verdict=PASS | target=glob:decisions/2026-05*.md (1 match)"
+        }
+      ]
+    }
+  ],
+  "final_state": {
+    "structural": [
+      {
+        "name": "all_internal_links_valid",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "all_decisions_have_reversal_condition",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_orphan_evidence",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "no_silent_hypothesis_demotion",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "content": [
+      {
+        "name": "judge:audit_trail",
+        "passed": true,
+        "detail": "verdict=PASS | target=no-target (using work_dir listing)"
+      }
+    ],
+    "content_skipped": false
+  },
+  "aborted": false,
+  "abort_reason": null,
+  "finished_at": "2026-05-17T23:54:02.103728+00:00",
+  "cost": {
+    "total_usd": 2.1622,
+    "max_usd": 8.0,
+    "by_kind": {
+      "turn": 1.8334,
+      "judge": 0.3288
+    },
+    "entries": [
+      {
+        "kind": "turn",
+        "label": "turn-1",
+        "cost": 0.437674
+      },
+      {
+        "kind": "judge",
+        "label": "hypothesis_proposed_not_promoted",
+        "cost": 0.05486080000000001
+      },
+      {
+        "kind": "turn",
+        "label": "turn-2",
+        "cost": 0.59252095
+      },
+      {
+        "kind": "judge",
+        "label": "contradiction_surfaced",
+        "cost": 0.057931300000000005
+      },
+      {
+        "kind": "turn",
+        "label": "turn-3",
+        "cost": 0.38395435000000006
+      },
+      {
+        "kind": "judge",
+        "label": "staleness_flagged",
+        "cost": 0.05619605
+      },
+      {
+        "kind": "turn",
+        "label": "turn-4",
+        "cost": 0.4192986
+      },
+      {
+        "kind": "judge",
+        "label": "decision_provenance",
+        "cost": 0.06086305000000001
+      },
+      {
+        "kind": "judge",
+        "label": "audit_trail",
+        "cost": 0.09894165
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+scenario: 12-decision-lifecycle
+description: |
+  Four-turn commands-coverage scenario for the decision-lifecycle trio: /prep, /hypothesize,
+  /decide. Each turn invokes the literal slash command. Tests that each command is recognized
+  literally, behaves per its spec (/prep is read-only, /hypothesize covers all 5 risk areas,
+  /decide produces a decision file with observable reversal condition and a hypothesis-status
+  flip via the decision rather than a silent mutation).
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed.md
+    structural:
+      # Stakeholder file + INDEX populated.
+      - file_exists_glob: stakeholders/*okonkwo*.md OR stakeholders/*diana*.md
+      - file_modified: stakeholders/INDEX.md
+      # Feature folder entry populated.
+      - file_exists_glob: knowledge/product/features/*auto-approve*.md OR knowledge/product/features/*auto_approve*.md
+      # Marcus interview preserved + routed.
+      - file_exists_glob: source/interviews/*marcus*.md OR source/interviews/*brillstone*.md OR source/interviews/2026-04-30*.md
+      - file_exists_glob: ingestion/interviews/*marcus*.md OR ingestion/interviews/*brillstone*.md OR ingestion/interviews/2026-04-30*.md
+
+  - turn: 2
+    input: turn-02-prep.md
+    structural: []  # /prep is read-only at call time. The agent may only touch the Last-touched field
+                    # on Diana's stakeholder file. No new files; no other mutations.
+    content:
+      - judge: prep_brief_shape
+        rubric: judges/prep_brief_shape.md
+        expected_meaning: |
+          The turn-2 response is a structured prep brief naming: (a) Diana's last-touched date and
+          cadence, (b) what Diana cares about and the specific concerns the auto-approve feature
+          will trip (audit trail, fraud signal, opt-out), (c) the strongest customer evidence cited
+          by specific brain artifact (the BrillStone interview), (d) 2-3 questions Diana will push
+          on (tied to her stake), (e) any conflicts surfaced. Read-only — no new hypothesis or
+          decision file drafted this turn.
+        must_not: "draft a new hypothesis file, draft a new decision file, or skip naming Diana's specific concerns"
+
+  - turn: 3
+    input: turn-03-hypothesize.md
+    structural:
+      # /hypothesize creates the hypothesis file.
+      - file_exists_glob: hypotheses/*auto-approve*.md OR hypotheses/*auto_approve*.md
+      # INDEX reflects the new hypothesis.
+      - file_modified: hypotheses/INDEX.md
+      # Hypothesis count grew.
+      - hypothesis_count_at_least: 1
+    content:
+      - judge: five_risk_areas_covered
+        rubric: judges/five_risk_areas_covered.md
+        target_glob: hypotheses/*auto-approve*.md OR hypotheses/*auto_approve*.md
+        expected_meaning: |
+          The hypothesis file enumerates ALL FIVE risk areas (value, usability, feasibility,
+          viability, other). Each area either has at least one hypothesis with a belief + evidence
+          row + test plan + decision trigger, OR an explicit "no risk identified, monitor" call-out.
+          The viability area wires in Diana's fraud-risk concern. NO hypothesis is created with
+          status `promoted` or `partially-validated` — all are `active` or `candidate`.
+        must_not: "skip one or more of the 5 risk areas without explicit 'no risk identified, monitor' call-out, OR auto-promote any hypothesis to promoted/partially-validated, OR omit Diana's fraud-risk concern from the viability area"
+
+  - turn: 4
+    input: turn-04-decide.md
+    structural:
+      # Decision file lands today.
+      - file_exists_glob: decisions/2026-05-17*auto-approve*.md OR decisions/2026-05-17*ship*.md
+      # INDEX reflects the decision.
+      - file_modified: decisions/INDEX.md
+      # The resolved hypothesis flips status (file modified this turn).
+      - file_modified_glob: hypotheses/*auto-approve*.md OR hypotheses/*auto_approve*.md
+      - file_modified: hypotheses/INDEX.md
+    content:
+      - judge: decision_quality
+        rubric: judges/decision_quality.md
+        target_glob: decisions/2026-05-17*auto-approve*.md OR decisions/2026-05-17*ship*.md
+        expected_meaning: |
+          The decision file has: (a) status `decided`, (b) every Evidence row carries a provenance
+          tag from the canonical enum, (c) an explicit, observable reversal condition that names a
+          specific signal (the 2% fraud-anomaly threshold, Diana withdrawing sign-off, or the 15%
+          disable-rate threshold), (d) an "Explicitly NOT doing" section with at least 2 items,
+          (e) Diana and Jordan named as signed-off stakeholders, (f) a link to the resolved
+          hypothesis file. The resolved hypothesis status flipped to `promoted` and now references
+          the decision file (via a Resolution row or equivalent).
+        must_not: "leave the reversal condition vague ('if things change'), leave any Evidence row without a provenance tag, omit the 'Explicitly NOT doing' section, silently flip the hypothesis status without the decision file linking back, or leave the decision status as `pending` (the PM was explicit it is decided)"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - no_orphan_evidence: true
+    - all_decisions_have_reversal_condition: true
+    - no_silent_hypothesis_demotion: true

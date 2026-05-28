@@ -1,0 +1,107 @@
+scenario: 03-drift-detection
+description: |
+  Four-turn drift scenario. PM seeds a brain state from 4 months ago (a promoted hypothesis +
+  decision driven by a strong customer interview), then a fresh interview today contradicts
+  the original signal. Tests whether weekly /review surfaces drift on aged claims and whether
+  the brain can draft a demotion decision with audit trail intact.
+
+pass_threshold:
+  structural: 1.0
+  content: 0.8
+
+# ---------------- per-turn assertions ----------------
+
+turns:
+
+  - turn: 1
+    input: turn-01-seed-old-state.md
+    structural:
+      # All three January artifacts preserved verbatim under source/.
+      - file_exists_glob: source/interviews/*brightsmile*.md OR source/interviews/*linda*.md OR source/interviews/2026-01-08*.md
+      - file_exists_glob: source/meetings/*feasibility*.md OR source/meetings/*marcus*.md OR source/adhoc/*feasibility*.md OR source/adhoc/*marcus*.md OR source/**/*feasibility*.md
+      - file_exists_glob: source/**/*decision*.md OR source/adhoc/*provider*.md OR source/adhoc/*availability*.md OR source/adhoc/*sync*.md
+      # Synthesis routed.
+      - file_exists_glob: ingestion/interviews/*brightsmile*.md OR ingestion/interviews/*linda*.md OR ingestion/interviews/2026-01-08*.md
+      # Hypothesis file created.
+      - file_exists_glob: hypotheses/*provider*.md OR hypotheses/*availability*.md OR hypotheses/*sync*.md
+      # Decision record created (this is a historical re-creation of the January decision).
+      - file_exists_glob: decisions/2026-01*.md
+      - file_modified: decisions/INDEX.md
+    content:
+      - judge: hypothesis_proposed_not_promoted
+        rubric: judges/hypothesis_proposed.md
+        target_glob: hypotheses/*.md
+        expected_meaning: |
+          The provider-availability-sync hypothesis is created with status `promoted` (recreating
+          the January 2026 state). All evidence rows wear provenance tags. The January 2026 dates
+          are preserved on the evidence — agent did NOT relabel them as "today."
+        must_not: "rewrite January 2026 dates to May 17 2026, or create a fresh hypothesis without preserving the January promotion context"
+
+  - turn: 2
+    input: turn-02-contradicting-interview.md
+    structural:
+      - file_exists_glob: source/interviews/*brightsmile*may*.md OR source/interviews/2026-05-17*.md OR source/interviews/*linda*may*.md OR source/interviews/*followup*.md
+      - file_exists_glob: ingestion/interviews/*brightsmile*may*.md OR ingestion/interviews/2026-05-17*.md OR ingestion/interviews/*linda*may*.md OR ingestion/interviews/*followup*.md
+      # The contradicting signal should add an evidence-against row OR a contradictions block.
+      - file_modified_glob: hypotheses/*provider*.md OR hypotheses/*availability*.md OR hypotheses/*sync*.md
+    content:
+      - judge: contradiction_surfaced
+        rubric: judges/contradiction_surfaced.md
+        target_glob: hypotheses/*.md
+        expected_meaning: |
+          The May 17 interview is captured as a contradicting signal against the original promotion
+          evidence. Brightsmile's reversed stance is preserved in detail (bidirectional sync is the
+          problem, $50/seat WTP collapsed to $10/seat for a read-only version, double-bookings did
+          NOT improve). The original January evidence row is NOT deleted or rewritten — the
+          contradiction lives alongside it.
+        must_not: "delete or overwrite the original Brightsmile evidence row, or auto-demote the hypothesis without surfacing the conflict to the PM first"
+
+  - turn: 3
+    input: turn-03-review.md
+    structural: []  # /review is synthesis-only; output is in the agent response.
+    content:
+      - judge: staleness_flagged
+        rubric: judges/staleness_flagged.md
+        expected_meaning: |
+          Weekly /review surfaces drift on the provider-availability-sync hypothesis as the
+          headline finding. Agent distinguishes "the January evidence is still real" (artifact
+          preserved, dated honestly) from "the underlying claim no longer matches the world"
+          (May 17 interview contradicts the WTP, the outcome, and the design direction). Agent
+          does NOT resolve the contradiction in this turn — it surfaces it.
+        must_not: "blanket-retire by age alone, or call the case closed when the contradiction is fresh"
+
+  - turn: 4
+    input: turn-04-demotion-decision.md
+    structural:
+      - file_exists_glob: decisions/2026-05*.md
+      - file_modified: decisions/INDEX.md
+      # Hypothesis file modified — status should change, or evidence-against grow, or both.
+      - file_modified_glob: hypotheses/*provider*.md OR hypotheses/*availability*.md OR hypotheses/*sync*.md
+    content:
+      - judge: decision_provenance
+        rubric: judges/decision_provenance.md
+        target_glob: decisions/2026-05*.md
+        expected_meaning: |
+          The new decision file references BOTH the January promotion evidence AND the May 17
+          contradiction, with per-row provenance tags. Status is `proposed`. A specific observable
+          reversal condition is named. An "Explicitly NOT doing" section names what's coming off the
+          table (e.g., the Apple fast-follow as originally scoped). Remaining ambiguities are
+          named (e.g., whether one-way sync would be enough to recover the value claim).
+        must_not: "silently kill the original decision, omit the reversal condition, or fail to tag evidence rows with provenance"
+
+# ---------------- final-state assertions ----------------
+
+final_state:
+  structural:
+    - all_internal_links_valid: true
+    - all_decisions_have_reversal_condition: true
+    - no_orphan_evidence: true
+    - no_silent_hypothesis_demotion: true
+  content:
+    - judge: audit_trail
+      rubric: judges/audit_trail.md
+      expected_meaning: |
+        Starting from the May 17 demotion-or-pivot decision, the audit trail reaches BOTH the
+        original January 2026 evidence AND the May 17 contradicting interview via working
+        markdown links through hypothesis → ingestion → source/. Drift is legible: a reader
+        can see the original claim, when it was promoted, what evidence contradicted it, and when.
