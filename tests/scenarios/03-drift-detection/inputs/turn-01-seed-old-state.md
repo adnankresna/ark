@@ -1,6 +1,6 @@
-# Bulk import: prior PM-Brain state from 4 months ago
+# Bulk import: prior Ark state from 4 months ago
 
-I'm Rita Park, PM for OrthoSched (B2B SaaS, ~340 mid-size dental practice accounts, ARR ~$8M). I started using PM Brain six months ago. Today is **2026-05-17**. Below are three artifacts from **January 2026** that established our top-priority hypothesis for Q1: *Provider Availability Sync*. The feature shipped to GA on **2026-03-20**. I want all three artifacts ingested faithfully — they happened in January, please preserve dates accurately so we know how old this evidence is.
+I'm Rita Park, PM for OrthoSched (B2B SaaS, ~340 mid-size dental practice accounts, ARR ~$8M). I started using Ark six months ago. Today is **2026-05-17**. Below are three artifacts from **January 2026** that established our top-priority hypothesis for Q1: *Provider Availability Sync*. The feature shipped to GA on **2026-03-20**. I want all three artifacts ingested faithfully — they happened in January, please preserve dates accurately so we know how old this evidence is.
 
 After ingesting, the active hypothesis should be `provider-availability-sync` with status `promoted` (it WAS promoted in January based on this evidence; the resulting feature has been live for ~8 weeks). The decision that came out of this hypothesis should be a real decision file.
 

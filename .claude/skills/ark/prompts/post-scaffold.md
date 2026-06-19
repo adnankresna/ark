@@ -108,7 +108,7 @@ This block goes in the final message to the PM, not just internal reasoning.
 ## 6. Commit
 
 - Run `git rev-parse --is-inside-work-tree` in the **current working directory** (not any subfolder).
-- If yes: stage all scaffolded files. Single commit titled `feat: initialize PM brain`.
+- If yes: stage all scaffolded files. Single commit titled `feat: initialize Ark`.
 - If no: `git init` in the **current working directory**, then stage and commit as above.
 - **Critical:** git init must run in the working directory where the skill was invoked, not inside any scaffolded subfolder. The provenance chain (`source/` → `ingestion/` → `knowledge/`) must be inside the same repo.
 - **Never push remotely.** The PM controls when and where this is published.

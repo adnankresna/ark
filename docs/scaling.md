@@ -1,4 +1,4 @@
-# How PM Brain scales
+# How Ark scales
 
 The brain is built to stay performant on a working PM timescale: one PM, one product, accumulating context over time. This page explains why, and what the system does on your behalf as the folder grows.
 
@@ -93,7 +93,7 @@ At those volumes, after a year of active use, you have a few hundred files total
 
 The architecture is markdown-in-git. That choice ages well in two specific ways:
 
-- **Model context windows expand.** What requires careful folder-bounded retrieval today becomes load-the-whole-active-layer tomorrow. PM Brain doesn't need to be re-architected to take advantage; the same files just get more of them loaded at once.
+- **Model context windows expand.** What requires careful folder-bounded retrieval today becomes load-the-whole-active-layer tomorrow. Ark doesn't need to be re-architected to take advantage; the same files just get more of them loaded at once.
 - **The data format doesn't depend on the model.** Markdown files in a git repo are forward-compatible with every future Claude, every future Cursor, every future agent. The brain you build today doesn't get locked to today's tooling.
 
 This is the architectural payoff of refusing vector DBs and embedded retrieval. Those choices bind you to the tooling generation you built against. Plain markdown does not.

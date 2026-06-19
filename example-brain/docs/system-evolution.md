@@ -1,8 +1,8 @@
-# PM Brain — System Evolution
+# Ark — System Evolution
 
-> This document governs the evolution of the PM Brain itself.
+> This document governs the evolution of the Ark itself.
 >
-> It is intentionally separate from product knowledge. The PM Brain manages two different things:
+> It is intentionally separate from product knowledge. The Ark manages two different things:
 >
 > 1. Product/company knowledge
 > 2. The architecture and behavior of the knowledge system itself
@@ -11,13 +11,13 @@
 >
 > `knowledge/` contains durable PM knowledge.
 >
-> `docs/system-evolution.md` contains operational guidance for keeping the PM Brain useful over time.
+> `docs/system-evolution.md` contains operational guidance for keeping the Ark useful over time.
 
 ---
 
 # Core principle
 
-The PM Brain should become:
+The Ark should become:
 - more compressed,
 - more operational,
 - more decision-relevant,
@@ -43,7 +43,7 @@ The primary enemy is entropy.
 
 # Architectural philosophy
 
-The PM Brain is not:
+The Ark is not:
 - a documentation vault,
 - a knowledge dump,
 - a Notion replacement,
@@ -226,7 +226,7 @@ Corrective action:
 
 # Signals the system is degrading
 
-The PM Brain is likely degrading if:
+The Ark is likely degrading if:
 
 - The agent regularly loads large portions of the repo
 - Retrieval feels slower or less precise
@@ -249,7 +249,7 @@ Treat them seriously.
 
 # Refinement cadence
 
-The PM Brain should evolve continuously.
+The Ark should evolve continuously.
 
 The architecture is not fixed.
 
@@ -357,13 +357,13 @@ Durable knowledge can be:
 - strategically outdated,
 - or overfit to recent evidence.
 
-The PM Brain should continuously question its own assumptions.
+The Ark should continuously question its own assumptions.
 
 ---
 
 ## Optimize for survivability
 
-The best PM Brain is not the most sophisticated one.
+The best Ark is not the most sophisticated one.
 
 It is the one that:
 - still works after 6 months,
@@ -377,7 +377,7 @@ Long-term survivability matters more than theoretical elegance.
 
 # Final principle
 
-A PM Brain that cannot prune itself eventually collapses under its own accumulated structure.
+A Ark that cannot prune itself eventually collapses under its own accumulated structure.
 
 Compression, synthesis, deletion, and selective forgetting are not maintenance details.
 

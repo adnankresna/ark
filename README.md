@@ -1,14 +1,14 @@
-# PM Brain
+# Ark
 
-[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-d97757)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Tests: 404/406 checks (≈99.5%)](https://img.shields.io/badge/tests-404%2F406%20checks%20%28%E2%89%8899.5%25%29-brightgreen)](tests/RESULTS.md) [![Companion: pm-skills](https://img.shields.io/badge/companion-pm--skills-blue)](https://github.com/phuryn/pm-skills)
+[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-d97757)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Tests: 404/406 checks (≈99.5%)](https://img.shields.io/badge/tests-404%2F406%20checks%20%28%E2%89%8899.5%25%29-brightgreen)](tests/RESULTS.md) [![Companion: pm-skills](https://img.shields.io/badge/companion-pm--skills-blue)](https://github.com/adnankresna/pm-skills)
 
 **A second brain for product managers.** Plain markdown files in a folder on your laptop. Claude reads them before answering, writes to them after, sweeps them every Friday. No vector DB. No cloud. No agent memory tricks.
 
-You manage one product. Your context is scattered across Notion, Linear, Slack, your dashboards, and your head. You ship a feature. Six weeks later, nobody remembers why you killed the other option. PM Brain fixes that.
+You manage one product. Your context is scattered across Notion, Linear, Slack, your dashboards, and your head. You ship a feature. Six weeks later, nobody remembers why you killed the other option. Ark fixes that.
 
-> **See it in action:** [A week with PM Brain: Lena's first five days](./docs/walkthrough.md) is a short story of one PM using it on a real team. New here? Start there.
+> **See it in action:** [A week with Ark: Lena's first five days](./docs/walkthrough.md) is a short story of one PM using it on a real team. New here? Start there.
 
-> **Research preview.** The architecture has months of dogfooding behind it on a sister content brain; the product as installed by real PMs in real organizations is days old. The eval suite (404 of 406 checks pass) is the floor. Real-world install feedback is how the next version gets better. Open [issues](https://github.com/phuryn/pm-brain/issues) or join the conversation per the launch post.
+> **Research preview.** The architecture has months of dogfooding behind it on a sister content brain; the product as installed by real PMs in real organizations is days old. The eval suite (404 of 406 checks pass) is the floor. Real-world install feedback is how the next version gets better. Open [issues](https://github.com/adnankresna/open-adnan/issues) or join the conversation per the launch post.
 
 ## Install
 
@@ -16,14 +16,14 @@ Two stages: install the skill once, then bootstrap a brain in any folder you wan
 
 ### Stage 1: install the skill (one time)
 
-The skill is global. It lands in `~/.claude/skills/pm-brain/` and is available across every Claude Code session, in any working directory.
+The skill is global. It lands in `~/.claude/skills/ark/` and is available across every Claude Code session, in any working directory.
 
 **macOS / Linux / WSL / Git Bash:**
 
 ```bash
 mkdir -p ~/.claude/skills && \
-  curl -L https://github.com/phuryn/pm-brain/archive/refs/heads/main.tar.gz | \
-  tar xz --strip-components=3 -C ~/.claude/skills pm-brain-main/.claude/skills/pm-brain/
+  curl -L https://github.com/adnankresna/open-adnan/archive/refs/heads/main.tar.gz | \
+  tar xz --strip-components=3 -C ~/.claude/skills open-adnan-main/.claude/skills/ark/
 ```
 
 **Windows PowerShell:**
@@ -31,13 +31,13 @@ mkdir -p ~/.claude/skills && \
 ```powershell
 $dest = "$env:USERPROFILE\.claude\skills"
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
-irm "https://github.com/phuryn/pm-brain/archive/refs/heads/main.zip" -OutFile "$env:TEMP\pmb.zip"
-Expand-Archive "$env:TEMP\pmb.zip" "$env:TEMP\pmb" -Force
-Copy-Item "$env:TEMP\pmb\pm-brain-main\.claude\skills\pm-brain" $dest -Recurse -Force
-Remove-Item "$env:TEMP\pmb.zip","$env:TEMP\pmb" -Recurse -Force
+irm "https://github.com/adnankresna/open-adnan/archive/refs/heads/main.zip" -OutFile "$env:TEMP\ark.zip"
+Expand-Archive "$env:TEMP\ark.zip" "$env:TEMP\ark" -Force
+Copy-Item "$env:TEMP\ark\open-adnan-main\.claude\skills\ark" $dest -Recurse -Force
+Remove-Item "$env:TEMP\ark.zip","$env:TEMP\ark" -Recurse -Force
 ```
 
-Either path pulls only the skill folder (`.claude/skills/pm-brain/`) into your Claude Code skills directory. The rest of this repo (`example-brain/`, `tests/`, `docs/`) stays on GitHub for you to browse, not on your laptop.
+Either path pulls only the skill folder (`.claude/skills/ark/`) into your Claude Code skills directory. The rest of this repo (`example-brain/`, `tests/`, `docs/`) stays on GitHub for you to browse, not on your laptop.
 
 ### Stage 2: bootstrap a brain (per-product)
 
@@ -47,14 +47,14 @@ In any folder where you want the brain to live:
 cd ~/projects/my-product-brain
 claude
 # then in the Claude Code prompt:
-/pm-brain
+/ark
 ```
 
 The skill detects what's already in the directory. An empty folder gets a fresh start (**greenfield**). A folder with existing PM artifacts (Notion exports, a Jira CSV, meeting notes) gets read and absorbed (**migration**). Either way, a short 5-batch interview captures company, role, and current priorities. The scaffold drops in, the brain commits locally. Never pushes.
 
 > **Migration is for your current state. Don't backfill old artifacts retroactively.** Migration mode reads your active strategy, in-flight hypotheses, recent decisions, current stakeholder list. That's the goal. Don't try to manually `/ingest` 200 old interview transcripts and six months of Slack threads. If a stale artifact matters, it'll come up through current work and you'll ingest it then. Forcing them in now wastes a weekend and clogs the durable layer.
 
-> Stuck? Universal fallback (any OS with `git`): `git clone https://github.com/phuryn/pm-brain.git && cp -R pm-brain/.claude/skills/pm-brain ~/.claude/skills/`. On Windows replace the `cp -R` with `Copy-Item pm-brain\.claude\skills\pm-brain $env:USERPROFILE\.claude\skills\ -Recurse`.
+> Stuck? Universal fallback (any OS with `git`): `git clone https://github.com/adnankresna/open-adnan.git && cp -R open-adnan/.claude/skills/ark ~/.claude/skills/`. On Windows replace the `cp -R` with `Copy-Item open-adnan\.claude\skills\ark $env:USERPROFILE\.claude\skills\ -Recurse`.
 
 ## What it does (one loop)
 
@@ -82,13 +82,13 @@ Full list of provenance tags in the [glossary](./docs/glossary.md). Worked end-t
 ## What's in the repo
 
 ```
-.claude/skills/pm-brain/    # The canonical skill. Install this.
+.claude/skills/ark/    # The canonical skill. Install this.
 example-brain/              # Pre-scaffolded instance (browseable demo)
 tests/                      # Eval suite. Synthetic scenarios + harness.
 docs/                       # Architecture, how it works, testing, prior art
 ```
 
-The brain itself (once you install and run `/pm-brain`) lives in your working directory:
+The brain itself (once you install and run `/ark`) lives in your working directory:
 
 - **`knowledge/`**: your stable picture of strategy, product, users, market, and org
 - **`hypotheses/`**: things you're tracking the evidence for (e.g., "invite-link friction blocks team activation under 50 seats")
@@ -123,9 +123,9 @@ python tests/harness/run_scenario.py tests/scenarios/01-b2b-churn
 
 ## Docs
 
-- [`docs/walkthrough.md`](./docs/walkthrough.md): *Start here.* A week with PM Brain, told as a story.
+- [`docs/walkthrough.md`](./docs/walkthrough.md): *Start here.* A week with Ark, told as a story.
 - [`docs/why-this-matters.md`](./docs/why-this-matters.md): five failure modes that kill most AI memory systems by month three, and the five structural choices that answer them.
-- [`docs/glossary.md`](./docs/glossary.md): every term used in PM Brain, defined in plain English.
+- [`docs/glossary.md`](./docs/glossary.md): every term used in Ark, defined in plain English.
 - [`docs/how-it-works.md`](./docs/how-it-works.md): the technical version of the walkthrough, with files and folders.
 - [`docs/architecture.md`](./docs/architecture.md): the design choices (deterministic scaffold + adaptive prompts) and why.
 - [`docs/scaling.md`](./docs/scaling.md): how the brain stays healthy as the folder grows. Growth shapes, compression mechanisms, realistic envelope numbers.
@@ -135,9 +135,9 @@ python tests/harness/run_scenario.py tests/scenarios/01-b2b-churn
 
 ## Compose with PM Skills
 
-![PM Brain composes with PM Skills](docs/screenshots/pm-brain-pm-skills.webp)
+![Ark composes with PM Skills](docs/screenshots/ark-pm-skills.webp)
 
-PM Brain is the memory layer. [PM Skills](https://github.com/phuryn/pm-skills) are the workflow modules: how to run a JTBD interview, how to score with RICE, how to design an experiment. They compose. The skill is how to do the work once. The brain is what you know across all the times you did it.
+Ark is the memory layer. [PM Skills](https://github.com/adnankresna/pm-skills) are the workflow modules: how to run a JTBD interview, how to score with RICE, how to design an experiment. They compose. The skill is how to do the work once. The brain is what you know across all the times you did it.
 
 ## Contributing
 
@@ -145,7 +145,7 @@ Issues first, please. The skill is the load-bearing artifact for every install, 
 
 1. Open a GitHub issue describing the use case, the missing behavior, or the scenario you'd like covered. Link to your own brain folder if you can. Concrete examples beat abstract requests.
 2. For documentation, walkthrough, or scenario contributions (new `tests/scenarios/<NN-slug>/`), a PR after issue discussion is welcome.
-3. For changes to the skill itself (`.claude/skills/pm-brain/`), please wait for explicit go-ahead on the issue before opening a PR. The eval suite needs to re-run and the example-brain may need to mirror structural changes. The repo-level [`CLAUDE.md`](./CLAUDE.md) describes the work patterns in detail.
+3. For changes to the skill itself (`.claude/skills/ark/`), please wait for explicit go-ahead on the issue before opening a PR. The eval suite needs to re-run and the example-brain may need to mirror structural changes. The repo-level [`CLAUDE.md`](./CLAUDE.md) describes the work patterns in detail.
 
 Run the eval suite before sending a PR if your change could affect any scenario:
 

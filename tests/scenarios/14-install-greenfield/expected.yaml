@@ -1,10 +1,10 @@
 scenario: 14-install-greenfield
 description: |
-  Single-turn install scenario. Empty work dir → invoke /pm-brain with all five interview
+  Single-turn install scenario. Empty work dir → invoke /ark with all five interview
   batches pre-answered → assert the install produced a populated, link-coherent brain with
   the hook layer in place and answers landed in the right files.
 
-  This is the only scenario that exercises the /pm-brain skill orchestration end-to-end
+  This is the only scenario that exercises the /ark skill orchestration end-to-end
   (mode detection, scaffold copy including .claude/, placeholder population, self-test).
 
 # This is the install scenario itself — do NOT bootstrap the scaffold beforehand.

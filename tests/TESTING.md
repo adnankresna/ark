@@ -1,4 +1,4 @@
-# Testing PM Brain — detailed reference
+# Testing Ark — detailed reference
 
 This is the **detailed** testing doc: scenario format, harness internals, ground-truth schema, cost behavior, current coverage, gaps before publishable, and how to add a scenario.
 
@@ -11,7 +11,7 @@ For the design rationale (why scenarios over per-turn unit tests, why LLM-as-jud
 
 ## Why this exists
 
-The thing PM Brain actually delivers is **trajectory over time** — does the brain converge on the right hypotheses, surface contradictions, draft a defensible decision after weeks of accumulating evidence. Testing one ingestion at a time misses the whole product. So the unit of test is a **scenario**: an ordered stream of synthetic artifacts representing weeks-to-quarters of a PM's life, with ground-truth assertions about brain state after each turn.
+The thing Ark actually delivers is **trajectory over time** — does the brain converge on the right hypotheses, surface contradictions, draft a defensible decision after weeks of accumulating evidence. Testing one ingestion at a time misses the whole product. So the unit of test is a **scenario**: an ordered stream of synthetic artifacts representing weeks-to-quarters of a PM's life, with ground-truth assertions about brain state after each turn.
 
 A scenario passes if, across N runs, structural assertions pass 100% and content (LLM-judge) assertions pass at or above the scenario's content threshold (default 0.8). Anything less means the brain is doing the wrong thing under real PM noise — that's a bug, not a flake.
 
@@ -139,11 +139,11 @@ python tests/harness/run_scenario.py <scenario-dir> [flags]
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `PM_BRAIN_CLAUDE_BIN` | `claude` | Path to the Claude Code CLI binary. |
-| `PM_BRAIN_TURN_TIMEOUT` | `600` (seconds) | Per-turn `claude -p` timeout. |
-| `PM_BRAIN_JUDGE_TIMEOUT` | `180` (seconds) | Per-judge `claude -p` timeout. |
-| `PM_BRAIN_TURN_MODEL` | `sonnet` | Model used for scenario turn execution. |
-| `PM_BRAIN_JUDGE_MODEL` | `sonnet` | Default model for judges (per-assertion `model:` overrides). |
+| `ARK_CLAUDE_BIN` | `claude` | Path to the Claude Code CLI binary. |
+| `ARK_TURN_TIMEOUT` | `600` (seconds) | Per-turn `claude -p` timeout. |
+| `ARK_JUDGE_TIMEOUT` | `180` (seconds) | Per-judge `claude -p` timeout. |
+| `ARK_TURN_MODEL` | `sonnet` | Model used for scenario turn execution. |
+| `ARK_JUDGE_MODEL` | `sonnet` | Default model for judges (per-assertion `model:` overrides). |
 
 ---
 

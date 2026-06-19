@@ -1,6 +1,6 @@
 """
 Unit tests for the PostToolUse validator hook
-(`.claude/skills/pm-brain/scaffold/.claude/hooks/validate_brain_file.py`).
+(`.claude/skills/ark/scaffold/.claude/hooks/validate_brain_file.py`).
 
 Run from tests/harness/:
     python -m checks.test_hook_validator
@@ -34,7 +34,7 @@ from pathlib import Path
 
 HOOK = (
     Path(__file__).resolve().parents[3]
-    / ".claude" / "skills" / "pm-brain" / "scaffold" / ".claude" / "hooks"
+    / ".claude" / "skills" / "ark" / "scaffold" / ".claude" / "hooks"
     / "validate_brain_file.py"
 )
 

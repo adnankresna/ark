@@ -178,7 +178,7 @@ def _iter_bold_evidence_rows(text: str):
 
 # ----- work_dir discovery -----
 
-# Markers that strongly suggest "this is a PM brain root".
+# Markers that strongly suggest "this is an Ark root".
 _BRAIN_ROOT_MARKERS = ("INDEX.md", "CLAUDE.md")
 _BRAIN_ROOT_DIRS = ("hypotheses", "decisions", "knowledge", "ingestion", "source", "stakeholders")
 
@@ -338,14 +338,14 @@ def main() -> int:
     # Warnings always print (informational), but don't block.
     if warnings:
         print(
-            "[pm-brain hook] warnings — non-blocking, fix when dependencies land:\n\n"
+            "[ark hook] warnings — non-blocking, fix when dependencies land:\n\n"
             + "\n".join(warnings),
             file=sys.stderr,
         )
 
     if blocking:
         msg = (
-            "[pm-brain hook] BLOCKING schema violations — fix in this turn before continuing:\n\n"
+            "[ark hook] BLOCKING schema violations — fix in this turn before continuing:\n\n"
             + "\n".join(blocking)
             + "\n\nEvery Evidence-row needs one of these provenance tags:\n"
             "  - [ingestion/...](../ingestion/<kind>/<file>.md) or [source/...](../source/<kind>/<file>.md)\n"

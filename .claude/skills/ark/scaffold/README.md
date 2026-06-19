@@ -1,4 +1,4 @@
-# PM Brain
+# Ark
 
 A markdown-native second brain for a product operator — a PM, product lead, or anyone accountable for one product or initiative with judgment-heavy work and scattered inputs.
 

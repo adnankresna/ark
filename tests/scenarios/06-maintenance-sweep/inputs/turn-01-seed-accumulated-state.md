@@ -1,6 +1,6 @@
-# Bulk import: ~6 months of accumulated PM Brain state
+# Bulk import: ~6 months of accumulated Ark state
 
-I'm Maya Chen, PM for **PulseFit** — a consumer fitness app (iOS + Android, ~180k MAU, freemium with a $9.99/mo premium tier called *PulseFit Plus*). I started using PM Brain six months ago, in November 2025. Today is **2026-05-17**.
+I'm Maya Chen, PM for **PulseFit** — a consumer fitness app (iOS + Android, ~180k MAU, freemium with a $9.99/mo premium tier called *PulseFit Plus*). I started using Ark six months ago, in November 2025. Today is **2026-05-17**.
 
 Below are the artifacts that represent ~6 months of accumulation. I want them ingested faithfully — preserve every date as written so we know how old each piece is. **Don't synthesize beyond what's in the artifacts.** Don't auto-demote anything, don't auto-archive anything. Just ingest the state. We'll do maintenance work in later turns.
 
@@ -169,7 +169,7 @@ The redesign decision (artifact 6 below) was logged in `decisions/` but never ba
 **Decision:** Compress the 7-step onboarding to a 4-step flow.
 
 **Why (recorded at decision time):**
-- Step 4 → 5 dropoff (wearable connect, 22%) was the funnel's worst single step. `(stakeholder-verbal, analytics-team, 2025-11-22)` — same numbers later digested into artifact 5's knowledge file. The original export pre-dates PM Brain, so no source/ artifact exists for it.
+- Step 4 → 5 dropoff (wearable connect, 22%) was the funnel's worst single step. `(stakeholder-verbal, analytics-team, 2025-11-22)` — same numbers later digested into artifact 5's knowledge file. The original export pre-dates Ark, so no source/ artifact exists for it.
 - User research (5 sessions, Dec 1–8) showed the goal+activity questions felt "interrogative" — users wanted to "just get in." `(stakeholder-verbal, ux-research-team, 2025-12-10)`
 - Eng estimated 2 weeks for the consolidation work. `(stakeholder-verbal, Aarav, 2025-12-12)`
 

@@ -1,7 +1,7 @@
 {
   "scenario": "06-maintenance-sweep",
   "run": 1,
-  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-0ui_c_xf",
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\ark-test-0ui_c_xf",
   "kept_workdir": false,
   "started_at": "2026-05-17T17:48:37.660326+00:00",
   "turns": [

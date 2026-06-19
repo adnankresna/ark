@@ -1,8 +1,8 @@
 # Scenario 07 — Migration mode (greenfield bulk-ingest)
 
-You're Aisha Patel, PM for **OperatorOS**, a developer-tools company building an API monitoring product (B2B SaaS, mid-market focus). You've been doing the PM job for 18 months **without** a structured second brain — just a messy folder of Google Docs exports, Slack snippets, interview transcripts, a strategy memo, two persona docs, a competitive landscape doc, a roadmap planning doc, and a CFO email about budget cuts. Today is **2026-05-17**. You're invoking PM Brain for the first time, in migration mode, and dumping the folder into it.
+You're Aisha Patel, PM for **OperatorOS**, a developer-tools company building an API monitoring product (B2B SaaS, mid-market focus). You've been doing the PM job for 18 months **without** a structured second brain — just a messy folder of Google Docs exports, Slack snippets, interview transcripts, a strategy memo, two persona docs, a competitive landscape doc, a roadmap planning doc, and a CFO email about budget cuts. Today is **2026-05-17**. You're invoking Ark for the first time, in migration mode, and dumping the folder into it.
 
-This scenario exercises **migration mode itself** — the init-phase behavior promised by [`prompts/migration.md`](../../../.claude/skills/pm-brain/prompts/migration.md) when the working directory already contains pre-existing PM artifacts. It tests the *conservative ingestion contract*: route every artifact to `source/`, create matching `ingestion/` syntheses without inferring beyond the artifact, surface tensions without resolving them, and **do not auto-promote anything into `hypotheses/` or `knowledge/` until the PM explicitly asks**.
+This scenario exercises **migration mode itself** — the init-phase behavior promised by [`prompts/migration.md`](../../../.claude/skills/ark/prompts/migration.md) when the working directory already contains pre-existing PM artifacts. It tests the *conservative ingestion contract*: route every artifact to `source/`, create matching `ingestion/` syntheses without inferring beyond the artifact, surface tensions without resolving them, and **do not auto-promote anything into `hypotheses/` or `knowledge/` until the PM explicitly asks**.
 
 ## Lifecycle moves exercised
 
@@ -19,7 +19,7 @@ This scenario exercises **migration mode itself** — the init-phase behavior pr
 
 - Auto-promotion from accumulating evidence over time (covered by 01)
 - Demotion from contradicting signal on a previously-promoted hypothesis (covered by 03)
-- Inheriting an already-structured PM Brain from another PM (covered by 02 — that's a different shape: artifacts arrive pre-structured, here they arrive as a messy raw folder)
+- Inheriting an already-structured Ark from another PM (covered by 02 — that's a different shape: artifacts arrive pre-structured, here they arrive as a messy raw folder)
 - Maintenance sweep / weekly review (covered by 03 turn 3, and partially 02)
 
 ## Distinction from scenario 02

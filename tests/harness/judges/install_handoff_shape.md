@@ -1,6 +1,6 @@
 # Judge — install_handoff_shape
 
-You are evaluating whether the PM Brain install agent's **final hand-off** to the operator
+You are evaluating whether the Ark install agent's **final hand-off** to the operator
 follows the documented hand-off shape from `prompts/post-scaffold.md § 7` and `SKILL.md § 8`.
 
 ## What the agent should produce
@@ -24,7 +24,7 @@ Required ordering:
 ## What the agent should NOT do
 
 - Lead with a folder map or `tree`-style listing.
-- Produce a generic "your scaffold is ready" or "your PM brain is ready" summary without
+- Produce a generic "your scaffold is ready" or "your Ark is ready" summary without
   named slugs and concrete days.
 - Skip the self-test step (link verification, routing self-test).
 - Invent contradictions when none exist; equally, claim "none found" without checking.

@@ -2,7 +2,7 @@
 
 > One row per scenario, latest run. Snapshots committed under [`results/snapshots/`](results/snapshots/). Open any JSON to see the per-turn structural checks, judge verdicts, agent responses, and cost breakdown.
 
-The harness spins up a fresh PM Brain scaffold in a temp dir, replays the scenario's cached `turn-NN-*.md` inputs through `claude -p`, runs structural checks after every turn, and runs LLM-judge checks at the end. There is no cherry-picking inside a run. Every check defined in `expected.yaml` is evaluated. See [`TESTING.md`](TESTING.md) for the design.
+The harness spins up a fresh Ark scaffold in a temp dir, replays the scenario's cached `turn-NN-*.md` inputs through `claude -p`, runs structural checks after every turn, and runs LLM-judge checks at the end. There is no cherry-picking inside a run. Every check defined in `expected.yaml` is evaluated. See [`TESTING.md`](TESTING.md) for the design.
 
 ## Headline
 

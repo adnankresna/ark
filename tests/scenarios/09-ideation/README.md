@@ -1,6 +1,6 @@
 # Scenario 09 — Ideation from existing knowledge
 
-You're Sam Liu, PM for **FlowExpense**, a B2B fintech expense-management product (~280 mid-market customers, ARR ~$11M). You've been operating the PM Brain for four months and it's accumulated real evidence: customer interviews, a competitor note, a CS monthly, an insights entry, an open question in the roadmap, and one stalled hypothesis. Today is **2026-05-17**. You're not bringing fresh signal in — you're asking the brain a different kind of question: *given everything in here, what's under-explored?*
+You're Sam Liu, PM for **FlowExpense**, a B2B fintech expense-management product (~280 mid-market customers, ARR ~$11M). You've been operating the Ark for four months and it's accumulated real evidence: customer interviews, a competitor note, a CS monthly, an insights entry, an open question in the roadmap, and one stalled hypothesis. Today is **2026-05-17**. You're not bringing fresh signal in — you're asking the brain a different kind of question: *given everything in here, what's under-explored?*
 
 This scenario exercises **forward synthesis from existing brain state** — the brain's ability to triangulate evidence it already has into 1-3 candidate hypotheses nobody has framed yet. Every other scenario is REACTIVE (new signal arrives, brain captures/synthesizes/audits). This one is GENERATIVE: the brain proposes candidates grounded entirely in the existing corpus, with explicit validation gates, and without auto-promoting anything.
 

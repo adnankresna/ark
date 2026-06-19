@@ -1,7 +1,7 @@
 {
   "scenario": "02-inherited-folder",
   "run": 1,
-  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-c2k4rsjd",
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\ark-test-c2k4rsjd",
   "kept_workdir": false,
   "started_at": "2026-05-17T21:26:24.179321+00:00",
   "turns": [

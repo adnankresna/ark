@@ -1,6 +1,6 @@
 # Architecture
 
-PM Brain is two architectural decisions and one operating loop. Everything else follows.
+Ark is two architectural decisions and one operating loop. Everything else follows.
 
 ## Decision 1: Deterministic scaffold + adaptive prompts
 
@@ -8,15 +8,15 @@ The skill is split into two layers that evolve independently.
 
 | Layer | Lives in | Behavior | Why |
 |---|---|---|---|
-| **Static structure**: schemas, `CLAUDE.md`, `INDEX.md`, folder tree, file templates | `.claude/skills/pm-brain/scaffold/` | Deterministic. Same every install. | Copy-paste reliability. No generation drift. Schemas can evolve without touching reasoning. |
-| **Adaptive reasoning**: mode detection, migration, interview, post-scaffold self-test | `.claude/skills/pm-brain/prompts/` | Probabilistic. Depends on inputs. | Reasoning can improve without rewriting schemas. Behavior evolves in `prompts/`, structure stays stable. |
-| **Orchestration**: when to load what | `.claude/skills/pm-brain/SKILL.md` | Glue. | Single entry point. |
+| **Static structure**: schemas, `CLAUDE.md`, `INDEX.md`, folder tree, file templates | `.claude/skills/ark/scaffold/` | Deterministic. Same every install. | Copy-paste reliability. No generation drift. Schemas can evolve without touching reasoning. |
+| **Adaptive reasoning**: mode detection, migration, interview, post-scaffold self-test | `.claude/skills/ark/prompts/` | Probabilistic. Depends on inputs. | Reasoning can improve without rewriting schemas. Behavior evolves in `prompts/`, structure stays stable. |
+| **Orchestration**: when to load what | `.claude/skills/ark/SKILL.md` | Glue. | Single entry point. |
 
 The first version of this skill mixed both layers in one prompt. Forcing deterministic content through probabilistic generation caused inconsistencies, formatting drift, occasional missing files, path errors. Splitting them eliminates that whole class of failure.
 
 ## Decision 2: Markdown files in a git repo, no vector layer
 
-Most "AI memory" systems reach for embeddings, vector databases, hidden retrieval. PM Brain reaches for markdown files the PM can read, edit, version-control, and grep.
+Most "AI memory" systems reach for embeddings, vector databases, hidden retrieval. Ark reaches for markdown files the PM can read, edit, version-control, and grep.
 
 | What we picked | What we rejected | Why |
 |---|---|---|

@@ -37,7 +37,7 @@ The directory looks like an **active working repository**, not a notes folder. S
 **Do not scaffold without confirmation.** Pause and ask:
 
 > "This directory looks like an active working repository (detected: <list signals>). I can:
-> (a) scaffold the PM Brain here alongside the existing files (recommended only if you intend to keep PM context with this project),
+> (a) scaffold the Ark here alongside the existing files (recommended only if you intend to keep PM context with this project),
 > (b) abort — you `cd` into a different directory and re-run.
 > Which one?"
 
@@ -58,4 +58,4 @@ Migration:
 > "Migration mode. Found 1 strategy doc, 3 interview transcripts, 2 decks, 4 prior stakeholder notes. I'll **copy** these into `source/` (originals stay put) and run a narrowed interview."
 
 Active-repo (after operator confirms (a)):
-> "Scaffolding PM Brain alongside the existing repo. Migration: found N PM artifacts mixed in with source code — I'll copy only PM-pattern files into `source/`, ignoring code/build directories."
+> "Scaffolding Ark alongside the existing repo. Migration: found N PM artifacts mixed in with source code — I'll copy only PM-pattern files into `source/`, ignoring code/build directories."

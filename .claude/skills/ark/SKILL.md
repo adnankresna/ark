@@ -1,11 +1,11 @@
 ---
-name: pm-brain
-description: Initialize a PM Brain — a markdown-native second brain for a product operator (PM, product lead, founder, or anyone accountable for one product or initiative) doing judgment-heavy work with scattered inputs. Detects greenfield vs. migration mode, runs a focused interview, copies the deterministic scaffold into the working directory, populates placeholders from interview answers, runs a self-test, and commits. Use when invoked via `/pm-brain` or when the user asks to set up a PM Brain.
+name: ark
+description: Initialize an Ark — a markdown-native second brain for a product operator (PM, product lead, founder, or anyone accountable for one product or initiative) doing judgment-heavy work with scattered inputs. Detects greenfield vs. migration mode, runs a focused interview, copies the deterministic scaffold into the working directory, populates placeholders from interview answers, runs a self-test, and commits. Use when invoked via `/ark` or when the user asks to set up an Ark.
 ---
 
-# PM Brain — Skill
+# Ark — Skill
 
-This skill scaffolds and initializes a PM Brain in the current working directory. The scaffold is deterministic (static files copied as-is from `scaffold/`). The reasoning is adaptive (loaded from `prompts/` per phase).
+This skill scaffolds and initializes an Ark in the current working directory. The scaffold is deterministic (static files copied as-is from `scaffold/`). The reasoning is adaptive (loaded from `prompts/` per phase).
 
 ## Architectural split
 
@@ -19,10 +19,10 @@ Behavior evolves independently from structure. Schemas can change without touchi
 
 ## When to invoke
 
-- Operator runs `/pm-brain` (or pastes a setup request like "set up a PM Brain here").
-- Operator asks to add a PM Brain to an existing directory of PM artifacts.
+- Operator runs `/ark` (or pastes a setup request like "set up an Ark here").
+- Operator asks to add an Ark to an existing directory of PM artifacts.
 
-Do **not** invoke this skill for routine PM Brain operations after init (ingestion, prep, review). Those are handled by the seeded `CLAUDE.md` operating manual in the target repo.
+Do **not** invoke this skill for routine Ark operations after init (ingestion, prep, review). Those are handled by the seeded `CLAUDE.md` operating manual in the target repo.
 
 ## Workflow
 
@@ -90,7 +90,7 @@ Load `prompts/post-scaffold.md`. Run:
 ### 7. Commit
 
 - Run `git rev-parse --is-inside-work-tree` in the **current working directory**.
-- If already a repo: stage all scaffolded files. Single commit titled `feat: initialize PM brain`.
+- If already a repo: stage all scaffolded files. Single commit titled `feat: initialize Ark`.
 - If not a repo: `git init` in the current working directory, then stage and commit.
 - **Never push remotely.** PM controls publication.
 - If any git step fails, surface the error and stop. No destructive recovery.
@@ -111,7 +111,7 @@ Then stop and wait for the operator's first real task.
 ## Anti-patterns
 
 - **Regenerating scaffold content.** The whole point of `scaffold/` is that it's deterministic. If you find yourself rewriting `CLAUDE.md` or a schema from scratch during init, stop — copy from `scaffold/` instead.
-- **Creating a nested `pm-brain/` subfolder.** The current working directory **is** the project root.
+- **Creating a nested `ark/` subfolder.** The current working directory **is** the project root.
 - **Skipping the self-test.** Broken links are memory corruption, not cosmetic.
 - **Inventing contradictions.** If migration mode found no genuine conflicts, say so. Don't fabricate.
 - **Pushing remotely.** PM controls when and where this gets published.
@@ -119,7 +119,7 @@ Then stop and wait for the operator's first real task.
 ## Files in this skill
 
 ```
-pm-brain-skill/
+ark-skill/
 ├── SKILL.md              # This file. Orchestration.
 ├── scaffold/             # Deterministic static structure. Copy as-is.
 │   ├── .claude/          # Per-brain Claude Code config (hooks + settings)

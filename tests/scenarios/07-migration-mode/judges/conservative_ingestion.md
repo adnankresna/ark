@@ -2,7 +2,7 @@
 
 ## What we're checking
 
-Turn 1 of scenario 07 is a bulk migration: the PM (Aisha) pastes 8 pre-existing PM artifacts spanning Q4 2025 → April 2026 and asks the brain to route them into `source/` and write matching `ingestion/` syntheses — **conservatively**. The migration prompt at [`.claude/skills/pm-brain/prompts/migration.md`](../../../.claude/skills/pm-brain/prompts/migration.md) makes the contract explicit: copy verbatim, treat uploaded materials as *claims not truth*, date-tag every claim, never overwrite, preserve conflicts as tensions rather than resolving them.
+Turn 1 of scenario 07 is a bulk migration: the PM (Aisha) pastes 8 pre-existing PM artifacts spanning Q4 2025 → April 2026 and asks the brain to route them into `source/` and write matching `ingestion/` syntheses — **conservatively**. The migration prompt at [`.claude/skills/ark/prompts/migration.md`](../../../.claude/skills/ark/prompts/migration.md) makes the contract explicit: copy verbatim, treat uploaded materials as *claims not truth*, date-tag every claim, never overwrite, preserve conflicts as tensions rather than resolving them.
 
 The right behavior on this turn is a faithful summary of what each artifact says — no more. The wrong behavior is the brain "helpfully" inferring strategic conclusions, restating Aisha's strategy memo as accepted truth, or synthesizing across artifacts to produce a unified picture the artifacts themselves don't support.
 

@@ -1,7 +1,7 @@
 {
   "scenario": "16-corrupt-state-recovery",
   "run": 1,
-  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-grvc3kbb",
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\ark-test-grvc3kbb",
   "kept_workdir": false,
   "started_at": "2026-05-17T23:06:54.092729+00:00",
   "turns": [

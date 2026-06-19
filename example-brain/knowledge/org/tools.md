@@ -15,7 +15,7 @@
 <!-- Slack, email, async docs. Where conversations actually happen. -->
 
 ## Documentation
-<!-- Notion, Confluence, Drive, etc. Where pre-PM-Brain knowledge lives. -->
+<!-- Notion, Confluence, Drive, etc. Where pre-Ark knowledge lives. -->
 
 ## Research
 <!-- Where interview transcripts, survey results, and user research land. -->

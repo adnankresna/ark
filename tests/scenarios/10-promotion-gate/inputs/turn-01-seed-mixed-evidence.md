@@ -1,4 +1,4 @@
-# Bulk import: existing PM-Brain state — proposed hypothesis, mixed evidence
+# Bulk import: existing Ark state — proposed hypothesis, mixed evidence
 
 I'm Casey Ito, PM for BrightSched (B2B healthtech, multi-provider outpatient clinics, ~210 accounts, ARR ~$5.4M). Today is **2026-05-17**. Six weeks ago, on **2026-04-05**, I opened a `proposed` hypothesis called `same-day-rebooking-flow`. Evidence has accumulated unevenly across the risk areas. I want all of the below ingested faithfully — preserve dates as given, tag every load-bearing evidence row with provenance from the canonical enum, and create the hypothesis file with status `proposed` (NOT `promoted` — that's the question I'll be asking next turn).
 

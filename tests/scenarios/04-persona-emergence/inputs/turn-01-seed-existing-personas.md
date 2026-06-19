@@ -1,6 +1,6 @@
-# Bulk import: prior PM-Brain state
+# Bulk import: prior Ark state
 
-I'm Dana Liu, PM for **HireFlow**, a B2B SaaS hiring platform (~180 mid-market employer accounts, 200-2000 headcount, ARR ~$11M). I started using PM Brain three months ago. Today is **2026-05-17**. Below are four artifacts from the past two months that represent the brain's current state on **who our users are** and **a recent prioritization call we made on that basis**. I want all four ingested faithfully — preserve dates, preserve personas, preserve the decision.
+I'm Dana Liu, PM for **HireFlow**, a B2B SaaS hiring platform (~180 mid-market employer accounts, 200-2000 headcount, ARR ~$11M). I started using Ark three months ago. Today is **2026-05-17**. Below are four artifacts from the past two months that represent the brain's current state on **who our users are** and **a recent prioritization call we made on that basis**. I want all four ingested faithfully — preserve dates, preserve personas, preserve the decision.
 
 After ingesting:
 
@@ -21,7 +21,7 @@ Don't synthesize anything new beyond what's in these four artifacts. The point i
 - Runs 6-12 sourcing campaigns per req via the Boolean search + saved-list tools.
 - Reviews resumes in batch (typically 30-60 per req in the first week).
 - Owns the candidate's experience through the screening loop.
-**Pain points (sourced — these came from interviews done BEFORE PM Brain existed, so the original notes are not in `source/`; tag accordingly with the non-path enum):**
+**Pain points (sourced — these came from interviews done BEFORE Ark existed, so the original notes are not in `source/`; tag accordingly with the non-path enum):**
 - Boolean search returns too many false positives on senior-eng reqs  `(stakeholder-verbal, priya-acme-recruiter, 2026-03-04)`
 - Cannot bulk-tag candidates across reqs  `(stakeholder-verbal, jordan-northstar-recruiter, 2026-03-18)`
 - ATS-side rejections do not sync back to HireFlow  `(stakeholder-verbal, priya-acme-recruiter, 2026-03-04)`
@@ -38,7 +38,7 @@ Don't synthesize anything new beyond what's in these four artifacts. The point i
 - Logs into HireFlow 2-4x/week, primarily for scorecard review and feedback entry.
 - Reads candidate packets the night before an interview loop.
 - Often the bottleneck on debrief scheduling.
-**Pain points (sourced — same caveat: these interviews pre-date PM Brain so no `source/` file exists):**
+**Pain points (sourced — same caveat: these interviews pre-date Ark so no `source/` file exists):**
 - Scorecard format does not surface conflicting interviewer signals well  `(stakeholder-verbal, marcus-acme-hm, 2026-03-11)`
 - Comparing two finalists side-by-side is clunky  `(stakeholder-verbal, jen-northstar-hm, 2026-03-25)`
 - Wants async debrief option; sync debriefs hard to schedule  `(stakeholder-verbal, marcus-acme-hm, 2026-03-11)`

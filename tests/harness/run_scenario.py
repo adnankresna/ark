@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-run_scenario.py — execute a single PM Brain test scenario.
+run_scenario.py — execute a single Ark test scenario.
 
 USAGE
     python tests/harness/run_scenario.py tests/scenarios/01-b2b-churn
@@ -12,7 +12,7 @@ USAGE
 WHAT IT DOES
     For each run:
       1. Creates a fresh work dir (TemporaryDirectory, or tests/workdir/<ts>-... with --keep-workdir).
-      2. Bootstraps the PM Brain scaffold into the work dir (cp -R of the canonical skill scaffold).
+      2. Bootstraps the Ark scaffold into the work dir (cp -R of the canonical skill scaffold).
       3. Iterates through scenario inputs/ in filename order. For each turn:
          - Snapshots files-before.
          - Invokes `claude -p` in the work dir with the turn's artifact embedded in the prompt.
@@ -55,20 +55,20 @@ from checks import content as content_checks  # noqa: E402
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-SKILL_PATH = REPO_ROOT / ".claude" / "skills" / "pm-brain"
+SKILL_PATH = REPO_ROOT / ".claude" / "skills" / "ark"
 RESULTS_DIR = REPO_ROOT / "tests" / "results"
 WORKDIR_ROOT = REPO_ROOT / "tests" / "workdir"
 JUDGES_DIR = Path(__file__).resolve().parent / "judges"
 
-CLAUDE_BIN = os.environ.get("PM_BRAIN_CLAUDE_BIN", "claude")
-TURN_TIMEOUT_S = int(os.environ.get("PM_BRAIN_TURN_TIMEOUT", "600"))
-JUDGE_TIMEOUT_S = int(os.environ.get("PM_BRAIN_JUDGE_TIMEOUT", "180"))
+CLAUDE_BIN = os.environ.get("ARK_CLAUDE_BIN", "claude")
+TURN_TIMEOUT_S = int(os.environ.get("ARK_TURN_TIMEOUT", "600"))
+JUDGE_TIMEOUT_S = int(os.environ.get("ARK_JUDGE_TIMEOUT", "180"))
 
 # Default models. The scenario-turn agent runs as Sonnet (realistic + ~3-5x cheaper than Opus).
 # Most judges run as Sonnet (tight rubrics). High-judgment judges can opt into Opus via a
 # `model: opus` field in expected.yaml.
-DEFAULT_TURN_MODEL = os.environ.get("PM_BRAIN_TURN_MODEL", "sonnet")
-DEFAULT_JUDGE_MODEL = os.environ.get("PM_BRAIN_JUDGE_MODEL", "sonnet")
+DEFAULT_TURN_MODEL = os.environ.get("ARK_TURN_MODEL", "sonnet")
+DEFAULT_JUDGE_MODEL = os.environ.get("ARK_JUDGE_MODEL", "sonnet")
 
 
 # ============================================================
@@ -149,7 +149,7 @@ def make_workdir(scenario_dir: Path, run_index: int, keep: bool) -> tuple[Path, 
         wd = WORKDIR_ROOT / f"{ts}-{scenario_dir.name}-run{run_index}"
         wd.mkdir(parents=True, exist_ok=False)
         return wd, lambda: None
-    tmp = tempfile.mkdtemp(prefix="pm-brain-test-")
+    tmp = tempfile.mkdtemp(prefix="ark-test-")
     return Path(tmp), lambda: shutil.rmtree(tmp, ignore_errors=True)
 
 
@@ -159,7 +159,7 @@ def make_workdir(scenario_dir: Path, run_index: int, keep: bool) -> tuple[Path, 
 
 def bootstrap_brain(work_dir: Path) -> None:
     """
-    Bootstrap a fresh PM Brain in work_dir by copying the canonical skill scaffold.
+    Bootstrap a fresh Ark in work_dir by copying the canonical skill scaffold.
 
     Scenario tests check post-init behavior. Init has its own scenario slot (TBD:
     04-greenfield-init), which is the right place to exercise the interview workflow.
@@ -180,9 +180,9 @@ def bootstrap_brain(work_dir: Path) -> None:
 # ============================================================
 
 TURN_PROMPT_TEMPLATE = """\
-You are operating the PM Brain that lives in your current working directory.
+You are operating the Ark that lives in your current working directory.
 
-Read CLAUDE.md and INDEX.md, then ingest the artifact below following the PM Brain operating
+Read CLAUDE.md and INDEX.md, then ingest the artifact below following the Ark operating
 manual. Apply changes directly — Autonomy mode is "act and tell" for this session.
 Do not ask for confirmation. Do not stop to clarify; make the reasonable PM call.
 
@@ -474,14 +474,14 @@ def run_once(
             bootstrap_brain(work_dir)
         else:
             # Install-style scenario: don't copy the scaffold (the agent's job).
-            # Do pre-stage the SKILL itself at .claude/skills/pm-brain/ so /pm-brain
+            # Do pre-stage the SKILL itself at .claude/skills/ark/ so /ark
             # is discoverable and the agent can read scaffold/ from inside the skill —
             # this mirrors how a real install resolves the skill on disk.
-            skill_dest = work_dir / ".claude" / "skills" / "pm-brain"
+            skill_dest = work_dir / ".claude" / "skills" / "ark"
             skill_dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copytree(SKILL_PATH, skill_dest)
             print(
-                f"  bootstrap: skipped scaffold copy; staged skill at .claude/skills/pm-brain/",
+                f"  bootstrap: skipped scaffold copy; staged skill at .claude/skills/ark/",
                 file=sys.stderr,
             )
         scenario_prompt_mode = expected.get("prompt_mode", "wrapped")

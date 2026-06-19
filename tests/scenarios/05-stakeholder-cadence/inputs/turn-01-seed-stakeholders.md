@@ -1,6 +1,6 @@
-# Bulk import: prior PM-Brain state — stakeholder roster + active hypothesis
+# Bulk import: prior Ark state — stakeholder roster + active hypothesis
 
-I'm Sasha Rao, PM for **Lumenscope** (B2B analytics SaaS, ~280 paying accounts on mid-market SaaS, ARR ~$11M). I started using PM Brain three months ago. Today is **2026-05-17**.
+I'm Sasha Rao, PM for **Lumenscope** (B2B analytics SaaS, ~280 paying accounts on mid-market SaaS, ARR ~$11M). I started using Ark three months ago. Today is **2026-05-17**.
 
 I'm seeding the brain with state that already exists in my head and in scattered notes. After this turn, I want:
 

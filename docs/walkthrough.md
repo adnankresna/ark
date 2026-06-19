@@ -1,6 +1,6 @@
-# A week with PM Brain: Adnan's first five days
+# A week with Ark: Adnan's first five days
 
-PM Brain is easier to *see* than to describe. This is a short story about one senior product manager (Adnan) using it for a week. You'll see what he sees, what the brain catches, and what he decides.
+Ark is easier to *see* than to describe. This is a short story about one senior product manager (Adnan) using it for a week. You'll see what he sees, what the brain catches, and what he decides.
 
 > **First, the words we'll use.** A *brain* here is just a folder of markdown files in a git repo on your laptop. To *ingest* something means to feed it into that folder so the brain knows about it. *Provenance* is shorthand for "where this claim came from." Every important note in the brain wears a small tag saying whether it came from an interview, a Slack message, a verbal hallway exchange, or your own hunch. There is a one-page [glossary](./glossary.md) at the end if anything else gets jargon-y.
 
@@ -15,7 +15,7 @@ The team runs on Notion, Jira, Slack, and Salestrekker (for the broking pipeline
 Adnan opens Claude and runs:
 
 ```
-/pm-brain
+/ark
 ```
 
 The skill detects there's no brain yet but real PM artifacts exist across Notion and Jira. It enters **migration mode** and walks Adnan through a short interview: company, role, current priorities, top stakeholders, what's in flight. Five batches of questions, about 10 minutes.
@@ -184,4 +184,4 @@ None of this is automation. None of it is the brain making decisions Adnan shoul
 - [Install](../README.md#install) takes about three minutes
 - [How it works](./how-it-works.md): the technical version, with files and folder structure
 - [Architecture](./architecture.md): the design choices and why they're what they are
-- [Glossary](./glossary.md): every term used in PM Brain, in one place
+- [Glossary](./glossary.md): every term used in Ark, in one place

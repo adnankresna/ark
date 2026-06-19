@@ -2,7 +2,7 @@
 
 ## What we're checking
 
-The architectural promise of PM Brain is that every load-bearing claim **wears its provenance**. This judge applies the same audit principle as `audit_trail.md`, but starting at a **hypothesis** rather than a decision. Use this rubric for scenarios that end with a freshly drafted hypothesis but no decision yet (migration / first-hypothesis scenarios).
+The architectural promise of Ark is that every load-bearing claim **wears its provenance**. This judge applies the same audit principle as `audit_trail.md`, but starting at a **hypothesis** rather than a decision. Use this rubric for scenarios that end with a freshly drafted hypothesis but no decision yet (migration / first-hypothesis scenarios).
 
 Auditability comes in two shapes, both valid:
 

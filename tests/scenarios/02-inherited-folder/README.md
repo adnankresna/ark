@@ -1,6 +1,6 @@
 # Scenario 02 — Inherited folder, bulk-ingest
 
-You're Maya Chen, senior PM newly assigned to **Tally**, a consumer fintech budgeting app (B2C, ~120k MAU). Your predecessor Alex left abruptly six weeks ago. You've inherited his folder: a strategy doc, two roadmaps, persona research, a handful of customer interviews, a competitor scan, a metrics snapshot, an engineering feasibility note, and a CS monthly. Some of it is contradictory. Some is stale. You're about to start ingesting it into a fresh PM brain — then continue working with new signals over the next four weeks until you need to make a Q4 prioritization call.
+You're Maya Chen, senior PM newly assigned to **Tally**, a consumer fintech budgeting app (B2C, ~120k MAU). Your predecessor Alex left abruptly six weeks ago. You've inherited his folder: a strategy doc, two roadmaps, persona research, a handful of customer interviews, a competitor scan, a metrics snapshot, an engineering feasibility note, and a CS monthly. Some of it is contradictory. Some is stale. You're about to start ingesting it into a fresh Ark — then continue working with new signals over the next four weeks until you need to make a Q4 prioritization call.
 
 This scenario exercises the **post-bulk-ingest behaviors** that migration mode produces: epistemic caution under high-volume import, contradiction enumeration, date-discounting of stale artifacts, source preservation, and parallel hypothesis promotion when multiple lines of evidence accumulate at once.
 

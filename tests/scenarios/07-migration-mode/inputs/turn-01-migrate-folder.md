@@ -1,6 +1,6 @@
 # Migration: 18 months of pre-existing PM artifacts
 
-I'm Aisha Patel, PM for **OperatorOS** — a developer-tools company building an API monitoring product (latency, error rates, SLOs, alerting for backend services). B2B SaaS, mid-market focus, ~180 paying accounts, ARR ~$6M. I've been doing the PM job for 18 months **without** any kind of structured brain — just a messy folder of artifacts I've written or collected along the way. Today is **2026-05-17** and I'm setting up PM Brain for the first time.
+I'm Aisha Patel, PM for **OperatorOS** — a developer-tools company building an API monitoring product (latency, error rates, SLOs, alerting for backend services). B2B SaaS, mid-market focus, ~180 paying accounts, ARR ~$6M. I've been doing the PM job for 18 months **without** any kind of structured brain — just a messy folder of artifacts I've written or collected along the way. Today is **2026-05-17** and I'm setting up Ark for the first time.
 
 I'm pasting the entire folder below as 8 artifacts. They span Q4 2025 → April 2026. Some are mine, some are from other functions (eng, CFO), some are interview transcripts. Some are stale, some contradict each other. That's the point — I want it in the brain as it actually is.
 

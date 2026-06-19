@@ -1,6 +1,6 @@
 # Bulk import: an inconsistent brain state, as it actually exists today
 
-I'm Aroon Tewari, PM at Plotline (B2B SaaS, marketing-attribution tool, ~$3M ARR). Today is **2026-05-18**. I've been running PM Brain for about 9 months. The brain has drifted into an inconsistent state — I know about some of the rot, I suspect there's more I haven't noticed. Below is everything I want you to ingest as-is, including the things that are broken. **Don't repair anything in this turn.** I want the rot preserved so the next turn's /review can find it.
+I'm Aroon Tewari, PM at Plotline (B2B SaaS, marketing-attribution tool, ~$3M ARR). Today is **2026-05-18**. I've been running Ark for about 9 months. The brain has drifted into an inconsistent state — I know about some of the rot, I suspect there's more I haven't noticed. Below is everything I want you to ingest as-is, including the things that are broken. **Don't repair anything in this turn.** I want the rot preserved so the next turn's /review can find it.
 
 Please create exactly the files described below, with the broken links and missing references as documented. Tag everything with the dates given. Do not silently fix any of the inconsistencies — the point of this turn is to land an imperfect state into the brain.
 

@@ -1,6 +1,6 @@
-# Testing PM Brain
+# Testing Ark
 
-PM Brain's value is *trajectory over time*, not single-step output. Testing one ingestion at a time misses the whole product. The unit of test is a **scenario**: an ordered stream of synthetic artifacts representing weeks-to-quarters of a PM's life, with ground-truth assertions about what the brain's state should look like after each turn.
+Ark's value is *trajectory over time*, not single-step output. Testing one ingestion at a time misses the whole product. The unit of test is a **scenario**: an ordered stream of synthetic artifacts representing weeks-to-quarters of a PM's life, with ground-truth assertions about what the brain's state should look like after each turn.
 
 ## Three eval layers, three mechanisms
 
@@ -15,7 +15,7 @@ The biggest mistake here is using LLM-as-judge for things a structural assertion
 
 ## The hook layer (catch schema errors in-loop, not at end-of-scenario)
 
-The scaffold ships a `PostToolUse` hook at [`.claude/skills/pm-brain/scaffold/.claude/hooks/validate_brain_file.py`](../.claude/skills/pm-brain/scaffold/.claude/hooks/validate_brain_file.py), wired via [`.claude/skills/pm-brain/scaffold/.claude/settings.json`](../.claude/skills/pm-brain/scaffold/.claude/settings.json). It runs after every Write/Edit. When the agent saves a brain file with a schema violation, the hook surfaces feedback the agent sees in the same turn — instead of the failure only appearing at end-of-scenario when the agent has already moved on.
+The scaffold ships a `PostToolUse` hook at [`.claude/skills/ark/scaffold/.claude/hooks/validate_brain_file.py`](../.claude/skills/ark/scaffold/.claude/hooks/validate_brain_file.py), wired via [`.claude/skills/ark/scaffold/.claude/settings.json`](../.claude/skills/ark/scaffold/.claude/settings.json). It runs after every Write/Edit. When the agent saves a brain file with a schema violation, the hook surfaces feedback the agent sees in the same turn — instead of the failure only appearing at end-of-scenario when the agent has already moved on.
 
 **Two-tier severity** — this is the load-bearing design choice. Blocking on every link miss would penalize legitimate ordering (a hypothesis written before its matching `source/` file, two files that reference each other and can't both be written in one tool call).
 
@@ -207,7 +207,7 @@ When the suite grows to 5 scenarios × 5 runs = ~$50-125 per full run. Run selec
 
 ## Tests as evidence
 
-The harness produces both green checks and the long-form article's load-bearing claims. "I ran a synthetic PM quarter through PM Brain 5 times. Here's where it converged, where it didn't, and the one contradiction it caught that I missed."
+The harness produces both green checks and the long-form article's load-bearing claims. "I ran a synthetic PM quarter through Ark 5 times. Here's where it converged, where it didn't, and the one contradiction it caught that I missed."
 
 That's the demo. The eval suite is the proof.
 

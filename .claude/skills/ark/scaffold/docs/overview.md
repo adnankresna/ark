@@ -1,10 +1,10 @@
-# PM Brain
+# Ark
 
 A durable reasoning and memory architecture for a product operator — a PM, product lead, founder, or anyone accountable for one product or initiative with judgment-heavy work and scattered inputs.
 
 Not a notes app. Not a chatbot with memory. An agent-native, markdown-native operating layer that preserves context, reasons across time, and resists the slow collapse that happens when product knowledge gets scattered across Slack, Notion, dashboards, docs, and memory.
 
-PM Brain optimizes for continuity, judgment, synthesis, and long-term product memory — not for generation.
+Ark optimizes for continuity, judgment, synthesis, and long-term product memory — not for generation.
 
 ## The problem with most AI memory systems
 
@@ -12,13 +12,13 @@ They fail in predictable ways: accumulate without synthesizing, flatten contradi
 
 The two outcomes: a passive store nobody trusts, or a noisy assistant generating shallow outputs from fragmented context.
 
-PM Brain was designed specifically to avoid both.
+Ark was designed specifically to avoid both.
 
-## Five things that make PM Brain different
+## Five things that make Ark different
 
 ### 1. Epistemic boundaries
 
-Most systems never define what counts as evidence, what counts as interpretation, what deserves promotion into durable knowledge, or when the agent should escalate. PM Brain does, along two orthogonal axes:
+Most systems never define what counts as evidence, what counts as interpretation, what deserves promotion into durable knowledge, or when the agent should escalate. Ark does, along two orthogonal axes:
 
 - **Epistemic type:** every piece of content is tagged as one of **observation**, **interpretation**, **hypothesis**, **assumption**, **decision**.
 - **Provenance:** every load-bearing claim wears a tag from a small enum — `[ingestion/...]`, `[source/...]`, `(stakeholder-verbal, <name>, <date>)`, `(intuition, PM, <date>)`, `(industry-knowledge)`, `(chat, no artifact)`.
@@ -31,7 +31,7 @@ A Slack comment is not automatically truth. A customer quote is not automaticall
 
 Storage alone is insufficient. The weekly `/review` sweep flags stale evidence, surfaces unresolved tensions, tracks decision debt, synthesizes recurring patterns, compresses duplicates, preserves meaningful contradictions, and archives low-signal history.
 
-Memory systems fail at month three because nothing sweeps. PM Brain was designed around that reality from day one. See [system-evolution.md](./system-evolution.md) for the 8 failure modes the sweep is designed to catch.
+Memory systems fail at month three because nothing sweeps. Ark was designed around that reality from day one. See [system-evolution.md](./system-evolution.md) for the 8 failure modes the sweep is designed to catch.
 
 ### 3. Flag, never gate
 
@@ -41,15 +41,15 @@ This is a reasoning system, not a compliance system. The moment it starts blocki
 
 ### 4. Inspectable architecture
 
-No embeddings, hidden retrieval, auto-generated ontologies, vector databases, or invisible memory layers. PM Brain is markdown-native, repo-native, version-controllable, fully auditable.
+No embeddings, hidden retrieval, auto-generated ontologies, vector databases, or invisible memory layers. Ark is markdown-native, repo-native, version-controllable, fully auditable.
 
 You can always inspect what the system believes, why it believes it, where the evidence came from, what changed, and which contradictions remain unresolved. Inspectability creates trust. Trust is the hidden bottleneck in long-running AI systems.
 
 ### 5. Resists complexity creep
 
-Many AI operating systems collapse under their own architecture: taxonomies, agent swarms, graph ontologies, embedding pipelines, auto-tagging. PM Brain stays opinionated, lightweight, retrieval-oriented, operational. The goal is not maximum sophistication — it's durable reasoning quality a real operator can maintain consistently.
+Many AI operating systems collapse under their own architecture: taxonomies, agent swarms, graph ontologies, embedding pipelines, auto-tagging. Ark stays opinionated, lightweight, retrieval-oriented, operational. The goal is not maximum sophistication — it's durable reasoning quality a real operator can maintain consistently.
 
-## What PM Brain is not for
+## What Ark is not for
 
 Not fully autonomous product management — supports judgment, doesn't replace it. Not enterprise knowledge management — one accountable operator, one product or initiative. Not perfect truth reconstruction — preserves provenance and contradictions, doesn't resolve genuinely ambiguous reality. Not maximum information capture — throws things out deliberately.
 

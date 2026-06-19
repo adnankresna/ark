@@ -1,8 +1,8 @@
 # tests/
 
-Eval suite for the PM Brain skill. A *scenario* here is a short, scripted story we feed the skill (a sequence of interviews, meetings, or messages) so we can check that the resulting **brain** (the folder of markdown files the skill maintains) ends up the way it should. The check happens after every turn.
+Eval suite for the Ark skill. A *scenario* here is a short, scripted story we feed the skill (a sequence of interviews, meetings, or messages) so we can check that the resulting **brain** (the folder of markdown files the skill maintains) ends up the way it should. The check happens after every turn.
 
-> New to PM Brain terms? The [glossary](../docs/glossary.md) covers *brain*, *ingest*, *provenance*, *hypothesis*, *decision file*, *audit trail*, and anything else that shows up in this doc and isn't obvious.
+> New to Ark terms? The [glossary](../docs/glossary.md) covers *brain*, *ingest*, *provenance*, *hypothesis*, *decision file*, *audit trail*, and anything else that shows up in this doc and isn't obvious.
 
 This file is the **operator-level quickstart**. For everything else (scenario format, ground-truth schema, harness internals, assumptions, full coverage / gap list, and how to add a scenario) see [`TESTING.md`](./TESTING.md). Design rationale lives in [`../docs/testing.md`](../docs/testing.md).
 

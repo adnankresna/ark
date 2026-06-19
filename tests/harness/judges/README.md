@@ -64,6 +64,6 @@ Scenario `02-inherited-folder` adds these rubrics (post-bulk-ingest migration be
 
 ## Why so many rubrics
 
-PM Brain's value claims are mostly qualitative: "the system surfaces contradictions instead of flattening them," "decisions carry their reversal conditions." These can't be checked structurally; they need judgment. Each rubric encodes one of those value claims as a testable pass/fail.
+Ark's value claims are mostly qualitative: "the system surfaces contradictions instead of flattening them," "decisions carry their reversal conditions." These can't be checked structurally; they need judgment. Each rubric encodes one of those value claims as a testable pass/fail.
 
 The cost of writing rubrics is one-time. The benefit is repeatable, version-controlled checks on whether the skill is doing the qualitative thing we claim it does.

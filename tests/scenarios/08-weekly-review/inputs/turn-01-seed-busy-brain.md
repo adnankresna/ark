@@ -1,6 +1,6 @@
-# Bulk import: prior PM-Brain state — busy brain heading into Friday /review
+# Bulk import: prior Ark state — busy brain heading into Friday /review
 
-I'm Aria Sharma, PM for **LogLens** (B2B observability SaaS, ~190 paying accounts on mid-market platform-eng teams, ARR ~$9M). I've been using PM Brain for ~4 months. Today is **2026-05-17** (Friday). I'm two months into a roadmap commitment to "make alerts trustworthy again" — the headline bet is alert-noise reduction for on-call engineers.
+I'm Aria Sharma, PM for **LogLens** (B2B observability SaaS, ~190 paying accounts on mid-market platform-eng teams, ARR ~$9M). I've been using Ark for ~4 months. Today is **2026-05-17** (Friday). I'm two months into a roadmap commitment to "make alerts trustworthy again" — the headline bet is alert-noise reduction for on-call engineers.
 
 I'm seeding the brain with state from the last ~4 months. After this turn, the brain should hold:
 

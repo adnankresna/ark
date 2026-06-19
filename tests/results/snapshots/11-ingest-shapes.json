@@ -1,7 +1,7 @@
 {
   "scenario": "11-ingest-shapes",
   "run": 1,
-  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-511gqbkm",
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\ark-test-511gqbkm",
   "kept_workdir": false,
   "started_at": "2026-05-17T19:44:27.464217+00:00",
   "turns": [

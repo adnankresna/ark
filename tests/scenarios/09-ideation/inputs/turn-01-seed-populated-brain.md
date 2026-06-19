@@ -1,6 +1,6 @@
-# Bulk import: 4 months of accumulated PM Brain state
+# Bulk import: 4 months of accumulated Ark state
 
-I'm Sam Liu, PM for FlowExpense (B2B SaaS expense management, ~280 mid-market customers, ARR ~$11M). I've been operating PM Brain for four months. Today is **2026-05-17**. Below are eight artifacts from **January through April 2026** that represent the current state of the brain — three customer interviews, an insights entry I wrote up after the second interview, a competitor note, a CS monthly, an entry in our roadmap with an open question I've been sitting on, and one hypothesis file I promoted in February that has gone quiet since.
+I'm Sam Liu, PM for FlowExpense (B2B SaaS expense management, ~280 mid-market customers, ARR ~$11M). I've been operating Ark for four months. Today is **2026-05-17**. Below are eight artifacts from **January through April 2026** that represent the current state of the brain — three customer interviews, an insights entry I wrote up after the second interview, a competitor note, a CS monthly, an entry in our roadmap with an open question I've been sitting on, and one hypothesis file I promoted in February that has gone quiet since.
 
 I want all of it ingested faithfully — original dates preserved, provenance tagged, the stalled hypothesis kept as-is (don't auto-update its status). This is the brain's current state. I'll work with you on it tomorrow.
 

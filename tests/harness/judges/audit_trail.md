@@ -2,7 +2,7 @@
 
 ## What we're checking
 
-The architectural promise of PM Brain is that every load-bearing claim **wears its provenance**. Auditability is enforced as a vocabulary, not a workflow: a claim that never went through `ingestion/` is legitimate as long as it's tagged honestly. A claim with no tag at all is a broken audit anchor.
+The architectural promise of Ark is that every load-bearing claim **wears its provenance**. Auditability is enforced as a vocabulary, not a workflow: a claim that never went through `ingestion/` is legitimate as long as it's tagged honestly. A claim with no tag at all is a broken audit anchor.
 
 The vocabulary is the enum defined in `hypotheses/_SCHEMA.md`:
 

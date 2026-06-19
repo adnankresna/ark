@@ -24,4 +24,4 @@ Operator-facing verbs. Each command is a thin spec: input, files to load, files 
 
 ## Scope: what these verbs are not
 
-PM Brain is the memory and reasoning layer. PM workflows (JTBD interview structure, Kano analysis, RICE prioritization, opportunity solution trees, experiment design templates) belong in workflow-specific skills, not here. A workflow skill produces an artifact; PM Brain ingests it via `/ingest` and routes the evidence into durable layers. The split keeps each system thin.
+Ark is the memory and reasoning layer. PM workflows (JTBD interview structure, Kano analysis, RICE prioritization, opportunity solution trees, experiment design templates) belong in workflow-specific skills, not here. A workflow skill produces an artifact; Ark ingests it via `/ingest` and routes the evidence into durable layers. The split keeps each system thin.

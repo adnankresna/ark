@@ -1,4 +1,4 @@
-# How PM Brain works
+# How Ark works
 
 A worked example, end to end. One real-shaped customer interview, six files touched, one audit trail.
 

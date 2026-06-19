@@ -1,6 +1,6 @@
 # Why this matters
 
-Most AI memory systems fail by month three. The same five failure modes show up across vector-DB memory, RAG over your docs, "AI second brain" apps, and most agent-memory frameworks. PM Brain is structured around five corresponding design choices, each one targeting a specific failure.
+Most AI memory systems fail by month three. The same five failure modes show up across vector-DB memory, RAG over your docs, "AI second brain" apps, and most agent-memory frameworks. Ark is structured around five corresponding design choices, each one targeting a specific failure.
 
 This page is the short version. The architecture choices behind each fix are in [`architecture.md`](./architecture.md). The lifecycle that operates them is in [`how-it-works.md`](./how-it-works.md). The growth-shape defense is in [`scaling.md`](./scaling.md).
 
@@ -16,7 +16,7 @@ These show up consistently across knowledge systems that look fine at month one 
 
 ## Five structural differences
 
-Each PM Brain design choice maps to a failure mode above.
+Each Ark design choice maps to a failure mode above.
 
 1. **Epistemic boundaries.** Every claim is tagged: observation, interpretation, hypothesis, assumption, decision. A Slack comment is not automatically truth. A customer quote is not automatically strategy. A meeting note is not automatically insight. *Addresses failures 2 and 4: contradictions stay distinct, decisions wear their reasoning.*
 2. **A maintenance model that runs.** Weekly sweep. Stale evidence flagged, recurring patterns compressed, contradictions preserved. The compression is the synthesis. *Addresses failure 1: the system forgets on purpose.*
@@ -28,6 +28,6 @@ Each PM Brain design choice maps to a failure mode above.
 
 Most systems store. Few forget on purpose.
 
-PM Brain is built around the forgetting. The promotion rule keeps the durable layer compressed by demanding *recurring + decision-relevant + strategy-relevant* before anything lands there. The weekly sweep is the forcing function. Provenance tags are what keep it honest when real PM work is messy.
+Ark is built around the forgetting. The promotion rule keeps the durable layer compressed by demanding *recurring + decision-relevant + strategy-relevant* before anything lands there. The weekly sweep is the forcing function. Provenance tags are what keep it honest when real PM work is messy.
 
 The rest of the docs explain how. Start with [`walkthrough.md`](./walkthrough.md) for a week-in-the-life story, or [`architecture.md`](./architecture.md) for the design choices stated cleanly.

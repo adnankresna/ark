@@ -1,13 +1,13 @@
-# CLAUDE.md — PM Brain repo
+# CLAUDE.md — Ark repo
 
-This is the canonical repo for the PM Brain Claude Code skill. It contains the skill itself, a pre-scaffolded example brain, an eval suite of synthetic scenarios, and architectural docs.
+This is the canonical repo for the Ark Claude Code skill. It contains the skill itself, a pre-scaffolded example brain, an eval suite of synthetic scenarios, and architectural docs.
 
 ## What this repo is for
 
 Three audiences, three uses:
 
-1. **PMs installing the skill** — copy `.claude/skills/pm-brain/` into `~/.claude/skills/`, run `/pm-brain` in any working directory. Read `README.md` and `docs/how-it-works.md`.
-2. **People evaluating whether PM Brain is right for them** — browse `example-brain/` to see what a populated PM Brain looks like. Read `docs/architecture.md`.
+1. **PMs installing the skill** — copy `.claude/skills/ark/` into `~/.claude/skills/`, run `/ark` in any working directory. Read `README.md` and `docs/how-it-works.md`.
+2. **People evaluating whether Ark is right for them** — browse `example-brain/` to see what a populated Ark looks like. Read `docs/architecture.md`.
 3. **Contributors and testers** — run the eval suite under `tests/`. Add scenarios. Tighten ground-truth assertions. Surface failure modes.
 
 This `CLAUDE.md` is the **repo-level** operating manual. It tells Claude (or any agent working in this repo) how the pieces relate and what work patterns are valid here.
@@ -17,7 +17,7 @@ It is NOT the brain's own operating manual. The brain has its own `CLAUDE.md` in
 ## Repo structure
 
 ```
-.claude/skills/pm-brain/    # Canonical skill (SKILL.md + scaffold/ + prompts/)
+.claude/skills/ark/    # Canonical skill (SKILL.md + scaffold/ + prompts/)
 example-brain/              # Pre-scaffolded instance. Browseable, edit-safe.
 tests/                      # Eval suite
 ├── scenarios/              # Synthetic PM scenarios with ground truth
@@ -31,7 +31,7 @@ CLAUDE.md                   # This file
 
 ### When asked to modify the skill
 
-The skill at `.claude/skills/pm-brain/` is the source of truth. Two layers:
+The skill at `.claude/skills/ark/` is the source of truth. Two layers:
 
 - `scaffold/` — deterministic. Schemas, CLAUDE.md template, INDEX template, folder tree. Same every install.
 - `prompts/` — adaptive. Mode detection, migration, interview, post-scaffold self-test. Loaded per phase.
@@ -80,8 +80,8 @@ The harness splits work across two model tiers to keep cost down without sacrifi
 
 | Layer | Default model | Override env var | Rationale |
 | --- | --- | --- | --- |
-| Scenario turn execution (`claude -p` ingesting each `turn-NN-*.md`) | `sonnet` | `PM_BRAIN_TURN_MODEL` | Realistic — most PMs will run the skill on Sonnet day-to-day. Cheaper by ~3-5x vs Opus. |
-| Simple judges (structural-shaped questions a rubric can answer mechanically) | `sonnet` | `PM_BRAIN_JUDGE_MODEL` | The judge prompt + rubric does most of the work; Sonnet follows rubrics reliably. |
+| Scenario turn execution (`claude -p` ingesting each `turn-NN-*.md`) | `sonnet` | `ARK_TURN_MODEL` | Realistic — most PMs will run the skill on Sonnet day-to-day. Cheaper by ~3-5x vs Opus. |
+| Simple judges (structural-shaped questions a rubric can answer mechanically) | `sonnet` | `ARK_JUDGE_MODEL` | The judge prompt + rubric does most of the work; Sonnet follows rubrics reliably. |
 | Hard judges (per-assertion `model: opus` in `expected.yaml`) | per-assertion | n/a (opt-in) | Use Opus only when the rubric requires genuinely hard discrimination — e.g., distinguishing "promoted with evidence" from "promoted with weak evidence." |
 | Repo coordination (this Claude, you) | Opus | n/a | Holds the cross-file picture, applies judgment about what to test and what to fix. Subagents are Sonnet by default; spawn Opus subagents only when the task itself needs Opus-level reasoning. |
 

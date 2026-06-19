@@ -1,7 +1,7 @@
 scenario: 07-migration-mode
 description: |
   Four-turn migration-mode scenario. PM (Aisha, OperatorOS — API monitoring devtools) bulk-imports
-  8 messy pre-existing PM artifacts on day 0 of using PM Brain, with explicit instructions to
+  8 messy pre-existing PM artifacts on day 0 of using Ark, with explicit instructions to
   route everything to source/, write conservative ingestion/ syntheses, and NOT auto-promote
   anything into hypotheses/ or knowledge/ until reviewed. Tests the conservative-ingestion
   contract promised by prompts/migration.md: source preservation, no premature promotion,

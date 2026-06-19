@@ -1,8 +1,8 @@
-Set up a PM Brain in this directory. Today's date is 2026-05-18.
+Set up an Ark in this directory. Today's date is 2026-05-18.
 
-**How to run the install:** The PM Brain skill is available at `.claude/skills/pm-brain/SKILL.md`. Load it and follow its workflow. (Equivalent to a user running `/pm-brain`.)
+**How to run the install:** The Ark skill is available at `.claude/skills/ark/SKILL.md`. Load it and follow its workflow. (Equivalent to a user running `/ark`.)
 
-**About this working directory:** Treat it as **greenfield mode** — the only thing present is the `.claude/skills/pm-brain/` config (which mode detection explicitly ignores). There are no PM artifacts to migrate.
+**About this working directory:** Treat it as **greenfield mode** — the only thing present is the `.claude/skills/ark/` config (which mode detection explicitly ignores). There are no PM artifacts to migrate.
 
 **Interview answers — already provided.** I'm answering all five batches inline so you don't have to ask. Use them verbatim. Do not ask follow-up clarifying questions; the answers below are complete.
 

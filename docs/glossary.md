@@ -1,6 +1,6 @@
 # Glossary
 
-Every term PM Brain uses, in plain English. If a word in the docs feels jargony, look it up here.
+Every term Ark uses, in plain English. If a word in the docs feels jargony, look it up here.
 
 ---
 
@@ -110,11 +110,11 @@ This isn't a rigid rule. It's a default. When something further down the list co
 
 ### Migration mode
 
-The mode the skill enters when you run `/pm-brain` in a directory with existing PM artifacts (a Notion export, a folder of meeting notes, a Jira CSV). It interviews you briefly about company / role / priorities, then reads what's there and produces an initial brain plus a short report on what it found, what it couldn't make sense of, and what questions you should answer this week.
+The mode the skill enters when you run `/ark` in a directory with existing PM artifacts (a Notion export, a folder of meeting notes, a Jira CSV). It interviews you briefly about company / role / priorities, then reads what's there and produces an initial brain plus a short report on what it found, what it couldn't make sense of, and what questions you should answer this week.
 
 ### Greenfield mode
 
-The mode the skill enters when you run `/pm-brain` in an empty directory. Same brief interview, scaffold goes in, you start fresh.
+The mode the skill enters when you run `/ark` in an empty directory. Same brief interview, scaffold goes in, you start fresh.
 
 ### Self-test
 
@@ -122,4 +122,4 @@ A short check the skill runs right after it scaffolds a new brain: a make-believ
 
 ---
 
-If something else needs a definition, [open an issue](https://github.com/phuryn/pm-brain/issues). The glossary is meant to be exhaustive, and a missing term is a doc bug.
+If something else needs a definition, [open an issue](https://github.com/adnankresna/open-adnan/issues). The glossary is meant to be exhaustive, and a missing term is a doc bug.

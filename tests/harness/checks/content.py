@@ -27,7 +27,7 @@ _FLAKE_ERROR_CODES = frozenset({"claude_not_found", "timeout"})
 
 
 JUDGE_PROMPT_TEMPLATE = """\
-You are an evaluation judge for the PM Brain test suite.
+You are an evaluation judge for the Ark test suite.
 
 Read the rubric below carefully. Then read the target file(s), the agent's response
 text from this turn, and the scenario context. Then output exactly ONE line in the

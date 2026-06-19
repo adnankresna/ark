@@ -1,7 +1,7 @@
 {
   "scenario": "01-b2b-churn",
   "run": 1,
-  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\pm-brain-test-1wp73jbq",
+  "work_dir": "C:\\Users\\Dell\\AppData\\Local\\Temp\\ark-test-1wp73jbq",
   "kept_workdir": false,
   "started_at": "2026-05-17T18:46:49.112384+00:00",
   "turns": [
