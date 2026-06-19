@@ -8,7 +8,7 @@ You manage one product. Your context is scattered across Notion, Linear, Slack, 
 
 > **See it in action:** [A week with Ark: Lena's first five days](./docs/walkthrough.md) is a short story of one PM using it on a real team. New here? Start there.
 
-> **Research preview.** The architecture has months of dogfooding behind it on a sister content brain; the product as installed by real PMs in real organizations is days old. The eval suite (404 of 406 checks pass) is the floor. Real-world install feedback is how the next version gets better. Open [issues](https://github.com/adnankresna/open-adnan/issues) to report what breaks or suggest what's missing.
+> **Research preview.** The architecture has months of dogfooding behind it on a sister content brain; the product as installed by real PMs in real organizations is days old. The eval suite (404 of 406 checks pass) is the floor. Real-world install feedback is how the next version gets better. Open [issues](https://github.com/adnankresna/ark/issues) to report what breaks or suggest what's missing.
 
 ## Install
 
@@ -22,8 +22,8 @@ The skill is global. It lands in `~/.claude/skills/ark/` and is available across
 
 ```bash
 mkdir -p ~/.claude/skills && \
-  curl -L https://github.com/adnankresna/open-adnan/archive/refs/heads/main.tar.gz | \
-  tar xz --strip-components=3 -C ~/.claude/skills open-adnan-main/.claude/skills/ark/
+  curl -L https://github.com/adnankresna/ark/archive/refs/heads/main.tar.gz | \
+  tar xz --strip-components=3 -C ~/.claude/skills ark-main/.claude/skills/ark/
 ```
 
 **Windows PowerShell:**
@@ -31,9 +31,9 @@ mkdir -p ~/.claude/skills && \
 ```powershell
 $dest = "$env:USERPROFILE\.claude\skills"
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
-irm "https://github.com/adnankresna/open-adnan/archive/refs/heads/main.zip" -OutFile "$env:TEMP\ark.zip"
+irm "https://github.com/adnankresna/ark/archive/refs/heads/main.zip" -OutFile "$env:TEMP\ark.zip"
 Expand-Archive "$env:TEMP\ark.zip" "$env:TEMP\ark" -Force
-Copy-Item "$env:TEMP\ark\open-adnan-main\.claude\skills\ark" $dest -Recurse -Force
+Copy-Item "$env:TEMP\ark\ark-main\.claude\skills\ark" $dest -Recurse -Force
 Remove-Item "$env:TEMP\ark.zip","$env:TEMP\ark" -Recurse -Force
 ```
 
@@ -54,7 +54,7 @@ The skill detects what's already in the directory. An empty folder gets a fresh 
 
 > **Migration is for your current state. Don't backfill old artifacts retroactively.** Migration mode reads your active strategy, in-flight hypotheses, recent decisions, current stakeholder list. That's the goal. Don't try to manually `/ingest` 200 old interview transcripts and six months of Slack threads. If a stale artifact matters, it'll come up through current work and you'll ingest it then. Forcing them in now wastes a weekend and clogs the durable layer.
 
-> Stuck? Universal fallback (any OS with `git`): `git clone https://github.com/adnankresna/open-adnan.git && cp -R open-adnan/.claude/skills/ark ~/.claude/skills/`. On Windows replace the `cp -R` with `Copy-Item open-adnan\.claude\skills\ark $env:USERPROFILE\.claude\skills\ -Recurse`.
+> Stuck? Universal fallback (any OS with `git`): `git clone https://github.com/adnankresna/ark.git && cp -R ark/.claude/skills/ark ~/.claude/skills/`. On Windows replace the `cp -R` with `Copy-Item ark\.claude\skills\ark $env:USERPROFILE\.claude\skills\ -Recurse`.
 
 ## What it does (one loop)
 

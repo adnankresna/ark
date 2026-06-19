@@ -122,4 +122,4 @@ A short check the skill runs right after it scaffolds a new brain: a make-believ
 
 ---
 
-If something else needs a definition, [open an issue](https://github.com/adnankresna/open-adnan/issues). The glossary is meant to be exhaustive, and a missing term is a doc bug.
+If something else needs a definition, [open an issue](https://github.com/adnankresna/ark/issues). The glossary is meant to be exhaustive, and a missing term is a doc bug.
