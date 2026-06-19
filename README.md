@@ -1,6 +1,6 @@
 # Ark
 
-[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-d97757)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Tests: 404/406 checks (≈99.5%)](https://img.shields.io/badge/tests-404%2F406%20checks%20%28%E2%89%8899.5%25%29-brightgreen)](tests/RESULTS.md) [![Companion: pm-skills](https://img.shields.io/badge/companion-pm--skills-blue)](https://github.com/adnankresna/pm-skills)
+[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-d97757)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Tests: 404/406 checks (≈99.5%)](https://img.shields.io/badge/tests-404%2F406%20checks%20%28%E2%89%8899.5%25%29-brightgreen)](tests/RESULTS.md)
 
 **A second brain for product managers.** Plain markdown files in a folder on your laptop. Claude reads them before answering, writes to them after, sweeps them every Friday. No vector DB. No cloud. No agent memory tricks.
 
@@ -8,7 +8,7 @@ You manage one product. Your context is scattered across Notion, Linear, Slack, 
 
 > **See it in action:** [A week with Ark: Lena's first five days](./docs/walkthrough.md) is a short story of one PM using it on a real team. New here? Start there.
 
-> **Research preview.** The architecture has months of dogfooding behind it on a sister content brain; the product as installed by real PMs in real organizations is days old. The eval suite (404 of 406 checks pass) is the floor. Real-world install feedback is how the next version gets better. Open [issues](https://github.com/adnankresna/open-adnan/issues) or join the conversation per the launch post.
+> **Research preview.** The architecture has months of dogfooding behind it on a sister content brain; the product as installed by real PMs in real organizations is days old. The eval suite (404 of 406 checks pass) is the floor. Real-world install feedback is how the next version gets better. Open [issues](https://github.com/adnankresna/open-adnan/issues) to report what breaks or suggest what's missing.
 
 ## Install
 
@@ -132,12 +132,6 @@ python tests/harness/run_scenario.py tests/scenarios/01-b2b-churn
 - [`docs/testing.md`](./docs/testing.md): how the eval suite works, scenario format, ground-truth schema.
 - [`docs/testing-decisions.md`](./docs/testing-decisions.md): running log of what eval runs taught us and the design calls that came out of them. Read when an assertion or scaffold rule looks arbitrary and you want to know *why it's there*.
 - [`docs/prior-art.md`](./docs/prior-art.md): Zettelkasten, RAG memory, agent OS patterns. What's borrowed and what's new.
-
-## Compose with PM Skills
-
-![Ark composes with PM Skills](docs/screenshots/ark-pm-skills.webp)
-
-Ark is the memory layer. [PM Skills](https://github.com/adnankresna/pm-skills) are the workflow modules: how to run a JTBD interview, how to score with RICE, how to design an experiment. They compose. The skill is how to do the work once. The brain is what you know across all the times you did it.
 
 ## Contributing
 
